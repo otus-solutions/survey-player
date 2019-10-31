@@ -13,7 +13,7 @@
   var uglify = require("gulp-uglify");
   var minifyCss = require('gulp-minify-css');
   var embedTemplates = require('gulp-angular-embed-templates');
-
+  var babel = require('gulp-babel');
   gulp.task('compress', function() {
     return gulp.src('app/index.html',{allowEmpty: true})
       .pipe(useref({
@@ -21,20 +21,26 @@
           return filePath.replace('app/', '');
         }
       }))
-      .pipe(gulpif('*.js', embedTemplates({
-        basePath: __dirname + '/'
-      })))
-      //  .pipe(gulpif('*.js', uglify()))
-       .pipe(gulpif('*.css', minifyCss()))
-      .pipe(gulp.dest('dist/otus-preview-js'));
+      .pipe(gulpif('*.js',
+        babel({
+          presets: ['es2015']
+        })
+      ))
+      // .pipe(gulpif('*.js', embedTemplates({
+      //   basePath: __dirname + '/'
+      // })))
+      .pipe(gulpif('*.js', uglify()))
+      .pipe(gulpif('*.css', minifyCss()))
+      .pipe(gulp.dest('dist/survey-player/'));
   });
 
   gulp.task('browser-sync', function() {
     browserSync.init({
       server: {
+        open: 'external',
         baseDir: '../',
         middleware: [
-          browserSyncSpa(/^[^\.]+$/, baseDir),
+          //browserSyncSpa(/^[^\.]+$/, baseDir),
 
           function(req, res, next) {
             res.setHeader('Access-Control-Allow-Origin', '*');
@@ -43,12 +49,13 @@
           }
         ]
       },
-      startPath: 'otus-preview-js/index'
+      startPath: 'survey-player/app'
     });
 
     gulp.watch([
       'app/**/*.html',
       'app/**/*.js',
+      'app/**/*.json',
       'app/**/*.css'
     ]).on('change', browserSync.reload);
   });
@@ -62,33 +69,33 @@
   });
 
   gulp.task('sonar', function() {
-      var options = {
-        sonar: {
-          host: {
-            url: process.env.npm_config_sonarUrl,
-          },
-          login: process.env.npm_config_sonarDatabaseUsername,
-          password: process.env.npm_config_sonarDatabasePassword,
-          projectKey: 'sonar:otus-preview-js',
-          projectName: 'otus-preview-js',
-          projectVersion: packageJson.version,
-          sources: 'app',
-          language: 'js',
-          sourceEncoding: 'UTF-8',
-          exec: {
-            maxBuffer: 1024 * 1024
-          },
-          javascript: {
-            lcov: {
-              reportPath: 'target/test-coverage/report-lcov/lcov.info'
-            }
+    var options = {
+      sonar: {
+        host: {
+          url: process.env.npm_config_sonarUrl,
+        },
+        login: process.env.npm_config_sonarDatabaseUsername,
+        password: process.env.npm_config_sonarDatabasePassword,
+        projectKey: 'sonar:survey-player',
+        projectName: 'survey-player',
+        projectVersion: packageJson.version,
+        sources: 'app',
+        language: 'js',
+        sourceEncoding: 'UTF-8',
+        exec: {
+          maxBuffer: 1024 * 1024
+        },
+        javascript: {
+          lcov: {
+            reportPath: 'target/test-coverage/report-lcov/lcov.info'
           }
         }
-      };
+      }
+    };
 
     return gulp.src('thisFileDoesNotExist.js', {
-        read: false
-      })
+      read: false
+    })
       .pipe(sonar(options));
   });
 
