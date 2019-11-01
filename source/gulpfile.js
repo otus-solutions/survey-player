@@ -1,6 +1,6 @@
 (function() {
-
-  var baseDir = __dirname + '/app/index.html';
+  //
+  // var baseDir = __dirname + '/app/index.html';
 
   var gulp = require('gulp');
   var browserSync = require('browser-sync').create();
@@ -38,7 +38,7 @@
     browserSync.init({
       server: {
         open: 'external',
-        baseDir: '../',
+        baseDir: ['./app', './'],
         middleware: [
           //browserSyncSpa(/^[^\.]+$/, baseDir),
 
@@ -48,8 +48,7 @@
             next();
           }
         ]
-      },
-      startPath: 'survey-player/app'
+      }
     });
 
     gulp.watch([

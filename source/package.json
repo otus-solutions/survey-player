@@ -5,7 +5,7 @@
   "keywords": [
     "preview",
     "otus",
-    "otus-studio"
+    "survey-player"
   ],
   "url": "https://github.com/ccem-dev/otus-model-js",
   "email": "ccem.projects@gmail.com",
@@ -19,7 +19,8 @@
     "gulp": "gulp",
     "start": "npm run gulp browser-sync",
     "karma": "karma",
-    "build": "gulp compress"
+    "build": "gulp compress",
+    "production": "npm install && npm test && npm run build && npm prune --production"
   },
   "dependencies": {
     "angular": "1.5.8",

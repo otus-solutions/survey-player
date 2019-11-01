@@ -34,10 +34,12 @@
     'otusjs.player.core.player.PlayerService',
     '$http',
     '$q',
-    '$scope'
+    '$scope',
+    'otusjs.player.core.player.PlayerConfigurationService',
+    'ExitPlayerStepService'
   ];
 
-  function Controller($compile, SurveyFactory, ActivityFacadeService, PlayerService, $http, $q, $scope) {
+  function Controller($compile, SurveyFactory, ActivityFacadeService, PlayerService, $http, $q, $scope, PlayerConfigurationService, ExitPlayerStepService) {
     var self = this;
 
     /* Lifecycle hooks */
@@ -48,9 +50,11 @@
     var _activityConfigurationName = 'C0';
 
 
+
+
     function getSurveyTemplate() {
       var defer = $q.defer();
-      $http.get('/survey-player/app/otusjs-player-data/survey.json').success(function(data) {
+      $http.get('/app/otusjs-player-data/survey.json').success(function(data) {
         defer.resolve(SurveyFactory.fromJsonObject(data));
       }).error(function(error) {
         console.log('Cannot GET a fake survey template.');
@@ -62,19 +66,18 @@
       _newScope = $scope;
       _newScope.surveyActivity = {};
       _newScope.surveyActivity.template = _getSurveyTemplateObject();
-      // _newScope.surveyActivity.template = {};
-      // var content = $compile(OTUS_SHEET_COMPONENT)(_newScope);
-      // $('#survey-preview').append(content);
+
     }
 
     function _getSurveyTemplateObject() {
       return ActivityFacadeService.createActivity(self.template, _user, _participant,_activityConfigurationName);
     }
 
-    function onInit() {
+    function onInit(){
       getSurveyTemplate().then(function(response) {
         self.template = angular.copy(response);
         _generateOtusPreview();
+        PlayerConfigurationService.onStop(ExitPlayerStepService);
         PlayerService.setup();
       });
     }

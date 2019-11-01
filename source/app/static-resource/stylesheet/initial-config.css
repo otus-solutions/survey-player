@@ -18,7 +18,7 @@
   color: #ECEFF1;
 }
 #installer #logo_otus {
-    content: url(../../static-resource/image/OtusImg.png);
+    content: url(../image/OtusImg.png);
     top: 1%;
 }
 
