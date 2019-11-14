@@ -1,24 +1,22 @@
 {
-    "env": {
-        "browser": true
-    },
-    "extends": "eslint:recommended",
-    "rules": {
-        "indent": [
-            "warn",
-            2
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ]
-    }
+  "env": {
+    "browser": true
+  },
+  "globals":{
+    "Insert Global Here": true
+  },
+  "extends": "angular",
+  "rules": {
+    "linebreak-style": [
+      "error",
+      "windows"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "no-console": "off",
+    "no-debugger": "warn",
+    "angular/di": [ "error", "$inject" ]
+  }
 }

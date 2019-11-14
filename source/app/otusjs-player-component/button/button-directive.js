@@ -12,7 +12,7 @@
             scope: {
                 click: '<'
             },
-            templateUrl: 'app/editor/ui/base/button/button.html',
+            templateUrl: 'app/otusjs-player-component/button/button.html',
             retrict: 'E',
             link: function linkFunc(scope, element, attrs) {
                 scope.widget = OtusButtonWidgetFactory.create(scope, attrs, scope.$parent.widget);

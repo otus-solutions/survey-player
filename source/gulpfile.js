@@ -7,6 +7,7 @@
   var browserSyncSpa = require('browser-sync-middleware-spa');
   var sonar = require('gulp-sonar');
   var bump = require('gulp-bump');
+  var replace = require('gulp-replace');
   var packageJson = require('./package.json');
   var useref = require('gulp-useref');
   var gulpif = require('gulp-if');
@@ -14,8 +15,54 @@
   var minifyCss = require('gulp-minify-css');
   var embedTemplates = require('gulp-angular-embed-templates');
   var babel = require('gulp-babel');
+  var runSequence = require('run-sequence');
+  var gulp_if = require('gulp-if');
+  var clean = require('gulp-clean');
+  var uncache = require('gulp-uncache');
+
   gulp.task('compress', function() {
-    return gulp.src('app/index.html',{allowEmpty: true})
+    runSequence('clean_dist', 'copy_code', 'embeded_template', 'copy_node_modules', 'compress-hash');
+  });
+
+  gulp.task('copy_code', function (){
+    return gulp.src('./app/**/*')
+      .pipe(gulp_if('index.html', replace('src="app/', 'src="')))
+      .pipe(gulp_if('index.html', replace('href="app/', 'href="')))
+      .pipe(gulp.dest('dist/survey-player'));
+  });
+
+  gulp.task('compress-hash', function () {
+    return gulp.src('dist/survey-player/index.html')
+      .pipe(uncache({
+        append: 'hash',
+        rename: true,
+        srcDir:'dist/survey-player',
+        distDir:'dist/survey-player'
+      }))
+      .pipe(gulp.dest('dist/survey-player'));
+  });
+
+  gulp.task('embeded_template', function() {
+    return gulp.src('./dist/survey-player/**/*')
+      .pipe(gulp_if('*.js', embedTemplates({
+        basePath: '.'
+      })))
+      .pipe(gulp.dest('dist/survey-player'));
+  });
+
+  gulp.task('copy_node_modules', function () {
+    return gulp.src('./node_modules/**/*')
+      .pipe(gulp.dest('dist/survey-player/node_modules'));
+  });
+
+  gulp.task('clean_dist', function () {
+    return gulp.src('dist/', {read: false})
+      .pipe(clean());
+  });
+
+
+  gulp.task('compress-compress', function() {
+    return gulp.src('app/index.html', {allowEmpty: true})
       .pipe(useref({
         transformPath: function(filePath) {
           return filePath.replace('app/', '');

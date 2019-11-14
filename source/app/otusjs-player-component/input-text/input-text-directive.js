@@ -13,7 +13,7 @@
                 model: '<',
                 disabled: '@'
             },
-            templateUrl: 'app/editor/ui/base/input-text/input-text.html',
+            templateUrl: 'app/otusjs-player-component/input-text/input-text.html',
             retrict: 'E',
             link: function linkFunc(scope, element, attrs) {
                 scope.widget = OtusInputTextWidgetFactory.create(scope, attrs, element, scope.$parent.widget || scope.$parent.$parent.childWidget);

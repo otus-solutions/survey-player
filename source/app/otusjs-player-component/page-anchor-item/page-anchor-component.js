@@ -4,7 +4,7 @@
     angular
         .module('otusjs.player.component')
         .component('otusPageAnchor', {
-            templateUrl: 'app/editor/ui/page-anchor-item/page-anchor-template.html',
+            templateUrl: 'app/otusjs-player-component/page-anchor-item/page-anchor-template.html',
             controller: AnchorController,
             bindings: {
                 id: '<'

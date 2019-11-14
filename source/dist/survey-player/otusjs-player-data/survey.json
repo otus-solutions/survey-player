@@ -1,0 +1,205 @@
+{
+  "extents": "StudioObject",
+  "objectType": "Survey",
+  "oid": "dXNlclVVSUQ6W3VuZGVmaW5lZF1zdXJ2ZXlVVUlEOlsxZjI2MmYzMC1mOThhLTExZTktYmZmMC0xNWNiZGQwM2E0YmVdcmVwb3NpdG9yeVVVSUQ6WyBOb3QgZG9uZSB5ZXQgXQ==",
+  "identity": {
+    "extents": "StudioObject",
+    "objectType": "SurveyIdentity",
+    "name": "Teste",
+    "acronym": "TST",
+    "recommendedTo": "",
+    "description": "",
+    "keywords": []
+  },
+  "metainfo": {
+    "extents": "StudioObject",
+    "objectType": "SurveyMetaInfo",
+    "creationDatetime": "2019-10-28T13:52:03.491Z",
+    "otusStudioVersion": ""
+  },
+  "dataSources": [],
+  "itemContainer": [
+    {
+      "extents": "SurveyItem",
+      "objectType": "CalendarQuestion",
+      "templateID": "TST1",
+      "customID": "TST1",
+      "dataType": "LocalDate",
+      "label": {
+        "ptBR": {
+          "extends": "StudioObject",
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "",
+          "formattedText": ""
+        },
+        "enUS": {
+          "extends": "StudioObject",
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "",
+          "formattedText": ""
+        },
+        "esES": {
+          "extends": "StudioObject",
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "",
+          "formattedText": ""
+        }
+      },
+      "metadata": {
+        "extents": "StudioObject",
+        "objectType": "MetadataGroup",
+        "options": []
+      },
+      "fillingRules": {
+        "extends": "StudioObject",
+        "objectType": "FillingRules",
+        "options": {
+          "mandatory": {
+            "extends": "StudioObject",
+            "objectType": "Rule",
+            "validatorType": "mandatory",
+            "data": {
+              "canBeIgnored": false,
+              "reference": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "extents": "SurveyItem",
+      "objectType": "SingleSelectionQuestion",
+      "templateID": "TST2",
+      "customID": "TST2",
+      "dataType": "Integer",
+      "label": {
+        "ptBR": {
+          "extends": "StudioObject",
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "",
+          "formattedText": ""
+        },
+        "enUS": {
+          "extends": "StudioObject",
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "",
+          "formattedText": ""
+        },
+        "esES": {
+          "extends": "StudioObject",
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "",
+          "formattedText": ""
+        }
+      },
+      "options": [],
+      "metadata": {
+        "extents": "StudioObject",
+        "objectType": "MetadataGroup",
+        "options": []
+      },
+      "fillingRules": {
+        "extends": "StudioObject",
+        "objectType": "FillingRules",
+        "options": {
+          "mandatory": {
+            "extends": "StudioObject",
+            "objectType": "Rule",
+            "validatorType": "mandatory",
+            "data": {
+              "canBeIgnored": false,
+              "reference": true
+            }
+          }
+        }
+      }
+    }
+  ],
+  "navigationList": [
+    {
+      "extents": "SurveyTemplateObject",
+      "objectType": "Navigation",
+      "origin": "BEGIN NODE",
+      "index": 0,
+      "inNavigations": [],
+      "routes": [
+        {
+          "extents": "SurveyTemplateObject",
+          "objectType": "Route",
+          "origin": "BEGIN NODE",
+          "destination": "TST1",
+          "name": "BEGIN NODE_TST1",
+          "isDefault": true,
+          "conditions": []
+        }
+      ]
+    },
+    {
+      "extents": "SurveyTemplateObject",
+      "objectType": "Navigation",
+      "origin": "END NODE",
+      "index": 1,
+      "inNavigations": [
+        {
+          "origin": "TST2",
+          "index": 3
+        }
+      ],
+      "routes": []
+    },
+    {
+      "extents": "SurveyTemplateObject",
+      "objectType": "Navigation",
+      "origin": "TST1",
+      "index": 2,
+      "inNavigations": [
+        {
+          "origin": "BEGIN NODE",
+          "index": 0
+        }
+      ],
+      "routes": [
+        {
+          "extents": "SurveyTemplateObject",
+          "objectType": "Route",
+          "origin": "TST1",
+          "destination": "TST2",
+          "name": "TST1_TST2",
+          "isDefault": true,
+          "conditions": []
+        }
+      ]
+    },
+    {
+      "extents": "SurveyTemplateObject",
+      "objectType": "Navigation",
+      "origin": "TST2",
+      "index": 3,
+      "inNavigations": [
+        {
+          "origin": "TST1",
+          "index": 2
+        }
+      ],
+      "routes": [
+        {
+          "extents": "SurveyTemplateObject",
+          "objectType": "Route",
+          "origin": "TST2",
+          "destination": "END NODE",
+          "name": "TST2_END NODE",
+          "isDefault": true,
+          "conditions": []
+        }
+      ]
+    }
+  ],
+  "staticVariableList": [],
+  "surveyItemGroupList": []
+}

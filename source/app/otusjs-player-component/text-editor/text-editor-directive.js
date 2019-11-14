@@ -16,7 +16,7 @@
                 leftIcon: '@',
                 ngModel: '<'
             },
-            templateUrl: 'app/editor/ui/base/text-editor/text-editor.html',
+            templateUrl: 'app/otusjs-player-component/text-editor/text-editor.html',
             retrict: 'E',
             link: function linkFunc(scope, element) {
                 scope.widget = OtusTextEditorWidgetFactory.create(scope, element);
