@@ -2,14 +2,15 @@
   'use strict';
 
   angular
-    .module('preview')
+    .module('otusjs.player.standalone')
     .service('SavePlayerStepService', Service);
 
   Service.$inject = [
-    'DashboardStateService'
+    'otusjs.model.activity.ActivityFacadeService',
+    'SurveyApiService'
   ];
 
-  function Service(DashboardStateService) {
+  function Service(ActivityFacadeService, SurveyApiService) {
     var self = this;
     var _currentItem;
 
@@ -22,7 +23,11 @@
     function beforeEffect(pipe, flowData) {}
 
     function effect(pipe, flowData) {
-      DashboardStateService.goToFormTemplates();
+      SurveyApiService.saveActivity(ActivityFacadeService.surveyActivity.toJSON()).then(function () {
+        console.log('Save activity');
+      }).catch(function () {
+        console.error('Activity not saved');
+      });
     }
 
     function afterEffect(pipe, flowData) {}

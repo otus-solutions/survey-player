@@ -7,49 +7,48 @@
   Service.$inject = [
     '$http',
     '$q',
-    'SurveyFactory'
+    'SurveyFactory',
+    'SurveyApiService'
   ];
 
-  function Service($http, $q, SurveyFactory) {
+  function Service($http, $q, SurveyFactory, SurveyApiService) {
 
     var self = this;
-    var HOSTNAME;
-    var CONTEXT;
-    self.init = init;
+
     self.getSurveyTemplate = getSurveyTemplate;
+    self.saveActivity = saveActivity;
 
-    self.setUrl = setUrl;
-    self.getApiHost = getApiHost;
-    self.setContext = setContext;
-
-
-    self.init();
-
-    function init() {
-      HOSTNAME = 'http://' + window.location.hostname + ':8080';
-      CONTEXT = '/otus-rest';
+    function _getSaveAddress() {
+      return SurveyApiService.getSaveUrl();
     }
 
-    function setUrl(url) {
-      HOSTNAME = angular.copy(url);
+    function _getActivityAddress(id) {
+      return SurveyApiService.getActivityUrl(id);
     }
 
-    function setContext(context) {
-      CONTEXT = angular.copy(context);
-    }
-
-    function getApiHost() {
-      return HOSTNAME + CONTEXT;
-    }
-
-    function getSurveyTemplate(activity) {
+    function getSurveyTemplate() {
       var defer = $q.defer();
-      $http.get('https://5d386bdcf898950014c52bce.mockapi.io/api/activity').success(function(data) {
-        console.log(data);
+      // $http.get(SurveyApiService.getCurrentActivity()).success(function(data) {
+      $http.get('https://5d386bdcf898950014c52bce.mockapi.io/api/activity').success(function(data) { //TODO: remover
         defer.resolve(SurveyFactory.fromJsonObject(data[0]));
       }).error(function(error) {
-        console.log('Cannot GET a fake survey template.');
+        console.error('Cannot GET a survey template.');
       });
+      return defer.promise;
+    }
+
+    function saveActivity(data) {
+      var defer = $q.defer();
+      $http.post(_getSaveAddress(), data).then(function (data) {
+        if (data) {
+          defer.resolve(true);
+        } else {
+          defer.reject();
+        }
+      }, function (error) {
+        defer.reject();
+      });
+
       return defer.promise;
     }
 

@@ -17,6 +17,7 @@
       'otusjs.player.data',
       'otusjs.player.viewer',
       'survey.player.client',
+      'survey.player.api',
       'ngCookies'
     ]);
 

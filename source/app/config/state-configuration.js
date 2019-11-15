@@ -12,7 +12,7 @@
 
   function stateConfiguration($stateProvider, $urlRouterProvider) {
     $stateProvider.state('/', {
-      url: '/?activity&token',
+      url: '/?activity&token&callback',
       templateUrl: 'app/activity-viewer-template.html',
       controller: Controller
     });
@@ -26,18 +26,27 @@
   }
 
 
-
-  function Controller (ActivityFacadeService, ActivityFactory, PlayerService, $compile, $q, $scope, PlayerConfigurationService, ExitPlayerStepService, $stateParams, SurveyClientService, $cookies, $location, $state) {
+  function Controller (
+    ActivityFacadeService,
+    ActivityFactory,
+    PlayerService,
+    $compile,
+    $q,
+    $scope,
+    PlayerConfigurationService,
+    ExitPlayerStepService,
+    $stateParams,
+    SurveyClientService,
+    SurveyApiService,
+    $cookies,
+    $location,
+    $state,
+    SavePlayerStepService) {
     var self = this;
 
     /* Lifecycle hooks */
     self.$onInit = onInit;
     var _newScope;
-    var _user = undefined;
-    var _participant = undefined;
-    var _activityConfigurationName = 'C0';
-
-
 
     function _generateOtusPreview() {
       _newScope = $scope;
@@ -47,59 +56,52 @@
     }
 
     function _getSurveyTemplateObject() {
-      //TODO: Tiago - alterar para fromJsonObject
-      var _activity = ActivityFactory.create(self.template, _user, _participant, _activityConfigurationName);
+      var _activity = ActivityFactory.fromJsonObject(self.template);
       return ActivityFacadeService.surveyActivity = _activity;
     }
 
     _config();
     function _config() {
-      const _token =  new String(angular.copy($stateParams.token));
-      if (!sessionStorage.getItem('Auth_Token')) {
-        sessionStorage.setItem('Auth_Token', angular.copy(_token));
-        SurveyClientService.setUrl($cookies.get('Backend-Address'));
-        if (!sessionStorage.getItem('Current_Activity')){
-          sessionStorage.setItem('Current_Activity', $stateParams.activity);
-          SurveyClientService.getSurveyTemplate(sessionStorage.getItem('Current_Activity')).then(function(response) {
+      const _token =  angular.copy($stateParams.token);
+      if ($stateParams.callback) {
+        SurveyApiService.setCallbackAddress(angular.copy($stateParams.callback));
+        $location.search('Callback-Address', null);
+      }
+      if (!SurveyApiService.getAuthToken()) {
+        SurveyApiService.setAuthToken(angular.copy(_token));
+        if (!SurveyApiService.getCurrentActivity()){
+          SurveyApiService.setCurrentActivity($stateParams.activity);
+          SurveyClientService.getSurveyTemplate().then(function(response) {
             self.template = angular.copy(response);
-            _generateOtusPreview();
-            PlayerConfigurationService.onStop(ExitPlayerStepService);
-            PlayerService.setup();
+            _setPlayerConfiguration();
           });
         }
 
       } else {
-        if (sessionStorage.getItem('Current_Activity')){
-          SurveyClientService.getSurveyTemplate(sessionStorage.getItem('Current_Activity')).then(function(response) {
+        if (SurveyApiService.getCurrentActivity()){
+          SurveyClientService.getSurveyTemplate().then(function(response) {
             self.template = angular.copy(response);
-            _generateOtusPreview();
-            PlayerConfigurationService.onStop(ExitPlayerStepService);
-            PlayerService.setup();
+            _setPlayerConfiguration();
             $('#survey-preview').append($compile('<otus-player layout="column" layout-fill=""></otus-player>')($scope));
             $scope.apply();
-            essionStorage.removeItem('Current_Activity');
           });
         }
       }
       $location.search('activity', null);
     }
 
+    function _setPlayerConfiguration(){
+      _generateOtusPreview();
+      PlayerConfigurationService.onStop(ExitPlayerStepService);
+      PlayerConfigurationService.onEject(ExitPlayerStepService);
+      PlayerConfigurationService.onSave(SavePlayerStepService);
+      PlayerService.setup();
+    }
+
     function onInit(){
-
       $location.search('token',null);
-      // _config();
       if(sessionStorage.getItem('Auth_Token') && sessionStorage.getItem('Current_Activity')){
-
-        // if (!self.template) {
-        //   SurveyClientService.getSurveyTemplate(sessionStorage.getItem('Current_Activity')).then(function (response) {
-        //     self.template = angular.copy(response);
-        //     _generateOtusPreview();
-        //     PlayerConfigurationService.onStop(ExitPlayerStepService);
-        //     PlayerService.setup();
-        //   });
-        // } else {
-        //   PlayerService.setup();
-        // }
+        console.log('Ready')
       } else {
         $state.go('/error');
       }
@@ -119,9 +121,11 @@
     'ExitPlayerStepService',
     '$stateParams',
     'SurveyClientService',
+    'SurveyApiService',
     '$cookies',
     '$location',
-    '$state'
+    '$state',
+    'SavePlayerStepService'
   ];
 
 }());

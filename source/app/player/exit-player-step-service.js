@@ -6,10 +6,11 @@
     .service('ExitPlayerStepService', Service);
 
   Service.$inject = [
-    'otusjs.model.activity.ActivityFacadeService'
+    'otusjs.model.activity.ActivityFacadeService',
+    'SurveyApiService'
   ];
 
-  function Service(ActivityFacadeService) {
+  function Service(ActivityFacadeService, SurveyApiService) {
     var self = this;
     var _currentItem;
 
@@ -22,9 +23,7 @@
     function beforeEffect(pipe, flowData) { }
 
     function effect(pipe, flowData) {
-      //TODO: TIAGO
-      console.log(ActivityFacadeService);
-
+      location.href = SurveyApiService.getCallbackAddress();
     }
 
     function afterEffect(pipe, flowData) {
