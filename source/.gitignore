@@ -1,4 +1,4 @@
-target/
+**/target/
 /*/.settings
 /*/.project
 /*/.classpath
@@ -9,11 +9,11 @@ target/
 *.swp
 *.swo
 **/unit-result.report.html
-**/node_modules/
+**/**/node_modules/
 /**/env.properties
 /**/npm-debug.log.*
 **/.sonar
-../package-lock.json
+**/package-lock.json
 bin/
 .project
 .classpath

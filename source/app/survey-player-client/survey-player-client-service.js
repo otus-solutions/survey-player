@@ -18,18 +18,13 @@
     self.getSurveyTemplate = getSurveyTemplate;
     self.saveActivity = saveActivity;
 
-    function _getSaveAddress() {
-      return SurveyApiService.getSaveUrl();
-    }
-
-    function _getActivityAddress(id) {
-      return SurveyApiService.getActivityUrl(id);
+    function _getActivityAddress() {
+      return SurveyApiService.getActivityUrl();
     }
 
     function getSurveyTemplate() {
       var defer = $q.defer();
-      // $http.get(SurveyApiService.getCurrentActivity()).success(function(data) {
-      $http.get('https://5d386bdcf898950014c52bce.mockapi.io/api/activity').success(function(data) { //TODO: remover
+      $http.get(_getActivityAddress() + '/' + SurveyApiService.getCurrentActivity()).success(function(data) {
         defer.resolve(SurveyFactory.fromJsonObject(data[0]));
       }).error(function(error) {
         console.error('Cannot GET a survey template.');
@@ -39,7 +34,7 @@
 
     function saveActivity(data) {
       var defer = $q.defer();
-      $http.post(_getSaveAddress(), data).then(function (data) {
+      $http.post(_getActivityAddress(), data).then(function (data) {
         if (data) {
           defer.resolve(true);
         } else {

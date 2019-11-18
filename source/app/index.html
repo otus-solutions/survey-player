@@ -45,6 +45,7 @@
 <script src="node_modules/angular-aria/angular-aria.min.js"></script>
 <script src="node_modules/angular-animate/angular-animate.min.js"></script>
 <script src="node_modules/angular-messages/angular-messages.min.js"></script>
+<script src="node_modules/angular-resource/angular-resource.min.js"></script>
 <!-- endbuild -->
 <!-- Bind HTML Compile -->
 <!-- build:js scripts/compile-min.js -->
@@ -67,6 +68,26 @@
 <!-- API -->
 <script src="app/survey-player-api/survey-api-module.js"></script>
 <script src="app/survey-player-api/survey-api-service.js"></script>
+
+<!--ACTIVITY STORAGE-->
+<script src="app/storage/storage-module.js"></script>
+<script src="app/storage/activity-local-storage-service.js"></script>
+<!--SURVEY ITEM DATASOURCE-->
+<script src="app/data-source/datasource-module.js"></script>
+<script src="app/data-source/datasource-resource-factory.js"></script>
+<script src="app/data-source/survey-item-rest-service.js"></script>
+<script src="app/data-source/survey-item-datasource-service.js"></script>
+<!--FILE UPLOAD-->
+<script src="app/file-upload/file-upload-module.js"></script>
+<script src="app/file-upload/upload-resource-factory.js"></script>
+<script src="app/file-upload/file-upload-rest-service.js"></script>
+<script src="app/file-upload/file-upload-datasource-service.js"></script>
+<!--STATIC VARIABLE-->
+<script src="app/static-variable/static-variable-module.js"></script>
+<script src="app/static-variable/static-variable-resource-factory.js"></script>
+<script src="app/static-variable/static-variable-rest-service.js"></script>
+<script src="app/static-variable/static-variable-data-source-request-factory.js"></script>
+<script src="app/static-variable/static-variable-data-source-service.js"></script>
 <!-- CONFIG -->
 <script src="app/config/otusjs-config-module.js"></script>
 <script src="app/config/state-configuration.js"></script>
@@ -90,6 +111,7 @@
 
 <script src="app/player-module.js"></script>
 <script src="app/player/exit-player-step-service.js"></script>
+<script src="app/player/pre-player-step-service.js"></script>
 <script src="app/player/save-player-step-service.js"></script>
 
 <!-- -------------------------------------------------------------------------------------- -->

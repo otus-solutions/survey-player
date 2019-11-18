@@ -4,13 +4,12 @@
   angular.module('survey.player.client')
     .factory('Interceptor', Interceptor);
 
-  Interceptor.$inject = ['$q'];
+  Interceptor.$inject = ['SurveyApiService'];
 
-  function Interceptor() {
+  function Interceptor(SurveyApiService) {
     return {
       request: function(config) {
-        // config.headers['Authorization'] = 'Bearer '+ sessionStorage.getItem('Auth_Token');
-        config.headers['Content-Type'] = 'application/json';
+        // config.headers['Authorization'] = 'Bearer '+ SurveyApiService.getAuthToken();
         return config;
       }
     };

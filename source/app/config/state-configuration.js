@@ -41,7 +41,8 @@
     $cookies,
     $location,
     $state,
-    SavePlayerStepService) {
+    SavePlayerStepService,
+    PrePlayerStepService) {
     var self = this;
 
     /* Lifecycle hooks */
@@ -92,6 +93,7 @@
 
     function _setPlayerConfiguration(){
       _generateOtusPreview();
+      PlayerConfigurationService.onPrePlayerStart(PrePlayerStepService);
       PlayerConfigurationService.onStop(ExitPlayerStepService);
       PlayerConfigurationService.onEject(ExitPlayerStepService);
       PlayerConfigurationService.onSave(SavePlayerStepService);
@@ -100,15 +102,13 @@
 
     function onInit(){
       $location.search('token',null);
-      if(sessionStorage.getItem('Auth_Token') && sessionStorage.getItem('Current_Activity')){
+      if(SurveyApiService.getAuthToken() && SurveyApiService.getCurrentActivity()){
         console.log('Ready')
       } else {
         $state.go('/error');
       }
     }
-
   }
-
 
   Controller.$inject = [
     'otusjs.model.activity.ActivityFacadeService',
@@ -125,7 +125,8 @@
     '$cookies',
     '$location',
     '$state',
-    'SavePlayerStepService'
+    'SavePlayerStepService',
+    'PrePlayerStepService'
   ];
 
 }());

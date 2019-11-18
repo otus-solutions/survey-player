@@ -13,12 +13,17 @@
       'otusjs.player.core',
       'otusjs.player.component',
       /* Standalone dependencies */
+      'survey.player.client',
+      'survey.player.api',
+      'survey.player.datasource',
+      'survey.player.staticVariable',
+      'survey.player.storage',
       'otusjs.player.config',
       'otusjs.player.data',
       'otusjs.player.viewer',
-      'survey.player.client',
-      'survey.player.api',
-      'ngCookies'
+      'survey.player.file.upload',
+      'ngCookies',
+      'ngResource'
     ]);
 
 

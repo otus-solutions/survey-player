@@ -11,9 +11,10 @@
   function Service($cookies) {
     var self = this;
 
-    self.getBaseUrl = getBaseUrl;
-    self.getSaveUrl = getSaveUrl;
+    self.getFileUploadUrl = getFileUploadUrl;
     self.getActivityUrl = getActivityUrl;
+    self.getDatasourceUrl = getDatasourceUrl;
+    self.getStatiVariableUrl = getStatiVariableUrl;
     self.getAuthToken = getAuthToken;
     self.setAuthToken = setAuthToken;
     self.setCallbackAddress = setCallbackAddress;
@@ -24,29 +25,32 @@
     const CURRENT_ACTIVITY = 'Current_Activity';
     init();
 
-    var _base;
-    var _context;
-    var _save;
-    var _activity;
-    var _callback;
+    var _datasourceUrl;
+    var _activityUrl;
+    var _staticVariableUrl;
+    var _fileUploadUrl;
 
     function init(){
-      _base = $cookies.get('Backend-Address');
-      _context = $cookies.get('Base-Context') || '';
-      _save = $cookies.get('Save-Context') || '';
-      _activity = $cookies.get('Activity-Context') || '';
+      _datasourceUrl = $cookies.get('Datasource-Address');
+      _activityUrl = $cookies.get('Activity-Address');
+      _staticVariableUrl = $cookies.get('StaticVariable-Address');
+      _fileUploadUrl = $cookies.get('FileUpload-Address');
     }
 
-    function getBaseUrl() {
-      return _base.concat(_context);
+    function getDatasourceUrl() {
+      return _datasourceUrl;
     }
 
-    function getSaveUrl() {
-      return _base.concat(_context).concat(_save);
+    function getStatiVariableUrl() {
+      return _staticVariableUrl;
     }
 
-    function getActivityUrl(id) {
-      return _base.concat(_context).concat(_activity).concat(id);
+    function getActivityUrl() {
+      return _activityUrl;
+    }
+
+    function getFileUploadUrl() {
+      return _fileUploadUrl;
     }
 
     function getAuthToken() {
