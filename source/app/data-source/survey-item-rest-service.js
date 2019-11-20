@@ -7,10 +7,10 @@
 
   Service.$inject = [
     '$q',
-    'OtusRestResourceService'
+    'DatasourceResourceFactory'
   ];
 
-  function Service($q, OtusRestResourceService) {
+  function Service($q, DatasourceResourceFactory) {
     var self = this;
     var _rest = null;
 
@@ -20,7 +20,7 @@
     self.getByID = getByID;
 
     function initialize() {
-      _rest = OtusRestResourceService.getDatasourceResourceFactory();
+      _rest = DatasourceResourceFactory.create();
     }
 
     function list() {

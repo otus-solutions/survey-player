@@ -2,14 +2,15 @@
   'use strict';
 
   angular
-    .module('preview')
+    .module('otusjs.player.standalone')
     .service('StopPlayerStepService', Service);
 
   Service.$inject = [
-    'DashboardStateService'
+    'otusjs.player.data.activity.ActivityFacadeService',
+    'SurveyApiService'
   ];
 
-  function Service(DashboardStateService) {
+  function Service(ActivityFacadeService, SurveyApiService) {
     var self = this;
     var _currentItem;
 
@@ -22,7 +23,8 @@
     function beforeEffect(pipe, flowData) { }
 
     function effect(pipe, flowData) {
-      DashboardStateService.goToFormTemplates();
+      ActivityFacadeService.save();
+      location.href = SurveyApiService.getCallbackAddress();
     }
 
     function afterEffect(pipe, flowData) {

@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('preview')
+    .module('otusjs.player.standalone')
     .service('PlayerService', Service);
 
   Service.$inject = [

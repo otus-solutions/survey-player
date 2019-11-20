@@ -22,7 +22,7 @@
     self.setCurrentActivity = setCurrentActivity;
     self.getCurrentActivity = getCurrentActivity;
 
-    const CURRENT_ACTIVITY = 'Current_Activity';
+    var CURRENT_ACTIVITY = 'Current_Activity';
     init();
 
     var _datasourceUrl;

@@ -1,103 +1,123 @@
 // Karma configuration
 
-module.exports = function(config) {
-    var APP_ROOT_PATH = 'app/';
-    var NODE_MODULES_ROOT_PATH = 'node_modules/';
-    var TEST_UTILS_ROOT_PATH = 'tests/utils/';
+module.exports = function (config) {
+  var APP_ROOT_PATH = 'app/';
+  var NODE_MODULES_ROOT_PATH = 'node_modules/';
+  var TEST_UTILS_ROOT_PATH = 'tests/utils/';
 
-    config.set({
-        // base path that will be used to resolve all patterns (eg. files, exclude)
-        basePath: '..',
+  'use strict';
+  config.set({
+    // base path that will be used to resolve all patterns (eg. files, exclude)
+    basePath: '',
 
-        // frameworks to use
-        // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-        frameworks: ['jasmine'],
+    // frameworks to use
+    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
+    frameworks: ['browserify', 'jasmine'],
 
-        // list of files / patterns to load in the browser
-        files: [
-            /* External dependencies */
-            NODE_MODULES_ROOT_PATH + 'jquery/dist/jquery.min.js',
-            NODE_MODULES_ROOT_PATH + 'angular/angular.min.js',
-            NODE_MODULES_ROOT_PATH + 'babel-polyfill/dist/polyfill.js',
-            NODE_MODULES_ROOT_PATH + 'angular-animate/angular-animate.min.js',
-            NODE_MODULES_ROOT_PATH + 'angular-aria/angular-aria.min.js',
-            NODE_MODULES_ROOT_PATH + 'angular-bind-html-compile-ci-dev/angular-bind-html-compile.js',
-            NODE_MODULES_ROOT_PATH + 'angular-mousewheel/mousewheel.js',
-            NODE_MODULES_ROOT_PATH + 'angular-material/angular-material.min.js',
-            NODE_MODULES_ROOT_PATH + 'angular-messages/angular-messages.min.js',
-            NODE_MODULES_ROOT_PATH + 'angular-mocks/angular-mocks.js',
-            NODE_MODULES_ROOT_PATH + 'angular-ui-router/release/angular-ui-router.min.js',
-            NODE_MODULES_ROOT_PATH + 'otus-model-js/dist/otus-model.min.js',
-            NODE_MODULES_ROOT_PATH + 'otus-model-js/dist/st-utils.min.js',
-            NODE_MODULES_ROOT_PATH + 'otus-validation-js/dist/otus-validation-min.js',
-            NODE_MODULES_ROOT_PATH + 'trail-js/dist/trail-min.js',
+    // list of files / patterns to load in the browser
+    files: [
+      /* External dependencies */
+      NODE_MODULES_ROOT_PATH + 'angular/angular.min.js',
+      NODE_MODULES_ROOT_PATH + 'babel-polyfill/dist/polyfill.js',
+      NODE_MODULES_ROOT_PATH + 'angular-cookies/angular-cookies.min.js',
+      NODE_MODULES_ROOT_PATH + 'angular-animate/angular-animate.min.js',
+      NODE_MODULES_ROOT_PATH + 'angular-resource/angular-resource.min.js',
+      NODE_MODULES_ROOT_PATH + 'angular-aria/angular-aria.min.js',
+      NODE_MODULES_ROOT_PATH + 'angular-bind-html-compile-ci-dev/angular-bind-html-compile.js',
+      NODE_MODULES_ROOT_PATH + 'angular-mousewheel/mousewheel.js',
+      NODE_MODULES_ROOT_PATH + 'angular-material/angular-material.min.js',
+      NODE_MODULES_ROOT_PATH + 'angular-messages/angular-messages.min.js',
+      NODE_MODULES_ROOT_PATH + 'angular-mocks/angular-mocks.js',
+      NODE_MODULES_ROOT_PATH + 'angular-ui-router/release/angular-ui-router.min.js',
+      NODE_MODULES_ROOT_PATH + 'jquery/dist/jquery.min.js',
+      NODE_MODULES_ROOT_PATH + 'otus-model-js/dist/otus-model.min.js',
+      NODE_MODULES_ROOT_PATH + 'otus-model-js/dist/st-utils.min.js',
+      NODE_MODULES_ROOT_PATH + 'otus-validation-js/dist/otus-validation-min.js',
+      NODE_MODULES_ROOT_PATH + 'trail-js/dist/trail-min.js',
 
-            APP_ROOT_PATH + 'app.js',
-            APP_ROOT_PATH + '**/*-module.js',
-            APP_ROOT_PATH + '**/*.js', {
-                pattern: 'tests/unit/**/*-spec.js',
-                included: true
-            },
-            TEST_UTILS_ROOT_PATH + 'data/json-importer.js'
-        ],
+      APP_ROOT_PATH + 'app.js',
 
-        // list of files to exclude
-        exclude: [
-          'tests/unit/**/*example.js'
-        ],
+      APP_ROOT_PATH + '**/*-module.js',
+      APP_ROOT_PATH + '**/**/*-module.js',
+      APP_ROOT_PATH + '**/**/**/*-module.js',
 
-        // preprocess matching files before serving them to the browser
-        // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-        preprocessors: {
-          './app/**/*.js': ['babel', 'coverage'],
-          './tests/unit/**/*-spec.js': 'babel'
-        },
+      APP_ROOT_PATH + '**/**/*.js', {
+        pattern: 'tests/unit/**/*-spec.js',
+        included: true
+      },
+      TEST_UTILS_ROOT_PATH + 'data/json-importer.js'
+    ],
 
-        coverageReporter: {
-            reporters: [{
-                type: 'html',
-                dir: 'target/test-coverage/'
-            }, {
-                type: 'lcov',
-                dir: 'target/test-coverage/',
-                subdir: 'report-lcov'
-            }]
-        },
+    // list of files to exclude
+    exclude: [
+      'tests/unit/**/*example.js',
+      APP_ROOT_PATH + 'static-resource/force-refresh-page.js'
+    ],
 
-        // test results reporter to use
-        // possible values: 'dots', 'progress'
-        // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['progress', 'html', 'coverage', 'lcov'],
+    // preprocess matching files before serving them to the browser
+    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
+    preprocessors: {
+      './app/**/*.js': ['babel', 'coverage'],
+      './tests/unit/**/*-spec.js': 'babel'
+    },
 
-        htmlReporter: {
-            outputFile: 'target/unit-result.report.html',
-            //Optional
-            pageTitle: 'Unit Tests'
-        },
-        // web server port
-        port: 9876,
+    browserify: {
+      debug: true,
+      transform: ['babelify', 'stringify']
+    },
 
-        // enable / disable colors in the output (reporters and logs)
-        colors: true,
+    coverageReporter: {
+      reporters: [{
+        type: 'html',
+        dir: 'target/test-coverage/'
+      }, {
+        type: 'lcov',
+        dir: 'target/test-coverage/',
+        subdir: 'report-lcov'
+      }]
+    },
 
-        // level of logging
-        // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-        logLevel: config.LOG_INFO,
+    // test results reporter to use
+    // possible values: 'dots', 'progress'
+    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
+    reporters: ['progress', 'html', 'coverage', 'lcov'],
 
-        // enable / disable watching file and executing tests whenever any file changes
-        autoWatch: false,
+    htmlReporter: {
+      outputFile: 'target/unit-result.report.html',
+      //Optional
+      pageTitle: 'Unit Tests'
+    },
+    // web server port
+    port: 9876,
 
-        // start these browsers
-        // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-        browsers: ['PhantomJS'],
+    // enable / disable colors in the output (reporters and logs)
+    colors: true,
 
-        // Continuous Integration mode
-        // if true, Karma captures browsers, runs the tests and exits
-        singleRun: false,
+    // level of logging
+    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+    logLevel: config.LOG_INFO,
 
-        // Concurrency level
-        // how many browser should be started simultaneous
-        concurrency: Infinity
-    });
+    // enable / disable watching file and executing tests whenever any file changes
+    autoWatch: false,
+
+    // start these browsers
+    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
+    browsers: ['PhantomJS'],
+
+    // Continuous Integration mode
+    // if true, Karma captures browsers, runs the tests and exits
+    singleRun: false,
+
+    // Concurrency level
+    // how many browser should be started simultaneous
+    concurrency: Infinity,
+
+    capabilities: {
+      'browserName': 'chrome',
+      'chromeOptions': {
+        args: ['--disable-browser-side-navigation']
+      }
+    }
+  });
 
 };

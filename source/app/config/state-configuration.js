@@ -63,7 +63,7 @@
 
     _config();
     function _config() {
-      const _token =  angular.copy($stateParams.token);
+      var _token =  angular.copy($stateParams.token);
       if ($stateParams.callback) {
         SurveyApiService.setCallbackAddress(angular.copy($stateParams.callback));
         $location.search('Callback-Address', null);
