@@ -24,7 +24,45 @@
       'survey.player.file.upload',
       'ngCookies',
       'ngResource'
-    ]);
+    ]).value('OtusLocalStorage', [
+    'ActivityLocalStorageService'
+  ])
+    .run(Runner);
+
+  Runner.$inject = [
+    '$injector',
+    'StorageLoaderService'
+  ];
+
+  function Runner($injector, StorageLoaderService) {
+    _loadOtusDb(StorageLoaderService)
+      .then(function() {
+        // BootstrapService.run();
+        // notifyModuleLoad($injector);
+      });
+  }
+
+  function _loadOtusDb(StorageLoaderService) {
+    var OTUS_DB = 'otus';
+
+    // StorageLoaderService.initializeSessionStorage();
+
+    return StorageLoaderService.dbExists(OTUS_DB).then(function(dbExists) {
+      if (dbExists) {
+        return StorageLoaderService.loadIndexedStorage(OTUS_DB);
+      } else {
+        return StorageLoaderService.createIndexedStorage(OTUS_DB);
+      }
+    });
+  }
+
+  // function notifyModuleLoad($injector) {
+  //   var currentModule = angular.module('otusjs.deploy');
+  //   var application = $injector.get('otusjs.application.core.ModuleService');
+  //   application.notifyModuleLoad(currentModule.name);
+  //   application.finalizeDeploy();
+  //   console.info('Deploy module ready.');
+  // }
 
 
 }());

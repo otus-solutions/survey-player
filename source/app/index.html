@@ -46,6 +46,10 @@
 <script src="node_modules/angular-animate/angular-animate.min.js"></script>
 <script src="node_modules/angular-messages/angular-messages.min.js"></script>
 <script src="node_modules/angular-resource/angular-resource.min.js"></script>
+<!-- ************************************* Lokijs ************************************* -->
+<script src="node_modules/lokijs/build/lokijs.min.js"></script>
+<script src="node_modules/lokijs/build/loki-indexed-adapter.min.js"></script>
+<script src="node_modules/lokijs/src/loki-angular.js"></script>
 <!-- endbuild -->
 <!-- Bind HTML Compile -->
 <!-- build:js scripts/compile-min.js -->
@@ -54,7 +58,7 @@
 <!-- endbuild -->
 <!-- Otus Model JS -->
 <!-- build:js scripts/model-min.js -->
-<script src="node_modules/otus-model-js/dist/otus-model.min.js"></script>
+<script src="node_modules/otus-model-js/dist/otus-model.js"></script>
 <script src="node_modules/otus-model-js/dist/st-utils.min.js"></script>
 <!-- endbuild -->
 <!-- Otus Validation JS -->
@@ -65,6 +69,13 @@
 <!-- OTUSJS PLAYER STANDALONE -->
 <!-- build:js scripts/otusjs-player-min.js -->
 <script src="app/app.js"></script>
+<script src="app/activity-rest-service.js"></script>
+<script src="app/activity-remote-storage-service.js"></script>
+<script src="app/activity-collection-service.js"></script>
+<script src="app/activity-repository-service.js"></script>
+<script src="app/indexed-db-service.js"></script>
+<script src="app/storage-loader-service.js"></script>
+
 <!-- API -->
 <script src="app/survey-player-api/survey-api-module.js"></script>
 <script src="app/survey-player-api/survey-api-service.js"></script>

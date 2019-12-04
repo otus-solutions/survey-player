@@ -42,6 +42,7 @@
     /* Datasources Methods */
     self.getDatasource = getDatasource;
     self.registerDatasource = registerDatasource;
+    // self.initialize({}, indexedDB.open('otus'));
 
     /**
      * Binds this service to collection "activities" from LokiJS database instance.

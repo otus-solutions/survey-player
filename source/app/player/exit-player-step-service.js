@@ -7,10 +7,11 @@
 
   Service.$inject = [
     'otusjs.model.activity.ActivityFacadeService',
-    'SurveyApiService'
+    'SurveyApiService',
+    'IndexedDbStorageService'
   ];
 
-  function Service(ActivityFacadeService, SurveyApiService) {
+  function Service(ActivityFacadeService, SurveyApiService, IndexedDbStorageService) {
     var self = this;
     var _currentItem;
 
@@ -23,6 +24,8 @@
     function beforeEffect(pipe, flowData) { }
 
     function effect(pipe, flowData) {
+      //TODO: TIAGO
+      IndexedDbStorageService.deleteDatabase();
       location.href = SurveyApiService.getCallbackAddress();
     }
 

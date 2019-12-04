@@ -28,7 +28,7 @@
 
   function Controller (
     ActivityFacadeService,
-    ActivityFactory,
+    StorageLoaderService,
     PlayerService,
     $compile,
     $q,
@@ -57,38 +57,41 @@
     }
 
     function _getSurveyTemplateObject() {
-      var _activity = ActivityFactory.fromJsonObject(self.template);
+      var _activity = angular.copy(self.template);
       return ActivityFacadeService.surveyActivity = _activity;
     }
 
     _config();
     function _config() {
-      var _token =  angular.copy($stateParams.token);
-      if ($stateParams.callback) {
-        SurveyApiService.setCallbackAddress(angular.copy($stateParams.callback));
-        $location.search('Callback-Address', null);
-      }
-      if (!SurveyApiService.getAuthToken()) {
-        SurveyApiService.setAuthToken(angular.copy(_token));
-        if (!SurveyApiService.getCurrentActivity()){
-          SurveyApiService.setCurrentActivity($stateParams.activity);
-          SurveyClientService.getSurveyTemplate().then(function(response) {
-            self.template = angular.copy(response);
-            _setPlayerConfiguration();
-          });
-        }
+      _loadOtusDb().then(function () {
 
-      } else {
-        if (SurveyApiService.getCurrentActivity()){
-          SurveyClientService.getSurveyTemplate().then(function(response) {
-            self.template = angular.copy(response);
-            _setPlayerConfiguration();
-            $('#survey-preview').append($compile('<otus-player layout="column" layout-fill=""></otus-player>')($scope));
-            $scope.apply();
-          });
+        var _token =  angular.copy($stateParams.token);
+        if ($stateParams.callback) {
+          SurveyApiService.setCallbackAddress(angular.copy($stateParams.callback));
+          $location.search('callback', null);
         }
-      }
-      $location.search('activity', null);
+        if (!SurveyApiService.getAuthToken()) {
+          SurveyApiService.setAuthToken(angular.copy(_token));
+          if (!SurveyApiService.getCurrentActivity()){
+            SurveyApiService.setCurrentActivity($stateParams.activity);
+            SurveyClientService.getSurveyTemplate().then(function(response) {
+              self.template = angular.copy(response);
+              _setPlayerConfiguration();
+            });
+          }
+
+        } else {
+          if (SurveyApiService.getCurrentActivity()){
+            SurveyClientService.getSurveyTemplate().then(function(response) {
+              self.template = angular.copy(response);
+              _setPlayerConfiguration();
+              $('#survey-preview').append($compile('<otus-player layout="column" layout-fill=""></otus-player>')($scope));
+              // $scope.apply();
+            });
+          }
+        }
+        $location.search('activity', null);
+      });
     }
 
     function _setPlayerConfiguration(){
@@ -103,16 +106,36 @@
     function onInit(){
       $location.search('token',null);
       if(SurveyApiService.getAuthToken() && SurveyApiService.getCurrentActivity()){
-        console.log('Ready')
+        console.log('Ready');
       } else {
         $state.go('/error');
       }
+    }
+
+    function _loadOtusDb() {
+      var OTUS_DB = 'otus';
+      var deferred = $q.defer();
+
+      // StorageLoaderService.initializeSessionStorage();
+
+      StorageLoaderService.dbExists(OTUS_DB).then(function(dbExists) {
+        if (dbExists) {
+          StorageLoaderService.loadIndexedStorage(OTUS_DB);
+          deferred.resolve();
+        } else {
+          StorageLoaderService.createIndexedStorage(OTUS_DB);
+          deferred.resolve();
+
+        }
+      });
+
+      return deferred.promise;
     }
   }
 
   Controller.$inject = [
     'otusjs.model.activity.ActivityFacadeService',
-    'otusjs.model.activity.ActivityFactory',
+    'StorageLoaderService',
     'otusjs.player.core.player.PlayerService',
     '$compile',
     '$q',
