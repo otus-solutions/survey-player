@@ -42,12 +42,15 @@
     $location,
     $state,
     SavePlayerStepService,
-    PrePlayerStepService) {
-    var self = this;
+    PrePlayerStepService,
+    LoadingScreenService) {
 
+    var self = this;
     /* Lifecycle hooks */
     self.$onInit = onInit;
+
     var _newScope;
+    var _isValid = false;
 
     function _generateOtusPreview() {
       _newScope = $scope;
@@ -61,8 +64,8 @@
       return ActivityFacadeService.surveyActivity = _activity;
     }
 
-    _config();
     function _config() {
+      LoadingScreenService.start();
       _loadOtusDb().then(function () {
 
         var _token =  angular.copy($stateParams.token);
@@ -72,6 +75,7 @@
         }
         if (!SurveyApiService.getAuthToken()) {
           SurveyApiService.setAuthToken(angular.copy(_token));
+          $location.search('token',null);
           if (!SurveyApiService.getCurrentActivity()){
             SurveyApiService.setCurrentActivity($stateParams.activity);
             SurveyClientService.getSurveyTemplate().then(function(response) {
@@ -82,15 +86,24 @@
 
         } else {
           if (SurveyApiService.getCurrentActivity()){
+            $location.search('activity', null);
             SurveyClientService.getSurveyTemplate().then(function(response) {
-              self.template = angular.copy(response);
-              _setPlayerConfiguration();
-              $('#survey-preview').append($compile('<otus-player layout="column" layout-fill=""></otus-player>')($scope));
-              // $scope.apply();
+              _loadOtusDb().then(function () {
+                self.template = angular.copy(response);
+                _isValid = true;
+                _setPlayerConfiguration();
+                $('#survey-preview').empty();
+                $('#survey-preview').append($compile('<otus-player layout="column" layout-fill=""></otus-player>')($scope));
+                LoadingScreenService.finish();
+              });
+
+
+            }).catch(function () {
+              $state.go('/error');
+              LoadingScreenService.finish();
             });
           }
         }
-        $location.search('activity', null);
       });
     }
 
@@ -104,19 +117,12 @@
     }
 
     function onInit(){
-      $location.search('token',null);
-      if(SurveyApiService.getAuthToken() && SurveyApiService.getCurrentActivity()){
-        console.log('Ready');
-      } else {
-        $state.go('/error');
-      }
+      _config();
     }
 
     function _loadOtusDb() {
       var OTUS_DB = 'otus';
       var deferred = $q.defer();
-
-      // StorageLoaderService.initializeSessionStorage();
 
       StorageLoaderService.dbExists(OTUS_DB).then(function(dbExists) {
         if (dbExists) {
@@ -149,7 +155,8 @@
     '$location',
     '$state',
     'SavePlayerStepService',
-    'PrePlayerStepService'
+    'PrePlayerStepService',
+    'LoadingScreenService'
   ];
 
 }());

@@ -15,6 +15,7 @@
   <link href="app/assets/otusjs-survey-item.css" rel="stylesheet"/>
   <link href="app/assets/otusjs-viewer.css" rel="stylesheet"/>
   <link rel="stylesheet" href="node_modules/trail-js/dist/style.css">
+  <link href="node_modules/please-wait/build/please-wait.css" rel="stylesheet">
   <!-- endbuild -->
 
   <title>Survey Player</title>
@@ -110,7 +111,7 @@
 <!-- VIEWER -->
 <script src="app/otusjs-player-viewer/otusjs-player-viewer-module.js"></script>
 <script src="app/otusjs-player-viewer/sheet-view-controller.js"></script>
-
+<script src="app/otusjs-player-viewer/loading-screen-service.js"></script>
 <!--CLIENT-->
 <script src="app/survey-player-client/survey-player-client-module.js"></script>
 <script src="app/survey-player-client/interceptor-factory.js"></script>
@@ -313,7 +314,8 @@
 
 <!-- /OTUSJS-PLAYER-DATA -->
 <!-- -------------------------------------------------------------------------------------- -->
-
+<!-- Please-wait -->
+<script src="node_modules/please-wait/build/please-wait.min.js"></script>
 <!-- Trail JS -->
 <script src="node_modules/trail-js/dist/trail-min.js"></script>
 <!-- endbuild -->

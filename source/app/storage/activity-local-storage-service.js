@@ -92,10 +92,12 @@
 
     /* Datasources  Methods */
     function registerDatasource(datasource) {
-      _collection.insert({
-        name: 'datasource',
-        dataMap: datasource
-      });
+      if (_collection) {
+        _collection.insert({
+          name: 'datasource',
+          dataMap: datasource
+        });
+      }
       return self.getDatasource;
     }
 

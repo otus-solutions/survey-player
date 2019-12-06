@@ -36,6 +36,7 @@
     "angular-mousewheel": "1.0.5",
     "angular-ui-router": "^0.3.1",
     "jquery": "3.0.0",
+    "please-wait": "0.0.5",
     "otus-model-js": "git@github.com:ccem-dev/otus-model-js.git#dev",
     "otus-validation-js": "git@github.com:ccem-dev/otus-validation-js.git#v1.0",
     "trail-js": "git@github.com:ccem-dev/trail-js.git#dev"

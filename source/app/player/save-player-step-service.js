@@ -7,10 +7,10 @@
 
   Service.$inject = [
     'otusjs.model.activity.ActivityFacadeService',
-    'SurveyApiService'
+    'SurveyClientService'
   ];
 
-  function Service(ActivityFacadeService, SurveyApiService) {
+  function Service(ActivityFacadeService, SurveyClientService) {
     var self = this;
     var _currentItem;
 
@@ -23,7 +23,7 @@
     function beforeEffect(pipe, flowData) {}
 
     function effect(pipe, flowData) {
-      SurveyApiService.saveActivity(ActivityFacadeService.surveyActivity.toJSON()).then(function () {
+      SurveyClientService.saveActivity(ActivityFacadeService.surveyActivity).then(function () {
         console.log('Save activity');
       }).catch(function () {
         console.error('Activity not saved');

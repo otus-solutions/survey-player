@@ -31,6 +31,7 @@
 
     /* Public methods */
     self.getById = getById;
+    self.update = update;
 
     /**
      * Find activity in collection. An object-like query can be passed to filter
@@ -45,6 +46,20 @@
 
       ActivityRestService
         .getById(activityInfo)
+        .then(function(response) {
+          deferred.resolve(response);
+        }).catch(function () {
+        deferred.reject();
+      });
+
+      return deferred.promise;
+    }
+
+    function update(activity) {
+      var deferred = $q.defer();
+
+      ActivityRestService
+        .update(activity)
         .then(function(response) {
           deferred.resolve(response);
         }).catch(function () {

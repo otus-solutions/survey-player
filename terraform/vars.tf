@@ -34,6 +34,7 @@ variable "survey-player-port"{
 }
 
 variable "survey-player-activity-url"{
+//  default = "/otusjs-player-data" //TODO: test local
 }
 
 variable "survey-player-staticVariable-url"{
