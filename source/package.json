@@ -20,7 +20,7 @@
     "start": "npm run gulp browser-sync",
     "karma": "karma",
     "build": "gulp compress",
-    "production": "npm install && npm test && npm run build && npm prune --production"
+    "production": "rm -rf node_modules && npm install && npm test && npm run build"
   },
   "dependencies": {
     "angular": "1.5.8",

@@ -21,8 +21,10 @@
     self.getCallbackAddress = getCallbackAddress;
     self.setCurrentActivity = setCurrentActivity;
     self.getCurrentActivity = getCurrentActivity;
+    self.clearSession = clearSession;
 
     var CURRENT_ACTIVITY = 'Current_Activity';
+    var AUTH_TOKEN = 'Auth_Token'
     init();
 
     var _datasourceUrl;
@@ -54,11 +56,11 @@
     }
 
     function getAuthToken() {
-      return sessionStorage.getItem('Auth_Token');
+      return sessionStorage.getItem(AUTH_TOKEN);
     }
 
     function setAuthToken(token) {
-      return sessionStorage.setItem('Auth_Token', token);
+      return sessionStorage.setItem(AUTH_TOKEN, token);
     }
 
     function setCallbackAddress(url) {
@@ -75,6 +77,11 @@
 
     function getCurrentActivity() {
       return sessionStorage.getItem(CURRENT_ACTIVITY);
+    }
+
+    function clearSession() {
+      sessionStorage.removeItem(CURRENT_ACTIVITY);
+      sessionStorage.removeItem(AUTH_TOKEN);
     }
   }
 })();

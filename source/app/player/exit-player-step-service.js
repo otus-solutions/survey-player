@@ -24,7 +24,7 @@
     function beforeEffect(pipe, flowData) { }
 
     function effect(pipe, flowData) {
-      //TODO: TIAGO
+      SurveyApiService.clearSession();
       IndexedDbStorageService.deleteDatabase();
       location.href = SurveyApiService.getCallbackAddress();
     }
