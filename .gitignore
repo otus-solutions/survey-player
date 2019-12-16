@@ -2,3 +2,4 @@
 **/package-lock.json
 terraform.*
 .terraform
+**/*swp

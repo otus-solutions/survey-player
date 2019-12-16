@@ -11,5 +11,4 @@ resource "docker_container" "survey-player" {
 	internal = 80
 	external = var.survey-player-port
   }
-  depends_on = [null_resource.survey-player]
 }

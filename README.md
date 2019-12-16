@@ -1,16 +1,23 @@
-#SURVEY-PLAYER
+# SURVEY-PLAYER
 
-Para iniciar utilize o comandos: <br>
+## Build Image
+
 ```bash
-terraform init terraform/
+terraform init terraform/image/
+terraform apply terraform/image/
 ```
-Após, utilize o comando
+
+## Run Container
 ```bash
-terraform apply terraform/
+terraform init terraform/image/
+terraform apply terraform/image/
 ```
 
 Preencha a variável _**var.survey-player-activity-url**_ com o valor "/otusjs-player-data" para buscar localmente uma atividade demo.
 
+```bash
+terraform apply -var survey-player-activity-url="/otusjs-player-data" terraform/image/
+```
 
 Insira na url os seguintes parametros
 - activity (identificador da atividade a ser buscada)

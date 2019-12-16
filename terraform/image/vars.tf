@@ -28,24 +28,3 @@ variable "survey-player-npmtest" {
 variable "survey-player-npmbuild" {
   default = "npm run build"
 }
-
-variable "survey-player-port"{
-  default = 51001
-}
-
-variable "survey-player-activity-url"{
-//  default = "/otusjs-player-data" //TODO: test local
-}
-
-variable "survey-player-staticVariable-url"{
-}
-
-variable "survey-player-datasource-url"{
-}
-
-variable "survey-player-fileUpload-url"{
-}
-
-variable "survey-player-version"{
-  default = "survey-player:latest"
-}
