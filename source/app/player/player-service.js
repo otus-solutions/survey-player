@@ -11,11 +11,10 @@
     'ExitPlayerStepService',
     'StopPlayerStepService',
     'SavePlayerStepService',
-    '$q',
-    '$timeout'
+    'PrePlayerStepService'
   ];
 
-  function Service(PlayerService, PlayerConfigurationService, ExitPlayerStepService, StopPlayerStepService, SavePlayerStepService, $q, $timeout) {
+  function Service(PlayerService, PlayerConfigurationService, ExitPlayerStepService, StopPlayerStepService, SavePlayerStepService, PrePlayerStepService) {
     var self = this;
     var _isSetupStepsReady = false;
 
@@ -31,8 +30,8 @@
 
     function _setupSteps() {
       // Application default steps
+      PlayerConfigurationService.onPrePlayerStart(PrePlayerStepService);
       PlayerConfigurationService.onEject(ExitPlayerStepService);
-      PlayerConfigurationService.onEject(SavePlayerStepService);
       PlayerConfigurationService.onSave(SavePlayerStepService);
       PlayerConfigurationService.onStop(StopPlayerStepService);
       _isSetupStepsReady = true;

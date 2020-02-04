@@ -29,6 +29,7 @@
     /* Public methods */
 
     self.getById = getById;
+    self.update = update;
 
     function getById(activityInfo) {
       var request = $q.defer();
@@ -38,6 +39,18 @@
             }).catch(function () {
             request.reject();
           });
+
+      return request.promise;
+    }
+
+    function update(activity) {
+      var request = $q.defer();
+      _remoteStorage.update(activity)
+        .then(function (response) {
+          request.resolve(response);
+        }).catch(function () {
+        request.reject();
+      });
 
       return request.promise;
     }

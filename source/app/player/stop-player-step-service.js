@@ -24,7 +24,7 @@
 
     function effect(pipe, flowData) {
       ActivityFacadeService.save();
-      location.href = SurveyApiService.getCallbackAddress();
+      // location.href = SurveyApiService.getCallbackAddress();
     }
 
     function afterEffect(pipe, flowData) {

@@ -6,19 +6,19 @@ variable "survey-player-port"{
 }
 
 variable "survey-player-activity-url"{
-  default = ""
+  default = "http://localhost:51002/otus-rest/v01/activities"
 }
 
 variable "survey-player-staticVariable-url"{
-  default = ""
+  default = "http://localhost:51002/otus-rest/v01/static-variable"
 }
 
 variable "survey-player-datasource-url"{
-  default = ""
+  default = "http://localhost:51002/otus-rest/v01/configuration/datasources"
 }
 
 variable "survey-player-fileUpload-url"{
-  default = ""
+  default = "http://localhost:51002/otus-rest/v01/upload"
 }
 
 variable "survey-player-version"{

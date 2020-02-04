@@ -29,20 +29,16 @@
   function Controller (
     ActivityFacadeService,
     StorageLoaderService,
-    PlayerService,
     $compile,
     $q,
     $scope,
-    PlayerConfigurationService,
-    ExitPlayerStepService,
+    PlayerService,
     $stateParams,
     SurveyClientService,
     SurveyApiService,
     $cookies,
     $location,
     $state,
-    SavePlayerStepService,
-    PrePlayerStepService,
     LoadingScreenService) {
 
     var self = this;
@@ -109,10 +105,6 @@
 
     function _setPlayerConfiguration(){
       _generateOtusPreview();
-      PlayerConfigurationService.onPrePlayerStart(PrePlayerStepService);
-      PlayerConfigurationService.onStop(ExitPlayerStepService);
-      PlayerConfigurationService.onEject(ExitPlayerStepService);
-      PlayerConfigurationService.onSave(SavePlayerStepService);
       PlayerService.setup();
     }
 
@@ -142,20 +134,16 @@
   Controller.$inject = [
     'otusjs.model.activity.ActivityFacadeService',
     'StorageLoaderService',
-    'otusjs.player.core.player.PlayerService',
     '$compile',
     '$q',
     '$scope',
-    'otusjs.player.core.player.PlayerConfigurationService',
-    'ExitPlayerStepService',
+    'PlayerService',
     '$stateParams',
     'SurveyClientService',
     'SurveyApiService',
     '$cookies',
     '$location',
     '$state',
-    'SavePlayerStepService',
-    'PrePlayerStepService',
     'LoadingScreenService'
   ];
 

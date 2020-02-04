@@ -9,7 +9,7 @@
   function Interceptor(SurveyApiService) {
     return {
       request: function(config) {
-        // config.headers['Authorization'] = 'Bearer '+ SurveyApiService.getAuthToken();
+        config.headers['Authorization'] = 'Bearer '+ SurveyApiService.getAuthToken();
         return config;
       }
     };
