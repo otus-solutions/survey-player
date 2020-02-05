@@ -4,6 +4,7 @@
   angular
     .module('otusjs.player.core.player', [])
     .run([
+      'SavePlayerStepService',
       'otusjs.player.core.player.PlayerConfigurationService',
       'otusjs.player.core.step.ApplyAnswerStepService',
       'otusjs.player.core.step.ClearSkippedAnswersStepService',
@@ -23,6 +24,7 @@
     ]);
 
     function run(
+      SavePlayerStepService,
       PlayerConfigurationService,
       ApplyAnswer,
       ClearSkippedAnswersStepService,
@@ -37,7 +39,8 @@
       ReadValidationError,
       RunValidation,
       SetupValidation,
-      HandleValidationError) {
+      HandleValidationError
+    ) {
 
       /**************************************************************
        * Player Start Phase
@@ -165,6 +168,7 @@
       /* ExecutionStop Phase */
       PlayerConfigurationService.onEject(ClearSkippedAnswersStepService);
       PlayerConfigurationService.onEject(FinalizeSurveyActivity);
+      PlayerConfigurationService.onEject(SavePlayerStepService);
 
       /* PostStop Phase */
     }
