@@ -5,6 +5,7 @@ describe('surveyItem Component Test unit', function() {
 
   beforeEach(function() {
     angular.mock.module('otusjs.player');
+    angular.mock.module('otusjs.player.standalone');
     angular.mock.inject(function (_$controller_, $rootScope, _$injector_) {
       mock($rootScope);
       Injections.$scope = Mock.$scope;

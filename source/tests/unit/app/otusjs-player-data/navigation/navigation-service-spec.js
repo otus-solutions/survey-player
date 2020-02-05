@@ -6,6 +6,7 @@ describe('NavigationService', function() {
 
   beforeEach(function() {
     angular.mock.module('otusjs.player');
+    angular.mock.module('otusjs.player.standalone');
 
     angular.mock.inject(function($injector) {
       mockItemData($injector);

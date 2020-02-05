@@ -7,6 +7,8 @@ describe('LoadSurveyActivityStepService', function() {
   beforeEach(function() {
     module('otusjs.player.core');
 
+    angular.mock.module('otusjs.player.standalone');
+
     inject(function(_$injector_) {
       /* Test data */
       mockExecutionPipe();
