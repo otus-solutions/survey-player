@@ -28,9 +28,10 @@
       SurveyClientService.saveActivity(ActivityFacadeService.surveyActivity).then(function () {
         IndexedDbStorageService.deleteDatabase();
         location.href = SurveyApiService.getCallbackAddress();
-        alert('Save activity');
       }).catch(function () {
-        alert('Activity not saved');
+        $mdToast.show($mdToast.simple()
+          .textContent('Erro ao salvar a atividade!')
+          .hideDelay(3000));
       });
     }
 

@@ -65,11 +65,12 @@
       _loadOtusDb().then(function () {
 
         var _token =  angular.copy($stateParams.token);
+
         if ($stateParams.callback) {
           SurveyApiService.setCallbackAddress(angular.copy($stateParams.callback));
           $location.search('callback', null);
         }
-        if (!SurveyApiService.getAuthToken()) {
+        if (_token) {
           SurveyApiService.setAuthToken(angular.copy(_token));
           $location.search('token',null);
           if (!SurveyApiService.getCurrentActivity()){
@@ -79,7 +80,6 @@
               _setPlayerConfiguration();
             });
           }
-
         } else {
           if (SurveyApiService.getCurrentActivity()){
             $location.search('activity', null);
