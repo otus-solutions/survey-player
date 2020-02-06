@@ -65,31 +65,32 @@
       _loadOtusDb().then(function () {
 
         var _token =  angular.copy($stateParams.token);
+        var _callback =  angular.copy($stateParams.callback);
+        var _activity =  angular.copy($stateParams.activity);
 
-        if ($stateParams.callback) {
-          SurveyApiService.setCallbackAddress(angular.copy($stateParams.callback));
+        if (_callback) {
+          SurveyApiService.setCallbackAddress(angular.copy(_callback));
           $location.search('callback', null);
         }
         if (_token) {
           SurveyApiService.setAuthToken(angular.copy(_token));
           $location.search('token',null);
-          if (!SurveyApiService.getCurrentActivity()){
-            SurveyApiService.setCurrentActivity($stateParams.activity);
+          if (_activity){
+            SurveyApiService.setCurrentActivity(_activity);
+            $location.search('activity', null);
             SurveyClientService.getSurveyTemplate().then(function(response) {
               self.template = angular.copy(response);
               _setPlayerConfiguration();
             });
           }
         } else {
-          if (SurveyApiService.getCurrentActivity()){
-            $location.search('activity', null);
+          if (SurveyApiService.getAuthToken() && SurveyApiService.getCurrentActivity()){
             SurveyClientService.getSurveyTemplate().then(function(response) {
               _loadOtusDb().then(function () {
                 self.template = angular.copy(response);
                 _isValid = true;
                 _setPlayerConfiguration();
-                $('#survey-preview').empty();
-                $('#survey-preview').append($compile('<otus-player layout="column" layout-fill=""></otus-player>')($scope));
+
                 LoadingScreenService.finish();
               });
 
@@ -106,6 +107,8 @@
     function _setPlayerConfiguration(){
       _generateOtusPreview();
       PlayerService.setup();
+      $('#survey-preview').empty();
+      $('#survey-preview').append($compile('<otus-player layout="column" layout-fill=""></otus-player>')($scope));
     }
 
     function onInit(){

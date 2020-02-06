@@ -65,7 +65,22 @@
     }
 
     function setCallbackAddress(url) {
-      sessionStorage.setItem(CALLBACK_ADDRESS, angular.copy(url));
+      var _array = url.split(/\/+/);
+      var _url = "";
+      var _length = _array.length;
+      for (var i = 0; i < _length; i++) {
+        _url = _url.concat(_array[i]);
+        switch (i) {
+          case 0:
+            _url = _url.concat("//");
+            break;
+          case 1:
+            _url = _url.concat("/#");
+          default:
+            if (i < _length - 1) _url = _url.concat("/");
+        }
+      }
+      sessionStorage.setItem(CALLBACK_ADDRESS, angular.copy(_url));
     }
 
     function getCallbackAddress() {
