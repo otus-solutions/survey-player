@@ -7,10 +7,12 @@
 
   Service.$inject = [
     'otusjs.model.activity.ActivityFacadeService',
-    'SurveyClientService'
+    'SurveyClientService',
+    'IndexedDbStorageService',
+    "SurveyApiService"
   ];
 
-  function Service(ActivityFacadeService, SurveyClientService) {
+  function Service(ActivityFacadeService, SurveyClientService, IndexedDbStorageService, SurveyApiService) {
     var self = this;
     var _currentItem;
 
@@ -24,9 +26,11 @@
 
     function effect(pipe, flowData) {
       SurveyClientService.saveActivity(ActivityFacadeService.surveyActivity).then(function () {
-        console.log('Save activity');
+        location.href = SurveyApiService.getCallbackAddress();
       }).catch(function () {
-        console.error('Activity not saved');
+        $mdToast.show($mdToast.simple()
+          .textContent('Erro ao salvar a atividade!')
+          .hideDelay(3000));
       });
     }
 

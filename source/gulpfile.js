@@ -82,6 +82,10 @@
   });
 
   gulp.task('browser-sync', function() {
+    var activityUrl = process.env.ACTIVITY_URL || "http://localhost:51002/otus-rest/v01/activities";
+    var datasourceUrl = process.env.DATASOURCE_URL || "http://localhost:51002/otus-rest/v01/configuration/datasources";
+    var fileuploadUrl = process.env.FILEUPLOAD_URL || "http://localhost:51002/otus-rest/v01/upload";
+    var staticvariableUrl = process.env.STATICVARIABLE_URL || "http://localhost:51002/otus-rest/v01/static-variable";
     browserSync.init({
       server: {
         open: 'external',
@@ -92,10 +96,15 @@
           function(req, res, next) {
             res.setHeader('Access-Control-Allow-Origin', '*');
             res.setHeader('Access-Control-Allow-Headers', '*');
+            res.setHeader('Set-Cookie',['Activity-Address='+activityUrl+';path=/',
+              'Datasource-Address='+datasourceUrl+';path=/',
+              'FileUpload-Address='+fileuploadUrl+';path=/',
+              'StaticVariable-Address='+staticvariableUrl+';path=/']);
             next();
           }
         ]
-      }
+      },
+      port: process.env.PORT || 51001
     });
 
     gulp.watch([

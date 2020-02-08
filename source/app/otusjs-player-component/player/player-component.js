@@ -18,6 +18,7 @@
     /* Public methods */
     self.catchMouseWheel = catchMouseWheel;
     self.eject = eject;
+    self.finalize = finalize;
     self.goAhead = goAhead;
     self.goBack = goBack;
     self.pause = pause;
@@ -74,6 +75,11 @@
     }
 
     function eject() {
+      PlayerService.eject();
+    }
+
+    function finalize() {
+      PlayerService.save();
       PlayerService.eject();
     }
 

@@ -24,7 +24,9 @@
     self.clearSession = clearSession;
 
     var CURRENT_ACTIVITY = 'Current_Activity';
-    var AUTH_TOKEN = 'Auth_Token'
+    var AUTH_TOKEN = 'Auth_Token';
+    var CALLBACK_ADDRESS = 'Callback-Address';
+    const HASHTAH = "HASHTAG";
     init();
 
     var _datasourceUrl;
@@ -60,19 +62,19 @@
     }
 
     function setAuthToken(token) {
-      return sessionStorage.setItem(AUTH_TOKEN, token);
+      return sessionStorage.setItem(AUTH_TOKEN, angular.copy(token));
     }
 
     function setCallbackAddress(url) {
-      sessionStorage.setItem('Callback-Address', angular.copy(url));
+      sessionStorage.setItem(CALLBACK_ADDRESS, angular.copy(url.replace(HASHTAH, "#")));
     }
 
     function getCallbackAddress() {
-      return sessionStorage.getItem('Callback-Address') ? sessionStorage.getItem('Callback-Address') : location.href;
+      return sessionStorage.getItem(CALLBACK_ADDRESS) ? sessionStorage.getItem(CALLBACK_ADDRESS) : location.href;
     }
 
     function setCurrentActivity(id) {
-      sessionStorage.setItem(CURRENT_ACTIVITY, id);
+      sessionStorage.setItem(CURRENT_ACTIVITY, angular.copy(id));
     }
 
     function getCurrentActivity() {
@@ -82,6 +84,7 @@
     function clearSession() {
       sessionStorage.removeItem(CURRENT_ACTIVITY);
       sessionStorage.removeItem(AUTH_TOKEN);
+      sessionStorage.removeItem(CALLBACK_ADDRESS);
     }
   }
 })();

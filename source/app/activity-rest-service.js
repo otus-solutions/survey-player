@@ -36,7 +36,7 @@
 
     function update(activity) {
       var defer = $q.defer();
-      $http.post(_getActivityAddress(), activity).success(function(response) {
+      $http.put(_getActivityAddress(), activity[0]).success(function(response) {
         defer.resolve(response.data);
       }).error(function(error) {
         console.error('Cannot GET a survey template.');

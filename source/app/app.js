@@ -8,6 +8,7 @@
       'ngMessages',
       'ngAnimate',
       'ui.router',
+
       'angular-bind-html-compile',
       /* Exportable dependencies */
       'otusjs.player.core',
@@ -23,7 +24,8 @@
       'otusjs.player.viewer',
       'survey.player.file.upload',
       'ngCookies',
-      'ngResource'
+      'ngResource',
+      'otusjs'
     ]).value('OtusLocalStorage', [
     'ActivityLocalStorageService'
   ])
@@ -37,8 +39,6 @@
   function Runner($injector, StorageLoaderService) {
     _loadOtusDb(StorageLoaderService)
       .then(function() {
-        // BootstrapService.run();
-        // notifyModuleLoad($injector);
       });
   }
 
@@ -55,14 +55,5 @@
       }
     });
   }
-
-  // function notifyModuleLoad($injector) {
-  //   var currentModule = angular.module('otusjs.deploy');
-  //   var application = $injector.get('otusjs.application.core.ModuleService');
-  //   application.notifyModuleLoad(currentModule.name);
-  //   application.finalizeDeploy();
-  //   console.info('Deploy module ready.');
-  // }
-
 
 }());

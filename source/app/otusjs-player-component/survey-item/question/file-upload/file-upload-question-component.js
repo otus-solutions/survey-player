@@ -85,6 +85,7 @@
       file.status = 'uploading';
 
       self.pendingCounter++;
+      if (!_uploadInterface) _uploadInterface = FileUploadService.getUploadInterface();
 
       _uploadInterface.uploadFile(file, _questionID)
       .then(function(response) {

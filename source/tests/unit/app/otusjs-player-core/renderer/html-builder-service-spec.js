@@ -6,6 +6,7 @@ describe('HtmlBuilderService', function() {
 
   beforeEach(function() {
     module('otusjs.player.core');
+    angular.mock.module('otusjs.player.standalone');
 
     inject(function(_$injector_) {
       service = _$injector_.get('otusjs.player.core.renderer.HtmlBuilderService');

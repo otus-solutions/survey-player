@@ -7,6 +7,7 @@ describe('LoadPreviousItemStepService Service Test unit', function() {
 
   beforeEach(function() {
     module('otusjs.player.core');
+    angular.mock.module('otusjs.player.standalone');
 
     inject(function($injector) {
       /* Test data*/

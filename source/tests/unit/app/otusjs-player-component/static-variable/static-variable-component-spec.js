@@ -4,6 +4,7 @@ describe('Static Variable Component Test unit', function () {
 
   beforeEach(function () {
     angular.mock.module('otusjs.player');
+    angular.mock.module('otusjs.player.standalone');
 
     angular.mock.inject(function (_$controller_, _$injector_) {
       Injections.ActivityFacadeService = _$injector_.get('otusjs.player.data.activity.ActivityFacadeService');

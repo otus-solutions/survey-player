@@ -4,6 +4,9 @@ describe('answer view component', function () {
   var injections = {};
 
   beforeEach(function () {
+
+    angular.mock.module('otusjs.player.standalone');
+
     Mock.mountedTag ='<otus-autocomplete-question-view item-data="$ctrl.itemData" />';
     Mock.icon = 'youtube_searched_for';
     Mock.answer = "Resposta: Medicamentos";
