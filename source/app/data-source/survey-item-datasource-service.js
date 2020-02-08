@@ -27,6 +27,7 @@
     }
 
     function setupDatasources(dsDefsArray) {
+      SurveyItemRestService.initialize();
       return $q(function (resolve, reject) {
         try {
           _getDatasources(dsDefsArray)

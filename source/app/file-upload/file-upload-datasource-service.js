@@ -15,20 +15,12 @@
     var self = this;
 
     /* Public Interface */
-    self.up = up;
     self.setupUploader = setupUploader;
-
-
-    function up() {
-      var defer = $q.defer();
-      FileUploadRestService.initialize();
-      defer.resolve(true);
-      return defer.promise;
-    }
 
     function setupUploader() {
       return $q(function (resolve, reject) {
         try {
+          FileUploadRestService.initialize();
           FileUploadService.setUploadInterface(FileUploadRestService)
             .then(function (response) {
               resolve(response);

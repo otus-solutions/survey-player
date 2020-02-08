@@ -33,12 +33,6 @@ xdescribe('ReadValidationErrorStepService', function() {
 
   });
 
-  describe('afterEffect method', function() {
-
-    // TODO
-
-  });
-
   describe('getEffectResult method', function() {
 
     describe('when validation found problems', function() {

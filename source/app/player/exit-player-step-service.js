@@ -24,7 +24,6 @@
     function beforeEffect(pipe, flowData) { }
 
     function effect(pipe, flowData) {
-      IndexedDbStorageService.deleteDatabase();
       location.href = SurveyApiService.getCallbackAddress();
     }
 

@@ -17,7 +17,7 @@
     "test": "karma start karma.conf.js --single-run",
     "tdd": "karma start karma.conf.js --auto-watch --browsers Chrome",
     "gulp": "gulp",
-    "start": "npm run gulp browser-sync",
+    "start": "gulp browser-sync",
     "karma": "karma",
     "build": "gulp compress",
     "production": "rm -rf node_modules && npm install && npm test && npm run build"
@@ -36,8 +36,9 @@
     "angular-mousewheel": "1.0.5",
     "angular-ui-router": "^0.3.1",
     "jquery": "3.0.0",
+    "fuse.js": "2.6.2",
     "please-wait": "0.0.5",
-    "otus-model-js": "git@github.com:ccem-dev/otus-model-js.git#dev",
+    "otus-model-js": "git@github.com:ccem-dev/otus-model-js.git#feature/OTUS-1",
     "otus-validation-js": "git@github.com:ccem-dev/otus-validation-js.git#v1.0",
     "trail-js": "git@github.com:ccem-dev/trail-js.git#dev"
   },

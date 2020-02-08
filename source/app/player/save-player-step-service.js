@@ -26,7 +26,6 @@
 
     function effect(pipe, flowData) {
       SurveyClientService.saveActivity(ActivityFacadeService.surveyActivity).then(function () {
-        IndexedDbStorageService.deleteDatabase();
         location.href = SurveyApiService.getCallbackAddress();
       }).catch(function () {
         $mdToast.show($mdToast.simple()

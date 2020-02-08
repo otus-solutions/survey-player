@@ -36,7 +36,6 @@
     $stateParams,
     SurveyClientService,
     SurveyApiService,
-    $cookies,
     $location,
     $state,
     LoadingScreenService) {
@@ -144,7 +143,6 @@
     '$stateParams',
     'SurveyClientService',
     'SurveyApiService',
-    '$cookies',
     '$location',
     '$state',
     'LoadingScreenService'

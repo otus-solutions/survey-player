@@ -38,20 +38,23 @@
     }
 
     function post(formData, canceler) {
+
       return $http({
         method: 'POST',
+        headers: {
+          "Content-Type": undefined
+        },
         url: _restPrefix,
         data: formData,
-        timeout: canceler.promise,
+        timeout: canceler,
         transformRequest: angular.identity
       });
     }
 
     function getByOID(oid) {
       return $http({
-        method: 'POST',
-        url: _restPrefix,
-        data: oid,
+        method: 'GET',
+        url: _restPrefix + '/' + oid,
         responseType: "arraybuffer"
       });
     }
