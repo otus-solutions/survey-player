@@ -1,0 +1,434 @@
+* {
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-y: hidden !important;
+}
+
+.toolbar-icon {
+  width: 48px;
+  height: 48px;
+}
+
+.icon-clickable {
+  cursor: pointer;
+}
+
+md-input-container.hide-error-msg .md-errors-spacer:empty {
+  display: none;
+}
+
+.md-subheader.md-default-theme, .md-subheader{
+  background-color: transparent !important;
+}
+/** finish style participant search **/
+
+.selectedState {
+  border-style: solid;
+  border-width: 0px 0px 0px 8px;
+  border-color: #009688;
+  background: rgba(68, 68, 68, 0.04);
+}
+
+.regularState {
+  background-color: #FFFFFF;
+  border-style: solid;
+  border-width: 0px 0px 0px 8px;
+  border-color: #FFFFFF;
+}
+
+.autocomplete-custom-template li {
+  border-bottom: 1px solid #ccc;
+  height: auto;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  white-space: normal;
+}
+
+.autocomplete-custom-template li:last-child {
+  border-bottom-width: 0;
+}
+
+.autocomplete-custom-template .item-title, .autocomplete-custom-template .item-metadata {
+  display: block;
+  line-height: 2;
+}
+
+.autocomplete-custom-template .item-title md-icon {
+  height: 18px;
+  width: 18px;
+}
+
+/**  ACTIVITY MANAGER LIST **/
+
+.activity-item-icon {
+  background: none !important;
+  color: #0091EA !important;
+  margin: 0 !important;
+  padding-left: 0px !important;
+}
+
+.label-light-gray {
+  color: #757575;
+}
+
+/** participant-search **/
+
+.md-autocomplete-participant {
+  background-color: #299288 !important;
+  border-radius: 4px !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.md-dashboard-autocomplete {
+  color: red !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+@media only screen and (max-width: 360px) {
+  .md-dashboard-autocomplete input:not(.md-input) {
+    font-size: 11px;
+  }
+  .md-dashboard-autocomplete .md-show-clear-button button {
+    display: none;
+  }
+
+  .md-autocomplete-participant input:not(.md-input) {
+    font-size: 11px;
+  }
+}
+
+@media only screen and (min-width: 361px) and (max-width: 500px) {
+  .md-dashboard-autocomplete input:not(.md-input) {
+    font-size: 12px;
+  }
+  .md-dashboard-autocomplete .md-show-clear-button button {
+    display: none;
+  }
+
+  .md-autocomplete-participant input:not(.md-input) {
+    font-size: 12px;
+  }
+}
+
+
+.autocomplete-custom-participant-template li {
+  border-bottom: 1px solid #ccc;
+  height: auto;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  white-space: normal;
+}
+
+otus-participant-dashboard-toolbar>div>md-toolbar>div>otus-participant-search>md-autocomplete>md-autocomplete-wrap>input {
+  color: rgb(255, 255, 255) !important;
+}
+otus-participant-dashboard-toolbar>div>md-toolbar>div>otus-participant-search>md-autocomplete>md-autocomplete-wrap>button {
+  color: rgb(255, 255, 255) !important;
+}
+
+otus-participant-dashboard-toolbar>div>md-toolbar>div>otus-participant-search>md-autocomplete>md-autocomplete-wrap>input::-webkit-input-placeholder {
+  color: rgb(255, 255, 255) !important;
+}
+
+otus-participant-dashboard-toolbar>div>md-toolbar>div>otus-participant-search>md-autocomplete>md-autocomplete-wrap>button>md-icon>svg>g>path {
+  fill: rgb(255, 254, 254) !important;
+}
+
+otus-participant-dashboard-toolbar>div>md-toolbar>div>otus-participant-search>md-autocomplete {
+  color: rgb(255, 255, 255) !important;
+}
+
+.autocomplete-custom-participant-template li:last-child {
+  border-bottom-width: 0;
+}
+
+.autocomplete-custom-participant-template .participant-title, .autocomplete-custom-participant-template .participant-information {
+  display: block;
+  line-height: 2;
+}
+
+.autocomplete-custom-participant-template .participant-title md-icon {
+  margin-right: 10px;
+}
+
+/** finish participant-search **/
+
+/** tube-item-view-component **/
+
+.tubeNotCollect {
+  transition: all linear 0.5s;
+  opacity: 0.4;
+}
+
+md-checkbox.md-checkbox-small {
+  transform: scale(0.8);
+  margin: 0;
+}
+
+/** finish tube-item-view-component**/
+
+/** lot-info-maneger-display-component **/
+
+.error {
+  color: red;
+}
+
+/** finish lot-info-maneger-display-component **/
+
+.remove-padding {
+  padding: 0 !important;
+}
+
+.remove-margin {
+  margin: 0 !important;
+}
+
+md-input-container.remove-errors-spacer .md-errors-spacer {
+  min-height: 0;
+}
+
+md-input-container.input-container-lot-margin {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.md-subheader.backgroud-color-default {
+  background-color: unset;
+}
+
+md-content.md-default-theme.backgroud-color-default{
+  background-color: unset;
+}
+
+.md-subheader.left-alignment {
+  text-align: left;
+}
+
+.rotate-180-deg, .reverse-rotate-180-deg {
+  -webkit-transition: 0.5s ease all;
+  -moz-transition: 0.5s ease all;
+  -o-transition: 0.5s ease all;
+  transition: 0.5s ease all;
+}
+
+.rotate-180-deg {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.reverse-rotate-180-deg {
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+md-content.no-background-color {
+  background-color: transparent;
+}
+
+.fieldActive {
+  border: none;
+  outline: 0;
+  opacity: 0.9;
+  background: none;
+  color: #00008B;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.fieldDisable {
+  border: none;
+  outline: 0;
+  opacity: 0.8;
+  background: none;
+  color: #292828;
+  font-weight: bold;
+  font-family: arial;
+}
+
+.dtp>.dtp-content>.dtp-date-view>header.dtp-header {
+  background: rgb(0, 121, 107) !important;
+}
+
+.dtp div.dtp-date, .dtp div.dtp-time {
+  background: rgb(0, 150, 136) !important;
+}
+
+.dtp table.dtp-picker-days tr>td>a.selected {
+  background: rgb(0, 121, 107) !important;
+}
+
+.dtp table.dtp-picker-days tr>td>a.hilite:not(.selected) {
+  color: rgb(0, 150, 136) !important;
+}
+
+.dtp .dtp-picker-time>a.dtp-select-hour.selected {
+  background: rgb(0, 121, 107) !important;
+}
+
+.dtp .dtp-hand.on {
+  background: rgb(0, 150, 136) !important;
+}
+
+.dtp .dtp-actual-meridien a.selected {
+  background: rgb(0, 150, 136) !important;
+}
+
+.iconInverted {
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
+.checkboxdemoSelectAll .demo-legend {
+  color: #3F51B5;
+}
+
+.checkboxdemoSelectAll .demo-fieldset {
+  border-style: solid;
+  border-width: 1px;
+  height: 100%;
+}
+
+.checkboxdemoSelectAll .demo-select-all-checkboxes {
+  padding-left: 30px;
+}
+
+.truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: auto;
+}
+
+.toolbarInfo {
+  background-color: rgb(0, 145, 234) !important;
+}
+
+.otus-panel{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: #f5f7f9;
+  padding: 10px;
+}
+
+.otus-panel-subheader{
+  color:white;
+  font-size: 1.2em;
+  border-radius: 3px;
+  position: relative;
+  top: -50px;
+  margin-bottom: -60px;
+  padding: 20px;
+}
+
+.dashboard-legend{
+  padding:2px;
+  border-bottom: 0.5px solid #ccc;
+  position: relative;
+  top: -18px;
+}
+
+.legend-separator{
+  border-left: 1px solid #ccc;
+}
+
+.bull-legend{
+  margin-right: 5px;
+  margin-left: 5px;
+  font-size: 32px;
+}
+
+.bull-legend.required{
+  color: red;
+}
+
+.bull-legend.optional{
+  color: orange;
+}
+
+.indicator-legend {
+  vertical-align: middle;
+  margin-top:0px;
+  /* margin-left: 5px; */
+  text-align:left;
+  font-size:56px;
+  margin-bottom: 5px;
+  color:rgb(128, 128, 128);
+}
+
+.icon-size-larger {
+  text-align:left;
+  font-size:68px;
+  height:60px;
+  width:78px;
+  margin: 1px !important;
+  padding-top:10px;
+}
+
+.md-subheader{
+  display: inline-block !important;
+}
+
+.button-inline {
+  padding: 0 !important;
+  line-height: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+
+}
+
+.icon-color {
+  height: 15px;
+  width: 15px;
+  display:inline-block;
+  border-radius: 50%;
+  margin: 5px 5px 0px 5px;
+}
+
+md-sidenav,
+md-sidenav.md-locked-open,
+md-sidenav.md-closed.md-locked-open-add-active {
+  min-width: 100px !important;
+  width: 50vw !important;
+  max-width: 360px !important;
+}
+
+md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar {
+  color: rgb(0,121,107);
+  background: rgb(0,121,107);
+}
+md-tab-content{
+  margin-top: 10px !important;
+}
+
+.selectdemoSelectHeader .demo-header-searchbox {
+  border: none;
+  outline: none;
+  height: 100%;
+  width: 100%;
+  padding: 0; }
+.selectdemoSelectHeader .demo-select-header {
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1), 0 0 0 0 rgba(0, 0, 0, 0.14), 0 0 0 0 rgba(0, 0, 0, 0.12);
+  padding-left: 10.667px;
+  height: 48px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: auto; }
+.selectdemoSelectHeader md-content._md {
+  max-height: 240px; }
+
+.selectdemoSelectHeader>md-select-menu {
+  margin-top: 45px !important;
+}

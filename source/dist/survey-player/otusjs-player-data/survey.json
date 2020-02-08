@@ -1,0 +1,1955 @@
+{
+  "data": {
+    "objectType": "Activity",
+    "_id": "5c92570b16da480064191180",
+    "surveyForm": {
+      "_id": null,
+      "sender": "diogo.rosas.ferreira@gmail.com",
+      "sendingDate": "2017-07-06T21:01:11.416Z",
+      "objectType": "SurveyForm",
+      "surveyFormType": "FORM_INTERVIEW",
+      "surveyTemplate": {
+        "extents": "StudioObject",
+        "objectType": "Survey",
+        "oid": "dXNlclVVSUQ6W3VuZGVmaW5lZF1zdXJ2ZXlVVUlEOlsyNDViMTZjMC1mN2E2LTExZTYtOGQ5Ni04YmVlMmI3YzVkOTVdcmVwb3NpdG9yeVVVSUQ6WyBOb3QgZG9uZSB5ZXQgXQ==",
+        "identity": {
+          "extents": "StudioObject",
+          "objectType": "SurveyIdentity",
+          "name": "ACTIMETRIA ATIVAÇÃO",
+          "acronym": "ACTA",
+          "recommendedTo": "",
+          "description": "09C.6_ACTA_2017-02-26-R1",
+          "keywords": []
+        },
+        "metainfo": {
+          "extents": "StudioObject",
+          "objectType": "SurveyMetaInfo",
+          "creationDatetime": "2017-02-20T19:52:42.796Z",
+          "otusStudioVersion": ""
+        },
+        "dataSources": [],
+        "staticVariableList": null,
+        "surveyItemGroupList": null,
+        "itemContainer": [
+          {
+            "label": {
+              "ptBR": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "CÓDIGO DO ACTÍGRAFO:",
+                "formattedText": "<b>CÓDIGO DO ACTÍGRAFO:</b>"
+              },
+              "enUS": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "",
+                "formattedText": ""
+              },
+              "esES": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "",
+                "formattedText": ""
+              }
+            },
+            "metadata": {
+              "extents": "StudioObject",
+              "objectType": "MetadataGroup",
+              "options": [
+                {
+                  "extends": "StudioObject",
+                  "objectType": "MetadataAnswer",
+                  "dataType": "Integer",
+                  "value": 1,
+                  "extractionValue": ".Q",
+                  "label": {
+                    "ptBR": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "Não quer responder",
+                      "formattedText": "Não quer responder"
+                    },
+                    "enUS": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    },
+                    "esES": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    }
+                  }
+                },
+                {
+                  "extends": "StudioObject",
+                  "objectType": "MetadataAnswer",
+                  "dataType": "Integer",
+                  "value": 2,
+                  "extractionValue": ".S",
+                  "label": {
+                    "ptBR": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "Não sabe",
+                      "formattedText": "Não sabe"
+                    },
+                    "enUS": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    },
+                    "esES": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    }
+                  }
+                },
+                {
+                  "extends": "StudioObject",
+                  "objectType": "MetadataAnswer",
+                  "dataType": "Integer",
+                  "value": 3,
+                  "extractionValue": ".A",
+                  "label": {
+                    "ptBR": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "Não se aplica",
+                      "formattedText": "Não se aplica"
+                    },
+                    "enUS": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    },
+                    "esES": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    }
+                  }
+                },
+                {
+                  "extends": "StudioObject",
+                  "objectType": "MetadataAnswer",
+                  "dataType": "Integer",
+                  "value": 4,
+                  "extractionValue": ".F",
+                  "label": {
+                    "ptBR": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "Não há dados",
+                      "formattedText": "Não há dados"
+                    },
+                    "enUS": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    },
+                    "esES": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    }
+                  }
+                }
+              ]
+            },
+            "fillingRules": {
+              "extends": "StudioObject",
+              "objectType": "FillingRules",
+              "options": {
+                "alphanumeric": {
+                  "data": {
+                    "reference": true,
+                    "canBeIgnored": true
+                  },
+                  "extends": "StudioObject",
+                  "objectType": "Rule",
+                  "validatorType": "alphanumeric"
+                },
+                "mandatory": {
+                  "data": {
+                    "reference": true,
+                    "canBeIgnored": false
+                  },
+                  "extends": "StudioObject",
+                  "objectType": "Rule",
+                  "validatorType": "mandatory"
+                }
+              }
+            },
+            "extents": "SurveyItem",
+            "objectType": "TextQuestion",
+            "templateID": "ACTA1",
+            "customID": "ACTC1",
+            "dataType": "String"
+          },
+          {
+            "label": {
+              "ptBR": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "DATA DE ENTREGA:",
+                "formattedText": "DATA DE ENTREGA:"
+              },
+              "enUS": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "",
+                "formattedText": ""
+              },
+              "esES": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "",
+                "formattedText": ""
+              }
+            },
+            "metadata": {
+              "extents": "StudioObject",
+              "objectType": "MetadataGroup",
+              "options": [
+                {
+                  "extends": "StudioObject",
+                  "objectType": "MetadataAnswer",
+                  "dataType": "Integer",
+                  "value": 1,
+                  "extractionValue": ".Q",
+                  "label": {
+                    "ptBR": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "Não quer responder",
+                      "formattedText": "<span style='letter-spacing: 0.14px;'>Não quer responder</span>"
+                    },
+                    "enUS": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    },
+                    "esES": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    }
+                  }
+                },
+                {
+                  "extends": "StudioObject",
+                  "objectType": "MetadataAnswer",
+                  "dataType": "Integer",
+                  "value": 2,
+                  "extractionValue": ".S",
+                  "label": {
+                    "ptBR": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "Não sabe",
+                      "formattedText": "<span style='letter-spacing: 0.14px;'>Não sabe</span>"
+                    },
+                    "enUS": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    },
+                    "esES": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    }
+                  }
+                },
+                {
+                  "extends": "StudioObject",
+                  "objectType": "MetadataAnswer",
+                  "dataType": "Integer",
+                  "value": 3,
+                  "extractionValue": ".A",
+                  "label": {
+                    "ptBR": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "Não se aplica",
+                      "formattedText": "<span style='letter-spacing: 0.14px;'>Não se aplica</span>"
+                    },
+                    "enUS": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    },
+                    "esES": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    }
+                  }
+                },
+                {
+                  "extends": "StudioObject",
+                  "objectType": "MetadataAnswer",
+                  "dataType": "Integer",
+                  "value": 4,
+                  "extractionValue": ".F",
+                  "label": {
+                    "ptBR": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "Não há dados",
+                      "formattedText": "<span style='letter-spacing: 0.14px;'>Não há dados</span>"
+                    },
+                    "enUS": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    },
+                    "esES": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    }
+                  }
+                }
+              ]
+            },
+            "fillingRules": {
+              "extends": "StudioObject",
+              "objectType": "FillingRules",
+              "options": {
+                "futureDate": {
+                  "data": {
+                    "reference": true,
+                    "canBeIgnored": true
+                  },
+                  "extends": "StudioObject",
+                  "objectType": "Rule",
+                  "validatorType": "futureDate"
+                },
+                "mandatory": {
+                  "data": {
+                    "reference": true,
+                    "canBeIgnored": false
+                  },
+                  "extends": "StudioObject",
+                  "objectType": "Rule",
+                  "validatorType": "mandatory"
+                },
+                "accept": {
+                  "data": {
+                    "reference": true,
+                    "canBeIgnored": false
+                  },
+                  "extends": "StudioObject",
+                  "objectType": "Rule",
+                  "validatorType": "accept"
+                }
+              }
+            },
+            "extents": "SurveyItem",
+            "objectType": "CalendarQuestion",
+            "templateID": "ACTA2",
+            "customID": "ACTC2",
+            "dataType": "LocalDate"
+          },
+          {
+            "options": [
+              {
+                "extents": "StudioObject",
+                "objectType": "AnswerOption",
+                "dataType": "Integer",
+                "label": {
+                  "ptBR": {
+                    "extends": "StudioObject",
+                    "objectType": "Label",
+                    "oid": "",
+                    "plainText": "PUNHO",
+                    "formattedText": "PUNHO"
+                  },
+                  "enUS": {
+                    "extends": "StudioObject",
+                    "objectType": "Label",
+                    "oid": "",
+                    "plainText": "",
+                    "formattedText": ""
+                  },
+                  "esES": {
+                    "extends": "StudioObject",
+                    "objectType": "Label",
+                    "oid": "",
+                    "plainText": "",
+                    "formattedText": ""
+                  }
+                },
+                "value": 1,
+                "extractionValue": "1"
+              },
+              {
+                "extents": "StudioObject",
+                "objectType": "AnswerOption",
+                "dataType": "Integer",
+                "label": {
+                  "ptBR": {
+                    "extends": "StudioObject",
+                    "objectType": "Label",
+                    "oid": "",
+                    "plainText": "CINTURA",
+                    "formattedText": "CINTURA"
+                  },
+                  "enUS": {
+                    "extends": "StudioObject",
+                    "objectType": "Label",
+                    "oid": "",
+                    "plainText": "",
+                    "formattedText": ""
+                  },
+                  "esES": {
+                    "extends": "StudioObject",
+                    "objectType": "Label",
+                    "oid": "",
+                    "plainText": "",
+                    "formattedText": ""
+                  }
+                },
+                "value": 2,
+                "extractionValue": "2"
+              }
+            ],
+            "label": {
+              "ptBR": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "LOCAL DE USO:",
+                "formattedText": "LOCAL DE USO:"
+              },
+              "enUS": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "",
+                "formattedText": ""
+              },
+              "esES": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "",
+                "formattedText": ""
+              }
+            },
+            "metadata": {
+              "extents": "StudioObject",
+              "objectType": "MetadataGroup",
+              "options": [
+                {
+                  "extends": "StudioObject",
+                  "objectType": "MetadataAnswer",
+                  "dataType": "Integer",
+                  "value": 1,
+                  "extractionValue": ".Q",
+                  "label": {
+                    "ptBR": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "Não quer responder",
+                      "formattedText": "<span style='letter-spacing: 0.14px;'>Não quer responder</span>"
+                    },
+                    "enUS": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    },
+                    "esES": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    }
+                  }
+                },
+                {
+                  "extends": "StudioObject",
+                  "objectType": "MetadataAnswer",
+                  "dataType": "Integer",
+                  "value": 2,
+                  "extractionValue": ".S",
+                  "label": {
+                    "ptBR": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "Não sabe",
+                      "formattedText": "<span style='letter-spacing: 0.14px;'>Não sabe</span>"
+                    },
+                    "enUS": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    },
+                    "esES": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    }
+                  }
+                },
+                {
+                  "extends": "StudioObject",
+                  "objectType": "MetadataAnswer",
+                  "dataType": "Integer",
+                  "value": 3,
+                  "extractionValue": ".A",
+                  "label": {
+                    "ptBR": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "Não se aplica",
+                      "formattedText": "<span style='letter-spacing: 0.14px;'>Não se aplica</span>"
+                    },
+                    "enUS": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    },
+                    "esES": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    }
+                  }
+                },
+                {
+                  "extends": "StudioObject",
+                  "objectType": "MetadataAnswer",
+                  "dataType": "Integer",
+                  "value": 4,
+                  "extractionValue": ".F",
+                  "label": {
+                    "ptBR": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "Não há dados",
+                      "formattedText": "<span style='letter-spacing: 0.14px;'>Não há dados</span>"
+                    },
+                    "enUS": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    },
+                    "esES": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    }
+                  }
+                }
+              ]
+            },
+            "fillingRules": {
+              "extends": "StudioObject",
+              "objectType": "FillingRules",
+              "options": {
+                "mandatory": {
+                  "data": {
+                    "reference": true,
+                    "canBeIgnored": false
+                  },
+                  "extends": "StudioObject",
+                  "objectType": "Rule",
+                  "validatorType": "mandatory"
+                }
+              }
+            },
+            "extents": "SurveyItem",
+            "objectType": "SingleSelectionQuestion",
+            "templateID": "ACTA3",
+            "customID": "ACTC3",
+            "dataType": "Integer"
+          },
+          {
+            "label": {
+              "ptBR": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "ATIVAÇÃO DATA DE ATIVAÇÃO:",
+                "formattedText": "<b>ATIVAÇÃO</b><div>DATA DE ATIVAÇÃO:<br></div>"
+              },
+              "enUS": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "",
+                "formattedText": ""
+              },
+              "esES": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "",
+                "formattedText": ""
+              }
+            },
+            "metadata": {
+              "extents": "StudioObject",
+              "objectType": "MetadataGroup",
+              "options": [
+                {
+                  "extends": "StudioObject",
+                  "objectType": "MetadataAnswer",
+                  "dataType": "Integer",
+                  "value": 1,
+                  "extractionValue": ".Q",
+                  "label": {
+                    "ptBR": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "Não quer responder",
+                      "formattedText": "<span style='letter-spacing: 0.14px;'>Não quer responder</span>"
+                    },
+                    "enUS": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    },
+                    "esES": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    }
+                  }
+                },
+                {
+                  "extends": "StudioObject",
+                  "objectType": "MetadataAnswer",
+                  "dataType": "Integer",
+                  "value": 2,
+                  "extractionValue": ".S",
+                  "label": {
+                    "ptBR": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "Não sabe",
+                      "formattedText": "<span style='letter-spacing: 0.14px;'>Não sabe</span>"
+                    },
+                    "enUS": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    },
+                    "esES": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    }
+                  }
+                },
+                {
+                  "extends": "StudioObject",
+                  "objectType": "MetadataAnswer",
+                  "dataType": "Integer",
+                  "value": 3,
+                  "extractionValue": ".A",
+                  "label": {
+                    "ptBR": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "Não se aplica",
+                      "formattedText": "<span style='letter-spacing: 0.14px;'>Não se aplica</span>"
+                    },
+                    "enUS": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    },
+                    "esES": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    }
+                  }
+                },
+                {
+                  "extends": "StudioObject",
+                  "objectType": "MetadataAnswer",
+                  "dataType": "Integer",
+                  "value": 4,
+                  "extractionValue": ".F",
+                  "label": {
+                    "ptBR": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "Não há dados",
+                      "formattedText": "<span style='letter-spacing: 0.14px;'>Não há dados</span>"
+                    },
+                    "enUS": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    },
+                    "esES": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    }
+                  }
+                }
+              ]
+            },
+            "fillingRules": {
+              "extends": "StudioObject",
+              "objectType": "FillingRules",
+              "options": {
+                "futureDate": {
+                  "data": {
+                    "reference": true,
+                    "canBeIgnored": true
+                  },
+                  "extends": "StudioObject",
+                  "objectType": "Rule",
+                  "validatorType": "futureDate"
+                },
+                "mandatory": {
+                  "data": {
+                    "reference": true,
+                    "canBeIgnored": false
+                  },
+                  "extends": "StudioObject",
+                  "objectType": "Rule",
+                  "validatorType": "mandatory"
+                },
+                "accept": {
+                  "data": {
+                    "reference": true,
+                    "canBeIgnored": false
+                  },
+                  "extends": "StudioObject",
+                  "objectType": "Rule",
+                  "validatorType": "accept"
+                }
+              }
+            },
+            "extents": "SurveyItem",
+            "objectType": "CalendarQuestion",
+            "templateID": "ACTA4",
+            "customID": "ACTC4a",
+            "dataType": "LocalDate"
+          },
+          {
+            "options": null,
+            "label": {
+              "ptBR": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "ATIVAÇÃO HORA DE ATIVAÇÃO:",
+                "formattedText": "<b>ATIVAÇÃO</b><div>HORA DE ATIVAÇÃO:<br></div>"
+              },
+              "enUS": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "",
+                "formattedText": ""
+              },
+              "esES": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "",
+                "formattedText": ""
+              }
+            },
+            "metadata": {
+              "extents": "StudioObject",
+              "objectType": "MetadataGroup",
+              "options": [
+                {
+                  "extends": "StudioObject",
+                  "objectType": "MetadataAnswer",
+                  "dataType": "Integer",
+                  "value": 1,
+                  "extractionValue": ".Q",
+                  "label": {
+                    "ptBR": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "Não quer responder",
+                      "formattedText": "Não quer responder"
+                    },
+                    "enUS": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    },
+                    "esES": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    }
+                  }
+                },
+                {
+                  "extends": "StudioObject",
+                  "objectType": "MetadataAnswer",
+                  "dataType": "Integer",
+                  "value": 2,
+                  "extractionValue": ".S",
+                  "label": {
+                    "ptBR": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "Não sabe",
+                      "formattedText": "Não sabe"
+                    },
+                    "enUS": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    },
+                    "esES": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    }
+                  }
+                },
+                {
+                  "extends": "StudioObject",
+                  "objectType": "MetadataAnswer",
+                  "dataType": "Integer",
+                  "value": 3,
+                  "extractionValue": ".A",
+                  "label": {
+                    "ptBR": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "Não se aplica",
+                      "formattedText": "Não se aplica"
+                    },
+                    "enUS": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    },
+                    "esES": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    }
+                  }
+                },
+                {
+                  "extends": "StudioObject",
+                  "objectType": "MetadataAnswer",
+                  "dataType": "Integer",
+                  "value": 4,
+                  "extractionValue": ".F",
+                  "label": {
+                    "ptBR": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "Não há dados",
+                      "formattedText": "Não há dados"
+                    },
+                    "enUS": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    },
+                    "esES": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    }
+                  }
+                }
+              ]
+            },
+            "fillingRules": {
+              "extends": "StudioObject",
+              "objectType": "FillingRules",
+              "options": {
+                "mandatory": {
+                  "data": {
+                    "reference": true,
+                    "canBeIgnored": false
+                  },
+                  "extends": "StudioObject",
+                  "objectType": "Rule",
+                  "validatorType": "mandatory"
+                }
+              }
+            },
+            "extents": "SurveyItem",
+            "objectType": "TimeQuestion",
+            "templateID": "ACTA5",
+            "customID": "ACTC4b",
+            "dataType": "LocalTime"
+          },
+          {
+            "label": {
+              "ptBR": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "DESATIVAÇÃO DATA DE DESATIVAÇÃO:",
+                "formattedText": "<b>DESATIVAÇÃO</b><div>DATA DE DESATIVAÇÃO:<br></div>"
+              },
+              "enUS": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "",
+                "formattedText": ""
+              },
+              "esES": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "",
+                "formattedText": ""
+              }
+            },
+            "metadata": {
+              "extents": "StudioObject",
+              "objectType": "MetadataGroup",
+              "options": [
+                {
+                  "extends": "StudioObject",
+                  "objectType": "MetadataAnswer",
+                  "dataType": "Integer",
+                  "value": 1,
+                  "extractionValue": ".Q",
+                  "label": {
+                    "ptBR": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "Não quer responder",
+                      "formattedText": "Não quer responder"
+                    },
+                    "enUS": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    },
+                    "esES": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    }
+                  }
+                },
+                {
+                  "extends": "StudioObject",
+                  "objectType": "MetadataAnswer",
+                  "dataType": "Integer",
+                  "value": 2,
+                  "extractionValue": ".S",
+                  "label": {
+                    "ptBR": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "Não sabe",
+                      "formattedText": "Não sabe"
+                    },
+                    "enUS": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    },
+                    "esES": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    }
+                  }
+                },
+                {
+                  "extends": "StudioObject",
+                  "objectType": "MetadataAnswer",
+                  "dataType": "Integer",
+                  "value": 3,
+                  "extractionValue": ".A",
+                  "label": {
+                    "ptBR": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "Não se aplica",
+                      "formattedText": "Não se aplica"
+                    },
+                    "enUS": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    },
+                    "esES": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    }
+                  }
+                },
+                {
+                  "extends": "StudioObject",
+                  "objectType": "MetadataAnswer",
+                  "dataType": "Integer",
+                  "value": 4,
+                  "extractionValue": ".F",
+                  "label": {
+                    "ptBR": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "Não há dados",
+                      "formattedText": "Não há dados"
+                    },
+                    "enUS": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    },
+                    "esES": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    }
+                  }
+                }
+              ]
+            },
+            "fillingRules": {
+              "extends": "StudioObject",
+              "objectType": "FillingRules",
+              "options": {
+                "futureDate": {
+                  "data": {
+                    "reference": true,
+                    "canBeIgnored": true
+                  },
+                  "extends": "StudioObject",
+                  "objectType": "Rule",
+                  "validatorType": "futureDate"
+                },
+                "mandatory": {
+                  "data": {
+                    "reference": true,
+                    "canBeIgnored": false
+                  },
+                  "extends": "StudioObject",
+                  "objectType": "Rule",
+                  "validatorType": "mandatory"
+                },
+                "accept": {
+                  "data": {
+                    "reference": true,
+                    "canBeIgnored": false
+                  },
+                  "extends": "StudioObject",
+                  "objectType": "Rule",
+                  "validatorType": "accept"
+                }
+              }
+            },
+            "extents": "SurveyItem",
+            "objectType": "CalendarQuestion",
+            "templateID": "ACTA6",
+            "customID": "ACTC5a",
+            "dataType": "LocalDate"
+          },
+          {
+            "options": null,
+            "label": {
+              "ptBR": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "DESATIVAÇÃO HORA DE DESATIVAÇÃO:",
+                "formattedText": "<b>DESATIVAÇÃO</b><div>HORA DE DESATIVAÇÃO:<br></div>"
+              },
+              "enUS": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "",
+                "formattedText": ""
+              },
+              "esES": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "",
+                "formattedText": ""
+              }
+            },
+            "metadata": {
+              "extents": "StudioObject",
+              "objectType": "MetadataGroup",
+              "options": [
+                {
+                  "extends": "StudioObject",
+                  "objectType": "MetadataAnswer",
+                  "dataType": "Integer",
+                  "value": 1,
+                  "extractionValue": ".Q",
+                  "label": {
+                    "ptBR": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "Não quer responder",
+                      "formattedText": "Não quer responder"
+                    },
+                    "enUS": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    },
+                    "esES": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    }
+                  }
+                },
+                {
+                  "extends": "StudioObject",
+                  "objectType": "MetadataAnswer",
+                  "dataType": "Integer",
+                  "value": 2,
+                  "extractionValue": ".S",
+                  "label": {
+                    "ptBR": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "Não sabe",
+                      "formattedText": "Não sabe"
+                    },
+                    "enUS": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    },
+                    "esES": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    }
+                  }
+                },
+                {
+                  "extends": "StudioObject",
+                  "objectType": "MetadataAnswer",
+                  "dataType": "Integer",
+                  "value": 3,
+                  "extractionValue": ".A",
+                  "label": {
+                    "ptBR": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "Não se aplica",
+                      "formattedText": "Não se aplica"
+                    },
+                    "enUS": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    },
+                    "esES": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    }
+                  }
+                },
+                {
+                  "extends": "StudioObject",
+                  "objectType": "MetadataAnswer",
+                  "dataType": "Integer",
+                  "value": 4,
+                  "extractionValue": ".F",
+                  "label": {
+                    "ptBR": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "Não há dados",
+                      "formattedText": "Não há dados"
+                    },
+                    "enUS": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    },
+                    "esES": {
+                      "extends": "StudioObject",
+                      "objectType": "Label",
+                      "oid": "",
+                      "plainText": "",
+                      "formattedText": ""
+                    }
+                  }
+                }
+              ]
+            },
+            "fillingRules": {
+              "extends": "StudioObject",
+              "objectType": "FillingRules",
+              "options": {
+                "mandatory": {
+                  "data": {
+                    "reference": true,
+                    "canBeIgnored": false
+                  },
+                  "extends": "StudioObject",
+                  "objectType": "Rule",
+                  "validatorType": "mandatory"
+                }
+              }
+            },
+            "extents": "SurveyItem",
+            "objectType": "TimeQuestion",
+            "templateID": "ACTA7",
+            "customID": "ACTC5b",
+            "dataType": "LocalTime"
+          },
+          {
+            "value": {
+              "ptBR": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "Obrigado(a).",
+                "formattedText": "<i>Obrigado(a).</i>"
+              },
+              "enUS": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "",
+                "formattedText": ""
+              },
+              "esES": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "",
+                "formattedText": ""
+              }
+            },
+            "extents": "SurveyItem",
+            "objectType": "TextItem",
+            "templateID": "ACTA8",
+            "customID": "ACTACZ",
+            "dataType": "String"
+          }
+        ],
+        "navigationList": [
+          {
+            "extents": "SurveyTemplateObject",
+            "objectType": "Navigation",
+            "origin": "BEGIN NODE",
+            "index": 0,
+            "inNavigations": [],
+            "isDefault": false,
+            "routes": [
+              {
+                "extents": "SurveyTemplateObject",
+                "objectType": "Route",
+                "origin": "BEGIN NODE",
+                "destination": "ACTA1",
+                "name": "BEGIN NODE_ACTA1",
+                "isDefault": true,
+                "conditions": []
+              }
+            ]
+          },
+          {
+            "extents": "SurveyTemplateObject",
+            "objectType": "Navigation",
+            "origin": "END NODE",
+            "index": 1,
+            "inNavigations": [
+              {
+                "origin": "ACTA8"
+              }
+            ],
+            "isDefault": false,
+            "routes": []
+          },
+          {
+            "extents": "SurveyTemplateObject",
+            "objectType": "Navigation",
+            "origin": "ACTA1",
+            "index": 2,
+            "inNavigations": [
+              {
+                "origin": "BEGIN NODE"
+              }
+            ],
+            "isDefault": false,
+            "routes": [
+              {
+                "extents": "SurveyTemplateObject",
+                "objectType": "Route",
+                "origin": "ACTA1",
+                "destination": "ACTA2",
+                "name": "ACTA1_ACTA2",
+                "isDefault": true,
+                "conditions": []
+              }
+            ]
+          },
+          {
+            "extents": "SurveyTemplateObject",
+            "objectType": "Navigation",
+            "origin": "ACTA2",
+            "index": 3,
+            "inNavigations": [
+              {
+                "origin": "ACTA1"
+              }
+            ],
+            "isDefault": false,
+            "routes": [
+              {
+                "extents": "SurveyTemplateObject",
+                "objectType": "Route",
+                "origin": "ACTA2",
+                "destination": "ACTA3",
+                "name": "ACTA2_ACTA3",
+                "isDefault": true,
+                "conditions": []
+              }
+            ]
+          },
+          {
+            "extents": "SurveyTemplateObject",
+            "objectType": "Navigation",
+            "origin": "ACTA3",
+            "index": 4,
+            "inNavigations": [
+              {
+                "origin": "ACTA2"
+              }
+            ],
+            "isDefault": false,
+            "routes": [
+              {
+                "extents": "SurveyTemplateObject",
+                "objectType": "Route",
+                "origin": "ACTA3",
+                "destination": "ACTA4",
+                "name": "ACTA3_ACTA4",
+                "isDefault": true,
+                "conditions": []
+              }
+            ]
+          },
+          {
+            "extents": "SurveyTemplateObject",
+            "objectType": "Navigation",
+            "origin": "ACTA4",
+            "index": 5,
+            "inNavigations": [
+              {
+                "origin": "ACTA3"
+              }
+            ],
+            "isDefault": false,
+            "routes": [
+              {
+                "extents": "SurveyTemplateObject",
+                "objectType": "Route",
+                "origin": "ACTA4",
+                "destination": "ACTA5",
+                "name": "ACTA4_ACTA5",
+                "isDefault": true,
+                "conditions": []
+              }
+            ]
+          },
+          {
+            "extents": "SurveyTemplateObject",
+            "objectType": "Navigation",
+            "origin": "ACTA5",
+            "index": 6,
+            "inNavigations": [
+              {
+                "origin": "ACTA4"
+              }
+            ],
+            "isDefault": false,
+            "routes": [
+              {
+                "extents": "SurveyTemplateObject",
+                "objectType": "Route",
+                "origin": "ACTA5",
+                "destination": "ACTA6",
+                "name": "ACTA5_ACTA6",
+                "isDefault": true,
+                "conditions": []
+              }
+            ]
+          },
+          {
+            "extents": "SurveyTemplateObject",
+            "objectType": "Navigation",
+            "origin": "ACTA6",
+            "index": 7,
+            "inNavigations": [
+              {
+                "origin": "ACTA5"
+              }
+            ],
+            "isDefault": false,
+            "routes": [
+              {
+                "extents": "SurveyTemplateObject",
+                "objectType": "Route",
+                "origin": "ACTA6",
+                "destination": "ACTA7",
+                "name": "ACTA6_ACTA7",
+                "isDefault": true,
+                "conditions": []
+              }
+            ]
+          },
+          {
+            "extents": "SurveyTemplateObject",
+            "objectType": "Navigation",
+            "origin": "ACTA7",
+            "index": 8,
+            "inNavigations": [
+              {
+                "origin": "ACTA6"
+              }
+            ],
+            "isDefault": false,
+            "routes": [
+              {
+                "extents": "SurveyTemplateObject",
+                "objectType": "Route",
+                "origin": "ACTA7",
+                "destination": "ACTA8",
+                "name": "ACTA7_ACTA8",
+                "isDefault": true,
+                "conditions": []
+              }
+            ]
+          },
+          {
+            "extents": "SurveyTemplateObject",
+            "objectType": "Navigation",
+            "origin": "ACTA8",
+            "index": 9,
+            "inNavigations": [
+              {
+                "origin": "ACTA7"
+              }
+            ],
+            "isDefault": false,
+            "routes": [
+              {
+                "extents": "SurveyTemplateObject",
+                "objectType": "Route",
+                "origin": "ACTA8",
+                "destination": "END NODE",
+                "name": "ACTA8_END NODE",
+                "isDefault": true,
+                "conditions": []
+              }
+            ]
+          }
+        ]
+      },
+      "name": "ACTIMETRIA ATIVAÇÃO",
+      "acronym": "ACTA",
+      "version": 1,
+      "isDiscarded": false
+    },
+    "mode": "ONLINE",
+    "category": {
+      "name": "C0",
+      "objectType": "ActivityCategory",
+      "label": "Normal",
+      "disabled": false,
+      "isDefault": true
+    },
+    "participantData": {
+      "recruitmentNumber": 2000735,
+      "name": "ADRIANA CLEMENTE DOS SANTOS",
+      "sex": "F",
+      "birthdate": {
+        "objectType": "ImmutableDate",
+        "value": "1966-01-23 00:00:00.000"
+      },
+      "fieldCenter": {
+        "name": "Rio de Janeiro",
+        "code": 4,
+        "acronym": "RJ",
+        "country": null,
+        "state": null,
+        "address": null,
+        "complement": null,
+        "zip": null,
+        "phone": null,
+        "backgroundColor": "rgba(127, 190, 102, 0.2)",
+        "borderColor": "rgba(127, 190, 102, 1)"
+      },
+      "late": false
+    },
+    "interviews": [],
+    "fillContainer": {
+      "fillingList": [
+        {
+          "objectType": "QuestionFill",
+          "questionID": "ACTA1",
+          "customID": null,
+          "answer": {
+            "value": "gjkljkkj",
+            "objectType": "AnswerFill",
+            "type": "TextQuestion"
+          },
+          "forceAnswer": false,
+          "metadata": {
+            "objectType": "MetadataFill",
+            "value": null
+          },
+          "comment": ""
+        },
+        {
+          "objectType": "QuestionFill",
+          "questionID": "ACTA2",
+          "customID": null,
+          "answer": {
+            "value": {
+              "objectType": "ImmutableDate",
+              "value": "2019-03-22 00:00:00.000"
+            },
+            "objectType": "AnswerFill",
+            "type": "CalendarQuestion"
+          },
+          "forceAnswer": true,
+          "metadata": {
+            "objectType": "MetadataFill",
+            "value": null
+          },
+          "comment": ""
+        },
+        {
+          "objectType": "QuestionFill",
+          "questionID": "ACTA3",
+          "customID": null,
+          "answer": {
+            "value": "2",
+            "objectType": "AnswerFill",
+            "type": "SingleSelectionQuestion"
+          },
+          "forceAnswer": false,
+          "metadata": {
+            "objectType": "MetadataFill",
+            "value": null
+          },
+          "comment": ""
+        },
+        {
+          "objectType": "QuestionFill",
+          "questionID": "ACTA4",
+          "customID": null,
+          "answer": {
+            "value": {
+              "objectType": "ImmutableDate",
+              "value": "2019-03-29 00:00:00.000"
+            },
+            "objectType": "AnswerFill",
+            "type": "CalendarQuestion"
+          },
+          "forceAnswer": false,
+          "metadata": {
+            "objectType": "MetadataFill",
+            "value": null
+          },
+          "comment": ""
+        },
+        {
+          "objectType": "QuestionFill",
+          "questionID": "ACTA5",
+          "customID": null,
+          "answer": {
+            "value": {
+              "objectType": "ImmutableDate",
+              "value": "2019-03-21 14:10:00.000"
+            },
+            "objectType": "AnswerFill",
+            "type": "TimeQuestion"
+          },
+          "forceAnswer": false,
+          "metadata": {
+            "objectType": "MetadataFill",
+            "value": null
+          },
+          "comment": ""
+        },
+        {
+          "objectType": "QuestionFill",
+          "questionID": "ACTA6",
+          "customID": null,
+          "answer": {
+            "value": {
+              "objectType": "ImmutableDate",
+              "value": "2019-03-30 00:00:00.000"
+            },
+            "objectType": "AnswerFill",
+            "type": "CalendarQuestion"
+          },
+          "forceAnswer": false,
+          "metadata": {
+            "objectType": "MetadataFill",
+            "value": null
+          },
+          "comment": ""
+        },
+        {
+          "objectType": "QuestionFill",
+          "questionID": "ACTA7",
+          "customID": null,
+          "answer": {
+            "value": {
+              "objectType": "ImmutableDate",
+              "value": "2019-03-21 14:10:00.000"
+            },
+            "objectType": "AnswerFill",
+            "type": "TimeQuestion"
+          },
+          "forceAnswer": false,
+          "metadata": {
+            "objectType": "MetadataFill",
+            "value": null
+          },
+          "comment": ""
+        }
+      ]
+    },
+    "statusHistory": [
+      {
+        "objectType": "ActivityStatus",
+        "name": "CREATED",
+        "date": "2019-03-20T17:06:45.453Z",
+        "user": {
+          "name": "Adonis",
+          "surname": "Garcia",
+          "phone": "51995623114",
+          "email": "adonis.garcia.adg@gmail.com"
+        }
+      },
+      {
+        "objectType": "ActivityStatus",
+        "name": "OPENED",
+        "date": "2019-03-20T15:08:36.473Z",
+        "user": {
+          "name": "Adonis",
+          "surname": "Garcia",
+          "phone": "51995623114",
+          "email": "adonis.garcia.adg@gmail.com"
+        }
+      },
+      {
+        "objectType": "ActivityStatus",
+        "name": "INITIALIZED_ONLINE",
+        "date": "2019-03-20T15:08:37.511Z",
+        "user": {
+          "name": "Adonis",
+          "surname": "Garcia",
+          "phone": "51995623114",
+          "email": "adonis.garcia.adg@gmail.com"
+        }
+      },
+      {
+        "objectType": "ActivityStatus",
+        "name": "SAVED",
+        "date": "2019-03-20T15:08:51.203Z",
+        "user": {
+          "name": "Adonis",
+          "surname": "Garcia",
+          "phone": "51995623114",
+          "email": "adonis.garcia.adg@gmail.com"
+        }
+      },
+      {
+        "objectType": "ActivityStatus",
+        "name": "OPENED",
+        "date": "2019-03-21T17:09:54.120Z",
+        "user": {
+          "name": "Adonis",
+          "surname": "Garcia",
+          "phone": "51995623114",
+          "email": "adonis.garcia.adg@gmail.com"
+        }
+      },
+      {
+        "objectType": "ActivityStatus",
+        "name": "INITIALIZED_ONLINE",
+        "date": "2019-03-21T17:09:55.416Z",
+        "user": {
+          "name": "Adonis",
+          "surname": "Garcia",
+          "phone": "51995623114",
+          "email": "adonis.garcia.adg@gmail.com"
+        }
+      },
+      {
+        "objectType": "ActivityStatus",
+        "name": "FINALIZED",
+        "date": "2019-03-21T17:10:47.700Z",
+        "user": {
+          "name": "Adonis",
+          "surname": "Garcia",
+          "phone": "51995623114",
+          "email": "adonis.garcia.adg@gmail.com"
+        }
+      }
+    ],
+    "isDiscarded": false,
+    "navigationTracker": {
+      "objectType": "NavigationTracker",
+      "items": [
+        {
+          "objectType": "NavigationTrackingItem",
+          "id": "ACTA1",
+          "state": "ANSWERED",
+          "previous": null,
+          "inputs": [],
+          "outputs": [
+            "ACTA2"
+          ]
+        },
+        {
+          "objectType": "NavigationTrackingItem",
+          "id": "ACTA2",
+          "state": "ANSWERED",
+          "previous": "ACTA1",
+          "inputs": [
+            "ACTA1"
+          ],
+          "outputs": [
+            "ACTA3"
+          ]
+        },
+        {
+          "objectType": "NavigationTrackingItem",
+          "id": "ACTA3",
+          "state": "ANSWERED",
+          "previous": "ACTA2",
+          "inputs": [
+            "ACTA2"
+          ],
+          "outputs": [
+            "ACTA4"
+          ]
+        },
+        {
+          "objectType": "NavigationTrackingItem",
+          "id": "ACTA4",
+          "state": "ANSWERED",
+          "previous": "ACTA3",
+          "inputs": [
+            "ACTA3"
+          ],
+          "outputs": [
+            "ACTA5"
+          ]
+        },
+        {
+          "objectType": "NavigationTrackingItem",
+          "id": "ACTA5",
+          "state": "ANSWERED",
+          "previous": "ACTA4",
+          "inputs": [
+            "ACTA4"
+          ],
+          "outputs": [
+            "ACTA6"
+          ]
+        },
+        {
+          "objectType": "NavigationTrackingItem",
+          "id": "ACTA6",
+          "state": "ANSWERED",
+          "previous": "ACTA5",
+          "inputs": [
+            "ACTA5"
+          ],
+          "outputs": [
+            "ACTA7"
+          ]
+        },
+        {
+          "objectType": "NavigationTrackingItem",
+          "id": "ACTA7",
+          "state": "ANSWERED",
+          "previous": "ACTA6",
+          "inputs": [
+            "ACTA6"
+          ],
+          "outputs": [
+            "ACTA8"
+          ]
+        },
+        {
+          "objectType": "NavigationTrackingItem",
+          "id": "ACTA8",
+          "state": "VISITED",
+          "previous": "ACTA7",
+          "inputs": [
+            "ACTA7"
+          ],
+          "outputs": []
+        }
+      ],
+      "lastVisitedIndex": 7
+    }
+  }
+}

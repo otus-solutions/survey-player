@@ -19,4 +19,3 @@ bin/
 .classpath
 .settings
 node_modules
-dist
