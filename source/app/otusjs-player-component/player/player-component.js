@@ -27,6 +27,7 @@
     self.showBack = showBack;
     self.showCover = showCover;
     self.$onInit = onInit;
+    self.onProcessingPlayer = onProcessingPlayer;
 
     var didScroll;
     var lastScrollTop = 0;
@@ -149,9 +150,15 @@
     }
 
     function _loadItem() {
-      if (PlayerService.getItemData()) {
-        self.playerDisplay.loadItem(PlayerService.getItemData());
+      let itemData = PlayerService.getItemData();
+      self.playerDisplay.loadItem(PlayerService.getItemData());
+      if (itemData) {
+        self.playerDisplay.loadItem(itemData);
       }
+    }
+
+    function onProcessingPlayer() {
+      self.onProcessing();
     }
   }
 }());
