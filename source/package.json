@@ -1,6 +1,6 @@
 {
   "name": "survey-player",
-  "version": "0.0.1-SNAPSHOT",
+  "version": "1.0.0",
   "description": "Survey Player Module Otus",
   "keywords": [
     "preview",
@@ -38,8 +38,8 @@
     "jquery": "3.0.0",
     "fuse.js": "2.6.2",
     "please-wait": "0.0.5",
-    "otus-model-js": "git@github.com:ccem-dev/otus-model-js.git#feature/OTUS-1",
-    "otus-validation-js": "git@github.com:ccem-dev/otus-validation-js.git#v1.0",
+    "otus-model-js": "1.28.0",
+    "otus-validation-js": "1.1.0",
     "trail-js": "git@github.com:ccem-dev/trail-js.git#dev"
   },
   "devDependencies": {
