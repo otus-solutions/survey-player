@@ -16,6 +16,7 @@
     }).controller("otusDecimalQuestionCtrl", Controller);
 
   Controller.$inject = [
+    '$document',
     'otusjs.player.data.activity.CurrentItemService'
   ];
 
