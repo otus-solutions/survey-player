@@ -55,9 +55,13 @@
     function _onProcessing() {
       $timeout(function () {
         self.loadingAhead = false;
+        $scope.$parent.$ctrl.playerCommander.loadingAhead = false;
         self.loadingBack = false;
+        $scope.$parent.$ctrl.playerCommander.loadingBack = false;
         self.isGoAheadDisabled = false;
+        $scope.$parent.$ctrl.playerCommander.isGoAheadDisabled = false;
         self.isGoBackDisabled = false;
+        $scope.$parent.$ctrl.playerCommander.isGoBackDisabled = false;
       },300);
     }
 
