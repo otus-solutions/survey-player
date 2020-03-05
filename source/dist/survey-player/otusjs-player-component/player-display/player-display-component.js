@@ -36,7 +36,6 @@
     self.remove = remove;
     self.currentItems = [];
 
-
     function onInit() {
       $scope.$parent.$ctrl.playerDisplay = self;
       $scope.itemData = {};
@@ -44,7 +43,6 @@
       $scope.questions = [];
       self.ids = [];
     }
-
 
     function _destroyCurrentItems() {
       if (self.currentItems.length) {
@@ -76,7 +74,7 @@
         _focusOnItem(itemsData[0].templateID);
       } else {
         _onProcessingPlayer();
-        _focusOnItem(itemsData[0].templateID);	        _focusOnItem(itemsData[0].templateID);
+        _focusOnItem(itemsData[0].templateID);
       }
 
       if (PlayerService.isGoingBack()) {
