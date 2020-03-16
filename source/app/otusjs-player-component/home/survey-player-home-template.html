@@ -1,0 +1,24 @@
+<div layout="row" flex>
+  <md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button">
+        <md-icon>menu</md-icon>
+      </md-button>
+      <h2 flex md-truncate>Survey Player</h2>
+      <span flex></span>
+      <md-button class="md-icon-button cursor-auto" aria-label="Connection">
+        <md-icon ng-if="$ctrl.connection">wifi</md-icon>
+        <md-icon ng-if="!$ctrl.connection">wifi_off</md-icon>
+        <md-tooltip ng-if="$ctrl.connection">Online</md-tooltip>
+        <md-tooltip ng-if="!$ctrl.connection">Offline</md-tooltip>
+      </md-button>
+      <span layout-margin="">{{ $ctrl.user }}</span>
+      <md-button class="md-icon-button md-raised md-accent" aria-label="Login" ng-click="$ctrl.authenticate($event)">
+        <md-icon ng-if="!$ctrl.auth()">person</md-icon>
+        <md-icon ng-if="$ctrl.auth()">how_to_reg</md-icon>
+        <md-tooltip ng-if="!$ctrl.auth()">Entrar</md-tooltip>
+        <md-tooltip ng-if="$ctrl.auth()">Autenticado</md-tooltip>
+      </md-button>
+    </div>
+  </md-toolbar>
+</div>
