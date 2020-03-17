@@ -23,19 +23,23 @@
 
     function authenticate(ev) {
       if (!self.isAuthenticated()){
-        _login(ev);
+        return _login(ev);
       } else {
         _logout(ev);
       }
     }
 
     function _login(ev) {
-      $mdDialog.show({
+      return $mdDialog.show({
         controller: DialogController,
         templateUrl: 'app/utils/login-template.html',
         parent: angular.element(document.body),
         targetEvent: ev,
         clickOutsideToClose: true
+      }).then(function (response) {
+        return response;
+      }).catch(function (err) {
+        return err;
       });
     }
 
@@ -53,7 +57,7 @@
       });
     }
 
-    function DialogController($scope, $mdDialog, $mdToast, $http, SurveyApiService) {
+    function DialogController($scope, $mdDialog, $http, SurveyApiService) {
       $scope.hide = function () {
         $mdDialog.hide();
       };
@@ -68,18 +72,13 @@
 
       $scope.login = function () {
         var _auth = Auth($scope.emailUser, $scope.passUser);
-        $scope.emailUser = '';
-        $scope.passUser = '';
-        $http.post(SurveyApiService.getLoginUrl(), _auth).then(function (response) {
+        return $http.post(SurveyApiService.getLoginUrl(), _auth).then(function (response) {
           var user = response['data']['data'];
           SurveyApiService.setLoggedUser(user);
           SurveyApiService.setAuthToken(user.token);
-          _showMessage('Usuário autenticado.');
-
-          $mdDialog.hide();
+          $mdDialog.hide('Usuário autenticado.');
         }).catch(function (err) {
-          _showMessage('Usuário não cadastrado.');
-          $mdDialog.hide();
+          $mdDialog.hide('Usuário não cadastrado.');
         });
       };
 
@@ -88,18 +87,10 @@
       };
 
       $scope.onEnter = function(event) {
-        if (event.which === 13 && $scope.isValid()){
+        if (event.which === 13 && !SurveyApiService.getAuthToken()){
           $scope.login()
         }
       };
-
-      function _showMessage(txt) {
-        $mdToast.show(
-          $mdToast.simple()
-            .textContent(txt)
-            .position('button right')
-            .hideDelay(3000))
-      }
     }
   }
 })();
