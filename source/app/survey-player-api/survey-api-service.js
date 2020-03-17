@@ -33,14 +33,14 @@
     const HASHTAH = "HASHTAG";
     init();
 
-    var _loginUrl = "http://0.0.0.0:51002/otus-rest/v01/authentication";
+    var _loginUrl;
     var _datasourceUrl;
     var _activityUrl;
     var _staticVariableUrl;
     var _fileUploadUrl;
 
     function init(){
-      // _loginUrl = $cookies.get('Login-Address');
+      _loginUrl = $cookies.get('Login-Address');
       _datasourceUrl = $cookies.get('Datasource-Address');
       _activityUrl = $cookies.get('Activity-Address');
       _staticVariableUrl = $cookies.get('StaticVariable-Address');

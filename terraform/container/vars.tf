@@ -21,6 +21,10 @@ variable "survey-player-fileUpload-url"{
   default = "http://localhost:51002/otus-rest/v01/upload"
 }
 
+variable "survey-player-login-url"{
+  default = "http://localhost:51002/otus-rest/v01/authentication"
+}
+
 variable "survey-player-version"{
   default = "survey-player:latest"
 }
