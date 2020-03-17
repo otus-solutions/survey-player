@@ -7,7 +7,7 @@
 
   Service.$inject = [
     'otusjs.player.data.activity.CurrentSurveyService',
-    'otusjs.player.data.activity.CurrentItemService'
+    'otusjs.player.data.activity.CurrentItemService',
   ];
 
   function Service(CurrentSurveyService, CurrentItemService) {

@@ -19,9 +19,14 @@
 
     self.getById = getById;
     self.update = update;
+    self.getSurveys = getSurveys;
 
     function _getActivityAddress() {
       return SurveyApiService.getActivityUrl();
+    }
+
+    function _getSurveyAddress() {
+      return SurveyApiService.getSurveyUrl();
     }
 
     function getById(activityInfo) {
@@ -40,6 +45,16 @@
         defer.resolve(response.data);
       }).error(function(error) {
         console.error('Cannot GET a survey template.');
+      });
+      return defer.promise;
+    }
+
+    function getSurveys() {
+      var defer = $q.defer();
+      $http.get(_getSurveyAddress()).success(function(response) {
+        defer.resolve(response.data);
+      }).error(function(error) {
+        console.error('Cannot GET surveys template.');
       });
       return defer.promise;
     }

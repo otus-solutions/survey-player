@@ -24,7 +24,7 @@
 
     $stateProvider.state('/home', {
       url: '/home',
-      template: '<survey-player-home flex></survey-player-home>'
+      template: '<survey-player-home flex><survey-list></survey-list></survey-player-home>'
     });
 
     $urlRouterProvider.otherwise('/home');

@@ -32,6 +32,7 @@
     "angular-material": "1.1.20",
     "angular-material-icons": "0.6.0",
     "angular-messages": "1.5.8",
+    "alasql": "0.4.3",
     "lokijs": "1.4.2",
     "angular-mousewheel": "1.0.5",
     "angular-ui-router": "^0.3.1",

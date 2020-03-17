@@ -13,6 +13,7 @@
 
     self.getFileUploadUrl = getFileUploadUrl;
     self.getActivityUrl = getActivityUrl;
+    self.getSurveyUrl = getSurveyUrl;
     self.getDatasourceUrl = getDatasourceUrl;
     self.getLoginUrl = getLoginUrl;
     self.getStatiVariableUrl = getStatiVariableUrl;
@@ -35,6 +36,7 @@
 
     var _loginUrl;
     var _datasourceUrl;
+    var _surveyUrl;
     var _activityUrl;
     var _staticVariableUrl;
     var _fileUploadUrl;
@@ -43,6 +45,7 @@
       _loginUrl = $cookies.get('Login-Address');
       _datasourceUrl = $cookies.get('Datasource-Address');
       _activityUrl = $cookies.get('Activity-Address');
+      _surveyUrl = $cookies.get('Survey-Address');
       _staticVariableUrl = $cookies.get('StaticVariable-Address');
       _fileUploadUrl = $cookies.get('FileUpload-Address');
     }
@@ -61,6 +64,10 @@
 
     function getActivityUrl() {
       return _activityUrl;
+    }
+
+    function getSurveyUrl() {
+      return _surveyUrl;
     }
 
     function getFileUploadUrl() {

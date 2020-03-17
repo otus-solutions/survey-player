@@ -13,32 +13,38 @@
     'LoginService',
     'SurveyApiService',
     '$mdSidenav',
-    '$mdToast'
+    '$mdToast',
+    'SurveyClientService'
   ];
 
-  function Controller($scope, LoginService, SurveyApiService, $mdSidenav, $mdToast) {
+  function Controller($scope, LoginService, SurveyApiService, $mdSidenav, $mdToast, SurveyClientService) {
     var self = this;
 
     self.auth = auth;
     self.authenticate = authenticate;
     self.toggleMenu = toggleMenu;
 
+    self.$onInit = function () {
+      _setUser();
+    };
+
     function auth() {
-      self.user = SurveyApiService.getLoggedUser() ?  SurveyApiService.getLoggedUser() : '';
       return LoginService.isAuthenticated();
     }
 
     function authenticate(ev) {
       $mdSidenav('userMenu').close();
       LoginService.authenticate(ev).then(function (response) {
+        _setUser();
         _showMessage(response)
       }, function (err) {
+        _setUser()
         _showMessage(err)
       })
     }
 
-    self.test = function () {
-      _showMessage('teste')
+    function _setUser() {
+      self.user = SurveyApiService.getLoggedUser() ?  SurveyApiService.getLoggedUser() : '';
     }
 
     function toggleMenu() {

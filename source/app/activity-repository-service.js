@@ -8,10 +8,11 @@
   Service.$inject = [
     '$q',
     'otusjs.model.activity.ActivityFactory',
+    'SurveyFormFactory',
     'ActivityCollectionService'
   ];
 
-  function Service($q, ActivityFactory, ActivityCollectionService) {
+  function Service($q, ActivityFactory, SurveyFormFactory, ActivityCollectionService) {
     var self = this;
     var _existsWorkingInProgress = null;
 
@@ -20,10 +21,33 @@
     self.save = save;
     self.discard = discard;
     self.getById = getById;
+    self.getSurveys = getSurveys;
+    self.getOfflineSurveys = getOfflineSurveys;
+    self.getListSurveys = getListSurveys;
 
 
     function getById(activityInfo) {
       return ActivityCollectionService.getById(activityInfo).then(_toEntity);
+    }
+
+    function getSurveys(user) {
+      return ActivityCollectionService.getSurveys().then(function (surveys) {
+          return surveys.map(function (survey) {
+            return ActivityFactory.createOfflineActivity(SurveyFormFactory.fromJsonObject(survey), user);
+          })
+      });
+    }
+
+    function getOfflineSurveys(user) {
+      return ActivityCollectionService.getOfflineSurveys().then(function (surveys) {
+          return surveys.map(function (survey) {
+            return ActivityFactory.createOfflineActivity(SurveyFormFactory.fromJsonObject(survey), user);
+          })
+      });
+    }
+
+    function getListSurveys() {
+      return ActivityCollectionService.getListSurveys();
     }
 
 
