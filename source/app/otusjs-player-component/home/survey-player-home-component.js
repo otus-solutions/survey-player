@@ -37,10 +37,6 @@
       })
     }
 
-    self.test = function () {
-      _showMessage('teste')
-    }
-
     function toggleMenu() {
       $mdSidenav('userMenu').toggle();
     }
