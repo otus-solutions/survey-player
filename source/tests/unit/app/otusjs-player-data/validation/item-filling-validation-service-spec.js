@@ -1,4 +1,4 @@
-describe('ItemFillingValidatorService', function() {
+describe('ItemFillingValidatorService', function () {
 
   var UNIT_NAME = 'otusjs.player.data.validation.ItemFillingValidatorService';
   var Mock = {};
@@ -7,14 +7,15 @@ describe('ItemFillingValidatorService', function() {
   var data = {};
   var _answers = [];
 
-  beforeEach(function() {
+  beforeEach(function () {
     angular.mock.module('otusjs.player');
     angular.mock.module('otusjs.player.standalone');
+    spyOn(window, 'alasql');
 
 
-    angular.mock.inject(function(_$injector_) {
+    angular.mock.inject(function (_$injector_) {
       mockItemData(_$injector_);
-      Injections.ElementRegisterFactory =  _$injector_.get('ElementRegisterFactory');
+      Injections.ElementRegisterFactory = _$injector_.get('ElementRegisterFactory');
       Injections.ValidationService = _$injector_.get('otusjs.validation.api.ValidationService');
 
       service = _$injector_.get(UNIT_NAME, Injections);
@@ -30,12 +31,12 @@ describe('ItemFillingValidatorService', function() {
     spyOn(Injections.ValidationService, 'unregisterElement');
     spyOn(Injections.ValidationService, 'registerElement');
 
-    service.setupValidation(Mock.currentItemService,_answers);
+    service.setupValidation(Mock.currentItemService, _answers);
   });
 
-  describe('applyValidation method', function() {
+  describe('applyValidation method', function () {
 
-    it('should execute element validation upon question', function() {
+    it('should execute element validation upon question', function () {
       var callback = jasmine.any(Function);
 
       service.applyValidation(Mock.currentItemService, callback);
@@ -45,10 +46,10 @@ describe('ItemFillingValidatorService', function() {
 
   });
 
-  describe('setupValidation method', function() {
+  describe('setupValidation method', function () {
 
-    it('should execute element validation and element register upon question', function() {
-      service.setupValidation(Mock.currentItemService,_answers);
+    it('should execute element validation and element register upon question', function () {
+      service.setupValidation(Mock.currentItemService, _answers);
 
       expect(Injections.ValidationService.unregisterElement).toHaveBeenCalledTimes(2);
       expect(Injections.ValidationService.registerElement).toHaveBeenCalledTimes(2);
@@ -167,7 +168,7 @@ describe('ItemFillingValidatorService', function() {
 
     Mock.ActivityFacadeService = $injector.get('otusjs.model.activity.ActivityFacadeService');
 
-    spyOn(Mock.ActivityFacadeService,'getFillingByQuestionID').and.returnValue(Mock.filling);
+    spyOn(Mock.ActivityFacadeService, 'getFillingByQuestionID').and.returnValue(Mock.filling);
 
     Mock.currentItemService = $injector.get('otusjs.player.data.activity.CurrentItemService');
   }

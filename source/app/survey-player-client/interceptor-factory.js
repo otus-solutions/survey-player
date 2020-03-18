@@ -1,4 +1,4 @@
-(function(){
+(function () {
   'use strict';
 
   angular.module('survey.player.client')
@@ -8,8 +8,8 @@
 
   function Interceptor(SurveyApiService) {
     return {
-      request: function(config) {
-        config.headers['Authorization'] = 'Bearer '+ SurveyApiService.getAuthToken();
+      request: function (config) {
+        config.headers['Authorization'] = 'Bearer ' + SurveyApiService.getAuthToken();
         return config;
       }
     };

@@ -8,9 +8,10 @@
   stateConfiguration.$inject = [
     '$stateProvider',
     '$urlRouterProvider',
-];
+  ];
 
   function stateConfiguration($stateProvider, $urlRouterProvider) {
+
     $stateProvider.state('/', {
       url: '/?activity&token&callback',
       templateUrl: 'app/activity-viewer-template.html',
@@ -24,14 +25,14 @@
 
     $stateProvider.state('/home', {
       url: '/home',
-      template: '<survey-player-home flex><survey-list></survey-list></survey-player-home>'
+      template: '<survey-player-home layout="column" flex></survey-player-home>'
     });
 
     $urlRouterProvider.otherwise('/home');
   }
 
 
-  function Controller (
+  function Controller(
     ActivityFacadeService,
     StorageLoaderService,
     $compile,
@@ -68,9 +69,9 @@
       LoadingScreenService.start();
       _loadOtusDb().then(function () {
 
-        var _token =  angular.copy($stateParams.token);
-        var _callback =  angular.copy($stateParams.callback);
-        var _activity =  angular.copy($stateParams.activity);
+        var _token = angular.copy($stateParams.token);
+        var _callback = angular.copy($stateParams.callback);
+        var _activity = angular.copy($stateParams.activity);
 
         if (_callback) {
           SurveyApiService.setCallbackAddress(angular.copy(_callback));
@@ -78,18 +79,18 @@
         }
         if (_token) {
           SurveyApiService.setAuthToken(angular.copy(_token));
-          $location.search('token',null);
-          if (_activity){
+          $location.search('token', null);
+          if (_activity) {
             SurveyApiService.setCurrentActivity(_activity);
             $location.search('activity', null);
-            SurveyClientService.getSurveyTemplate().then(function(response) {
+            SurveyClientService.getSurveyTemplate().then(function (response) {
               self.template = angular.copy(response);
               _setPlayerConfiguration();
             });
           }
         } else {
-          if (SurveyApiService.getAuthToken() && SurveyApiService.getCurrentActivity()){
-            SurveyClientService.getSurveyTemplate().then(function(response) {
+          if (SurveyApiService.getAuthToken() && SurveyApiService.getCurrentActivity()) {
+            SurveyClientService.getSurveyTemplate().then(function (response) {
               _loadOtusDb().then(function () {
                 self.template = angular.copy(response);
                 _isValid = true;
@@ -108,14 +109,14 @@
       });
     }
 
-    function _setPlayerConfiguration(){
+    function _setPlayerConfiguration() {
       _generateOtusPreview();
       PlayerService.setup();
       $('#survey-preview').empty();
       $('#survey-preview').append($compile('<otus-player layout="column" layout-fill=""></otus-player>')($scope));
     }
 
-    function onInit(){
+    function onInit() {
       _config();
     }
 
@@ -123,7 +124,7 @@
       var OTUS_DB = 'otus';
       var deferred = $q.defer();
 
-      StorageLoaderService.dbExists(OTUS_DB).then(function(dbExists) {
+      StorageLoaderService.dbExists(OTUS_DB).then(function (dbExists) {
         if (dbExists) {
           StorageLoaderService.loadIndexedStorage(OTUS_DB);
           deferred.resolve();

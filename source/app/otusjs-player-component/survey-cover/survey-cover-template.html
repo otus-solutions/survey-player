@@ -1,6 +1,6 @@
 <md-content class="cover-content" layout-align="center center" layout="row" flex>
   <div layout-align="center center" layout="column" flex layout-padding>
-    <section >
+    <section>
       <h2 class="md-display-1">{{ $ctrl.title }}</h2>
     </section>
     <div ng-if="$ctrl.hardError" layout="row">
@@ -10,7 +10,8 @@
     </span>
     </div>
     <div layout="row">
-      <md-button class="md-raised md-primary" aria-label="Iniciar" ng-click="$ctrl.play()" ng-disabled="$ctrl.hardError">
+      <md-button class="md-raised md-primary" aria-label="Iniciar" ng-click="$ctrl.play()"
+                 ng-disabled="$ctrl.hardError">
         <md-icon md-font-set="material-icons">assignment</md-icon>
         Iniciar
       </md-button>
@@ -19,6 +20,7 @@
         Sair
       </md-button>
     </div>
-    <md-progress-circular md-primary md-mode="indeterminate" ng-show="$ctrl.softProgress || $ctrl.hardProgress"></md-progress-circular>
+    <md-progress-circular md-primary md-mode="indeterminate"
+                          ng-show="$ctrl.softProgress || $ctrl.hardProgress"></md-progress-circular>
   </div>
 </md-content>

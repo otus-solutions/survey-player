@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -34,7 +34,7 @@
     }
 
     function afterEffect(pipe, flowData) {
-      for (var itemID in flowData.validationResult){
+      for (var itemID in flowData.validationResult) {
         if (flowData.validationResult[itemID].hasError) {
           pipe.isFlowing = false;
         }

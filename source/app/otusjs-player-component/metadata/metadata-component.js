@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -29,8 +29,8 @@
     self.blurOnClick = blurOnClick;
 
     function onInit() {
-        self.metadata = CurrentItemService.getFilling(self.itemData.templateID).metadata.value;
-        self.otusQuestion.metadata = self;
+      self.metadata = CurrentItemService.getFilling(self.itemData.templateID).metadata.value;
+      self.otusQuestion.metadata = self;
     }
 
     function update() {
@@ -41,8 +41,8 @@
     }
 
     function clear() {
-        CurrentItemService.getFilling(self.itemData.templateID).metadata.clear();
-        delete self.metadata;
+      CurrentItemService.getFilling(self.itemData.templateID).metadata.clear();
+      delete self.metadata;
     }
 
     function blurOnClick() {

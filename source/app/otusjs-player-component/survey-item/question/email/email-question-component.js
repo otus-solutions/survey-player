@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -10,7 +10,7 @@
         itemData: '<',
         onUpdate: '&'
       },
-      require : {
+      require: {
         otusQuestion: '^otusQuestion'
       }
     }).controller("otusEmailQuestionCtrl", Controller);
@@ -24,23 +24,23 @@
 
     self.view = false;
 
-    self.$onInit = function() {
+    self.$onInit = function () {
       self.answer = CurrentItemService.getFilling(self.itemData.templateID).answer.value;
       self.otusQuestion.answer = self;
     };
 
-    self.update = function() {
+    self.update = function () {
       self.onUpdate({
         valueType: 'answer',
         value: self.answer
       });
     };
 
-    self.ariaLabel = function() {
+    self.ariaLabel = function () {
       return self.itemData.label.ptBR.plainText;
     };
 
-    self.clear = function() {
+    self.clear = function () {
       CurrentItemService.getFilling(self.itemData.templateID).answer.clear();
       delete self.answer;
     };

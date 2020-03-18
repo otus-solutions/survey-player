@@ -2,7 +2,7 @@
  * ActivityRemoteStorageService
  * @namespace Services
  */
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -47,7 +47,7 @@
 
       ActivityRestService
         .getById(activityInfo)
-        .then(function(response) {
+        .then(function (response) {
           deferred.resolve(response);
         }).catch(function () {
         deferred.reject();
@@ -61,7 +61,7 @@
 
       ActivityRestService
         .update(activity)
-        .then(function(response) {
+        .then(function (response) {
           deferred.resolve(response);
         }).catch(function () {
         deferred.reject();
@@ -75,7 +75,7 @@
 
       ActivityRestService
         .getSurveys()
-        .then(function(response) {
+        .then(function (response) {
           deferred.resolve(response);
         }).catch(function () {
         deferred.reject();
@@ -83,7 +83,6 @@
 
       return deferred.promise;
     }
-
 
 
   }

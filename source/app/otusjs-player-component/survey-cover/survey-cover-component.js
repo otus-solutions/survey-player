@@ -56,7 +56,7 @@
           });
       }
 
-      if(self.softBlocker()){
+      if (self.softBlocker()) {
         self.softProgress = true;
         self.softBlocker()
           .then(function () {

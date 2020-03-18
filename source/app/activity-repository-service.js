@@ -32,17 +32,17 @@
 
     function getSurveys(user) {
       return ActivityCollectionService.getSurveys().then(function (surveys) {
-          return surveys.map(function (survey) {
-            return ActivityFactory.createOfflineActivity(SurveyFormFactory.fromJsonObject(survey), user);
-          })
+        return surveys.map(function (survey) {
+          return ActivityFactory.createOfflineActivity(SurveyFormFactory.fromJsonObject(survey), user);
+        });
       });
     }
 
     function getOfflineSurveys(user) {
       return ActivityCollectionService.getOfflineSurveys().then(function (surveys) {
-          return surveys.map(function (survey) {
-            return ActivityFactory.createOfflineActivity(SurveyFormFactory.fromJsonObject(survey), user);
-          })
+        return surveys.map(function (survey) {
+          return ActivityFactory.createOfflineActivity(SurveyFormFactory.fromJsonObject(survey), user);
+        });
       });
     }
 

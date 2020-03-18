@@ -11,7 +11,7 @@
         onGoBack: '&',
         onPause: '&',
         onStop: '&',
-        onProcessing:'=?'
+        onProcessing: '=?'
       }
     });
 
@@ -62,7 +62,7 @@
         $scope.$parent.$ctrl.playerCommander.isGoAheadDisabled = false;
         self.isGoBackDisabled = false;
         $scope.$parent.$ctrl.playerCommander.isGoBackDisabled = false;
-      },300);
+      }, 300);
     }
 
     function postLink() {
@@ -104,47 +104,42 @@
     function shortcutAction() {
       $(document).unbind('keydown').bind('keydown', function (event) {
         switch (event.key) {
-          case 'Control':
-            {
-              pressedControl = true;
-              break;
+          case 'Control': {
+            pressedControl = true;
+            break;
+          }
+          case 'ArrowLeft': {
+            if (pressedControl) {
+              event.preventDefault();
+              $element.find('#previousQuestion').focus();
+              self.goBack();
+              $scope.$apply();
             }
-          case 'ArrowLeft':
-            {
-              if (pressedControl) {
-                event.preventDefault();
-                $element.find('#previousQuestion').focus();
-                self.goBack();
-                $scope.$apply();
-              }
-              break;
+            break;
+          }
+          case 'ArrowRight': {
+            if (pressedControl) {
+              event.preventDefault();
+              $element.find('#nextQuestion').focus();
+              self.goAhead();
+              $scope.$apply();
             }
-          case 'ArrowRight':
-            {
-              if (pressedControl) {
-                event.preventDefault();
-                $element.find('#nextQuestion').focus();
-                self.goAhead();
-                $scope.$apply();
-              }
-              break;
+            break;
+          }
+          case 'End': {
+            if (pressedControl) {
+              $element.find('#cancelActivity').focus();
+              self.stop();
             }
-          case 'End':
-            {
-              if (pressedControl) {
-                $element.find('#cancelActivity').focus();
-                self.stop();
-              }
-              break;
+            break;
+          }
+          case 'Home': {
+            if (pressedControl) {
+              $element.find('#saveActivity').focus();
+              self.pause();
             }
-          case 'Home':
-            {
-              if (pressedControl) {
-                $element.find('#saveActivity').focus();
-                self.pause();
-              }
-              break;
-            }
+            break;
+          }
           default:
             return;
         }

@@ -6,7 +6,8 @@
       templateUrl: 'app/otusjs-player-component/survey-list/survey-list-template.html',
       controller: Controller,
       bindings: {
-        user: '='
+        user: '=',
+        auth: '='
       }
     });
 
@@ -48,7 +49,9 @@
         acronym: activity.surveyForm.acronym,
         version: activity.surveyForm.version
       };
-      if ((!!self.list.find( item => { return item.acronym === _data.acronym && item.version == _data.version}))){
+      if ((!!self.list.find(item => {
+        return item.acronym === _data.acronym && item.version == _data.version;
+      }))) {
         return true;
       }
       self.allUpdated = false;

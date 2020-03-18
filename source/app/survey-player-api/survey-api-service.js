@@ -1,15 +1,21 @@
-(function() {
+(function () {
   'use strict';
 
   angular.module('survey.player.api')
     .service('SurveyApiService', Service);
 
   Service.$inject = [
-    '$cookies'
+    '$cookies',
+    '$q',
+    '$rootScope'
   ];
 
-  function Service($cookies) {
+  function Service($cookies, $q, $rootScope) {
     var self = this;
+
+    const INIT_QUERY = "CREATE INDEXEDDB DATABASE IF NOT EXISTS userDB; ATTACH INDEXEDDB DATABASE userDB; USE userDB;";
+    const DB_TABLE_USER = 'User';
+    const TABLE_USER = "CREATE TABLE IF NOT EXISTS ".concat(DB_TABLE_USER).concat("; ");
 
     self.getFileUploadUrl = getFileUploadUrl;
     self.getActivityUrl = getActivityUrl;
@@ -30,7 +36,7 @@
     const CURRENT_ACTIVITY = 'Current_Activity';
     const AUTH_TOKEN = 'Auth_Token';
     const CALLBACK_ADDRESS = 'Callback-Address';
-    const LOGGED_USER = '_loggedUser';
+    const LOGGED_USER = '_userDB';
     const HASHTAH = "HASHTAG";
     init();
 
@@ -41,13 +47,36 @@
     var _staticVariableUrl;
     var _fileUploadUrl;
 
-    function init(){
+    var _token = null;
+    var _user = null;
+
+    function init() {
       _loginUrl = $cookies.get('Login-Address');
       _datasourceUrl = $cookies.get('Datasource-Address');
       _activityUrl = $cookies.get('Activity-Address');
       _surveyUrl = $cookies.get('Survey-Address');
       _staticVariableUrl = $cookies.get('StaticVariable-Address');
       _fileUploadUrl = $cookies.get('FileUpload-Address');
+      _initDB();
+    }
+
+    function _initDB() {
+      alasql(INIT_QUERY, [], function () {
+        alasql(TABLE_USER, [], function () {
+          alasql.promise('SELECT * FROM User').then(function (response) {
+            if ($rootScope.online && getLoggedUser() == null) {
+              _dropDb();
+              $rootScope.$broadcast("login", {any: {}});
+            } else {
+              _user = angular.copy(response[0]);
+              _token = angular.copy(response[0].token);
+              delete _user.token;
+              $rootScope.$broadcast("logged", {any: {}});
+            }
+
+          });
+        });
+      });
     }
 
     function getLoginUrl() {
@@ -75,19 +104,42 @@
     }
 
     function getAuthToken() {
-      return sessionStorage.getItem(AUTH_TOKEN);
+      return _token ? _token : getLoggedUser() ? getLoggedUser().token : null;
     }
 
     function setAuthToken(token) {
-      sessionStorage.setItem(AUTH_TOKEN, angular.copy(token));
+      _token = angular.copy(token);
+      sessionStorage.setItem(LOGGED_USER, JSON.stringify({token: token}));
+    }
+
+    function _dropDb() {
+      alasql("DROP INDEXEDDB DATABASE userDB");
     }
 
     function setLoggedUser(user) {
-      sessionStorage.setItem(LOGGED_USER, JSON.stringify(user));
+      var deferred = $q.defer();
+      _dropDb();
+      alasql(INIT_QUERY, [], function () {
+        alasql(TABLE_USER, [], function (res) {
+          if (res === 1) {
+            var query = "SELECT * INTO User ".concat(' FROM ?');
+            _user = angular.copy(user);
+            sessionStorage.setItem(LOGGED_USER, JSON.stringify(user));
+            delete _user.token;
+            _token = angular.copy(user.token);
+            alasql(query, [Array.prototype.concat.apply(user)]);
+            deferred.resolve();
+          }
+        });
+      });
+
+
+      return deferred.promise;
+
     }
 
     function getLoggedUser() {
-      return JSON.parse(sessionStorage.getItem(LOGGED_USER));
+      return _user ? _user : JSON.parse(sessionStorage.getItem(LOGGED_USER));
     }
 
     function setCallbackAddress(url) {
@@ -107,6 +159,8 @@
     }
 
     function clearSession() {
+      _user = null;
+      _token = null;
       sessionStorage.removeItem(CURRENT_ACTIVITY);
       sessionStorage.removeItem(AUTH_TOKEN);
       sessionStorage.removeItem(CALLBACK_ADDRESS);

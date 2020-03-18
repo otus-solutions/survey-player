@@ -13,11 +13,10 @@
     'LoginService',
     'SurveyApiService',
     '$mdSidenav',
-    '$mdToast',
-    'SurveyClientService'
+    '$mdToast'
   ];
 
-  function Controller($scope, LoginService, SurveyApiService, $mdSidenav, $mdToast, SurveyClientService) {
+  function Controller($scope, LoginService, SurveyApiService, $mdSidenav, $mdToast) {
     var self = this;
 
     self.auth = auth;
@@ -36,15 +35,15 @@
       $mdSidenav('userMenu').close();
       LoginService.authenticate(ev).then(function (response) {
         _setUser();
-        _showMessage(response)
+        response ? _showMessage(response) : null;
       }, function (err) {
-        _setUser()
-        _showMessage(err)
-      })
+        _setUser();
+        _showMessage(err);
+      });
     }
 
     function _setUser() {
-      self.user = SurveyApiService.getLoggedUser() ?  SurveyApiService.getLoggedUser() : '';
+      self.user = SurveyApiService.getLoggedUser() ? SurveyApiService.getLoggedUser() : '';
     }
 
     function toggleMenu() {
@@ -57,7 +56,16 @@
           .textContent(txt)
           .parent(document.querySelectorAll('survey-player-home'))
           .position('bottom right')
-          .hideDelay(3000))
+          .hideDelay(3000));
     }
+
+    $scope.$on("logged", function () {
+      _setUser();
+    });
+
+    $scope.$on("login", function () {
+      $("#shortLogin").click();
+    });
+
   }
 }());

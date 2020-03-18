@@ -9,10 +9,11 @@
     '$q',
     'otusjs.utils.DatasourceService',
     'ActivityLocalStorageService',
-    'SurveyItemRestService'
+    'SurveyItemRestService',
+    'ActivityIndexedDbService'
   ];
 
-  function service($q, DatasourceService, ActivityLocalStorageService, SurveyItemRestService) {
+  function service($q, DatasourceService, ActivityLocalStorageService, SurveyItemRestService, ActivityIndexedDbService) {
     var self = this;
 
     /* Public Interface */
@@ -73,7 +74,15 @@
     }
 
     function _getDatasourcesByID(id) {
-      return SurveyItemRestService.getByID(id);
+      if (navigator.onLine) {
+        return SurveyItemRestService.getByID(id).then(function (response) {
+          ActivityIndexedDbService.updateDatasource(id, response.data);
+          return response;
+        });
+
+      } else {
+        return ActivityIndexedDbService.getDatasource(id);
+      }
     }
   }
 }());

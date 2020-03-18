@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -19,7 +19,8 @@
     self.afterEffect = afterEffect;
     self.getEffectResult = getEffectResult;
 
-    function beforeEffect(pipe, flowData) {}
+    function beforeEffect(pipe, flowData) {
+    }
 
     function effect(pipe, flowData) {
       var loadData = NavigationService.loadPreviousItem();
@@ -30,7 +31,7 @@
         flowData.metadataToEvaluate = {};
 
         CurrentItemService.getItems().forEach(item => {
-          if(item.isQuestion()) {
+          if (item.isQuestion()) {
             let templateID = item.templateID;
             flowData.answerToEvaluate[templateID] = {};
             flowData.answerToEvaluate[templateID].data = {};
@@ -42,7 +43,8 @@
       }
     }
 
-    function afterEffect(pipe, flowData) {}
+    function afterEffect(pipe, flowData) {
+    }
 
     function getEffectResult(pipe, flowData) {
       return flowData;

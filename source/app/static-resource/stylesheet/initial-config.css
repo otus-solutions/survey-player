@@ -1,10 +1,11 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 #installer .hearder {
 
 }
+
 #installer .logo {
   height: 178px;
   z-index: 3;
@@ -17,13 +18,14 @@
   background-color: #006064;
   color: #ECEFF1;
 }
+
 #installer #logo_otus {
-    content: url(../image/OtusImg.png);
-    top: 1%;
+  content: url(../image/OtusImg.png);
+  top: 1%;
 }
 
 #installer #installerLayout {
-    background-color: white;
+  background-color: white;
 }
 
 #installer #headerSize {
@@ -39,9 +41,10 @@
 }
 
 #installer #container {
-    height: 550px;
-    z-index: 3;
+  height: 550px;
+  z-index: 3;
 }
+
 /** AngularJS **/
 
 
@@ -56,5 +59,5 @@
 /** This style is to fix float label 'celular'! Do NOT remove**/
 
 #installer #installer-page label[for="phonenumber"] {
-    -webkit-transform: translate3d(0, 6px, 0) scale(.75) !important;
+  -webkit-transform: translate3d(0, 6px, 0) scale(.75) !important;
 }

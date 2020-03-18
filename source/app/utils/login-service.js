@@ -16,16 +16,17 @@
     self.isAuthenticated = isAuthenticated;
     self.authenticate = authenticate;
 
+
     function isAuthenticated() {
       var _token = SurveyApiService.getAuthToken();
-      return _token ? true : false;
+      return _token && navigator.onLine ? true : false;
     }
 
     function authenticate(ev) {
-      if (!self.isAuthenticated()){
+      if (!self.isAuthenticated()) {
         return _login(ev);
       } else {
-        _logout(ev);
+        return _logout(ev);
       }
     }
 
@@ -52,8 +53,9 @@
         .ok('Sim')
         .cancel('Não');
 
-      $mdDialog.show(confirm).then(function() {
+      return $mdDialog.show(confirm).then(function () {
         SurveyApiService.clearSession();
+        return "Usuário desconectado.";
       });
     }
 
@@ -67,17 +69,19 @@
       };
 
       function Auth(email, password) {
-        return {email, password}
+        return {email, password};
       }
 
       $scope.login = function () {
         var _auth = Auth($scope.emailUser, $scope.passUser);
         return $http.post(SurveyApiService.getLoginUrl(), _auth).then(function (response) {
           var user = response['data']['data'];
-          SurveyApiService.setLoggedUser(user);
-          SurveyApiService.setAuthToken(user.token);
-          $mdDialog.hide('Usuário autenticado.');
+          SurveyApiService.setLoggedUser(user).then(function () {
+            $mdDialog.hide('Usuário autenticado.');
+          });
+          // SurveyApiService.setAuthToken(user.token);
         }).catch(function (err) {
+
           $mdDialog.hide('Usuário não cadastrado.');
         });
       };
@@ -86,9 +90,9 @@
         return $scope.emailUser && $scope.passUser;
       };
 
-      $scope.onEnter = function(event) {
-        if (event.which === 13 && !SurveyApiService.getAuthToken()){
-          $scope.login()
+      $scope.onEnter = function (event) {
+        if (event.which === 13 && !SurveyApiService.getAuthToken()) {
+          $scope.login();
         }
       };
     }

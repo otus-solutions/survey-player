@@ -1,4 +1,4 @@
-describe('CurrentItemService', function() {
+describe('CurrentItemService', function () {
 
   var UNIT_NAME = 'otusjs.player.data.activity.CurrentItemService';
   var Mock = {};
@@ -9,9 +9,11 @@ describe('CurrentItemService', function() {
   var VAL2 = 'VAL2';
 
   beforeEach(function () {
-    module('otusjs.player');
+
+    angular.mock.module('otusjs.player');
 
     angular.mock.module('otusjs.player.standalone');
+    spyOn(window, 'alasql');
 
     inject(function (_$injector_) {
       /* Test data */
@@ -409,193 +411,193 @@ describe('CurrentItemService', function() {
     };
   }
 
-function mockSurveyItems() {
-  Mock.itemVAL1 = {
-    "extents": "SurveyItem",
-    "objectType": "CalendarQuestion",
-    "templateID": "VAL1",
-    "customID": "VAL1",
-    "dataType": "LocalDate",
-    "label": {
-      "ptBR": {
-        "extends": "StudioObject",
-        "objectType": "Label",
-        "oid": "",
-        "plainText": "",
-        "formattedText": ""
-      },
-      "enUS": {
-        "extends": "StudioObject",
-        "objectType": "Label",
-        "oid": "",
-        "plainText": "",
-        "formattedText": ""
-      },
-      "esES": {
-        "extends": "StudioObject",
-        "objectType": "Label",
-        "oid": "",
-        "plainText": "",
-        "formattedText": ""
-      }
-    },
-    "metadata": {
-      "extents": "StudioObject",
-      "objectType": "MetadataGroup",
-      "options": []
-    },
-    "fillingRules": {
-      "extends": "StudioObject",
-      "objectType": "FillingRules",
-      "options": {
-        "mandatory": {
+  function mockSurveyItems() {
+    Mock.itemVAL1 = {
+      "extents": "SurveyItem",
+      "objectType": "CalendarQuestion",
+      "templateID": "VAL1",
+      "customID": "VAL1",
+      "dataType": "LocalDate",
+      "label": {
+        "ptBR": {
           "extends": "StudioObject",
-          "objectType": "Rule",
-          "validatorType": "mandatory",
-          "data": {
-            "reference": true
-          }
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "",
+          "formattedText": ""
         },
-        "rangeDate": {
+        "enUS": {
           "extends": "StudioObject",
-          "objectType": "Rule",
-          "validatorType": "rangeDate",
-          "data": {
-            "reference": {
-              "initial": "2016-09-01T03:00:00.000Z",
-              "end": "2016-10-01T03:00:00.000Z"
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "",
+          "formattedText": ""
+        },
+        "esES": {
+          "extends": "StudioObject",
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "",
+          "formattedText": ""
+        }
+      },
+      "metadata": {
+        "extents": "StudioObject",
+        "objectType": "MetadataGroup",
+        "options": []
+      },
+      "fillingRules": {
+        "extends": "StudioObject",
+        "objectType": "FillingRules",
+        "options": {
+          "mandatory": {
+            "extends": "StudioObject",
+            "objectType": "Rule",
+            "validatorType": "mandatory",
+            "data": {
+              "reference": true
             }
-          }
-        },
-        "minDate": {
-          "extends": "StudioObject",
-          "objectType": "Rule",
-          "validatorType": "minDate",
-          "data": {
-            "reference": "2016-07-01T03:00:00.000Z"
-          }
-        },
-        "maxDate": {
-          "extends": "StudioObject",
-          "objectType": "Rule",
-          "validatorType": "maxDate",
-          "data": {
-            "reference": "2016-12-01T02:00:00.000Z"
+          },
+          "rangeDate": {
+            "extends": "StudioObject",
+            "objectType": "Rule",
+            "validatorType": "rangeDate",
+            "data": {
+              "reference": {
+                "initial": "2016-09-01T03:00:00.000Z",
+                "end": "2016-10-01T03:00:00.000Z"
+              }
+            }
+          },
+          "minDate": {
+            "extends": "StudioObject",
+            "objectType": "Rule",
+            "validatorType": "minDate",
+            "data": {
+              "reference": "2016-07-01T03:00:00.000Z"
+            }
+          },
+          "maxDate": {
+            "extends": "StudioObject",
+            "objectType": "Rule",
+            "validatorType": "maxDate",
+            "data": {
+              "reference": "2016-12-01T02:00:00.000Z"
+            }
           }
         }
       }
-    }
-  };
-  Mock.itemVAL2 = {
-    "extents": "SurveyItem",
-    "objectType": "CalendarQuestion",
-    "templateID": "VAL2",
-    "customID": "VAL2",
-    "dataType": "LocalDate",
-    "label": {
-      "ptBR": {
-        "extends": "StudioObject",
-        "objectType": "Label",
-        "oid": "",
-        "plainText": "",
-        "formattedText": ""
-      },
-      "enUS": {
-        "extends": "StudioObject",
-        "objectType": "Label",
-        "oid": "",
-        "plainText": "",
-        "formattedText": ""
-      },
-      "esES": {
-        "extends": "StudioObject",
-        "objectType": "Label",
-        "oid": "",
-        "plainText": "",
-        "formattedText": ""
-      }
-    },
-    "metadata": {
-      "extents": "StudioObject",
-      "objectType": "MetadataGroup",
-      "options": []
-    },
-    "fillingRules": {
-      "extends": "StudioObject",
-      "objectType": "FillingRules",
-      "options": {
-        "mandatory": {
+    };
+    Mock.itemVAL2 = {
+      "extents": "SurveyItem",
+      "objectType": "CalendarQuestion",
+      "templateID": "VAL2",
+      "customID": "VAL2",
+      "dataType": "LocalDate",
+      "label": {
+        "ptBR": {
           "extends": "StudioObject",
-          "objectType": "Rule",
-          "validatorType": "mandatory",
-          "data": {
-            "reference": true
-          }
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "",
+          "formattedText": ""
         },
-        "rangeDate": {
+        "enUS": {
           "extends": "StudioObject",
-          "objectType": "Rule",
-          "validatorType": "rangeDate",
-          "data": {
-            "reference": {
-              "initial": "2016-09-01T03:00:00.000Z",
-              "end": "2016-10-01T03:00:00.000Z"
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "",
+          "formattedText": ""
+        },
+        "esES": {
+          "extends": "StudioObject",
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "",
+          "formattedText": ""
+        }
+      },
+      "metadata": {
+        "extents": "StudioObject",
+        "objectType": "MetadataGroup",
+        "options": []
+      },
+      "fillingRules": {
+        "extends": "StudioObject",
+        "objectType": "FillingRules",
+        "options": {
+          "mandatory": {
+            "extends": "StudioObject",
+            "objectType": "Rule",
+            "validatorType": "mandatory",
+            "data": {
+              "reference": true
             }
-          }
-        },
-        "minDate": {
-          "extends": "StudioObject",
-          "objectType": "Rule",
-          "validatorType": "minDate",
-          "data": {
-            "reference": "2016-07-01T03:00:00.000Z"
-          }
-        },
-        "maxDate": {
-          "extends": "StudioObject",
-          "objectType": "Rule",
-          "validatorType": "maxDate",
-          "data": {
-            "reference": "2016-12-01T02:00:00.000Z"
+          },
+          "rangeDate": {
+            "extends": "StudioObject",
+            "objectType": "Rule",
+            "validatorType": "rangeDate",
+            "data": {
+              "reference": {
+                "initial": "2016-09-01T03:00:00.000Z",
+                "end": "2016-10-01T03:00:00.000Z"
+              }
+            }
+          },
+          "minDate": {
+            "extends": "StudioObject",
+            "objectType": "Rule",
+            "validatorType": "minDate",
+            "data": {
+              "reference": "2016-07-01T03:00:00.000Z"
+            }
+          },
+          "maxDate": {
+            "extends": "StudioObject",
+            "objectType": "Rule",
+            "validatorType": "maxDate",
+            "data": {
+              "reference": "2016-12-01T02:00:00.000Z"
+            }
           }
         }
       }
-    }
-  };
-  Mock.itemVAL3 = {};
+    };
+    Mock.itemVAL3 = {};
 
-  Mock.itemVAL1.isQuestion = jasmine.createSpy('isQuestion').and.returnValue(true);
-  Mock.itemVAL2.isQuestion = jasmine.createSpy('isQuestion').and.returnValue(true);
-  Mock.itemVAL3.isQuestion = jasmine.createSpy('isQuestion').and.returnValue(false);
+    Mock.itemVAL1.isQuestion = jasmine.createSpy('isQuestion').and.returnValue(true);
+    Mock.itemVAL2.isQuestion = jasmine.createSpy('isQuestion').and.returnValue(true);
+    Mock.itemVAL3.isQuestion = jasmine.createSpy('isQuestion').and.returnValue(false);
 
-  Mock.itemContainer = [Mock.itemVAL1, Mock.itemVAL2, Mock.itemVAL3];
-}
+    Mock.itemContainer = [Mock.itemVAL1, Mock.itemVAL2, Mock.itemVAL3];
+  }
 
-function mockNavigations() {
-  Mock.undefinedNavigation = undefined;
-  Mock.navigation = {
-    "extents": "SurveyTemplateObject",
-    "objectType": "Navigation",
-    "origin": "VAL1",
-    "index": 0,
-    "inNavigations": [],
-    "routes": [{
+  function mockNavigations() {
+    Mock.undefinedNavigation = undefined;
+    Mock.navigation = {
       "extents": "SurveyTemplateObject",
-      "objectType": "Route",
+      "objectType": "Navigation",
       "origin": "VAL1",
-      "destination": "VAL2",
-      "name": "VAL1_VAL2",
-      "isDefault": true,
-      "conditions": []
-    }]
-  };
-}
+      "index": 0,
+      "inNavigations": [],
+      "routes": [{
+        "extents": "SurveyTemplateObject",
+        "objectType": "Route",
+        "origin": "VAL1",
+        "destination": "VAL2",
+        "name": "VAL1_VAL2",
+        "isDefault": true,
+        "conditions": []
+      }]
+    };
+  }
 
-function mockActivityFacadeService($injector) {
-  Mock.ActivityFacadeService = $injector.get('otusjs.model.activity.ActivityFacadeService');
+  function mockActivityFacadeService($injector) {
+    Mock.ActivityFacadeService = $injector.get('otusjs.model.activity.ActivityFacadeService');
 
-  Mock.ActivityFacadeService.fillQuestion = jasmine.createSpy('fillQuestion');
+    Mock.ActivityFacadeService.fillQuestion = jasmine.createSpy('fillQuestion');
 
-  Injections.ActivityFacadeService = Mock.ActivityFacadeService;
-}
+    Injections.ActivityFacadeService = Mock.ActivityFacadeService;
+  }
 });

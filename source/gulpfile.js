@@ -1,4 +1,4 @@
-(function() {
+(function () {
   //
   // var baseDir = __dirname + '/app/index.html';
 
@@ -20,11 +20,11 @@
   var clean = require('gulp-clean');
   var uncache = require('gulp-uncache');
 
-  gulp.task('compress', function() {
+  gulp.task('compress', function () {
     runSequence('clean_dist', 'copy_code', 'embeded_template', 'copy_node_modules', 'compress-hash');
   });
 
-  gulp.task('copy_code', function (){
+  gulp.task('copy_code', function () {
     return gulp.src('./app/**/*')
       .pipe(gulp_if('index.html', replace('src="app/', 'src="')))
       .pipe(gulp_if('index.html', replace('href="app/', 'href="')))
@@ -36,13 +36,13 @@
       .pipe(uncache({
         append: 'hash',
         rename: true,
-        srcDir:'dist/survey-player',
-        distDir:'dist/survey-player'
+        srcDir: 'dist/survey-player',
+        distDir: 'dist/survey-player'
       }))
       .pipe(gulp.dest('dist/survey-player'));
   });
 
-  gulp.task('embeded_template', function() {
+  gulp.task('embeded_template', function () {
     return gulp.src('./dist/survey-player/**/*')
       .pipe(gulp_if('*.js', embedTemplates({
         basePath: '.'
@@ -61,10 +61,10 @@
   });
 
 
-  gulp.task('compress-compress', function() {
+  gulp.task('compress-compress', function () {
     return gulp.src('app/index.html', {allowEmpty: true})
       .pipe(useref({
-        transformPath: function(filePath) {
+        transformPath: function (filePath) {
           return filePath.replace('app/', '');
         }
       }))
@@ -81,7 +81,7 @@
       .pipe(gulp.dest('dist/survey-player/'));
   });
 
-  gulp.task('browser-sync', function() {
+  gulp.task('browser-sync', function () {
     var activityUrl = process.env.ACTIVITY_URL || "http://localhost:51002/otus-rest/v01/activities";
     var datasourceUrl = process.env.DATASOURCE_URL || "http://localhost:51002/otus-rest/v01/configuration/datasources";
     var fileuploadUrl = process.env.FILEUPLOAD_URL || "http://localhost:51002/otus-rest/v01/upload";
@@ -95,15 +95,15 @@
         middleware: [
           //browserSyncSpa(/^[^\.]+$/, baseDir),
 
-          function(req, res, next) {
+          function (req, res, next) {
             res.setHeader('Access-Control-Allow-Origin', '*');
             res.setHeader('Access-Control-Allow-Headers', '*');
-            res.setHeader('Set-Cookie',['Activity-Address='+activityUrl+';path=/',
-              'Datasource-Address='+datasourceUrl+';path=/',
-              'FileUpload-Address='+fileuploadUrl+';path=/',
-              'Login-Address='+loginUrl+';path=/',
-              'Survey-Address='+surveyUrl+';path=/',
-              'StaticVariable-Address='+staticvariableUrl+';path=/']);
+            res.setHeader('Set-Cookie', ['Activity-Address=' + activityUrl + ';path=/',
+              'Datasource-Address=' + datasourceUrl + ';path=/',
+              'FileUpload-Address=' + fileuploadUrl + ';path=/',
+              'Login-Address=' + loginUrl + ';path=/',
+              'Survey-Address=' + surveyUrl + ';path=/',
+              'StaticVariable-Address=' + staticvariableUrl + ';path=/']);
             next();
           }
         ]
@@ -119,7 +119,7 @@
     ]).on('change', browserSync.reload);
   });
 
-  gulp.task('upgrade-version', function(value) {
+  gulp.task('upgrade-version', function (value) {
     gulp.src('./package.json')
       .pipe(bump({
         version: process.env.npm_config_value
@@ -127,7 +127,7 @@
       .pipe(gulp.dest('./'));
   });
 
-  gulp.task('sonar', function() {
+  gulp.task('sonar', function () {
     var options = {
       sonar: {
         host: {

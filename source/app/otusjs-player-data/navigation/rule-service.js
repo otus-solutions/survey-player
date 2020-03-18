@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -31,7 +31,7 @@
     }
 
     function _isSkipped(item) {
-      return CurrentSurveyService.getNavigationTracker().getSkippedItems().some(function(element) {
+      return CurrentSurveyService.getNavigationTracker().getSkippedItems().some(function (element) {
         return item === element.getID();
       });
     }

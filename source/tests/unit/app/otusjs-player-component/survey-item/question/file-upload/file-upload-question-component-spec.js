@@ -37,7 +37,7 @@ describe('file upload question controller component', function () {
       FileUploadService: Mock.FileUploadService,
       $scope: Mock.scope,
       FileUploadAnswerFactory: Mock.FileUploadAnswerFactory
-    }
+    };
     controller = _$controller_('otusFileUploadQuestionCtrl', Mock.Injections);
     controller.itemData = Mock.itemData;
   }

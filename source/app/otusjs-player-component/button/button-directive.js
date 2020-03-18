@@ -1,25 +1,25 @@
-(function() {
-    'use strict';
+(function () {
+  'use strict';
 
-    angular
-        .module('otusjs.player.component')
-        .directive('otusButton', directive);
+  angular
+    .module('otusjs.player.component')
+    .directive('otusButton', directive);
 
-    directive.$inject = ['OtusButtonWidgetFactory'];
+  directive.$inject = ['OtusButtonWidgetFactory'];
 
-    function directive(OtusButtonWidgetFactory) {
-        var ddo = {
-            scope: {
-                click: '<'
-            },
-            templateUrl: 'app/otusjs-player-component/button/button.html',
-            retrict: 'E',
-            link: function linkFunc(scope, element, attrs) {
-                scope.widget = OtusButtonWidgetFactory.create(scope, attrs, scope.$parent.widget);
-            }
-        };
+  function directive(OtusButtonWidgetFactory) {
+    var ddo = {
+      scope: {
+        click: '<'
+      },
+      templateUrl: 'app/otusjs-player-component/button/button.html',
+      retrict: 'E',
+      link: function linkFunc(scope, element, attrs) {
+        scope.widget = OtusButtonWidgetFactory.create(scope, attrs, scope.$parent.widget);
+      }
+    };
 
-        return ddo;
-    }
+    return ddo;
+  }
 
 }());

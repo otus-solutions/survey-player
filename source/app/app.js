@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -38,7 +38,7 @@
 
   function Runner($injector, StorageLoaderService) {
     _loadOtusDb(StorageLoaderService)
-      .then(function() {
+      .then(function () {
       });
   }
 
@@ -47,7 +47,7 @@
 
     // StorageLoaderService.initializeSessionStorage();
 
-    return StorageLoaderService.dbExists(OTUS_DB).then(function(dbExists) {
+    return StorageLoaderService.dbExists(OTUS_DB).then(function (dbExists) {
       if (dbExists) {
         return StorageLoaderService.loadIndexedStorage(OTUS_DB);
       } else {

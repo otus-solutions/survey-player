@@ -29,7 +29,7 @@
 
 
     function onInit() {
-      self.hueClass='md-primary';
+      self.hueClass = 'md-primary';
       self.iconEye = 'remove_red_eye';
       self.iconTooltip = 'Visualizar questão';
       self.view = false;
@@ -41,24 +41,23 @@
       self.template = TagComponentBuilderService.createTagElement(self.itemData.objectType, true);
       self.itemData = angular.copy(self.itemData);
       self.icon = ICON[self.icon];
-      if(self.itemData.isQuestion()){
+      if (self.itemData.isQuestion()) {
         _metadadaBuilder();
 
-          self.answer = _containMetadada() ? 'Metadado: '+  self.METADADA[self.itemData.data.metadata.value - 1] : 'Resposta: '+_formatAnswer();
-          self.comment = self.itemData.data.comment ? 'Contém comentário(s)': '';
+        self.answer = _containMetadada() ? 'Metadado: ' + self.METADADA[self.itemData.data.metadata.value - 1] : 'Resposta: ' + _formatAnswer();
+        self.comment = self.itemData.data.comment ? 'Contém comentário(s)' : '';
 
         self.label = self.itemData.label.ptBR.plainText;
         self.labelFormatted = self.itemData.label.ptBR.formattedText;
-      } else if(self.itemData.objectType === "TextItem"){
-        self.txtqst = "txtqst"
+      } else if (self.itemData.objectType === "TextItem") {
+        self.txtqst = "txtqst";
         self.label = self.itemData.value.ptBR.plainText;
         self.labelFormatted = self.itemData.value.ptBR.formattedText;
-      } else if(self.itemData.objectType === "ImageItem"){
+      } else if (self.itemData.objectType === "ImageItem") {
         self.label = "[IMAGEM]";
       }
 
     }
-
 
 
     function _containMetadada() {
@@ -67,9 +66,9 @@
 
     function _metadadaBuilder() {
       self.METADADA = [];
-      self.itemData.metadata.options.forEach(function(option) {
+      self.itemData.metadata.options.forEach(function (option) {
         self.METADADA.push(option.label.ptBR.plainText);
-      })
+      });
     }
 
     function goingBack() {
@@ -79,20 +78,20 @@
 
     function viewQuestion() {
       self.view = !self.view;
-      if(self.view){
+      if (self.view) {
         self.iconTooltip = 'Ocultar questão';
         self.hueClass = 'md-accent';
         self.iconEye = 'visibility_off';
       } else {
         self.iconTooltip = 'Visualizar questão';
-        self.hueClass = 'md-primary'
+        self.hueClass = 'md-primary';
         self.iconEye = 'remove_red_eye';
       }
     }
 
     function formatDate(value) {
-      var format = 'dd/MM/yyyy'
-      return value ? $filter('date')(new Date(value), format): "";
+      var format = 'dd/MM/yyyy';
+      return value ? $filter('date')(new Date(value), format) : "";
     }
 
     function formatTime(value) {
@@ -102,9 +101,9 @@
 
     function formatSingleSelection() {
       var _answer = '';
-      self.itemData.options.find(function(option){
-        if(option.value === parseInt(self.itemData.data.answer.value)){
-          _answer =  self.itemData.options[option.value - 1].label.ptBR.plainText;
+      self.itemData.options.find(function (option) {
+        if (option.value === parseInt(self.itemData.data.answer.value)) {
+          _answer = self.itemData.options[option.value - 1].label.ptBR.plainText;
         }
       });
       return _answer;
@@ -112,12 +111,12 @@
 
     function formatFileUpload() {
       var _answer = "";
-      if(self.itemData.data.answer.value){
-        self.itemData.data.answer.value.forEach(function(value){
+      if (self.itemData.data.answer.value) {
+        self.itemData.data.answer.value.forEach(function (value) {
           _answer = _answer + angular.copy(value.name) + "; ";
         });
       }
-      return  _answer;
+      return _answer;
     }
 
     function isQuestion() {
@@ -130,31 +129,31 @@
 
     function _formatAnswer() {
       var answer = "";
-        switch (self.icon){
-          case "date_range":
-            answer = formatDate(self.itemData.data.answer.value);
-            break;
-          case "access_time":
-            answer = formatTime(self.itemData.data.answer.value);
-            break;
-          case "radio_button_checked":
-            answer = formatSingleSelection();
-            break;
-          case "check_box":
-            answer = "Multiplas respostas, clique em visualizar questão.";
-            break;
-          case "filter_none":
-            answer = "Multiplas respostas, clique em visualizar questão.";
-            break;
-          case "filter_1":
-            answer = "Multiplas respostas, clique em visualizar questão.";
-            break;
-          case "attach_file":
-            answer = formatFileUpload();
-            break;
-          default:
-            answer = self.itemData.data.answer.value !== null ? self.itemData.data.answer.value : '';
-        }
+      switch (self.icon) {
+        case "date_range":
+          answer = formatDate(self.itemData.data.answer.value);
+          break;
+        case "access_time":
+          answer = formatTime(self.itemData.data.answer.value);
+          break;
+        case "radio_button_checked":
+          answer = formatSingleSelection();
+          break;
+        case "check_box":
+          answer = "Multiplas respostas, clique em visualizar questão.";
+          break;
+        case "filter_none":
+          answer = "Multiplas respostas, clique em visualizar questão.";
+          break;
+        case "filter_1":
+          answer = "Multiplas respostas, clique em visualizar questão.";
+          break;
+        case "attach_file":
+          answer = formatFileUpload();
+          break;
+        default:
+          answer = self.itemData.data.answer.value !== null ? self.itemData.data.answer.value : '';
+      }
 
       return answer;
 

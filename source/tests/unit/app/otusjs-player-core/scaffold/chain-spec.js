@@ -1,23 +1,24 @@
-describe('PreGoAheadStage', function() {
+describe('PreGoAheadStage', function () {
 
   var Mock = {};
   var Injections = {};
   var chain = {};
 
-  beforeEach(function() {
+  beforeEach(function () {
     module('otusjs.player.core');
     angular.mock.module('otusjs.player.standalone');
+    spyOn(window, 'alasql');
 
-    inject(function(_$injector_) {
+    inject(function (_$injector_) {
       mockChainLink(_$injector_);
       var factory = _$injector_.get('otusjs.player.core.scaffold.ChainFactory', Injections);
       chain = factory.create();
     });
   });
 
-  describe('chain method', function() {
+  describe('chain method', function () {
 
-    beforeEach(function() {
+    beforeEach(function () {
       chain.chain(Mock.linkA);
       chain.chain(Mock.linkB);
       chain.chain(Mock.linkC);
@@ -25,7 +26,7 @@ describe('PreGoAheadStage', function() {
       chain.chain(Mock.linkE);
     });
 
-    it('should add a link at end of link chain', function() {
+    it('should add a link at end of link chain', function () {
       var link = chain.getChainHead();
       expect(link).not.toEqual(Mock.linkA);
 
@@ -47,15 +48,15 @@ describe('PreGoAheadStage', function() {
       expect(chain.getChainTail()).toEqual(Mock.linkE);
     });
 
-    it('the last link should point to null', function() {
+    it('the last link should point to null', function () {
       expect(Mock.linkE.getNext()).toBe(null);
     });
 
   });
 
-  describe('execute method', function() {
+  describe('execute method', function () {
 
-    beforeEach(function() {
+    beforeEach(function () {
       chain.chain(Mock.linkA);
       chain.chain(Mock.linkB);
       chain.chain(Mock.linkC);
@@ -63,7 +64,7 @@ describe('PreGoAheadStage', function() {
       chain.chain(Mock.linkE);
     });
 
-    it('should call execute method from all links on the chain', function() {
+    it('should call execute method from all links on the chain', function () {
       chain.execute({isFlowing: true});
 
       expect(Mock.linkA.execute).toHaveBeenCalled();

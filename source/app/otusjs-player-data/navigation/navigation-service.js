@@ -72,7 +72,7 @@
         navigation = ActivityFacadeService.getCurrentSurvey().getNavigationByOrigin(itemsPreviousArray[itemsPreviousArray.length - 1].templateID);
 
         RouteService.setup(navigation);
-        _navigationTracker.visitGroup(itemsPreviousArray.map(item=>item.templateID));
+        _navigationTracker.visitGroup(itemsPreviousArray.map(item => item.templateID));
 
         return {
           items: itemsPreviousArray,
@@ -111,15 +111,15 @@
         let firstItem = ActivityFacadeService.getCurrentSurvey().getItems()[0];
         itemsToLoad = ActivityFacadeService.fetchItemGroupByID(firstItem.templateID);
         navigation = ActivityFacadeService.fetchNavigationByOrigin(itemsToLoad[itemsToLoad.length - 1].templateID);
-        _navigationTracker.visitGroup(itemsToLoad.map(item=>item.templateID));
+        _navigationTracker.visitGroup(itemsToLoad.map(item => item.templateID));
 
       } else if (id !== 'END NODE') {
         itemsToLoad = ActivityFacadeService.fetchItemGroupByID(id);
         navigation = ActivityFacadeService.fetchNavigationByOrigin(itemsToLoad[itemsToLoad.length - 1].templateID);
-        _navigationTracker.visitGroup(itemsToLoad.map(item=>item.templateID));
+        _navigationTracker.visitGroup(itemsToLoad.map(item => item.templateID));
 
       } else {
-         navigation = ActivityFacadeService.fetchNavigationByOrigin(id);
+        navigation = ActivityFacadeService.fetchNavigationByOrigin(id);
       }
 
       if (navigation) {

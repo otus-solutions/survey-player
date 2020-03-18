@@ -2,7 +2,7 @@
   "env": {
     "browser": true
   },
-  "globals":{
+  "globals": {
     "Insert Global Here": true
   },
   "extends": "angular",
@@ -17,6 +17,9 @@
     ],
     "no-console": "off",
     "no-debugger": "warn",
-    "angular/di": [ "error", "$inject" ]
+    "angular/di": [
+      "error",
+      "$inject"
+    ]
   }
 }
