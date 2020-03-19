@@ -86,6 +86,7 @@
     var datasourceUrl = process.env.DATASOURCE_URL || "http://localhost:51002/otus-rest/v01/configuration/datasources";
     var fileuploadUrl = process.env.FILEUPLOAD_URL || "http://localhost:51002/otus-rest/v01/upload";
     var staticvariableUrl = process.env.STATICVARIABLE_URL || "http://localhost:51002/otus-rest/v01/static-variable";
+    var loginUrl = process.env.LOGIN_URL || "http://localhost:51002/otus-rest/v01/authentication";
     browserSync.init({
       server: {
         open: 'external',
@@ -99,6 +100,7 @@
             res.setHeader('Set-Cookie',['Activity-Address='+activityUrl+';path=/',
               'Datasource-Address='+datasourceUrl+';path=/',
               'FileUpload-Address='+fileuploadUrl+';path=/',
+              'Login-Address='+loginUrl+';path=/',
               'StaticVariable-Address='+staticvariableUrl+';path=/']);
             next();
           }

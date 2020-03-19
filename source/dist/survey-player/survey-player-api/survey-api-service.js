@@ -14,31 +14,41 @@
     self.getFileUploadUrl = getFileUploadUrl;
     self.getActivityUrl = getActivityUrl;
     self.getDatasourceUrl = getDatasourceUrl;
+    self.getLoginUrl = getLoginUrl;
     self.getStatiVariableUrl = getStatiVariableUrl;
     self.getAuthToken = getAuthToken;
     self.setAuthToken = setAuthToken;
+    self.setLoggedUser = setLoggedUser;
+    self.getLoggedUser = getLoggedUser;
     self.setCallbackAddress = setCallbackAddress;
     self.getCallbackAddress = getCallbackAddress;
     self.setCurrentActivity = setCurrentActivity;
     self.getCurrentActivity = getCurrentActivity;
     self.clearSession = clearSession;
 
-    var CURRENT_ACTIVITY = 'Current_Activity';
-    var AUTH_TOKEN = 'Auth_Token';
-    var CALLBACK_ADDRESS = 'Callback-Address';
+    const CURRENT_ACTIVITY = 'Current_Activity';
+    const AUTH_TOKEN = 'Auth_Token';
+    const CALLBACK_ADDRESS = 'Callback-Address';
+    const LOGGED_USER = '_loggedUser';
     const HASHTAH = "HASHTAG";
     init();
 
+    var _loginUrl;
     var _datasourceUrl;
     var _activityUrl;
     var _staticVariableUrl;
     var _fileUploadUrl;
 
     function init(){
+      _loginUrl = $cookies.get('Login-Address');
       _datasourceUrl = $cookies.get('Datasource-Address');
       _activityUrl = $cookies.get('Activity-Address');
       _staticVariableUrl = $cookies.get('StaticVariable-Address');
       _fileUploadUrl = $cookies.get('FileUpload-Address');
+    }
+
+    function getLoginUrl() {
+      return _loginUrl;
     }
 
     function getDatasourceUrl() {
@@ -62,7 +72,15 @@
     }
 
     function setAuthToken(token) {
-      return sessionStorage.setItem(AUTH_TOKEN, angular.copy(token));
+      sessionStorage.setItem(AUTH_TOKEN, angular.copy(token));
+    }
+
+    function setLoggedUser(user) {
+      sessionStorage.setItem(LOGGED_USER, JSON.stringify(user));
+    }
+
+    function getLoggedUser() {
+      return JSON.parse(sessionStorage.getItem(LOGGED_USER));
     }
 
     function setCallbackAddress(url) {
@@ -85,6 +103,7 @@
       sessionStorage.removeItem(CURRENT_ACTIVITY);
       sessionStorage.removeItem(AUTH_TOKEN);
       sessionStorage.removeItem(CALLBACK_ADDRESS);
+      sessionStorage.removeItem(LOGGED_USER);
     }
   }
 })();
