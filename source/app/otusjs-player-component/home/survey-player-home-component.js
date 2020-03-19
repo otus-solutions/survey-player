@@ -23,18 +23,27 @@
     self.authenticate = authenticate;
     self.toggleMenu = toggleMenu;
 
+    self.$onInit = function () {
+      _setUser();
+    };
+
     function auth() {
-      self.user = SurveyApiService.getLoggedUser() ?  SurveyApiService.getLoggedUser() : '';
       return LoginService.isAuthenticated();
     }
 
     function authenticate(ev) {
       $mdSidenav('userMenu').close();
       LoginService.authenticate(ev).then(function (response) {
+        _setUser();
         response ? _showMessage(response) : null;
       }, function (err) {
-        _showMessage(err)
-      })
+        _setUser();
+        err ? _showMessage(err) : null;
+      });
+    }
+
+    function _setUser() {
+      self.user = SurveyApiService.getLoggedUser() ? SurveyApiService.getLoggedUser() : '';
     }
 
     function toggleMenu() {
@@ -47,7 +56,16 @@
           .textContent(txt)
           .parent(document.querySelectorAll('survey-player-home'))
           .position('bottom right')
-          .hideDelay(3000))
+          .hideDelay(3000));
     }
+
+    $scope.$on("logged", function () {
+      _setUser();
+    });
+
+    $scope.$on("login", function () {
+      $("#shortLogin").click();
+    });
+
   }
 }());

@@ -9,7 +9,7 @@ resource "docker_container" "survey-player" {
     "LOGIN_URL=${var.survey-player-login-url}"
   ]
   ports {
-	internal = 80
-	external = var.survey-player-port
+    internal = 80
+    external = var.survey-player-port
   }
 }

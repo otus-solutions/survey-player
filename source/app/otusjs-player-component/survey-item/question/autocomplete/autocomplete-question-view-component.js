@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -20,7 +20,7 @@
     self.view = true;
 
     /* Question Methods */
-    self.$onInit = function() {
+    self.$onInit = function () {
       self.answer = self.itemData.data.answer.value;
     };
 

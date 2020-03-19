@@ -5,6 +5,7 @@ describe('surveyViewerModelFactory_TestSuite', function () {
 
   beforeEach(function () {
     angular.mock.module('otusjs.player.standalone');
+    spyOn(window, 'alasql');
     angular.mock.inject(function ($injector) {
       Injections.ActivityFacadeService = $injector.get('otusjs.model.activity.ActivityFacadeService');
       Mock.activityFactory = $injector.get('otusjs.model.activity.ActivityFactory');
@@ -35,9 +36,9 @@ describe('surveyViewerModelFactory_TestSuite', function () {
   });
 
   it('create_method_should_evoke_internal_services', function () {
-    spyOn(Injections.ActivityFacadeService.surveyActivity,"getItems").and.callThrough();
-    spyOn(Injections.ActivityFacadeService,"getNavigationTracker").and.callThrough();
-    spyOn(Injections.ActivityFacadeService,"getFillingByQuestionID").and.callThrough();
+    spyOn(Injections.ActivityFacadeService.surveyActivity, "getItems").and.callThrough();
+    spyOn(Injections.ActivityFacadeService, "getNavigationTracker").and.callThrough();
+    spyOn(Injections.ActivityFacadeService, "getFillingByQuestionID").and.callThrough();
     factory.create();
 
     expect(Injections.ActivityFacadeService.surveyActivity.getItems).toHaveBeenCalledTimes(1);

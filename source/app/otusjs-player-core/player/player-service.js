@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -62,17 +62,17 @@
       _softBlocker = blocker;
     }
 
-    function getHardBlocker(){
+    function getHardBlocker() {
       return _hardBlocker;
     }
 
-    function getSoftBlocker(){
+    function getSoftBlocker() {
       return _softBlocker;
     }
 
-    function clearHardBlocker(){
+    function clearHardBlocker() {
       _hardBlocker = null;
-   }
+    }
 
     /**/
 

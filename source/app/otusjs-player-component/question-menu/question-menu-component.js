@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -26,7 +26,7 @@
     /* Public methods */
     self.showAccept = showAccept;
 
-    self.$onInit = function() {
+    self.$onInit = function () {
       self.otusQuestion.menuComponent = self;
       _enableDialogSettings();
       _disableDialogSettings();
@@ -34,13 +34,13 @@
       self.forceAnswer = self.otusQuestion.menuComponent.otusQuestion.filling.forceAnswer;
     };
 
-    self.clear = function(value) {
+    self.clear = function (value) {
       self.onClear({
         value: value
       });
     };
 
-    self.showConfirm = function(ev) {
+    self.showConfirm = function (ev) {
       if (!self.forceAnswer) {
         $mdDialog
           .show(self.enableDialogSettings)
@@ -49,7 +49,7 @@
           );
 
         return {
-          onConfirm: function(callback) {
+          onConfirm: function (callback) {
             self.callback = callback;
           }
         };
@@ -62,7 +62,7 @@
           );
 
         return {
-          onConfirm: function(callback) {
+          onConfirm: function (callback) {
             self.callback = callback;
           }
         };
@@ -87,7 +87,8 @@
       }
     }
 
-    function _disableForwardUnsuccessfulExecution(error) {}
+    function _disableForwardUnsuccessfulExecution(error) {
+    }
 
     function _enableDialogSettings() {
       self.enableDialogSettings = {

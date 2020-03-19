@@ -23,14 +23,15 @@
     const NO = 'Não';
     const AUTHENTICATED_USER = 'Usuário autenticado.';
     const ERROR_LOGIN = 'Email/Senha incorretos.';
+    const USER_DESCONNECT = 'Usuário desconectado.';
 
     function isAuthenticated() {
       var _token = SurveyApiService.getAuthToken();
-      return _token ? true : false;
+      return _token && navigator.onLine ? true : false;
     }
 
     function authenticate(ev) {
-      if (!self.isAuthenticated()){
+      if (!self.isAuthenticated()) {
         return _login(ev);
       } else {
         return _logout(ev);
@@ -62,6 +63,7 @@
 
       return $mdDialog.show(confirm).then(function() {
         SurveyApiService.clearSession();
+        return USER_DESCONNECT;
       });
     }
 
@@ -75,16 +77,17 @@
       };
 
       function Auth(email, password) {
-        return {email, password}
+        return {email, password};
       }
 
       $scope.login = function () {
         var _auth = Auth($scope.emailUser, $scope.passUser);
         return $http.post(SurveyApiService.getLoginUrl(), _auth).then(function (response) {
           var user = response['data']['data'];
-          SurveyApiService.setLoggedUser(user);
-          SurveyApiService.setAuthToken(user.token);
-          $mdDialog.hide(AUTHENTICATED_USER);
+          SurveyApiService.setLoggedUser(user).then(function () {
+            $mdDialog.hide(AUTHENTICATED_USER);
+          });
+          // SurveyApiService.setAuthToken(user.token);
         }).catch(function (err) {
           $mdDialog.hide(ERROR_LOGIN);
         });

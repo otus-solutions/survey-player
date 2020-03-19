@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -34,16 +34,16 @@
     var delta = 5;
 
     angular.element(document).ready(function () {
-      angular.element(document.querySelector('.otus-player-display-container')).bind('wheel', function(){
+      angular.element(document.querySelector('.otus-player-display-container')).bind('wheel', function () {
         didScroll = true;
       });
 
-      angular.element(document.querySelector('.otus-player-display-container')).bind('touchmove', function(){
+      angular.element(document.querySelector('.otus-player-display-container')).bind('touchmove', function () {
         didScroll = true;
       });
     });
 
-    setInterval(function() {
+    setInterval(function () {
       if (didScroll) {
         hasScrolled();
         didScroll = false;
@@ -53,10 +53,10 @@
     function hasScrolled() {
       var st = angular.element(document.querySelector('.otus-player-display-container')).scrollTop();
 
-      if(Math.abs(lastScrollTop - st) <= delta)
+      if (Math.abs(lastScrollTop - st) <= delta)
         return;
 
-      if (st > lastScrollTop){
+      if (st > lastScrollTop) {
         $('otus-survey-header').removeClass('nav-down').addClass('nav-up');
       } else {
 

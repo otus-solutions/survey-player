@@ -1,14 +1,14 @@
-xdescribe('ReadValidationErrorStepService', function() {
+xdescribe('ReadValidationErrorStepService', function () {
 
   var Mock = {};
   var Injections = {};
   var service = {};
   var CAD1 = 'CAD1';
 
-  beforeEach(function() {
+  beforeEach(function () {
     module('otusjs.player.core');
 
-    inject(function(_$injector_) {
+    inject(function (_$injector_) {
       mockExecutionPipe();
       mockFlowData();
       mockItemData();
@@ -16,14 +16,14 @@ xdescribe('ReadValidationErrorStepService', function() {
     });
   });
 
-  describe('effect method', function() {
+  describe('effect method', function () {
 
-    beforeEach(function() {
+    beforeEach(function () {
       mockTrueValidationResponse();
       service.effect(Mock.pipe, Mock.flowData);
-    })
+    });
 
-    it('should build an object with all validator results', function() {
+    it('should build an object with all validator results', function () {
       var flowData = service.getEffectResult(Mock.pipe, Mock.flowData);
 
       expect(flowData.validationResult.mandatory).toBeDefined();
@@ -33,16 +33,16 @@ xdescribe('ReadValidationErrorStepService', function() {
 
   });
 
-  describe('getEffectResult method', function() {
+  describe('getEffectResult method', function () {
 
-    describe('when validation found problems', function() {
+    describe('when validation found problems', function () {
 
-      beforeEach(function() {
+      beforeEach(function () {
         mockFalseValidationResponse();
         service.effect(Mock.pipe, Mock.flowData);
-      })
+      });
 
-      it('should return the flag hasError equal to true', function() {
+      it('should return the flag hasError equal to true', function () {
         var flowData = service.getEffectResult(Mock.pipe, Mock.flowData);
 
         expect(flowData.validationResult.hasError).toBe(true);
@@ -50,14 +50,14 @@ xdescribe('ReadValidationErrorStepService', function() {
 
     });
 
-    describe('when validation not found problems', function() {
+    describe('when validation not found problems', function () {
 
-      beforeEach(function() {
+      beforeEach(function () {
         mockTrueValidationResponse();
         service.effect(Mock.pipe, Mock.flowData);
-      })
+      });
 
-      it('should return the flag hasError equal to false', function() {
+      it('should return the flag hasError equal to false', function () {
         var flowData = service.getEffectResult(Mock.pipe, Mock.flowData);
 
         expect(flowData.validationResult.hasError).toBe(false);

@@ -44,7 +44,8 @@ describe('autocomplete question view controller component', function () {
         value: 'Medicamentos',
         'objectType': 'AnswerFill',
         'type': 'AutocompleteQuestion',
-        clear: function () {}
+        clear: function () {
+        }
       }
     };
 
@@ -61,7 +62,7 @@ describe('autocomplete question view controller component', function () {
     };
 
     Mock.SearchQueryFactory = {
-      newStringSearch : function () {
+      newStringSearch: function () {
         var self = this;
         self.perform = perform;
 
@@ -76,7 +77,8 @@ describe('autocomplete question view controller component', function () {
 
   function mockBindings() {
     Mock.parentContainer = {
-      onUpdate: function () {}
+      onUpdate: function () {
+      }
     };
 
     var otusQuestion = {
@@ -84,7 +86,7 @@ describe('autocomplete question view controller component', function () {
     };
 
     var itemData = {
-      "dataSources" : [
+      "dataSources": [
         "medicamentos"
       ],
       "data": {
@@ -92,119 +94,119 @@ describe('autocomplete question view controller component', function () {
           "value": "Medicamentos"
         }
       },
-      "label" : {
-        "ptBR" : {
-          "extends" : "StudioObject",
-          "objectType" : "Label",
-          "oid" : "",
-          "plainText" : "ENTREVISTADOR",
-          "formattedText" : "<div style='text-align: justify;'><b>ENTREVISTADOR: </b></div>"
+      "label": {
+        "ptBR": {
+          "extends": "StudioObject",
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "ENTREVISTADOR",
+          "formattedText": "<div style='text-align: justify;'><b>ENTREVISTADOR: </b></div>"
         }
       },
-      "metadata" : {
-        "extents" : "StudioObject",
-        "objectType" : "MetadataGroup",
-        "options" : [
+      "metadata": {
+        "extents": "StudioObject",
+        "objectType": "MetadataGroup",
+        "options": [
           {
-            "extends" : "StudioObject",
-            "objectType" : "MetadataAnswer",
-            "dataType" : "Integer",
-            "value" : 1,
-            "extractionValue" : ".Q",
-            "label" : {
-              "ptBR" : {
-                "extends" : "StudioObject",
-                "objectType" : "Label",
-                "oid" : "",
-                "plainText" : "Não quer responder",
-                "formattedText" : "<div>Não quer responder</div>"
+            "extends": "StudioObject",
+            "objectType": "MetadataAnswer",
+            "dataType": "Integer",
+            "value": 1,
+            "extractionValue": ".Q",
+            "label": {
+              "ptBR": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "Não quer responder",
+                "formattedText": "<div>Não quer responder</div>"
               }
             }
           },
           {
-            "extends" : "StudioObject",
-            "objectType" : "MetadataAnswer",
-            "dataType" : "Integer",
-            "value" : 2,
-            "extractionValue" : ".S",
-            "label" : {
-              "ptBR" : {
-                "extends" : "StudioObject",
-                "objectType" : "Label",
-                "oid" : "",
-                "plainText" : "Não sabe",
-                "formattedText" : "Não sabe"
+            "extends": "StudioObject",
+            "objectType": "MetadataAnswer",
+            "dataType": "Integer",
+            "value": 2,
+            "extractionValue": ".S",
+            "label": {
+              "ptBR": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "Não sabe",
+                "formattedText": "Não sabe"
               },
-              "enUS" : {
-                "extends" : "StudioObject",
-                "objectType" : "Label",
-                "oid" : "",
-                "plainText" : "",
-                "formattedText" : ""
+              "enUS": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "",
+                "formattedText": ""
               },
-              "esES" : {
-                "extends" : "StudioObject",
-                "objectType" : "Label",
-                "oid" : "",
-                "plainText" : "",
-                "formattedText" : ""
+              "esES": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "",
+                "formattedText": ""
               }
             }
           },
           {
-            "extends" : "StudioObject",
-            "objectType" : "MetadataAnswer",
-            "dataType" : "Integer",
-            "value" : 3,
-            "extractionValue" : ".A",
-            "label" : {
-              "ptBR" : {
-                "extends" : "StudioObject",
-                "objectType" : "Label",
-                "oid" : "",
-                "plainText" : "Não se aplica",
-                "formattedText" : "Não se aplica"
+            "extends": "StudioObject",
+            "objectType": "MetadataAnswer",
+            "dataType": "Integer",
+            "value": 3,
+            "extractionValue": ".A",
+            "label": {
+              "ptBR": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "Não se aplica",
+                "formattedText": "Não se aplica"
               }
             }
           },
           {
-            "extends" : "StudioObject",
-            "objectType" : "MetadataAnswer",
-            "dataType" : "Integer",
-            "value" : 4,
-            "extractionValue" : ".F",
-            "label" : {
-              "ptBR" : {
-                "extends" : "StudioObject",
-                "objectType" : "Label",
-                "oid" : "",
-                "plainText" : "Não há dados",
-                "formattedText" : "Não há dados"
+            "extends": "StudioObject",
+            "objectType": "MetadataAnswer",
+            "dataType": "Integer",
+            "value": 4,
+            "extractionValue": ".F",
+            "label": {
+              "ptBR": {
+                "extends": "StudioObject",
+                "objectType": "Label",
+                "oid": "",
+                "plainText": "Não há dados",
+                "formattedText": "Não há dados"
               }
             }
           }
         ]
       },
-      "fillingRules" : {
-        "extends" : "StudioObject",
-        "objectType" : "FillingRules",
-        "options" : {
-          "mandatory" : {
-            "data" : {
-              "reference" : true,
-              "canBeIgnored" : false
+      "fillingRules": {
+        "extends": "StudioObject",
+        "objectType": "FillingRules",
+        "options": {
+          "mandatory": {
+            "data": {
+              "reference": true,
+              "canBeIgnored": false
             },
-            "extends" : "StudioObject",
-            "objectType" : "Rule",
-            "validatorType" : "mandatory"
+            "extends": "StudioObject",
+            "objectType": "Rule",
+            "validatorType": "mandatory"
           }
         }
       },
-      "extents" : "SurveyItem",
-      "objectType" : "AutocompleteQuestion",
-      "templateID" : "TST2",
-      "customID" : "TST2_1",
-      "dataType" : "String"
+      "extents": "SurveyItem",
+      "objectType": "AutocompleteQuestion",
+      "templateID": "TST2",
+      "customID": "TST2_1",
+      "dataType": "String"
     };
 
     controller.otusQuestion = otusQuestion;

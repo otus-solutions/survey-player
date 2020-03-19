@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -18,7 +18,8 @@
   function TextItemController($sce) {
     var self = this;
 
-    self.$onInit = function() {};
+    self.$onInit = function () {
+    };
     self.trustedHtml = trustedHtml;
 
     function trustedHtml(html) {

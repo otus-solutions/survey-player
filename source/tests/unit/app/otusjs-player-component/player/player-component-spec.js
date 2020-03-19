@@ -1,4 +1,4 @@
-xdescribe('otusPlayer component', function() {
+xdescribe('otusPlayer component', function () {
 
   var UNIT_NAME = 'otusPlayer';
   var Mock = {};
@@ -6,11 +6,11 @@ xdescribe('otusPlayer component', function() {
   var Bindings = {};
   var component = {};
 
-  beforeEach(function() {
+  beforeEach(function () {
     module('otusjs.player.core');
     module('otusjs.player.component');
 
-    inject(function(_$componentController_, _$injector_) {
+    inject(function (_$componentController_, _$injector_) {
       /* Injectable mocks */
       mockPlayerService(_$injector_);
 
@@ -18,20 +18,20 @@ xdescribe('otusPlayer component', function() {
     });
   });
 
-  describe('goAhead method', function() {
+  describe('goAhead method', function () {
 
-    beforeEach(function() {
+    beforeEach(function () {
       component.$onInit();
       component.playerDisplay.loadItem = jasmine.createSpy('loadItem');
     });
 
-    it('should fire goAhead action from PlayerService', function() {
+    it('should fire goAhead action from PlayerService', function () {
       component.goAhead();
 
       expect(Mock.PlayerService.goAhead).toHaveBeenCalledWith();
     });
 
-    it('should request to playerDisplay to load item', function() {
+    it('should request to playerDisplay to load item', function () {
       component.goAhead();
 
       expect(component.playerDisplay.loadItem).toHaveBeenCalledWith();
@@ -39,20 +39,20 @@ xdescribe('otusPlayer component', function() {
 
   });
 
-  describe('goBack method', function() {
+  describe('goBack method', function () {
 
-    beforeEach(function() {
+    beforeEach(function () {
       component.$onInit();
       component.playerDisplay.loadItem = jasmine.createSpy('loadItem');
     });
 
-    it('should fire goBack action from PlayerService', function() {
+    it('should fire goBack action from PlayerService', function () {
       component.goBack();
 
       expect(Mock.PlayerService.goBack).toHaveBeenCalledWith();
     });
 
-    it('should request to playerDisplay to load item', function() {
+    it('should request to playerDisplay to load item', function () {
       component.goBack();
 
       expect(component.playerDisplay.loadItem).toHaveBeenCalledWith();
@@ -60,20 +60,20 @@ xdescribe('otusPlayer component', function() {
 
   });
 
-  describe('play method', function() {
+  describe('play method', function () {
 
-    beforeEach(function() {
+    beforeEach(function () {
       component.$onInit();
       component.playerDisplay.loadItem = jasmine.createSpy('loadItem');
     });
 
-    it('should fire play action from PlayerService', function() {
+    it('should fire play action from PlayerService', function () {
       component.play();
 
       expect(Mock.PlayerService.play).toHaveBeenCalledWith();
     });
 
-    it('should request to playerDisplay to load item', function() {
+    it('should request to playerDisplay to load item', function () {
       component.play();
 
       expect(component.playerDisplay.loadItem).toHaveBeenCalledWith();
@@ -81,29 +81,29 @@ xdescribe('otusPlayer component', function() {
 
   });
 
-  describe('onInit method', function() {
+  describe('onInit method', function () {
 
-    beforeEach(function() {
+    beforeEach(function () {
       component.$onInit();
     });
 
-    it('should set showCover status to true', function() {
+    it('should set showCover status to true', function () {
       expect(component.showCover).toBe(true);
     });
 
-    it('should set showActivity status to false', function() {
+    it('should set showActivity status to false', function () {
       expect(component.showActivity).toBe(false);
     });
 
-    it('should set the attribute playerCommander with an empty literal object', function() {
+    it('should set the attribute playerCommander with an empty literal object', function () {
       expect(component.playerCommander).toBeDefined();
     });
 
-    it('should set the attribute playerDisplay with an empty literal object', function() {
+    it('should set the attribute playerDisplay with an empty literal object', function () {
       expect(component.playerDisplay).toBeDefined();
     });
 
-    it('should setup PlayerService', function() {
+    it('should setup PlayerService', function () {
       expect(Mock.PlayerService.setup).toHaveBeenCalledWith();
     });
 

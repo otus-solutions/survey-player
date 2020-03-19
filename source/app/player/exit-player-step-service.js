@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -7,11 +7,10 @@
 
   Service.$inject = [
     'otusjs.model.activity.ActivityFacadeService',
-    'SurveyApiService',
-    'IndexedDbStorageService'
+    'SurveyApiService'
   ];
 
-  function Service(ActivityFacadeService, SurveyApiService, IndexedDbStorageService) {
+  function Service(ActivityFacadeService, SurveyApiService) {
     var self = this;
     var _currentItem;
 
@@ -21,7 +20,8 @@
     self.afterEffect = afterEffect;
     self.getEffectResult = getEffectResult;
 
-    function beforeEffect(pipe, flowData) { }
+    function beforeEffect(pipe, flowData) {
+    }
 
     function effect(pipe, flowData) {
       location.href = SurveyApiService.getCallbackAddress();

@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -104,7 +104,7 @@
     }
 
     function _canBeIgnored(error) {
-      return function(validator) {
+      return function (validator) {
         return self.itemData.fillingRules.options[validator].data.canBeIgnored || !error[validator];
       };
     }

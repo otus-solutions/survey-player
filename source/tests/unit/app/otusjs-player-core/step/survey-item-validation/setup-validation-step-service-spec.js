@@ -1,14 +1,14 @@
-xdescribe('SetupValidationStepService', function() {
+xdescribe('SetupValidationStepService', function () {
 
   var Mock = {};
   var Injections = {};
   var service = {};
   var CAD1 = 'CAD1';
 
-  beforeEach(function() {
+  beforeEach(function () {
     module('otusjs.player.core');
 
-    inject(function(_$injector_) {
+    inject(function (_$injector_) {
       mockExecutionPipe();
       mockFlowData();
       mockItemData();
@@ -19,29 +19,29 @@ xdescribe('SetupValidationStepService', function() {
     });
   });
 
-  describe('effect method', function() {
+  describe('effect method', function () {
 
-    beforeEach(function() {
+    beforeEach(function () {
       spyOn(Mock.ElementRegisterFactory, 'create').and.returnValue(Mock.elementRegister);
       spyOn(Mock.ValidationService, 'registerElement');
       spyOn(Mock.elementRegister, 'addValidator');
       service.beforeEffect(Mock.pipe, Mock.flowData);
       service.effect(Mock.pipe, Mock.flowData);
-    })
+    });
 
-    it('should retrieve the current item', function() {
+    it('should retrieve the current item', function () {
       expect(Mock.NavigationService.getCurrentItem).toHaveBeenCalledWith();
     });
 
-    it('should create an ElementRegister instance', function() {
-      expect(Mock.ElementRegisterFactory.create).toHaveBeenCalledWith(Mock.itemData.customID,   Mock.flowData.answerToEvaluate);
+    it('should create an ElementRegister instance', function () {
+      expect(Mock.ElementRegisterFactory.create).toHaveBeenCalledWith(Mock.itemData.customID, Mock.flowData.answerToEvaluate);
     });
 
-    it('should add a validator in ElementRegister instance for each filling rule option', function() {
+    it('should add a validator in ElementRegister instance for each filling rule option', function () {
       expect(Mock.elementRegister.addValidator).toHaveBeenCalled();
     });
 
-    it('should register the ElementRegister instance in ValidationService', function() {
+    it('should register the ElementRegister instance in ValidationService', function () {
       expect(Mock.ValidationService.registerElement).toHaveBeenCalledWith(Mock.elementRegister);
     });
 
@@ -149,8 +149,12 @@ xdescribe('SetupValidationStepService', function() {
     Mock.NavigationService = $injector.get('otusjs.player.data.navigation.NavigationService');
 
     var currentItem = {};
-    currentItem.getItem = function() { return Mock.itemData; };
-    currentItem.shouldIgnoreResponseEvaluation = function() { return false; };
+    currentItem.getItem = function () {
+      return Mock.itemData;
+    };
+    currentItem.shouldIgnoreResponseEvaluation = function () {
+      return false;
+    };
     spyOn(Mock.NavigationService, 'getCurrentItem').and.returnValue(currentItem);
 
     Injections.NavigationService = Mock.NavigationService;
@@ -163,7 +167,7 @@ xdescribe('SetupValidationStepService', function() {
 
   function mockElementRegisterFactory($injector) {
     Mock.ElementRegisterFactory = $injector.get('ElementRegisterFactory');
-    Mock.elementRegister = Mock.ElementRegisterFactory.create(Mock.itemData, { data: {} });
+    Mock.elementRegister = Mock.ElementRegisterFactory.create(Mock.itemData, {data: {}});
     Injections.ElementRegisterFactory = Mock.ElementRegisterFactory;
   }
 });

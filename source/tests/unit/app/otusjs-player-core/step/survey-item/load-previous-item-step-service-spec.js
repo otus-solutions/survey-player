@@ -1,15 +1,16 @@
-describe('LoadPreviousItemStepService Service Test unit', function() {
+describe('LoadPreviousItemStepService Service Test unit', function () {
 
   var Mock = {};
   var Injections = {};
   var service;
   var navigationData = {};
 
-  beforeEach(function() {
+  beforeEach(function () {
     module('otusjs.player.core');
     angular.mock.module('otusjs.player.standalone');
+    spyOn(window, 'alasql');
 
-    inject(function($injector) {
+    inject(function ($injector) {
       /* Test data*/
       mockExecutionPipe();
       mockFlowData();
@@ -25,17 +26,17 @@ describe('LoadPreviousItemStepService Service Test unit', function() {
     spyOn(Injections.CurrentItemService, 'setup');
   });
 
-    it('LoadPreviousItemStep should retrieve navigation data from NavigationService', function() {
-      service.effect(Mock.pipe, Mock.flowData);
+  it('LoadPreviousItemStep should retrieve navigation data from NavigationService', function () {
+    service.effect(Mock.pipe, Mock.flowData);
 
-      expect(Injections.NavigationService.loadPreviousItem).toHaveBeenCalledWith();
-    });
+    expect(Injections.NavigationService.loadPreviousItem).toHaveBeenCalledWith();
+  });
 
-    it('LoadPreviousItemStep should use the navigation data to setup the CurrentItemService', function() {
-      service.effect(Mock.pipe, Mock.flowData);
+  it('LoadPreviousItemStep should use the navigation data to setup the CurrentItemService', function () {
+    service.effect(Mock.pipe, Mock.flowData);
 
-      expect(Injections.CurrentItemService.setup).toHaveBeenCalledWith(navigationData);
-    });
+    expect(Injections.CurrentItemService.setup).toHaveBeenCalledWith(navigationData);
+  });
 
   function mockExecutionPipe() {
     Mock.pipe = {};

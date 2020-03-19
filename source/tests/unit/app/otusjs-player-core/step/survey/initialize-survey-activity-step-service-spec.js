@@ -1,14 +1,15 @@
-describe('InitializeSurveyActivityStepService', function() {
+describe('InitializeSurveyActivityStepService', function () {
 
   var Mock = {};
   var Injections = {};
   var service;
 
-  beforeEach(function() {
+  beforeEach(function () {
     module('otusjs.player.core');
     angular.mock.module('otusjs.player.standalone');
+    spyOn(window, 'alasql');
 
-    inject(function(_$injector_) {
+    inject(function (_$injector_) {
       /* Test data */
       mockExecutionPipe();
       mockFlowData();
@@ -20,9 +21,9 @@ describe('InitializeSurveyActivityStepService', function() {
     });
   });
 
-  describe('effect method', function() {
+  describe('effect method', function () {
 
-    it('should call ActivityFacadeService.applyAnswer', function() {
+    it('should call ActivityFacadeService.applyAnswer', function () {
       spyOn(Mock.ActivityFacadeService, 'initialize');
 
       service.effect(Mock.pipe, Mock.flowData);

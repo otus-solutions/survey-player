@@ -55,7 +55,7 @@
     }
 
     function loadItem(itemsData) {
-      if (_shouldLoadItem(itemsData[itemsData.length -1])) {
+      if (_shouldLoadItem(itemsData[itemsData.length - 1])) {
         _saveQuestion();
         _destroyCurrentItems();
         _removeQuestions(itemsData);
@@ -145,7 +145,7 @@
     }
 
     function _shouldLoadItem(itemData) {
-      return !self.currentItems.length  || (self.currentItems.length && $scope.itemData.templateID !== itemData.templateID);
+      return !self.currentItems.length || (self.currentItems.length && $scope.itemData.templateID !== itemData.templateID);
     }
 
     function _onProcessingPlayer() {

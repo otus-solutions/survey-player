@@ -36,11 +36,11 @@
 
     function _printKeyMsg(key, msg) {
       var fullMsg = LOCKED_MESSAGE + self.key;
-      if(key || msg) fullMsg += ' - ' + msg + key;
+      if (key || msg) fullMsg += ' - ' + msg + key;
     }
 
     function startingLockedByKey(key) {
-      if(!self.key || self.key === key){
+      if (!self.key || self.key === key) {
         self.key = key;
         start();
       } else {
@@ -49,7 +49,7 @@
     }
 
     function finishUnlockedByKey(key) {
-      if(self.key === key){
+      if (self.key === key) {
         self.key = '';
         finish();
       } else {
@@ -58,13 +58,13 @@
     }
 
     function start() {
-      if (!self.loading_screen){
+      if (!self.loading_screen) {
         _constructor();
       }
     }
 
     function finish() {
-      if(!self.key){
+      if (!self.key) {
         if (self.loading_screen) {
           self.loading_screen.finish();
           self.loading_screen = null;

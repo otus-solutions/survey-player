@@ -28,6 +28,7 @@ otus-participants-list {
   .dynamic-table-container-md-content {
     max-height: 90%;
   }
+
   .dynamic-table-container {
     min-width: 850px;
 
@@ -64,9 +65,10 @@ otus-dashboard {
 }
 
 otus-report-dashboard {
-  otus-panel{
+  otus-panel {
     .report-list {
       min-width: 250px;
+
       .report-item {
         min-width: 250px;
         background-color: #ffffff
@@ -374,8 +376,9 @@ otus-lot-info-manager-display {
 }
 
 otus-view-sending-exam {
-  .dynamic-table-container-md-content{
+  .dynamic-table-container-md-content {
     min-height: 400px;
+
     .dynamic-table-container {
       min-width: 850px;
       max-height: 420px;

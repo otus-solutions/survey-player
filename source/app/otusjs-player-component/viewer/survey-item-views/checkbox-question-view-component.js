@@ -13,6 +13,7 @@
     });
 
 
-  function Controller() {}
+  function Controller() {
+  }
 
 }());

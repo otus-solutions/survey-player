@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -22,19 +22,19 @@
   function OtusCommentController(CurrentItemService) {
     var self = this;
 
-    self.$onInit = function() {
-        self.comment = CurrentItemService.getFilling(self.itemData.templateID).comment;
-        self.otusQuestion.comment = self;
+    self.$onInit = function () {
+      self.comment = CurrentItemService.getFilling(self.itemData.templateID).comment;
+      self.otusQuestion.comment = self;
     };
 
-    self.update = function() {
+    self.update = function () {
       self.onUpdate({
         valueType: 'comment',
         value: self.comment
       });
     };
 
-    self.clear = function() {
+    self.clear = function () {
       CurrentItemService.getFilling(self.itemData.templateID).comment = "";
       delete self.comment;
     };

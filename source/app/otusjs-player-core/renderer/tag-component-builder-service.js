@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -19,10 +19,10 @@
     }
 
     function _replace(tagName, onlyView) {
-      if(onlyView){
+      if (onlyView) {
 
         return '<otus-' + tagName + '-view item-data="$ctrl.itemData" />';
-      }else {
+      } else {
 
         return '<otus-' + tagName + ' item-data="$ctrl.itemData" on-update="$ctrl.update(valueType, value)" />';
       }
