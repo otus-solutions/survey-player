@@ -23,25 +23,24 @@
     const NO = 'Não';
     const AUTHENTICATED_USER = 'Usuário autenticado.';
     const ERROR_LOGIN = 'Email/Senha incorretos.';
-    const USER_DESCONNECT = 'Usuário desconectado.';
 
     function isAuthenticated() {
       var _token = SurveyApiService.getAuthToken();
-      return _token && navigator.onLine ? true : false;
+      return _token ? true : false;
     }
 
     function authenticate(ev) {
-      if (!self.isAuthenticated()) {
+      if (!self.isAuthenticated()){
         return _login(ev);
       } else {
-        return _logout(ev);
+        _logout(ev);
       }
     }
 
     function _login(ev) {
       return $mdDialog.show({
         controller: DialogController,
-        templateUrl: 'app/utils/login-template.html',
+        template:'<md-dialog aria-label="Autenticação de Usuário"><form><md-toolbar><div class="md-toolbar-tools"><h2>Autenticação de Usuário</h2><span flex></span><md-button class="md-icon-button" ng-click="cancel()"><md-icon>close</md-icon></md-button></div></md-toolbar><md-dialog-content><div class="md-dialog-content" layout="column"><h2>Informe seu email e senha.</h2><md-input-container><label>Email</label> <input type="email" id="email" ng-model="emailUser" required ng-keyup="onEnter($event)"></md-input-container><md-input-container><label>Senha</label> <input type="password" id="password" ng-model="passUser" required ng-keyup="onEnter($event)"></md-input-container></div></md-dialog-content><md-dialog-actions layout="row"><span flex></span><md-button ng-click="cancel()">Cancelar</md-button><md-button class="md-accent md-raised" ng-click="login()" ng-disabled="!isValid()">Entrar</md-button></md-dialog-actions></form></md-dialog>',
         parent: angular.element(document.body),
         targetEvent: ev,
         clickOutsideToClose: true
@@ -61,9 +60,8 @@
         .ok(YES)
         .cancel(NO);
 
-      return $mdDialog.show(confirm).then(function() {
+      $mdDialog.show(confirm).then(function() {
         SurveyApiService.clearSession();
-        return USER_DESCONNECT;
       });
     }
 
@@ -77,17 +75,16 @@
       };
 
       function Auth(email, password) {
-        return {email, password};
+        return {email, password}
       }
 
       $scope.login = function () {
         var _auth = Auth($scope.emailUser, $scope.passUser);
         return $http.post(SurveyApiService.getLoginUrl(), _auth).then(function (response) {
           var user = response['data']['data'];
-          SurveyApiService.setLoggedUser(user).then(function () {
-            $mdDialog.hide(AUTHENTICATED_USER);
-          });
-          // SurveyApiService.setAuthToken(user.token);
+          SurveyApiService.setLoggedUser(user);
+          SurveyApiService.setAuthToken(user.token);
+          $mdDialog.hide(AUTHENTICATED_USER);
         }).catch(function (err) {
           $mdDialog.hide(ERROR_LOGIN);
         });

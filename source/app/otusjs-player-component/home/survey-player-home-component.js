@@ -38,7 +38,7 @@
         response ? _showMessage(response) : null;
       }, function (err) {
         _setUser();
-        _showMessage(err);
+        err ? _showMessage(err) : null;
       });
     }
 

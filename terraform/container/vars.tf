@@ -1,31 +1,31 @@
 ###############################################
 ###               Variables                 ###
 ###############################################
-variable "survey-player-port"{
+variable "survey-player-port" {
   default = 51001
 }
 
-variable "survey-player-activity-url"{
+variable "survey-player-activity-url" {
   default = "http://localhost:51002/otus-rest/v01/activities"
 }
 
-variable "survey-player-staticVariable-url"{
+variable "survey-player-staticVariable-url" {
   default = "http://localhost:51002/otus-rest/v01/static-variable"
 }
 
-variable "survey-player-datasource-url"{
+variable "survey-player-datasource-url" {
   default = "http://localhost:51002/otus-rest/v01/configuration/datasources"
 }
 
-variable "survey-player-fileUpload-url"{
+variable "survey-player-fileUpload-url" {
   default = "http://localhost:51002/otus-rest/v01/upload"
 }
 
-variable "survey-player-login-url"{
+variable "survey-player-login-url" {
   default = "http://localhost:51002/otus-rest/v01/authentication"
 }
 
-variable "survey-player-version"{
+variable "survey-player-version" {
   default = "survey-player:latest"
 }
 
