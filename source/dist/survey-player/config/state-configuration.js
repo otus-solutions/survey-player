@@ -22,7 +22,12 @@
       template: '<h1 style="flex-direction: row; text-align: center; flex: 100; margin: auto">404 - Data Not Found</h1>'
     });
 
-    $urlRouterProvider.otherwise('/error');
+    $stateProvider.state('/home', {
+      url: '/home',
+      template: '<survey-player-home flex></survey-player-home>'
+    });
+
+    $urlRouterProvider.otherwise('/home');
   }
 
 
