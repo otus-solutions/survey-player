@@ -17,9 +17,10 @@
           <label>Email</label>
           <input type="email" id="email" ng-model="emailUser" required ng-keyup="onEnter($event)"/>
         </md-input-container>
-        <md-input-container>
+        <md-input-container ng-init="show = false">
           <label>Senha</label>
-          <input type="password" id="password" ng-model="passUser" required ng-keyup="onEnter($event)"/>
+          <input type="{{show ? 'text' : 'password'}}" id="password" ng-model="passUser" required ng-keyup="onEnter($event)"/>
+          <md-icon ng-click="show = !show" style="cursor: pointer">{{ show ? 'visibility' : 'visibility_off'}}</md-icon>
         </md-input-container>
       </div>
     </md-dialog-content>

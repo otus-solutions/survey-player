@@ -33,7 +33,7 @@
       if (!self.isAuthenticated()){
         return _login(ev);
       } else {
-        _logout(ev);
+        return _logout(ev);
       }
     }
 
@@ -60,7 +60,7 @@
         .ok(YES)
         .cancel(NO);
 
-      $mdDialog.show(confirm).then(function() {
+      return $mdDialog.show(confirm).then(function() {
         SurveyApiService.clearSession();
       });
     }

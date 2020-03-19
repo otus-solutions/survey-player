@@ -31,7 +31,7 @@
     function authenticate(ev) {
       $mdSidenav('userMenu').close();
       LoginService.authenticate(ev).then(function (response) {
-        _showMessage(response)
+        response ? _showMessage(response) : null;
       }, function (err) {
         _showMessage(err)
       })
