@@ -38,6 +38,7 @@
     const CALLBACK_ADDRESS = 'Callback-Address';
     const LOGGED_USER = '_userDB';
     const HASHTAH = "HASHTAG";
+    const TOKEN = true;
     init();
 
     var _loginUrl;
@@ -104,7 +105,7 @@
     }
 
     function getAuthToken() {
-      return _token ? _token : getLoggedUser() ? getLoggedUser().token : null;
+      return _token ? _token : getLoggedUser() ? getLoggedUser(TOKEN).token : null;
     }
 
     function setAuthToken(token) {
@@ -138,8 +139,14 @@
 
     }
 
-    function getLoggedUser() {
-      return _user ? _user : JSON.parse(sessionStorage.getItem(LOGGED_USER));
+    function getLoggedUser(propName) {
+      var loggedUser = _user ? _user : JSON.parse(sessionStorage.getItem(LOGGED_USER));
+      if (loggedUser.hasOwnProperty('token') && !propName) {
+        var _loggedUser = angular.copy(loggedUser);
+        delete _loggedUser.token;
+        return _loggedUser;
+      }
+      return loggedUser;
     }
 
     function setCallbackAddress(url) {
@@ -161,6 +168,7 @@
     function clearSession() {
       _user = null;
       _token = null;
+      _dropDb();
       sessionStorage.removeItem(CURRENT_ACTIVITY);
       sessionStorage.removeItem(AUTH_TOKEN);
       sessionStorage.removeItem(CALLBACK_ADDRESS);

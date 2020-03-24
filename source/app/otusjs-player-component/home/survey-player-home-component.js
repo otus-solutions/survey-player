@@ -13,22 +13,59 @@
     'LoginService',
     'SurveyApiService',
     '$mdSidenav',
-    '$mdToast'
+    '$mdToast',
+    'SurveyClientService'
+
   ];
 
-  function Controller($scope, LoginService, SurveyApiService, $mdSidenav, $mdToast) {
+  function Controller($scope, LoginService, SurveyApiService, $mdSidenav, $mdToast, SurveyClientService) {
     var self = this;
 
     self.auth = auth;
     self.authenticate = authenticate;
     self.toggleMenu = toggleMenu;
+    self.isUpdate = isUpdate;
+    self.allUpdated = true;
+    self.commands = [];
+
 
     self.$onInit = function () {
+      update();
       _setUser();
     };
 
     function auth() {
       return LoginService.isAuthenticated();
+    }
+
+    function update() {
+      self.preActivities = [];
+      if (navigator.onLine) {
+        SurveyClientService.getSurveys().then(function (response) {
+          self.preActivities = angular.copy(Array.prototype.concat.apply(response));
+          self.list = SurveyClientService.getListSurveys();
+        });
+      } else {
+        SurveyClientService.getOfflineSurveys().then(function (response) {
+          self.preActivities = angular.copy(Array.prototype.concat.apply(response));
+          self.list = SurveyClientService.getListSurveys();
+        });
+      }
+    }
+
+
+    function isUpdate(activity) {
+      let _data = {
+        acronym: activity.surveyForm.acronym,
+        version: activity.surveyForm.version
+      };
+      if ((!!self.list.find(item => {
+        return item.acronym == _data.acronym && item.version == _data.version;
+      }))) {
+        return {theme: 'md-accent', icon: 'done'};
+      }
+      self.allUpdated = false;
+      return {theme: 'md-warn', icon: 'sync_problem'};
     }
 
     function authenticate(ev) {

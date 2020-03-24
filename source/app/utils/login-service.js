@@ -87,7 +87,6 @@
           SurveyApiService.setLoggedUser(user).then(function () {
             $mdDialog.hide(AUTHENTICATED_USER);
           });
-          // SurveyApiService.setAuthToken(user.token);
         }).catch(function (err) {
           $mdDialog.hide(ERROR_LOGIN);
         });

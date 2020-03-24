@@ -15,7 +15,7 @@
     const DB_TABLE_ACTIVITIES = 'SurveyPlayerActivities';
     const DB_TABLE_DATASOURCES = 'Datasources';
     const OBJECT_TYPE = 'SurveyForm';
-    const INIT_QUERY = "CREATE INDEXEDDB DATABASE IF NOT EXISTS surveyPlayer; ATTACH INDEXEDDB DATABASE surveyPlayer; USE surveyPlayer;";
+    const INIT_QUERY = "CREATE DATABASE IF NOT EXISTS surveyPlayer; ATTACH INDEXEDDB DATABASE surveyPlayer; USE surveyPlayer;";
     const TABLE_ACTIVITY = "CREATE TABLE IF NOT EXISTS ".concat(DB_TABLE_ACTIVITIES).concat("; ");
     const TABLE_DATASOURCE = "CREATE TABLE IF NOT EXISTS ".concat(DB_TABLE_DATASOURCES).concat("; ");
     const CREATE_TABLES = TABLE_ACTIVITY.concat(TABLE_DATASOURCE);
