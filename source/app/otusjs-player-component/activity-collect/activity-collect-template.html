@@ -1,11 +1,11 @@
 <md-content layout="column" layout-wrap layout-fill="" flex layout-padding="" ng-show="!$ctrl.selectedCollection && !$ctrl.fillCollection" ng-init="search">
   <div layout="row" layout-xs="column" flex layout-align="start center" layout-align-xs="center start" layout-padding="">
     <div layout="row" layout-align="start center">
-      <md-button class="md-icon-button md-mini md-raised md-primary" ng-click="search = true"></md-button>
+      <md-button class="md-icon-button md-mini md-raised md-primary" aria-label="Iniciadas" ng-click="search = true"></md-button>
       <span flex>Coletas iniciadas</span>
     </div>
     <div layout="row" layout-align="start center">
-      <md-button class="md-icon-button md-mini md-raised md-accent" ng-click="search = false"></md-button>
+      <md-button class="md-icon-button md-mini md-raised md-accent" aria-label="Não iniciadas" ng-click="search = false"></md-button>
       <span flex>Coletas não iniciadas</span>
     </div>
     <div layout="row" layout-align="start center" ng-show="search != undefined">

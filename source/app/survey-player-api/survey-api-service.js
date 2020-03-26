@@ -83,12 +83,13 @@
         alasql(TABLE_USER, [], function () {
           alasql.promise('SELECT * FROM User').then(function (response) {
             if ($rootScope.online && getLoggedUser() == null) {
-              _dropDb();
               $rootScope.$broadcast("login", {any: {}});
             } else {
-              _user = angular.copy(response[0]);
-              _token = angular.copy(response[0].token);
-              delete _user.token;
+              if (response.length){
+                _user = angular.copy(response[0]);
+                _token = angular.copy(response[0].token);
+                delete _user.token;
+              }
               $rootScope.$broadcast("logged", {any: {}});
             }
 
@@ -98,15 +99,15 @@
     }
 
     function setSelectedCollection(id) {
-      if (id){
-        sessionStorage.setItem(COLLECTION, id)
+      if (id) {
+        sessionStorage.setItem(COLLECTION, id);
       } else {
-        sessionStorage.removeItem(COLLECTION)
+        sessionStorage.removeItem(COLLECTION);
       }
     }
 
     function getSelectedCollection() {
-      return sessionStorage.getItem(COLLECTION)
+      return sessionStorage.getItem(COLLECTION);
     }
 
     function getLoginUrl() {
@@ -160,24 +161,23 @@
       sessionStorage.setItem(LOGGED_USER, JSON.stringify({token: token}));
     }
 
-    function _dropDb() {
-      alasql("DROP INDEXEDDB DATABASE userDB");
+    function _removeUser() {
+      alasql("DELETE FROM User");
     }
 
     function setLoggedUser(user) {
       var deferred = $q.defer();
-      _dropDb();
       alasql(INIT_QUERY, [], function () {
         alasql(TABLE_USER, [], function (res) {
-          if (res === 1) {
-            var query = "SELECT * INTO User ".concat(' FROM ?');
-            _user = angular.copy(user);
-            sessionStorage.setItem(LOGGED_USER, JSON.stringify(user));
-            delete _user.token;
-            _token = angular.copy(user.token);
-            alasql(query, [Array.prototype.concat.apply(user)]);
-            deferred.resolve();
-          }
+          _removeUser();
+          var query = "SELECT * INTO User ".concat(' FROM ?');
+          _user = angular.copy(user);
+          sessionStorage.setItem(LOGGED_USER, JSON.stringify(user));
+          delete _user.token;
+          _token = angular.copy(user.token);
+          alasql('DELETE FROM User');
+          alasql(query, [Array.prototype.concat.apply(user)]);
+          deferred.resolve();
         });
       });
 
@@ -189,7 +189,7 @@
     function getLoggedUser(propName) {
       var loggedUser = _user ? _user : JSON.parse(sessionStorage.getItem(LOGGED_USER));
       if (loggedUser) {
-        if (loggedUser.hasOwnProperty('token') && !propName){
+        if (loggedUser.hasOwnProperty('token') && !propName) {
           var _loggedUser = angular.copy(loggedUser);
           delete _loggedUser.token;
           return _loggedUser;
@@ -222,7 +222,6 @@
     function clearSession() {
       _user = null;
       _token = null;
-      _dropDb();
       sessionStorage.removeItem(CURRENT_ACTIVITY);
       sessionStorage.removeItem(AUTH_TOKEN);
       sessionStorage.removeItem(CALLBACK_ADDRESS);

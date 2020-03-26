@@ -78,8 +78,10 @@
       $mdSidenav('userMenu').close();
       LoginService.authenticate(ev).then(function (response) {
         _setUser();
-        response ? _showMessage(response) : null;
-        update();
+        if (response) {
+          _showMessage(response)
+          update();
+        }
       }, function (err) {
         _setUser();
         err ? _showMessage(err) : null;

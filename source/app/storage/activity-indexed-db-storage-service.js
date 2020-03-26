@@ -56,7 +56,7 @@
           activity.acronym = activity.surveyTemplate.identity.acronym;
         });
         _updateList(activities);
-        _dropDb('surveyPlayer');
+        // _dropDb('surveyPlayer');
         _getDatasources().then(function (datasources) {
           _persist(activities, datasources);
 
