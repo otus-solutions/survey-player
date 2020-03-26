@@ -20,6 +20,7 @@
     self.getFileUploadUrl = getFileUploadUrl;
     self.getActivityUrl = getActivityUrl;
     self.getSurveyUrl = getSurveyUrl;
+    self.getCollectUrl = getCollectUrl;
     self.getDatasourceUrl = getDatasourceUrl;
     self.getLoginUrl = getLoginUrl;
     self.getStatiVariableUrl = getStatiVariableUrl;
@@ -32,13 +33,26 @@
     self.setCurrentActivity = setCurrentActivity;
     self.getCurrentActivity = getCurrentActivity;
     self.clearSession = clearSession;
+    self.setModeOffline = setModeOffline;
+    self.getModeOffline = getModeOffline;
+    self.setSelectedCollection = setSelectedCollection;
+    self.getSelectedCollection = getSelectedCollection;
 
     const CURRENT_ACTIVITY = 'Current_Activity';
     const AUTH_TOKEN = 'Auth_Token';
     const CALLBACK_ADDRESS = 'Callback-Address';
+    const LOGIN_ADDRESS = 'Login-Address';
+    const DATASOURCE_ADDRESS = 'Datasource-Address';
+    const ACTIVITY_ADDRESS = 'Activity-Address';
+    const SURVEY_ADDRESS = 'Survey-Address';
+    const STATIC_VARIABLE_ADDRESS = 'StaticVariable-Address';
+    const FILE_UPLOAD_ADDRESS = 'FileUpload-Address';
+    const COLLECT_ADDRESS = 'Collect-Address';
     const LOGGED_USER = '_userDB';
     const HASHTAH = "HASHTAG";
+    const COLLECTION = 'COLLECTION';
     const TOKEN = true;
+    const MODE = 'MODE';
     init();
 
     var _loginUrl;
@@ -47,17 +61,19 @@
     var _activityUrl;
     var _staticVariableUrl;
     var _fileUploadUrl;
+    var _collectUrl;
 
     var _token = null;
     var _user = null;
 
     function init() {
-      _loginUrl = $cookies.get('Login-Address');
-      _datasourceUrl = $cookies.get('Datasource-Address');
-      _activityUrl = $cookies.get('Activity-Address');
-      _surveyUrl = $cookies.get('Survey-Address');
-      _staticVariableUrl = $cookies.get('StaticVariable-Address');
-      _fileUploadUrl = $cookies.get('FileUpload-Address');
+      _loginUrl = $cookies.get(LOGIN_ADDRESS);
+      _datasourceUrl = $cookies.get(DATASOURCE_ADDRESS);
+      _activityUrl = $cookies.get(ACTIVITY_ADDRESS);
+      _surveyUrl = $cookies.get(SURVEY_ADDRESS);
+      _staticVariableUrl = $cookies.get(STATIC_VARIABLE_ADDRESS);
+      _fileUploadUrl = $cookies.get(FILE_UPLOAD_ADDRESS);
+      _collectUrl = $cookies.get(COLLECT_ADDRESS);
       _initDB();
     }
 
@@ -80,6 +96,18 @@
       });
     }
 
+    function setSelectedCollection(id) {
+      if (id){
+        sessionStorage.setItem(COLLECTION, id)
+      } else {
+        sessionStorage.removeItem(COLLECTION)
+      }
+    }
+
+    function getSelectedCollection() {
+      return sessionStorage.getItem(COLLECTION)
+    }
+
     function getLoginUrl() {
       return _loginUrl;
     }
@@ -96,8 +124,23 @@
       return _activityUrl;
     }
 
+    function setModeOffline() {
+      sessionStorage.setItem(MODE, 'true');
+    }
+
+    function getModeOffline() {
+      var _mode = angular.copy(JSON.parse(sessionStorage.getItem(MODE)));
+      // sessionStorage.removeItem(MODE); //TODO TIAGO
+      return _mode;
+    }
+
+
     function getSurveyUrl() {
       return _surveyUrl;
+    }
+
+    function getCollectUrl() {
+      return _collectUrl;
     }
 
     function getFileUploadUrl() {
@@ -141,10 +184,16 @@
 
     function getLoggedUser(propName) {
       var loggedUser = _user ? _user : JSON.parse(sessionStorage.getItem(LOGGED_USER));
-      if (loggedUser.hasOwnProperty('token') && !propName) {
-        var _loggedUser = angular.copy(loggedUser);
-        delete _loggedUser.token;
-        return _loggedUser;
+      if (loggedUser) {
+        if (loggedUser.hasOwnProperty('token') && !propName){
+          var _loggedUser = angular.copy(loggedUser);
+          delete _loggedUser.token;
+          return _loggedUser;
+        }
+      } else {
+        if (navigator.onLine) {
+          clearSession();
+        }
       }
       return loggedUser;
     }

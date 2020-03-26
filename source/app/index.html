@@ -15,6 +15,7 @@
   <link href="app/assets/otusjs-survey-item.css" rel="stylesheet"/>
   <link href="app/assets/otusjs-viewer.css" rel="stylesheet"/>
   <link rel="stylesheet" href="node_modules/trail-js/dist/style.css">
+  <link rel="stylesheet" href="node_modules/angular-material-badge/angular-material-badge.min.css" />
   <link href="node_modules/please-wait/build/please-wait.css" rel="stylesheet">
   <!-- endbuild -->
 
@@ -46,6 +47,7 @@
 <script src="node_modules/angular-animate/angular-animate.min.js"></script>
 <script src="node_modules/angular-messages/angular-messages.min.js"></script>
 <script src="node_modules/angular-resource/angular-resource.min.js"></script>
+<script src="node_modules/angular-material-badge/angular-material-badge.min.js"></script>
 <!-- ************************************* Lokijs ************************************* -->
 <script src="node_modules/lokijs/build/lokijs.min.js"></script>
 <script src="node_modules/lokijs/build/loki-indexed-adapter.min.js"></script>
@@ -73,6 +75,7 @@
 <!-- build:js scripts/otusjs-player-min.js -->
 <script src="app/app.js"></script>
 <script src="app/activity-rest-service.js"></script>
+<script src="app/activity-collection-rest-service.js"></script>
 <script src="app/activity-remote-storage-service.js"></script>
 <script src="app/activity-collection-service.js"></script>
 <script src="app/activity-repository-service.js"></script>
@@ -87,6 +90,7 @@
 <script src="app/storage/storage-module.js"></script>
 <script src="app/storage/activity-local-storage-service.js"></script>
 <script src="app/storage/activity-indexed-db-storage-service.js"></script>
+<script src="app/storage/collect-indexed-db-storage-service.js"></script>
 <!--SURVEY ITEM DATASOURCE-->
 <script src="app/data-source/datasource-module.js"></script>
 <script src="app/data-source/datasource-resource-factory.js"></script>
@@ -204,7 +208,7 @@
 <script src="app/otusjs-player-component/question-menu/question-menu-component.js"></script>
 <script src="app/otusjs-player-component/answer-view/answer-view-component.js"></script>
 <script src="app/otusjs-player-component/survey-list/survey-list-component.js"></script>
-<script src="app/otusjs-player-component/activity-collection/activity-collection-component.js"></script>
+<script src="app/otusjs-player-component/activity-collect/activity-collect-component.js"></script>
 
 <!-- /OTUSJS-PLAYER-CORE -->
 <!-- -------------------------------------------------------------------------------------- -->

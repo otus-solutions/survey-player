@@ -27,14 +27,21 @@
 
 
     function getSurveyTemplate() {
-      return ActivityRepositoryService.getById(SurveyApiService.getCurrentActivity()).then(function (response) {
-        if (Array.isArray(response)) {
-          if (response.length > 0) {
-            activityToPlay = angular.copy(response[0]);
-            return activityToPlay;
+      if (!SurveyApiService.getModeOffline()) { //TODO TIAGO MODIFICAR
+        return ActivityRepositoryService.getById(SurveyApiService.getCurrentActivity()).then(function (response) {
+          if (Array.isArray(response)) {
+            if (response.length > 0) {
+              activityToPlay = angular.copy(response[0]);
+              return activityToPlay;
+            }
           }
-        }
-      });
+        });
+      } else {
+        return ActivityRepositoryService.getByAcronymOffline(SurveyApiService.getSelectedCollection(), SurveyApiService.getCurrentActivity()).then(function (response) {
+          activityToPlay = angular.copy(response);
+          return activityToPlay;
+        });
+      }
     }
 
     function getListSurveys() {
@@ -60,6 +67,8 @@
         } else {
           return [];
         }
+      }).catch(function (err) {
+          return Promise.reject(err);
       });
     }
 

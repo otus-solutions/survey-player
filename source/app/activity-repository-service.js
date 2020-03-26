@@ -24,10 +24,17 @@
     self.getSurveys = getSurveys;
     self.getOfflineSurveys = getOfflineSurveys;
     self.getListSurveys = getListSurveys;
+    self.getByAcronymOffline = getByAcronymOffline;
 
 
     function getById(activityInfo) {
       return ActivityCollectionService.getById(activityInfo).then(_toEntity);
+    }
+
+    function getByAcronymOffline(id, acronym) {
+      return ActivityCollectionService.getByAcronymOffline(id, acronym).then(function (survey) {
+        return ActivityFactory.fromJsonObject(survey);
+      });
     }
 
     function getSurveys(user) {
@@ -35,6 +42,8 @@
         return surveys.map(function (survey) {
           return ActivityFactory.createOfflineActivity(SurveyFormFactory.fromJsonObject(survey), user);
         });
+      }).catch(function (err) {
+        return Promise.reject(err);
       });
     }
 

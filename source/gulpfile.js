@@ -88,6 +88,7 @@
     var staticvariableUrl = process.env.STATICVARIABLE_URL || "http://localhost:51002/otus-rest/v01/static-variable";
     var loginUrl = process.env.LOGIN_URL || "http://localhost:51002/otus-rest/v01/authentication";
     var surveyUrl = process.env.LOGIN_URL || "http://localhost:51002/otus-rest/v01/configuration/surveys";
+    var collectUrl = process.env.COLLECT_URL || "http://localhost:51002/otus-rest/v01/offline/activities/collection";
     browserSync.init({
       server: {
         open: 'external',
@@ -103,6 +104,7 @@
               'FileUpload-Address=' + fileuploadUrl + ';path=/',
               'Login-Address=' + loginUrl + ';path=/',
               'Survey-Address=' + surveyUrl + ';path=/',
+              'Collect-Address=' + collectUrl + ';path=/',
               'StaticVariable-Address=' + staticvariableUrl + ';path=/']);
             next();
           }

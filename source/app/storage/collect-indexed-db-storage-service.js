@@ -5,60 +5,96 @@
     .service('CollectIndexedDbService', Service);
 
   Service.$inject = [
-    '$q',
-    'SurveyItemRestService',
-    'SurveyApiService'
+    '$q'
   ];
 
-  function Service($q, SurveyItemRestService, SurveyApiService) {
+  function Service($q) {
     var self = this;
-    //
-    // const DB_TABLE_ACTIVITIES = 'SurveyPlayerActivities';
-    const DB_TABLE_COLLECTIONS = 'Collection';
+
     const OBJECT_TYPE = 'OfflineActivityCollection';
-    const INIT_QUERY = "CREATE DATABASE IF NOT EXISTS activityCollections; ATTACH INDEXEDDB DATABASE activityCollections; USE activityCollections;";
+    const DB_TABLE_COLLECTIONS = 'OfflineActivityCollection';
+    const INIT_QUERY = "CREATE INDEXEDDB DATABASE IF NOT EXISTS activityCollections; ATTACH INDEXEDDB DATABASE activityCollections; USE activityCollections;";
     const TABLE_COLLECTION = "CREATE TABLE IF NOT EXISTS ".concat(DB_TABLE_COLLECTIONS).concat("; ");
-    // const TABLE_DATASOURCE = "CREATE TABLE IF NOT EXISTS ".concat(DB_TABLE_DATASOURCES).concat("; ");
-    // const CREATE_TABLES = TABLE_ACTIVITY.concat(TABLE_DATASOURCE);
-    self.updateAll = updateAll;
-    self.insert = insert;
+
+    self.updateAllCollections = updateAllCollections;
+    self.insertCollection = insertCollection;
     self.getAllCollections = getAllCollections;
+    self.getCollection = getCollection;
+    self.updateCollection = updateCollection;
+    self.removeCollection = removeCollection;
     self.dropDb = dropDb;
 
     function dropDb() {
-      alasql('DROP INDEXEDDB DATABASE '.concat(DB_TABLE_COLLECTIONS));
+      alasql('DROP INDEXEDDB DATABASE activityCollections');
     }
 
-    function _persist(collections) {
+    function _persist(table_name, data) {
       alasql(INIT_QUERY, [], function () {
         alasql(TABLE_COLLECTION, [], function (res) {
-          if (res === 1) {
-            var query = "SELECT * INTO ".concat(DB_TABLE_COLLECTIONS).concat(' FROM ?');
-            alasql(query, [collections]);
-          }
+          var query = "SELECT * INTO ".concat(table_name).concat(' FROM ?');
+          alasql('DELETE FROM '.concat(table_name));
+          alasql(query, [data]);
+
         });
       });
     }
 
-    function updateAll(collections) {
-      if (Array.isArray(collections) && _isValid(collections)) {
-        dropDb();
-        _persist(collections);
+    function updateAllCollections(collections) {
+      if (Array.isArray(collections)) {
+        if (collections.length) {
+          if (_isValid(collections)) {
+            // dropDb();
+            _persist(DB_TABLE_COLLECTIONS, collections);
+          }
+        } else {
+          dropDb();
+        }
+
       }
     }
 
-    function insert(newCollection) {
+    function insertCollection(newCollection) {
       if (_isValid(newCollection)) {
-        var _activities = getAllCollections(newCollection.userId);
-        _activities = Array.prototype.concat.apply(_activities, newCollection);
-        updateAll(_activities);
+        alasql(INIT_QUERY, [], function () {
+          alasql(TABLE_COLLECTION, [], function (res) {
+            var query = "INSERT INTO ".concat(DB_TABLE_COLLECTIONS).concat(' SELECT * FROM ?');
+            alasql.promise(query, [Array.prototype.concat.apply(newCollection)]);
+          });
+        });
       }
+    }
+
+    function updateCollection(collection) {
+      if (_isValid(collection)) {
+        alasql(INIT_QUERY, [], function () {
+          alasql(TABLE_COLLECTION, [], function (res) {
+            var params = [];
+            var _properties = Object.getOwnPropertyNames(collection);
+            var SET_VALUES = "";
+            _properties.forEach(function (propName) {
+              SET_VALUES = SET_VALUES.concat(propName).concat(' = ?,');
+              params.push(collection[propName]);
+            });
+            SET_VALUES = SET_VALUES.substring(0, (SET_VALUES.length - 1));
+            var query = "UPDATE "+ DB_TABLE_COLLECTIONS +" SET ".concat(SET_VALUES).concat(' WHERE code = "'+collection.code+'"');
+            alasql.promise(query, params);
+          });
+        });
+      }
+    }
+
+    function removeCollection(code) {
+      alasql(INIT_QUERY, [], function () {
+        alasql(TABLE_COLLECTION, [], function (res) {
+          alasql('DELETE FROM '.concat(DB_TABLE_COLLECTIONS).concat(' WHERE code = ?'), [code]);
+        });
+      });
     }
 
     function getAllCollections(email) {
       var defer = $q.defer();
       alasql(INIT_QUERY, [], function () {
-        alasql.promise('SELECT * FROM '.concat(DB_TABLE_COLLECTIONS).concat(' WHERE userId = ').concat(email)).then(function (response) {
+        alasql.promise('SELECT * FROM '.concat(DB_TABLE_COLLECTIONS).concat(' WHERE userEmail = "'+email+'"')).then(function (response) {
           defer.resolve(response);
         }).catch(function (err) {
           defer.reject(err);
@@ -69,16 +105,19 @@
       return defer.promise;
     }
 
-    // function updateCollection(collection) {
-    //   alasql(INIT_QUERY, [], function () {
-    //     alasql(TABLE_COLLECTION, [], function (res) {
-    //       if (res === 1) {
-    //         var query = "SELECT * INTO ".concat(DB_TABLE_COLLECTIONS).concat(' FROM ? WHERE _id = ').concat(collection._id);
-    //         alasql(query, [collection]);
-    //       }
-    //     });
-    //   });
-    // }
+    function getCollection(code) {
+      var defer = $q.defer();
+      alasql(INIT_QUERY, [], function () {
+        alasql.promise('SELECT * FROM '.concat(DB_TABLE_COLLECTIONS).concat(' WHERE code = "'+code+'"')).then(function (response) {
+          defer.resolve(response);
+        }).catch(function (err) {
+          defer.reject(err);
+        });
+
+      });
+
+      return defer.promise;
+    }
 
     function _isValid(data) {
       var _collections = Array.prototype.concat.apply(data)

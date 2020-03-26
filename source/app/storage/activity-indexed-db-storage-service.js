@@ -15,7 +15,7 @@
     const DB_TABLE_ACTIVITIES = 'SurveyPlayerActivities';
     const DB_TABLE_DATASOURCES = 'Datasources';
     const OBJECT_TYPE = 'SurveyForm';
-    const INIT_QUERY = "CREATE DATABASE IF NOT EXISTS surveyPlayer; ATTACH INDEXEDDB DATABASE surveyPlayer; USE surveyPlayer;";
+    const INIT_QUERY = "CREATE INDEXEDDB DATABASE IF NOT EXISTS surveyPlayer; ATTACH INDEXEDDB DATABASE surveyPlayer; USE surveyPlayer;";
     const TABLE_ACTIVITY = "CREATE TABLE IF NOT EXISTS ".concat(DB_TABLE_ACTIVITIES).concat("; ");
     const TABLE_DATASOURCE = "CREATE TABLE IF NOT EXISTS ".concat(DB_TABLE_DATASOURCES).concat("; ");
     const CREATE_TABLES = TABLE_ACTIVITY.concat(TABLE_DATASOURCE);
@@ -52,6 +52,9 @@
 
     function update(activities) {
       if (Array.isArray(activities) && _isValid(activities)) {
+        activities.forEach(function (activity) {
+          activity.acronym = activity.surveyTemplate.identity.acronym;
+        });
         _updateList(activities);
         _dropDb('surveyPlayer');
         _getDatasources().then(function (datasources) {
@@ -88,7 +91,7 @@
     function getActivity(acronym) {
       var defer = $q.defer();
       alasql(INIT_QUERY, [], function () {
-        alasql.promise('SELECT * FROM '.concat(DB_TABLE_ACTIVITIES).concat(' WHERE surveyForm->acronym = '.concat(acronym))).then(function (response) {
+        alasql.promise('SELECT * FROM '.concat(DB_TABLE_ACTIVITIES).concat(' WHERE acronym = "'.concat(acronym).concat('"; '))).then(function (response) {
           defer.resolve(response);
         });
 

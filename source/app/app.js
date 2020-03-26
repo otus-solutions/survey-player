@@ -8,7 +8,7 @@
       'ngMessages',
       'ngAnimate',
       'ui.router',
-
+      'ngMdBadge',
       'angular-bind-html-compile',
       /* Exportable dependencies */
       'otusjs.player.core',

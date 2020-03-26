@@ -77,8 +77,8 @@
         .getSurveys()
         .then(function (response) {
           deferred.resolve(response);
-        }).catch(function () {
-        deferred.reject();
+        }).catch(function (err) {
+        deferred.reject(err);
       });
 
       return deferred.promise;

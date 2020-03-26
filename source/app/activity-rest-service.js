@@ -55,6 +55,7 @@
         defer.resolve(response.data);
       }).error(function (error) {
         console.error('Cannot GET surveys template.');
+        defer.reject(error);
       });
       return defer.promise;
     }

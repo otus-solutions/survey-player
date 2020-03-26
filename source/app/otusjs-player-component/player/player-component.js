@@ -151,7 +151,6 @@
 
     function _loadItem() {
       let itemData = PlayerService.getItemData();
-      self.playerDisplay.loadItem(PlayerService.getItemData());
       if (itemData) {
         self.playerDisplay.loadItem(itemData);
       }

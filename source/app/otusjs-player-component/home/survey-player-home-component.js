@@ -26,13 +26,13 @@
     self.toggleMenu = toggleMenu;
     self.isUpdate = isUpdate;
     self.allUpdated = true;
+    self.$onInit = onInit;
     self.commands = [];
 
-
-    self.$onInit = function () {
-      update();
+    function onInit() {
       _setUser();
-    };
+      update();
+    }
 
     function auth() {
       return LoginService.isAuthenticated();
@@ -42,8 +42,14 @@
       self.preActivities = [];
       if (navigator.onLine) {
         SurveyClientService.getSurveys().then(function (response) {
-          self.preActivities = angular.copy(Array.prototype.concat.apply(response));
+          console.log(response);
+          self.preActivities = angular.copy(Array.prototype.concat.apply(response)).map(function (activity) {
+            return activity.toObjectJson()
+          });
           self.list = SurveyClientService.getListSurveys();
+        }).catch(function () {
+          SurveyApiService.clearSession();
+          _setUser();
         });
       } else {
         SurveyClientService.getOfflineSurveys().then(function (response) {
@@ -73,6 +79,7 @@
       LoginService.authenticate(ev).then(function (response) {
         _setUser();
         response ? _showMessage(response) : null;
+        update();
       }, function (err) {
         _setUser();
         err ? _showMessage(err) : null;

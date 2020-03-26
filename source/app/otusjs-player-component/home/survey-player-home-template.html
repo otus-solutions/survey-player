@@ -19,6 +19,8 @@
       </md-button>
     </div>
   </md-toolbar>
+  <md-content ng-if="!$ctrl.user" layout="column" flex="">
+  </md-content>
   <md-content ng-if="$ctrl.user" layout="column" flex="">
 
     <md-tabs class="" md-dynamic-height md-selected="selectedIndex" md-border-bottom md-autoselect>
@@ -33,7 +35,6 @@
             </md-button>
             <md-button class="md-icon-button md-raised md-accent" ng-if="$ctrl.allUpdated">
               <md-icon class="md-accent" >done_all</md-icon>
-
               <md-tooltip md-direction="top">Atualizado</md-tooltip>
             </md-button>
             <span flex="3.33"></span>
@@ -43,7 +44,7 @@
       </md-tab>
       <md-tab label="COLETAS">
         <md-content layout="column" flex ng-if="$ctrl.preActivities.length">
-          <activity-collection layout="column" commands="$ctrl.commands" flex user="$ctrl.user" activities="$ctrl.preActivities"></activity-collection>
+          <activity-collection ng-if="selectedIndex == 1" layout="column" commands="$ctrl.commands" flex user="$ctrl.user" activities="$ctrl.preActivities"></activity-collection>
         </md-content>
       </md-tab>
       <md-tab label="SINCRONIZAR">
@@ -56,9 +57,9 @@
   </md-content>
   <footer>
     <md-toolbar class="md-scroll-shrink">
-      <div layout="row" layout-align="start center" flex>
-        <small flex flex-offset="5" class="md-caption">&copy; Plataform Otus</small>
-        <md-button class="{{command.theme}}" ng-repeat="command in $ctrl.commands" ng-click="command.action()">
+      <div layout="row" layout-align="start center" flex layout-padding="">
+        <small flex class="md-caption">&copy; Plataform Otus</small>
+        <md-button class="{{command.theme}}" style="margin-right: 30px" ng-repeat="command in $ctrl.commands" ng-click="command.action()">
           <md-icon>{{''.concat(command.icon)}}</md-icon>
         </md-button>
       </div>
