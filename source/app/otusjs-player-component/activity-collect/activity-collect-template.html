@@ -1,26 +1,35 @@
-<md-content layout="row" layout-wrap flex layout-padding="" ng-show="!$ctrl.selectedCollection && !$ctrl.fillCollection">
+<md-content layout="column" layout-wrap layout-fill="" flex layout-padding="" ng-show="!$ctrl.selectedCollection && !$ctrl.fillCollection" ng-init="search">
   <div layout="row" layout-xs="column" flex layout-align="start center" layout-align-xs="center start" layout-padding="">
     <div layout="row" layout-align="start center">
-      <md-button class="md-icon-button md-mini md-raised md-primary"></md-button>
+      <md-button class="md-icon-button md-mini md-raised md-primary" ng-click="search = true"></md-button>
       <span flex>Coletas iniciadas</span>
     </div>
     <div layout="row" layout-align="start center">
-      <md-button class="md-icon-button md-mini md-raised md-accent"></md-button>
+      <md-button class="md-icon-button md-mini md-raised md-accent" ng-click="search = false"></md-button>
       <span flex>Coletas não iniciadas</span>
+    </div>
+    <div layout="row" layout-align="start center" ng-show="search != undefined">
+      <md-button class="md-icon-button md-mini md-warn" ng-click="search = undefined">
+        <md-icon>close</md-icon>
+      </md-button>
+      <span flex>Limpar filtro</span>
     </div>
 
   </div>
-  <md-grid-list flex="100"
+  <div layout-align="center center" layout="column" flex="100" layout-fill="" ng-if="!$ctrl.collections.length">
+    <span class="md-display-1">Não há coletas criadas.</span>
+  </div>
+  <md-grid-list flex="100" ng-if="$ctrl.collections.length"
                 md-cols-xs="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="4" md-cols-gt-lg="6"
                 md-row-height-gt-md="3:2" md-row-height-xs="3:1" md-row-height="3:2" md-row-height-gt-xs="2:1"
                 md-row-height-gt-sm="3:2"
                 md-gutter="20px" md-gutter-gt-sm="18px" layout-padding="">
-    <md-grid-tile class="md-whiteframe-2dp" ng-repeat="collect in $ctrl.collections track by $index"
+    <md-grid-tile class="md-whiteframe-2dp" ng-repeat="collect in $ctrl.collections | filter: {hasInitialized: search} track by $index"
                   md-rowspan="1" md-colspan="1" md-colspan-sm="1" md-colspan-xs="1" >
       <div layout-fill="" flex>
         <md-toolbar md-scroll-shrink class="md-toolbar-tools"
                     ng-class="collect.hasInitialized ? 'md-primary' : 'md-accent'">
-          <md-button class="md-icon-button md-mini" ng-click="$ctrl.removeCollection(collect.code)">
+          <md-button class="md-icon-button md-mini" ng-click="$ctrl.removeCollection(collect)">
             <md-icon>delete_forever</md-icon>
             <md-tooltip md-direction="top">Apagar</md-tooltip>
           </md-button>
@@ -58,8 +67,6 @@
   <span flex="20"></span>
 </md-content>
 
-
-
 <md-content ng-show="$ctrl.selectedCollection" layout="column" flex="">
   <div layout="row" layout-padding="" layout-margin="" flex>
     <span class="md-title">{{ $ctrl.selectedCollection.observation }}</span>
@@ -79,7 +86,7 @@
           </md-checkbox>
         </md-input-container>
       </div>
-      <md-list-item class="md-2-line" ng-repeat="activity in $ctrl.allActivities" ng-click="null">
+      <md-list-item class="md-2-line" ng-repeat="activity in $ctrl.allActivities track by $index" ng-click="null">
         <md-chips layout-padding="">
           <md-chip>
             <strong>{{ activity.surveyForm.acronym}}</strong>
@@ -98,13 +105,14 @@
   </div>
 </md-content>
 
-
-
 <md-content ng-if="$ctrl.fillCollection" layout="column" flex="">
-  <div layout="row" layout-padding="" layout-margin="" flex>
+  <div layout="row" layout-padding="" layout-margin="" flex layout-align="start center">
+    <md-button class="md-icon-button md-primary" ng-click="$ctrl.fillCollection = null">
+      <md-icon>arrow_back</md-icon>
+    </md-button>
     <span class="md-title">{{ $ctrl.fillCollection.observation }}</span>
   </div>
-  <div layout="column" layout-fill>
+  <div layout="column" layout-padding>
     <md-list flex>
       <md-list-item class="md-2-line" ng-repeat="activity in $ctrl.fillCollection.activities" ng-click="$ctrl.play(activity)">
         <md-chips layout-padding="">
@@ -116,7 +124,8 @@
           <span class="md-body-1"> {{ activity.surveyForm.name }}</span>
           <p class="md-caption">Versão: {{ activity.surveyForm.version }}</p>
         </div>
-        <md-button class="md-icon-button md-accent" ng-click="$ctrl.play(activity)">
+        <span class="md-caption" flex="20" flex-gt-sm="10"> {{ $ctrl.STATUS[activity.statusHistory[activity.statusHistory.length - 1].name] }}</span>
+        <md-button class="md-icon-button md-accent" flex-offset="5" ng-click="$ctrl.play(activity)">
           <md-icon>play_arrow</md-icon>
         </md-button>
         <md-divider></md-divider>
@@ -124,44 +133,3 @@
     </md-list>
   </div>
 </md-content>
-
-<!--<div layout="row" layout-wrap flex layout-fill="" layout-padding="">-->
-
-<!--    <div flex-xs flex="50">-->
-
-
-<!--  <md-checkbox aria-label="Select All" class="md-primary md-raised"-->
-<!--               ng-checked="isChecked()"-->
-<!--               md-indeterminate="isIndeterminate()"-->
-<!--               ng-click="toggleAll()">-->
-<!--    <span ng-if="isChecked()">DESMARCAR</span>-->
-<!--    <span ng-if="!isChecked()">SELECIONAR</span>-->
-<!--    TODOS-->
-<!--  </md-checkbox>-->
-
-<!--  <md-grid-list flex="100"-->
-<!--                md-cols-xs="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="4" md-cols-gt-lg="6"-->
-<!--                md-row-height-gt-md="3:2" md-row-height-xs="3:1" md-row-height="3:2" md-row-height-gt-xs="2:1"-->
-<!--                md-row-height-gt-sm="3:1"-->
-<!--                md-gutter="12px" md-gutter-gt-sm="18px" layout-padding="">-->
-<!--    <md-grid-tile class="md-whiteframe-2dp" ng-repeat="item in $ctrl.activities"-->
-<!--                  md-rowspan="1" md-colspan="1" md-colspan-sm="1" md-colspan-xs="1">-->
-<!--      <div layout-fill="" flex>-->
-
-<!--        <md-toolbar md-scroll-shrink class="md-toolbar-tools">-->
-<!--          <h2 class="md-toolbar-tools" flex="">{{ item.surveyForm.acronym }}</h2>-->
-<!--          <md-checkbox ng-checked="exists(item, selected)" aria-label="Selecionar"-->
-<!--                       class="checkboxToolbar md-primary md-hue" ng-click="toggle(item, selected)">-->
-<!--          </md-checkbox>-->
-<!--        </md-toolbar>-->
-<!--        <div layout-margin="" layout="column">-->
-<!--          <span class="md-body-1">{{ item.surveyForm.name }}</span>-->
-<!--        </div>-->
-<!--        <md-grid-tile-footer layout-padding="" style="background-color: transparent; color: #000">-->
-<!--          <span class="md-caption">Versão: {{ item.surveyForm.version }}</span>-->
-<!--        </md-grid-tile-footer>-->
-<!--      </div>-->
-
-<!--    </md-grid-tile>-->
-<!--  </md-grid-list>-->
-<!--</div>-->

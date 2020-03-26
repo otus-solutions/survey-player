@@ -9,7 +9,8 @@
       bindings: {
         user: '<',
         activities: '=',
-        commands: '='
+        commands: '=',
+        showCommands: '='
       }
     });
 
@@ -20,14 +21,56 @@
     'CollectIndexedDbService',
     'SurveyApiService',
     '$state',
-    'ActivityCollectionRestService'
+    'ActivityCollectionRestService',
+    'ACTIVITY_STATUS',
+    '$mdToast'
   ];
 
-  function Controller(OfflineActivityCollection, $scope, $mdDialog, CollectIndexedDbService, SurveyApiService, $state, ActivityCollectionRestService) {
+  function Controller(OfflineActivityCollection, $scope, $mdDialog, CollectIndexedDbService, SurveyApiService, $state, ActivityCollectionRestService, ACTIVITY_STATUS, $mdToast) {
     var self = this;
 
     const PRINCIPAL_THEME = 'md-accent md-raised md-icon-button';
     const OTHER_THEME = 'md-icon-button';
+    const POSITION = 'bottom right';
+    const DELAY = 3000;
+    const MESSAGE_SEND_SUCCESS = 'Coleta foi enviada com sucesso.';
+    const MESSAGE_SEND_FAILED = 'Não foi possível enviar a coleta! Tente novamente.';
+    const MESSAGE_REMOVE_SUCCESS = 'Coleta foi removida com sucesso.';
+    const MESSAGE_REMOVE_FAILED = 'Não foi possível remover a coleta! Tente novamente.';
+    const MESSAGE_INITIALIZE = 'Coleta iniciada.';
+
+    const NEW_COLLECTION = {
+      title: 'Nova Coleta',
+      textContent: 'Informe uma observação sobre a coleta:',
+      placeholder: 'Observação',
+      required: true,
+      ariaLabel: 'Observation',
+      ok: 'Criar',
+      cancel: 'Cancelar',
+      action: newCollection
+    };
+
+    const SEND_COLLECTION = {
+      title: 'Envio de Coleta',
+      textContent: 'Informe seu email para confirmar o envio:',
+      placeholder: 'Email',
+      required: true,
+      ariaLabel: 'Email',
+      ok: 'Enviar',
+      cancel: 'Cancelar',
+      action: _confirmEmail
+    };
+
+    const REMOVE_COLLECTION = {
+      title: 'Excluir Coleta',
+      textContent: 'ATENÇÃO! A exclusão da coleta é permanente. Informe seu email para confirmar a remoção:',
+      placeholder: 'Email',
+      required: true,
+      ariaLabel: 'Email',
+      ok: 'Excluir',
+      cancel: 'Cancelar',
+      action: _confirmEmail
+    };
 
     self.collections = [];
 
@@ -48,14 +91,21 @@
     self.fill = fill;
     self.play = play;
 
+    $scope.$watch('$ctrl.showCommands', function (newVal) {
+      if (newVal){
+        _addButtonADD();
+      } else {
+        _clear();
+      }
+    });
+
+
     function onInit() {
       self.allActivities = self.activities;
-
-
+      SurveyApiService.setSelectedCollection();
+      self.STATUS = ACTIVITY_STATUS;
       _listCollections();
-
       _clear();
-      _addButtonADD();
     }
 
     function _listCollections() {
@@ -65,18 +115,26 @@
     }
 
     function fill(collect) {
+      SurveyApiService.setModeOffline();
       SurveyApiService.setSelectedCollection(collect.code);
       self.fillCollection = collect;
     }
 
-
-    function removeCollection(code) {
-      CollectIndexedDbService.removeCollection(code);
-      _listCollections();
+    function removeCollection(collect) {
+      self.collect = collect.toJSON();
+      _showPrompt(REMOVE_COLLECTION).then(function (response) {
+        if (response) {
+          CollectIndexedDbService.removeCollection(collect.code);
+          _listCollections();
+          _messages(MESSAGE_REMOVE_SUCCESS)
+        } else {
+          _messages(MESSAGE_REMOVE_FAILED)
+        }
+        delete self.collect;
+      });
     }
 
     function play(activity) {
-      SurveyApiService.setModeOffline();
       SurveyApiService.setCallbackAddress(location.origin);
       SurveyApiService.setCurrentActivity(activity.surveyForm.acronym);
       $state.go('/');
@@ -93,6 +151,7 @@
     function initializeCollection(collect) {
       collect.initialize();
       CollectIndexedDbService.updateCollection(collect.toJSON());
+      _messages(MESSAGE_INITIALIZE)
     }
 
     function newCollection(observation) {
@@ -126,12 +185,28 @@
       self.commands.splice(0, self.commands.length);
     }
 
+    function _confirmEmail(email) {
+      return self.collect.userEmail === email;
+    }
+
     function saveCollection(collect, index) {
-      ActivityCollectionRestService.saveOffline(collect.toJSON()).then(function () {
-        self.removeCollection(index);
-        _updateIndexedDB();
-        onInit();
+      self.collect = collect.toJSON();
+      _showPrompt(SEND_COLLECTION).then(function (response) {
+        if (response) {
+          ActivityCollectionRestService.saveOffline(collect.toJSON()).then(function () {
+            self.removeCollection(index);
+            _messages(MESSAGE_SEND_SUCCESS);
+            _updateIndexedDB();
+            onInit();
+          }).catch(function () {
+            _messages(MESSAGE_SEND_FAILED);
+          });
+        } else {
+          _messages(MESSAGE_SEND_FAILED);
+        }
+        delete self.collect;
       });
+
     }
 
     function _save() {
@@ -140,7 +215,6 @@
         if (self.selectedCollection.activities.length) {
           self.selectedCollection.userEmail = self.user.email;
           self.collections.push(self.selectedCollection);
-
           CollectIndexedDbService.insertCollection(self.selectedCollection.toJSON());
           _clear();
           _addButtonADD();
@@ -157,19 +231,21 @@
       }));
     }
 
-    function _showPrompt() {
+    function _showPrompt(data) {
+      if (!data) data = NEW_COLLECTION;
       var confirm = $mdDialog.prompt()
-        .title('Nova Coleta')
-        .textContent('Informe uma observação sobre a coleta:')
-        .placeholder('Observação')
-        .required(true)
-        .ariaLabel('Observation')
-        .ok('Criar')
-        .cancel('Cancelar');
+        .title(data.title)
+        .textContent(data.textContent)
+        .placeholder(data.placeholder)
+        .required(data.required)
+        .ariaLabel(data.ariaLabel)
+        .ok(data.ok)
+        .cancel(data.cancel);
 
-      $mdDialog.show(confirm).then(function (result) {
-        self.newCollection(result);
+      return $mdDialog.show(confirm).then(function (result) {
+        return data.action(result);
       }, function () {
+        return false;
       });
     }
 
@@ -200,8 +276,16 @@
         self.selected = [];
       } else if (self.selected.length === 0 || self.selected.length > 0) {
         self.selected = self.allActivities.slice(0);
-        console.log(self.selected);
       }
+    }
+
+    function _messages(text) {
+      $mdToast.show(
+        $mdToast.simple()
+          .textContent(text)
+          .position(POSITION)
+          .hideDelay(DELAY)
+      );
     }
 
   }

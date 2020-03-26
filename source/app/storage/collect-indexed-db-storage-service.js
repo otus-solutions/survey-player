@@ -43,7 +43,6 @@
       if (Array.isArray(collections)) {
         if (collections.length) {
           if (_isValid(collections)) {
-            // dropDb();
             _persist(DB_TABLE_COLLECTIONS, collections);
           }
         } else {

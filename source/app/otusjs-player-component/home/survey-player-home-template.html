@@ -44,12 +44,7 @@
       </md-tab>
       <md-tab label="COLETAS">
         <md-content layout="column" flex ng-if="$ctrl.preActivities.length">
-          <activity-collection ng-if="selectedIndex == 1" layout="column" commands="$ctrl.commands" flex user="$ctrl.user" activities="$ctrl.preActivities"></activity-collection>
-        </md-content>
-      </md-tab>
-      <md-tab label="SINCRONIZAR">
-        <md-content class="md-padding">
-
+          <activity-collection show-commands="selectedIndex == 1" layout="column" commands="$ctrl.commands" flex user="$ctrl.user" activities="$ctrl.preActivities"></activity-collection>
         </md-content>
       </md-tab>
     </md-tabs>
@@ -93,9 +88,6 @@
       </md-button>
       <md-button ng-show="$ctrl.user" class="md-primary md-raised" ng-click="selectedIndex = 1; $ctrl.toggleMenu()">
         Coletas
-      </md-button>
-      <md-button ng-show="$ctrl.user" class="md-primary md-raised" ng-click="selectedIndex = 2; $ctrl.toggleMenu()">
-        Sincronizar
       </md-button>
 
       <md-button ng-click="$ctrl.authenticate($event)" aria-label="Login" class="md-accent" style="top: 50%">

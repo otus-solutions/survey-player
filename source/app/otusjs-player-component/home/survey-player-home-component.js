@@ -30,6 +30,7 @@
     self.commands = [];
 
     function onInit() {
+      self.commands = [];
       _setUser();
       update();
     }
@@ -42,7 +43,6 @@
       self.preActivities = [];
       if (navigator.onLine) {
         SurveyClientService.getSurveys().then(function (response) {
-          console.log(response);
           self.preActivities = angular.copy(Array.prototype.concat.apply(response)).map(function (activity) {
             return activity.toObjectJson()
           });

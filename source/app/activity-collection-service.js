@@ -84,7 +84,6 @@
 
     function _updateInCollection(code, activity) {
       var request = $q.defer();
-      //TODO TIAGO TROCAR
       CollectIndexedDbService.getAllCollections(SurveyApiService.getLoggedUser().email)
         .then(function (collections) {
           collections.forEach(function (collection) {
@@ -95,16 +94,12 @@
                 }
                 return offlineActivity;
               });
-              collection.isSynchronized = false;
+              SurveyApiService.setModeOffline();
               CollectIndexedDbService.updateCollection(collection);
             }
           });
         });
-
-
       return request.promise;
-
-
     }
 
     function getSurveys() {

@@ -110,6 +110,7 @@
           }
         ]
       },
+      https: true,
       port: process.env.PORT || 51001
     });
 

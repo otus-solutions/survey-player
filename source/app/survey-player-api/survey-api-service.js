@@ -35,6 +35,7 @@
     self.clearSession = clearSession;
     self.setModeOffline = setModeOffline;
     self.getModeOffline = getModeOffline;
+    self.exitModeOffline = exitModeOffline;
     self.setSelectedCollection = setSelectedCollection;
     self.getSelectedCollection = getSelectedCollection;
 
@@ -125,13 +126,16 @@
     }
 
     function setModeOffline() {
-      sessionStorage.setItem(MODE, 'true');
+      sessionStorage.setItem(MODE, String(true));
+    }
+
+    function exitModeOffline() {
+      sessionStorage.setItem(MODE, String(false));
     }
 
     function getModeOffline() {
       var _mode = angular.copy(JSON.parse(sessionStorage.getItem(MODE)));
-      // sessionStorage.removeItem(MODE); //TODO TIAGO
-      return _mode;
+      return !!_mode;
     }
 
 
@@ -203,6 +207,7 @@
     }
 
     function getCallbackAddress() {
+      exitModeOffline();
       return sessionStorage.getItem(CALLBACK_ADDRESS) ? sessionStorage.getItem(CALLBACK_ADDRESS) : location.href;
     }
 
