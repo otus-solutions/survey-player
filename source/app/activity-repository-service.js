@@ -23,7 +23,6 @@
     self.getById = getById;
     self.getSurveys = getSurveys;
     self.getOfflineSurveys = getOfflineSurveys;
-    self.getListSurveys = getListSurveys;
     self.getByAcronymOffline = getByAcronymOffline;
 
 
@@ -54,11 +53,6 @@
         });
       });
     }
-
-    function getListSurveys() {
-      return ActivityCollectionService.getListSurveys();
-    }
-
 
     function save(activity) {
       return _update([_toDbObject(activity)]);

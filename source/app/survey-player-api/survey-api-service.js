@@ -92,7 +92,6 @@
               }
               $rootScope.$broadcast("logged", {any: {}});
             }
-
           });
         });
       });
@@ -161,29 +160,21 @@
       sessionStorage.setItem(LOGGED_USER, JSON.stringify({token: token}));
     }
 
-    function _removeUser() {
-      alasql("DELETE FROM User");
-    }
-
     function setLoggedUser(user) {
       var deferred = $q.defer();
       alasql(INIT_QUERY, [], function () {
         alasql(TABLE_USER, [], function (res) {
-          _removeUser();
           var query = "SELECT * INTO User ".concat(' FROM ?');
           _user = angular.copy(user);
           sessionStorage.setItem(LOGGED_USER, JSON.stringify(user));
           delete _user.token;
           _token = angular.copy(user.token);
-          alasql('DELETE FROM User');
           alasql(query, [Array.prototype.concat.apply(user)]);
           deferred.resolve();
         });
       });
 
-
       return deferred.promise;
-
     }
 
     function getLoggedUser(propName) {

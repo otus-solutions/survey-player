@@ -17,8 +17,8 @@
 
   function Controller($window, $rootScope) {
     var self = this;
-    self.online = true;
     $rootScope.online = navigator.onLine;
+    self.online = $rootScope.online;
     $window.addEventListener("offline", function () {
       $rootScope.$apply(function () {
         $rootScope.online = false;

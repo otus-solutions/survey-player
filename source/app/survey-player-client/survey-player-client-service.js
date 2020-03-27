@@ -23,11 +23,10 @@
     self.saveActivity = saveActivity;
     self.getSurveys = getSurveys;
     self.getOfflineSurveys = getOfflineSurveys;
-    self.getListSurveys = getListSurveys;
 
 
     function getSurveyTemplate() {
-      if (!SurveyApiService.getModeOffline()) { //TODO TIAGO MODIFICAR
+      if (!SurveyApiService.getModeOffline()) {
         return ActivityRepositoryService.getById(SurveyApiService.getCurrentActivity()).then(function (response) {
           if (Array.isArray(response)) {
             if (response.length > 0) {
@@ -42,10 +41,6 @@
           return activityToPlay;
         });
       }
-    }
-
-    function getListSurveys() {
-      return ActivityRepositoryService.getListSurveys();
     }
 
     function saveActivity(data) {

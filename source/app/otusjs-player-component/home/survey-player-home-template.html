@@ -29,17 +29,8 @@
 
           <div flex="100" layout="row" layout-align="end center" layout-padding="">
             <span class="md-subheader" flex>Verifique sempre se há atividades desatualizadas! Se necessário, conecte-se a internet para atualiza-las.</span>
-            <md-button class="md-icon-button" ng-if="!$ctrl.allUpdated" ng-click="$ctrl.update()">
-              <md-icon class="md-warn">cloud_download</md-icon>
-              <md-tooltip md-direction="top">Carregar atividades</md-tooltip>
-            </md-button>
-            <md-button class="md-icon-button md-raised md-accent" ng-if="$ctrl.allUpdated">
-              <md-icon class="md-accent" >done_all</md-icon>
-              <md-tooltip md-direction="top">Atualizado</md-tooltip>
-            </md-button>
-            <span flex="3.33"></span>
           </div>
-          <survey-list user="$ctrl.user" pre-activities="$ctrl.preActivities" is-update="$ctrl.isUpdate" layout-padding="" flex></survey-list>
+          <survey-list user="$ctrl.user" pre-activities="$ctrl.preActivities" layout-padding="" flex></survey-list>
         </md-content>
       </md-tab>
       <md-tab label="COLETAS">

@@ -23,19 +23,8 @@
     self.insert = insert;
     self.getAllActivities = getAllActivities;
     self.getActivity = getActivity;
-    self.getList = getList;
     self.getDatasource = getDatasource;
     self.updateDatasource = updateDatasource;
-
-    self.list = [];
-
-    function getList() {
-      return self.list;
-    }
-
-    function _dropDb(name) {
-      alasql('DROP INDEXEDDB DATABASE '.concat(name));
-    }
 
     function _persist(activities, datasources) {
       alasql(INIT_QUERY, [], function () {
@@ -55,8 +44,6 @@
         activities.forEach(function (activity) {
           activity.acronym = activity.surveyTemplate.identity.acronym;
         });
-        _updateList(activities);
-        // _dropDb('surveyPlayer');
         _getDatasources().then(function (datasources) {
           _persist(activities, datasources);
 
@@ -138,24 +125,6 @@
           return activity.objectType == OBJECT_TYPE;
         });
       return !!_activities.length;
-    }
-
-    function _updateList(surveys) {
-      var _acronyms = [];
-      Array.prototype.concat.apply(surveys).forEach(function (survey) {
-        _acronyms.push({acronym: survey.surveyTemplate.identity.acronym, version: survey.version});
-      });
-      var _preList = angular.copy([...new Set(_acronyms)]);
-      self.list = _preList.map(function (value) {
-        var _list = _acronyms.filter(function (obj) {
-          return obj.acronym === value.acronym;
-        });
-        return {
-          acronym: value.acronym, version: Math.max(..._list.map(obj => {
-            return obj.version;
-          }))
-        };
-      });
     }
 
     function _getDatasources() {

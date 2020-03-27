@@ -24,8 +24,6 @@
     self.auth = auth;
     self.authenticate = authenticate;
     self.toggleMenu = toggleMenu;
-    self.isUpdate = isUpdate;
-    self.allUpdated = true;
     self.$onInit = onInit;
     self.commands = [];
 
@@ -46,7 +44,6 @@
           self.preActivities = angular.copy(Array.prototype.concat.apply(response)).map(function (activity) {
             return activity.toObjectJson()
           });
-          self.list = SurveyClientService.getListSurveys();
         }).catch(function () {
           SurveyApiService.clearSession();
           _setUser();
@@ -54,24 +51,8 @@
       } else {
         SurveyClientService.getOfflineSurveys().then(function (response) {
           self.preActivities = angular.copy(Array.prototype.concat.apply(response));
-          self.list = SurveyClientService.getListSurveys();
         });
       }
-    }
-
-
-    function isUpdate(activity) {
-      let _data = {
-        acronym: activity.surveyForm.acronym,
-        version: activity.surveyForm.version
-      };
-      if ((!!self.list.find(item => {
-        return item.acronym == _data.acronym && item.version == _data.version;
-      }))) {
-        return {theme: 'md-accent', icon: 'done'};
-      }
-      self.allUpdated = false;
-      return {theme: 'md-warn', icon: 'sync_problem'};
     }
 
     function authenticate(ev) {
@@ -79,7 +60,7 @@
       LoginService.authenticate(ev).then(function (response) {
         _setUser();
         if (response) {
-          _showMessage(response)
+          _showMessage(response);
           update();
         }
       }, function (err) {

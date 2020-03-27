@@ -36,7 +36,6 @@
     self.update = update;
     self.getSurveys = getSurveys;
     self.getOfflineSurveys = getOfflineSurveys;
-    self.getListSurveys = getListSurveys;
     self.getByAcronymOffline = getByAcronymOffline;
 
     function getById(activityInfo) {
@@ -124,11 +123,6 @@
       });
       return request.promise;
     }
-
-    function getListSurveys() {
-      return ActivityIndexedDbService.getList();
-    }
-
 
   }
 }());
