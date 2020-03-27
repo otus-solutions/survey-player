@@ -7,7 +7,7 @@
   "scope": "/",
   "start_url": "/",
   "icons": [{
-    "src": "static-resource/image/project_research.png",
+    "src": "assets/icons/survey-player.png",
     "sizes": "260x260",
     "type": "image/png"
   }]

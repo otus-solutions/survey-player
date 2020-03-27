@@ -5,10 +5,10 @@
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/",
-  "start_url": "http://localhost:51001/",
+  "start_url": "/",
   "icons": [
     {
-      "src": "static-resource/image/project_research.png",
+      "src": "assets/icons/survey-player.png",
       "sizes": "260x260",
       "type": "image/png"
     }
