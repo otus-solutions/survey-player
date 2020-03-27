@@ -36,6 +36,7 @@
     "angular-resource": "1.5.5",
     "angular-ui-router": "^0.3.1",
     "fuse.js": "2.6.2",
+    "gulp-json-editor": "^2.5.4",
     "jquery": "3.0.0",
     "lokijs": "1.4.2",
     "otus-model-js": "1.28.0",

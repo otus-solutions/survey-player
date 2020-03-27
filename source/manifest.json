@@ -1,0 +1,16 @@
+{
+  "name": "Survey Player App",
+  "short_name": "SurveyPlayer",
+  "theme_color": "#3C897B",
+  "background_color": "#fafafa",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "http://localhost:51001/",
+  "icons": [
+    {
+      "src": "static-resource/image/project_research.png",
+      "sizes": "260x260",
+      "type": "image/png"
+    }
+  ]
+}

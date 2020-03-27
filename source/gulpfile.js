@@ -19,15 +19,31 @@
   var gulp_if = require('gulp-if');
   var clean = require('gulp-clean');
   var uncache = require('gulp-uncache');
+  var jeditor = require('gulp-json-editor');
 
   gulp.task('compress', function () {
-    runSequence('clean_dist', 'copy_code', 'embeded_template', 'copy_node_modules', 'compress-hash');
+    runSequence('clean_dist', 'copy_code','copy_manifest', 'copy_sw', 'embeded_template', 'copy_node_modules', 'compress-hash');
   });
 
   gulp.task('copy_code', function () {
     return gulp.src('./app/**/*')
       .pipe(gulp_if('index.html', replace('src="app/', 'src="')))
       .pipe(gulp_if('index.html', replace('href="app/', 'href="')))
+      .pipe(gulp.dest('dist/survey-player'));
+  });
+
+  gulp.task('copy_manifest', function () {
+    return gulp.src('./manifest.json')
+      .pipe(jeditor(function (json) {
+        json.start_url =String(process.env.URL || '/');
+        return json;
+      }))
+      .pipe(gulp.dest('dist/survey-player'));
+  });
+
+  gulp.task('copy_sw', function () {
+    return gulp.src('./sw.js')
+      .pipe(replace('/app/', '/'))
       .pipe(gulp.dest('dist/survey-player'));
   });
 
@@ -110,7 +126,6 @@
           }
         ]
       },
-      https: true,
       port: process.env.PORT || 51001
     });
 
