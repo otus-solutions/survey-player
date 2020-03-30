@@ -67,9 +67,12 @@
   <span flex="20"></span>
 </md-content>
 
-<md-content ng-show="$ctrl.selectedCollection" layout="column" flex="">
-  <div layout="row" layout-padding="" layout-margin="" flex>
-    <span class="md-title">{{ $ctrl.selectedCollection.observation }}</span>
+<md-content ng-show="$ctrl.selectedCollection" layout="column" flex="" layout-fill="">
+  <div layout="row" layout-padding="" layout-margin="" flex="100">
+    <md-input-container flex>
+      <label>Observação</label>
+      <textarea ng-model="$ctrl.selectedCollection.observation" md-select-on-focus md-maxlength="150" required></textarea>
+    </md-input-container>
   </div>
   <div layout="column" layout-fill>
     <md-list flex>

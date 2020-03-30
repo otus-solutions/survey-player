@@ -154,8 +154,8 @@
       _messages(MESSAGE_INITIALIZE)
     }
 
-    function newCollection(observation) {
-      self.selectedCollection = OfflineActivityCollection.fromJson({observation: observation}, self.user.email);
+    function newCollection() {
+      self.selectedCollection = OfflineActivityCollection.fromJson({}, self.user.email);
       self.selectedCollection.code = new ObjectId().toString();
       self.commands.splice(0, self.commands.length);
       _addButtonCANCEL();
@@ -167,7 +167,7 @@
     }
 
     function _addButtonADD() {
-      self.commands.push({icon: 'add', theme: PRINCIPAL_THEME, action: _showPrompt});
+      self.commands.push({icon: 'add', theme: PRINCIPAL_THEME, action: newCollection});
     }
 
     function _addButtonCANCEL() {
@@ -206,7 +206,6 @@
         }
         delete self.collect;
       });
-
     }
 
     function _save() {
