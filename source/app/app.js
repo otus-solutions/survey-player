@@ -32,10 +32,12 @@
 
   Runner.$inject = [
     '$injector',
-    'StorageLoaderService'
+    'StorageLoaderService',
+    '$rootScope'
   ];
 
-  function Runner($injector, StorageLoaderService) {
+  function Runner($injector, StorageLoaderService, $rootScope) {
+
     _loadOtusDb(StorageLoaderService)
       .then(function () {
       });
@@ -53,6 +55,7 @@
         return StorageLoaderService.createIndexedStorage(OTUS_DB);
       }
     });
+
   }
 
 }());

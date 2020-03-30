@@ -1,6 +1,10 @@
+
+var version = new Date().getDate().toString() + String(new Date().getMonth() + 1) + new Date().getFullYear().toString();
+
+var CACHE = 'survey-player';
 self.addEventListener('install', function(e) {
   e.waitUntil(
-    caches.open('survey-player').then(function(cache) {
+    caches.open(CACHE).then(function(cache) {
       return cache.addAll([
         "/node_modules/jquery/dist/jquery.min.js",
         "/node_modules/angular/angular.min.js",
@@ -22,6 +26,7 @@ self.addEventListener('install', function(e) {
         "/node_modules/fuse.js/src/fuse.min.js",
         "/node_modules/otus-validation-js/dist/otus-validation-min.js",
         "/app.js",
+        "/service-worker.js",
         "/activity-rest-service.js",
         "/activity-collection-rest-service.js",
         "/activity-remote-storage-service.js",
@@ -209,26 +214,11 @@ self.addEventListener('install', function(e) {
     })
   );
 });
-//
-// self.addEventListener('fetch', function(e) {
-//   console.log(e.request.url);
-//   e.respondWith(
-//     caches.match(e.request).then(function(response) {
-//       return response || fetch(e.request);
-//     })
-//   );
-// });
 
-
-self.addEventListener('fetch', function(event) {
-  event.respondWith(
-    caches.open('survey-player').then(function(cache) {
-      return cache.match(event.request).then(function (response) {
-        return response || fetch(event.request).then(function(response) {
-          cache.put(event.request, response.clone());
-          return response;
-        });
-      });
+self.addEventListener('fetch', function(e) {
+  e.respondWith(
+    caches.match(e.request).then(function(response) {
+      return response || fetch(e.request);
     })
   );
 });

@@ -8,10 +8,11 @@
   Service.$inject = [
     '$http',
     'SurveyApiService',
-    '$mdDialog'
+    '$mdDialog',
+    '$rootScope'
   ];
 
-  function Service($http, SurveyApiService, $mdDialog) {
+  function Service($http, SurveyApiService, $mdDialog, $rootScope) {
     var self = this;
     self.isAuthenticated = isAuthenticated;
     self.authenticate = authenticate;
@@ -27,7 +28,7 @@
 
     function isAuthenticated() {
       var _token = SurveyApiService.getAuthToken();
-      return _token && navigator.onLine ? true : false;
+      return _token && $rootScope.online ? true : false;
     }
 
     function authenticate(ev) {

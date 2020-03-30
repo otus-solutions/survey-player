@@ -8,10 +8,11 @@
   Service.$inject = [
     '$q',
     '$http',
-    'SurveyApiService'
+    'SurveyApiService',
+    '$rootScope'
   ];
 
-  function Service($q, $http, SurveyApiService) {
+  function Service($q, $http, SurveyApiService, $rootScope) {
     var self = this;
     var _rest = null;
 
@@ -54,10 +55,6 @@
       $http.get(_getSurveyAddress()).success(function (response) {
         defer.resolve(response.data);
       }).error(function (error) {
-        console.error('Cannot GET surveys template.');
-        if (error.hasOwnProperty('STATUS')) {
-          error.STATUS === "UNAUTHORIZED" ? SurveyApiService.clearSession() : null;
-        }
         defer.reject(error);
       });
       return defer.promise;

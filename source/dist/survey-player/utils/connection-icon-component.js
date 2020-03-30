@@ -3,34 +3,37 @@
 
   angular.module('otusjs.player.standalone')
     .component('connectionIcon', {
-      template: `<md-icon ng-if="$ctrl.online">wifi</md-icon>
+      template: `<div ng-if="ready()"><md-icon ng-if="$ctrl.online">wifi</md-icon>
         <md-icon ng-if="!$ctrl.online">wifi_off</md-icon>
         <md-tooltip ng-if="$ctrl.online">Online</md-tooltip>
-        <md-tooltip ng-if="!$ctrl.online">Offline</md-tooltip>`,
+        <md-tooltip ng-if="!$ctrl.online">Offline</md-tooltip></div>`,
       controller: Controller
     });
 
   Controller.$inject = [
     '$window',
-    '$rootScope'
+    '$rootScope',
+    '$scope'
   ];
 
-  function Controller($window, $rootScope) {
+  function Controller($window, $rootScope, $scope) {
     var self = this;
-    $rootScope.online = navigator.onLine;
-    self.online = $rootScope.online;
-    $window.addEventListener("offline", function () {
-      $rootScope.$apply(function () {
-        $rootScope.online = false;
-        self.online = false;
-      });
-    }, false);
-    $window.addEventListener("online", function () {
-      $rootScope.$apply(function () {
-        $rootScope.online = true;
-        self.online = true;
-      });
-    }, false);
 
+
+    $scope.$on("offline", function () {
+      self.online = false;
+    });
+
+    $scope.$on("online", function () {
+      self.online = true;
+    });
+
+    $scope.ready = function () {
+      return self.online !== undefined;
+    };
+
+    $scope.$watch('$root.online', function (status) {
+      self.online = status;
+    });
   }
 })();

@@ -34,6 +34,7 @@
 
   gulp.task('copy_manifest', function () {
     return gulp.src('./manifest.json')
+      .pipe(replace('app/', ''))
       .pipe(jeditor(function (json) {
         json.start_url =String(process.env.URL || '/');
         return json;
