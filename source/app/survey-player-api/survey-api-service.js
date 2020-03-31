@@ -7,11 +7,10 @@
   Service.$inject = [
     '$cookies',
     '$q',
-    '$rootScope',
-    'ServiceWorker'
+    '$rootScope'
   ];
 
-  function Service($cookies, $q, $rootScope, ServiceWorker) {
+  function Service($cookies, $q, $rootScope) {
     var self = this;
 
     const INIT_QUERY = "CREATE INDEXEDDB DATABASE IF NOT EXISTS userDB; ATTACH INDEXEDDB DATABASE userDB; USE userDB;";
