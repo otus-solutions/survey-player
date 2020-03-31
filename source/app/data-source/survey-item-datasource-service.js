@@ -10,10 +10,11 @@
     'otusjs.utils.DatasourceService',
     'ActivityLocalStorageService',
     'SurveyItemRestService',
-    'ActivityIndexedDbService'
+    'ActivityIndexedDbService',
+    '$rootScope'
   ];
 
-  function service($q, DatasourceService, ActivityLocalStorageService, SurveyItemRestService, ActivityIndexedDbService) {
+  function service($q, DatasourceService, ActivityLocalStorageService, SurveyItemRestService, ActivityIndexedDbService, $rootScope) {
     var self = this;
 
     /* Public Interface */
@@ -74,7 +75,7 @@
     }
 
     function _getDatasourcesByID(id) {
-      if (navigator.onLine) {
+      if ($rootScope.online) {
         return SurveyItemRestService.getByID(id).then(function (response) {
           ActivityIndexedDbService.updateDatasource(id, response.data);
           return response;

@@ -24,7 +24,6 @@
     self.getSurveys = getSurveys;
     self.getOfflineSurveys = getOfflineSurveys;
 
-
     function getSurveyTemplate() {
       if (!SurveyApiService.getModeOffline()) {
         return ActivityRepositoryService.getById(SurveyApiService.getCurrentActivity()).then(function (response) {
@@ -58,7 +57,9 @@
     function getSurveys() {
       return ActivityRepositoryService.getSurveys(SurveyApiService.getLoggedUser()).then(function (response) {
         if (Array.isArray(response)) {
-          return response;
+          return response.map(function (activity) {
+            return activity.toObjectJson();
+          });
         } else {
           return [];
         }
@@ -70,7 +71,9 @@
     function getOfflineSurveys() {
       return ActivityRepositoryService.getOfflineSurveys(SurveyApiService.getLoggedUser()).then(function (response) {
         if (Array.isArray(response)) {
-          return response;
+          return response.map(function (activity) {
+            return activity.toObjectJson();
+          });
         } else {
           return [];
         }

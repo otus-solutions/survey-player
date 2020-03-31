@@ -14,44 +14,52 @@
     'SurveyApiService',
     '$mdSidenav',
     '$mdToast',
-    'SurveyClientService'
-
+    'SurveyClientService',
+    '$rootScope',
+    'ServiceWorker'
   ];
 
-  function Controller($scope, LoginService, SurveyApiService, $mdSidenav, $mdToast, SurveyClientService) {
+  function Controller($scope, LoginService, SurveyApiService, $mdSidenav, $mdToast, SurveyClientService, $rootScope, ServiceWorker) {
     var self = this;
 
-    self.auth = auth;
     self.authenticate = authenticate;
     self.toggleMenu = toggleMenu;
     self.$onInit = onInit;
+    self.update = update;
+    $scope.selectedIndex = null;
     self.commands = [];
+    self.preActivities = [];
+    self.isLoading = false;
+
 
     function onInit() {
+      ServiceWorker.unregister();
       self.commands = [];
-      _setUser();
       update();
     }
 
-    function auth() {
-      return LoginService.isAuthenticated();
+    function update() {
+      self.isLoading = true;
+        SurveyClientService.getSurveys().then(function (response) {
+          self.preActivities = angular.copy(Array.prototype.concat.apply(response));
+          self.isLoading = false;
+        }).catch(function () {
+          self.preActivities = [];
+          _updateOffline();
+        });
+
     }
 
-    function update() {
-      self.preActivities = [];
-      if (navigator.onLine) {
-        SurveyClientService.getSurveys().then(function (response) {
-          self.preActivities = angular.copy(Array.prototype.concat.apply(response)).map(function (activity) {
-            return activity.toObjectJson()
-          });
-        }).catch(function () {
-          SurveyApiService.clearSession();
-          _setUser();
-        });
-      } else {
+    function _updateOffline() {
+      if (!$scope.$root.online){
+        _setUser();
         SurveyClientService.getOfflineSurveys().then(function (response) {
           self.preActivities = angular.copy(Array.prototype.concat.apply(response));
+          self.isLoading = false;
         });
+      } else {
+        _setUser();
+        self.isLoading = false;
       }
     }
 
@@ -71,6 +79,9 @@
 
     function _setUser() {
       self.user = SurveyApiService.getLoggedUser() ? SurveyApiService.getLoggedUser() : '';
+      if (self.user.email) {
+        ServiceWorker.register();
+      }
     }
 
     function toggleMenu() {

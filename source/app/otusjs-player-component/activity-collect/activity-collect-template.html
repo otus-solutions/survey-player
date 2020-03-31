@@ -1,5 +1,5 @@
 <md-content layout="column" layout-wrap layout-fill="" flex layout-padding="" ng-show="!$ctrl.selectedCollection && !$ctrl.fillCollection" ng-init="search">
-  <div layout="row" layout-xs="column" flex layout-align="start center" layout-align-xs="center start" layout-padding="">
+  <div layout="row" layout-xs="column" flex layout-align="start center" layout-align-xs="center start" layout-padding="" ng-show="$ctrl.collections.length">
     <div layout="row" layout-align="start center">
       <md-button class="md-icon-button md-mini md-raised md-primary" aria-label="Iniciadas" ng-click="search = true"></md-button>
       <span flex>Coletas iniciadas</span>
@@ -67,9 +67,12 @@
   <span flex="20"></span>
 </md-content>
 
-<md-content ng-show="$ctrl.selectedCollection" layout="column" flex="">
-  <div layout="row" layout-padding="" layout-margin="" flex>
-    <span class="md-title">{{ $ctrl.selectedCollection.observation }}</span>
+<md-content ng-show="$ctrl.selectedCollection" layout="column" flex="" layout-fill="">
+  <div layout="row" layout-padding="" layout-margin="" flex="100">
+    <md-input-container flex>
+      <label>Observação</label>
+      <textarea ng-model="$ctrl.selectedCollection.observation" md-select-on-focus md-maxlength="150" required></textarea>
+    </md-input-container>
   </div>
   <div layout="column" layout-fill>
     <md-list flex>

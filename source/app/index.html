@@ -4,10 +4,12 @@
 <head>
   <meta charset="utf-8"/>
   <base href="./"/>
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/ico" href="favicon.ico">
   <!-- OTUSJS PLAYER STANDALONE APP STYLESHEETS -->
   <!-- build:js css/otus-player-min.css -->
+  <link href="app/assets/fonts-googleapis-css.css" rel="stylesheet"/>
+  <link href="app/assets/material-icons.css" rel="stylesheet"/>
   <link href="node_modules/angular-material/angular-material.min.css" rel="stylesheet"/>
   <link href="app/assets/otusjs-player-standalone.css" rel="stylesheet"/>
   <meta name="viewport" content="width=device-width, user-scalable=no">
@@ -77,6 +79,7 @@
 <!-- OTUSJS PLAYER STANDALONE -->
 <!-- build:js scripts/otusjs-player-min.js -->
 <script src="app/app.js"></script>
+<script src="app/service-worker.js"></script>
 <script src="app/activity-rest-service.js"></script>
 <script src="app/activity-collection-rest-service.js"></script>
 <script src="app/activity-remote-storage-service.js"></script>
@@ -346,3 +349,14 @@
 
 
 </html>
+
+
+
+
+
+
+
+
+
+
+

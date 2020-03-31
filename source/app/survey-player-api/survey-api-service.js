@@ -79,22 +79,26 @@
     }
 
     function _initDB() {
-      alasql(INIT_QUERY, [], function () {
-        alasql(TABLE_USER, [], function () {
-          alasql.promise('SELECT * FROM User').then(function (response) {
-            if ($rootScope.online && getLoggedUser() == null) {
-              $rootScope.$broadcast("login", {any: {}});
-            } else {
-              if (response.length){
+      if (!$rootScope.online){
+        alasql(INIT_QUERY, [], function () {
+          alasql(TABLE_USER, [], function () {
+            alasql.promise('SELECT * FROM User').then(function (response) {
+              if (response.length === 1) {
                 _user = angular.copy(response[0]);
                 _token = angular.copy(response[0].token);
                 delete _user.token;
+                $rootScope.$broadcast("logged", {any: {}});
+              } else if (response.length > 1){
+                _dropDatabase();
+              } else {
+                $rootScope.$broadcast("login", {any: {}});
               }
-              $rootScope.$broadcast("logged", {any: {}});
-            }
+
+
+            });
           });
         });
-      });
+      }
     }
 
     function setSelectedCollection(id) {
@@ -160,21 +164,29 @@
       sessionStorage.setItem(LOGGED_USER, JSON.stringify({token: token}));
     }
 
+    function _dropDatabase() {
+      alasql('DROP INDEXEDDB DATABASE userDB');
+    }
+
     function setLoggedUser(user) {
       var deferred = $q.defer();
-      alasql(INIT_QUERY, [], function () {
-        alasql(TABLE_USER, [], function (res) {
-          var query = "SELECT * INTO User ".concat(' FROM ?');
-          _user = angular.copy(user);
-          sessionStorage.setItem(LOGGED_USER, JSON.stringify(user));
-          delete _user.token;
-          _token = angular.copy(user.token);
-          alasql(query, [Array.prototype.concat.apply(user)]);
-          deferred.resolve();
+      _dropDatabase();
+      if (user){
+        alasql(INIT_QUERY, [], function () {
+          alasql(TABLE_USER, [], function (res) {
+            var query = "SELECT * INTO User ".concat(' FROM ?');
+            _user = angular.copy(user);
+            sessionStorage.setItem(LOGGED_USER, JSON.stringify(user));
+            delete _user.token;
+            _token = angular.copy(user.token);
+            alasql(query, [Array.prototype.concat.apply(user)]);
+            deferred.resolve();
+          });
         });
-      });
+      }
 
       return deferred.promise;
+
     }
 
     function getLoggedUser(propName) {
@@ -185,10 +197,7 @@
           delete _loggedUser.token;
           return _loggedUser;
         }
-      } else {
-        if (navigator.onLine) {
-          clearSession();
-        }
+
       }
       return loggedUser;
     }
