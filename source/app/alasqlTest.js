@@ -1,6 +1,0 @@
-window.alsql = () => {
-  return {
-    promise: () => {
-    }
-  };
-};

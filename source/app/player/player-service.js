@@ -30,6 +30,7 @@
 
     function _setupSteps() {
       // Application default steps
+      PlayerConfigurationService.onEject(ExitPlayerStepService);
       PlayerConfigurationService.onPrePlayerStart(PrePlayerStepService);
       PlayerConfigurationService.onSave(SavePlayerStepService);
       PlayerConfigurationService.onStop(StopPlayerStepService);

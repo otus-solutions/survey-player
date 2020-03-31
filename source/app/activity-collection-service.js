@@ -12,7 +12,10 @@
   Service.$inject = [
     '$q',
     'ActivityRemoteStorageService',
-    'ActivityIndexedDbService'
+    'ActivityIndexedDbService',
+    'CollectIndexedDbService',
+    'SurveyApiService',
+    'ActivityCollectionRestService'
   ];
 
   /**
@@ -23,7 +26,7 @@
    * @namespace ActivityCollectionService
    * @memberof Services
    */
-  function Service($q, ActivityRemoteStorageService, ActivityIndexedDbService) {
+  function Service($q, ActivityRemoteStorageService, ActivityIndexedDbService, CollectIndexedDbService, SurveyApiService, ActivityCollectionRestService) {
     var self = this;
     var _remoteStorage = ActivityRemoteStorageService;
 
@@ -33,6 +36,7 @@
     self.update = update;
     self.getSurveys = getSurveys;
     self.getOfflineSurveys = getOfflineSurveys;
+    self.getByAcronymOffline = getByAcronymOffline;
 
     function getById(activityInfo) {
       var request = $q.defer();
@@ -46,15 +50,54 @@
       return request.promise;
     }
 
-    function update(activity) {
+    function getByAcronymOffline(code, acronym) {
       var request = $q.defer();
-      _remoteStorage.update(activity)
+      CollectIndexedDbService.getCollection(code)
         .then(function (response) {
-          request.resolve(response);
+          var _activity = response[0].activities.find(function (activity) {
+            return activity.surveyForm.acronym == acronym;
+          });
+          request.resolve(_activity);
         }).catch(function () {
         request.reject();
       });
 
+      return request.promise;
+    }
+
+    function update(activity) {
+      var request = $q.defer();
+      var _code = SurveyApiService.getSelectedCollection();
+      if (!_code) {
+        _remoteStorage.update(activity)
+          .then(function (response) {
+            request.resolve(response);
+          }).catch(function () {
+          request.reject();
+        });
+      } else {
+        return _updateInCollection(_code, JSON.parse(JSON.stringify(activity[0])));
+      }
+      return request.promise;
+    }
+
+    function _updateInCollection(code, activity) {
+      var request = $q.defer();
+      CollectIndexedDbService.getAllCollections(SurveyApiService.getLoggedUser().email)
+        .then(function (collections) {
+          collections.forEach(function (collection) {
+            if (collection.code === code) {
+              collection.activities = collection.activities.map(function (offlineActivity) {
+                if (offlineActivity.surveyForm.acronym === activity.surveyForm.acronym) {
+                  return activity;
+                }
+                return offlineActivity;
+              });
+              SurveyApiService.setModeOffline();
+              CollectIndexedDbService.updateCollection(collection);
+            }
+          });
+        });
       return request.promise;
     }
 
@@ -64,8 +107,8 @@
         .then(function (response) {
           ActivityIndexedDbService.update(response);
           request.resolve(response);
-        }).catch(function () {
-        request.reject();
+        }).catch(function (err) {
+        request.reject(err);
       });
 
       return request.promise;
@@ -80,13 +123,6 @@
       });
       return request.promise;
     }
-
-    self.getListSurveys = getListSurveys;
-
-    function getListSurveys() {
-      return ActivityIndexedDbService.getList();
-    }
-
 
   }
 }());

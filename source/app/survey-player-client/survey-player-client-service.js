@@ -23,22 +23,24 @@
     self.saveActivity = saveActivity;
     self.getSurveys = getSurveys;
     self.getOfflineSurveys = getOfflineSurveys;
-    self.getListSurveys = getListSurveys;
 
 
     function getSurveyTemplate() {
-      return ActivityRepositoryService.getById(SurveyApiService.getCurrentActivity()).then(function (response) {
-        if (Array.isArray(response)) {
-          if (response.length > 0) {
-            activityToPlay = angular.copy(response[0]);
-            return activityToPlay;
+      if (!SurveyApiService.getModeOffline()) {
+        return ActivityRepositoryService.getById(SurveyApiService.getCurrentActivity()).then(function (response) {
+          if (Array.isArray(response)) {
+            if (response.length > 0) {
+              activityToPlay = angular.copy(response[0]);
+              return activityToPlay;
+            }
           }
-        }
-      });
-    }
-
-    function getListSurveys() {
-      return ActivityRepositoryService.getListSurveys();
+        });
+      } else {
+        return ActivityRepositoryService.getByAcronymOffline(SurveyApiService.getSelectedCollection(), SurveyApiService.getCurrentActivity()).then(function (response) {
+          activityToPlay = angular.copy(response);
+          return activityToPlay;
+        });
+      }
     }
 
     function saveActivity(data) {
@@ -60,6 +62,8 @@
         } else {
           return [];
         }
+      }).catch(function (err) {
+          return Promise.reject(err);
       });
     }
 

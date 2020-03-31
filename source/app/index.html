@@ -22,6 +22,11 @@
 </head>
 
 <body ng-cloak>
+<noscript>
+  <h3 style="color: #673ab7; font-family: Helvetica; margin: 2rem;">
+    Aplicativo indisponível sem javascript.
+  </h3>
+</noscript>
 <div layout="row" class="md-body-2" ui-view layout-fill=""></div>
 </body>
 
@@ -73,6 +78,7 @@
 <!-- build:js scripts/otusjs-player-min.js -->
 <script src="app/app.js"></script>
 <script src="app/activity-rest-service.js"></script>
+<script src="app/activity-collection-rest-service.js"></script>
 <script src="app/activity-remote-storage-service.js"></script>
 <script src="app/activity-collection-service.js"></script>
 <script src="app/activity-repository-service.js"></script>
@@ -87,6 +93,7 @@
 <script src="app/storage/storage-module.js"></script>
 <script src="app/storage/activity-local-storage-service.js"></script>
 <script src="app/storage/activity-indexed-db-storage-service.js"></script>
+<script src="app/storage/collect-indexed-db-storage-service.js"></script>
 <!--SURVEY ITEM DATASOURCE-->
 <script src="app/data-source/datasource-module.js"></script>
 <script src="app/data-source/datasource-resource-factory.js"></script>
@@ -112,6 +119,7 @@
 <script src="app/misc/otusjs-player-data-module.js"></script>
 <script src="app/misc/fake-data-service.js"></script>
 <script src="app/utils/connection-icon-component.js"></script>
+<script src="app/utils/activity-status-constant.js"></script>
 <!-- VIEWER -->
 <script src="app/otusjs-player-viewer/otusjs-player-viewer-module.js"></script>
 <script src="app/otusjs-player-viewer/sheet-view-controller.js"></script>
@@ -204,6 +212,7 @@
 <script src="app/otusjs-player-component/question-menu/question-menu-component.js"></script>
 <script src="app/otusjs-player-component/answer-view/answer-view-component.js"></script>
 <script src="app/otusjs-player-component/survey-list/survey-list-component.js"></script>
+<script src="app/otusjs-player-component/activity-collect/activity-collect-component.js"></script>
 
 <!-- /OTUSJS-PLAYER-CORE -->
 <!-- -------------------------------------------------------------------------------------- -->

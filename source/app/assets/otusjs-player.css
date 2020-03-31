@@ -96,3 +96,7 @@ md-sidenav {
   z-index: 65 !important;
   min-width: 320px !important;
 }
+
+.checkboxToolbar:not(.md-checked) .md-icon {
+  border-color: #FFFFFF !important;
+}

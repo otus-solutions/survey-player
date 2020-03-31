@@ -13,29 +13,56 @@
     'LoginService',
     'SurveyApiService',
     '$mdSidenav',
-    '$mdToast'
+    '$mdToast',
+    'SurveyClientService'
+
   ];
 
-  function Controller($scope, LoginService, SurveyApiService, $mdSidenav, $mdToast) {
+  function Controller($scope, LoginService, SurveyApiService, $mdSidenav, $mdToast, SurveyClientService) {
     var self = this;
 
     self.auth = auth;
     self.authenticate = authenticate;
     self.toggleMenu = toggleMenu;
+    self.$onInit = onInit;
+    self.commands = [];
 
-    self.$onInit = function () {
+    function onInit() {
+      self.commands = [];
       _setUser();
-    };
+      update();
+    }
 
     function auth() {
       return LoginService.isAuthenticated();
+    }
+
+    function update() {
+      self.preActivities = [];
+      if (navigator.onLine) {
+        SurveyClientService.getSurveys().then(function (response) {
+          self.preActivities = angular.copy(Array.prototype.concat.apply(response)).map(function (activity) {
+            return activity.toObjectJson()
+          });
+        }).catch(function () {
+          SurveyApiService.clearSession();
+          _setUser();
+        });
+      } else {
+        SurveyClientService.getOfflineSurveys().then(function (response) {
+          self.preActivities = angular.copy(Array.prototype.concat.apply(response));
+        });
+      }
     }
 
     function authenticate(ev) {
       $mdSidenav('userMenu').close();
       LoginService.authenticate(ev).then(function (response) {
         _setUser();
-        response ? _showMessage(response) : null;
+        if (response) {
+          _showMessage(response);
+          update();
+        }
       }, function (err) {
         _setUser();
         err ? _showMessage(err) : null;

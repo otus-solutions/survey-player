@@ -19,31 +19,38 @@
       </md-button>
     </div>
   </md-toolbar>
+  <md-content ng-if="!$ctrl.user" layout="column" flex="">
+  </md-content>
   <md-content ng-if="$ctrl.user" layout="column" flex="">
 
     <md-tabs class="" md-dynamic-height md-selected="selectedIndex" md-border-bottom md-autoselect>
-      <md-tab label="Listar">
-        <md-content class="md-padding" flex="100" layout="column">
-          <survey-list user="$ctrl.user" layout-padding="" flex></survey-list>
-        </md-content>
-      </md-tab>
-      <md-tab label="Coletar">
-        <md-content class="md-padding" flex="">
-          <div flex layout="row" layout-align="center center" layout-margin="">
-            <md-button class="md-raised md-primary">
-              NOVA COLETA
-            </md-button>
-          </div>
-        </md-content>
-      </md-tab>
-      <md-tab label="CARREGAR">
-        <md-content class="md-padding">
+      <md-tab label="LISTA">
+        <md-content class="md-padding" flex="100" layout="column" ng-if="$ctrl.preActivities.length">
 
+          <div flex="100" layout="row" layout-align="end center" layout-padding="">
+            <span class="md-subheader" flex>Verifique sempre se há atividades desatualizadas! Se necessário, conecte-se a internet para atualiza-las.</span>
+          </div>
+          <survey-list user="$ctrl.user" pre-activities="$ctrl.preActivities" layout-padding="" flex></survey-list>
+        </md-content>
+      </md-tab>
+      <md-tab label="COLETAS">
+        <md-content layout="column" flex ng-if="$ctrl.preActivities.length">
+          <activity-collection show-commands="selectedIndex == 1" layout="column" commands="$ctrl.commands" flex user="$ctrl.user" activities="$ctrl.preActivities"></activity-collection>
         </md-content>
       </md-tab>
     </md-tabs>
 
   </md-content>
+  <footer>
+    <md-toolbar class="md-scroll-shrink">
+      <div layout="row" layout-align="start center" flex layout-padding="">
+        <small flex class="md-caption">&copy; Plataform Otus</small>
+        <md-button class="{{command.theme}}" style="margin-right: 30px" ng-repeat="command in $ctrl.commands" ng-click="command.action()">
+          <md-icon>{{''.concat(command.icon)}}</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+  </footer>
 
   <md-sidenav class="md-sidenav-left" md-component-id="userMenu"
               md-whiteframe="4" md-disable-close-events>
@@ -67,12 +74,11 @@
         <span class="md-body-1">{{ $ctrl.user.email}}</span>
       </div>
       <span flex="20"></span>
-
-      <md-button ng-show="$ctrl.user" class="md-primary md-raised" ng-click="selectedIndex = 1; $ctrl.toggleMenu()">
-        COLETAR
+      <md-button ng-show="$ctrl.user" class="md-primary md-raised" ng-click="selectedIndex = 0; $ctrl.toggleMenu()">
+        Lista
       </md-button>
-      <md-button ng-show="$ctrl.user" class="md-primary md-raised" ng-click="selectedIndex = 2; $ctrl.toggleMenu()">
-        CARREGAR
+      <md-button ng-show="$ctrl.user" class="md-primary md-raised" ng-click="selectedIndex = 1; $ctrl.toggleMenu()">
+        Coletas
       </md-button>
 
       <md-button ng-click="$ctrl.authenticate($event)" aria-label="Login" class="md-accent" style="top: 50%">

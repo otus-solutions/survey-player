@@ -25,6 +25,10 @@ variable "survey-player-login-url" {
   default = "http://localhost:51002/otus-rest/v01/authentication"
 }
 
+variable "survey-player-collect-url" {
+  default = "http://localhost:51002/otus-rest/v01/offline/activities/collection"
+}
+
 variable "survey-player-version" {
   default = "survey-player:latest"
 }
