@@ -82,6 +82,7 @@
      * Clears the collection data.
      */
     function clear() {
+      _db.loadDatabase();
       _collection.clear();
       self.options.unique.forEach(function(uniqueIndex) {
         _collection.constraints.unique[uniqueIndex].keyMap = {};
@@ -92,12 +93,14 @@
 
     /* Datasources  Methods */
     function registerDatasource(datasource) {
+      _db.loadDatabase();
       if (_collection) {
         _collection.insert({
           name: 'datasource',
           dataMap: datasource
         });
       }
+      _db.saveDatabase();
       return self.getDatasource;
     }
 
