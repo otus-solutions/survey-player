@@ -11,7 +11,7 @@
       </md-button>
       <span layout-margin="">{{ $ctrl.user.name }}</span>
       <md-button class="md-icon-button md-raised md-accent" aria-label="Login" id="shortLogin"
-                 ng-click="$ctrl.authenticate($event)">
+                 ng-click="$ctrl.authenticate()">
         <md-icon ng-if="!$ctrl.user">person</md-icon>
         <md-icon ng-if="$ctrl.user">how_to_reg</md-icon>
         <md-tooltip ng-if="!$ctrl.user">Entrar</md-tooltip>
@@ -25,7 +25,14 @@
   <md-content ng-if="$ctrl.user" layout="column" flex="">
 
     <md-tabs class="" md-dynamic-height md-selected="selectedIndex" md-border-bottom md-autoselect>
-      <md-tab label="LISTA" ng-click="$ctrl.update()" ng-disabled="!!!$ctrl.preActivities.length">
+
+      <md-tab label="COLETAS" ng-click="$ctrl.list()">
+        <div layout="column">
+          <activity-group-collection commands="$ctrl.commands" user="$ctrl.user"
+                                     show-commands="selectedIndex == 0"></activity-group-collection>
+        </div>
+      </md-tab>
+      <md-tab label="LISTA DE ATIVIDADES" ng-click="$ctrl.list()">
         <md-content class="md-padding" flex="100" layout="column">
           <div flex="100" layout="row" layout-align="end center" layout-padding="" ng-if="$ctrl.preActivities.length">
             <span class="md-subheader" flex>Verifique sempre se há atividades desatualizadas! Se necessário, conecte-se a internet para atualiza-las.</span>
@@ -34,12 +41,7 @@
                        ng-if="$ctrl.preActivities.length"></survey-list>
         </md-content>
       </md-tab>
-      <md-tab label="COLETAS" ng-click="selectedIndex = 1" ng-disabled="!!!$ctrl.preActivities.length">
-        <md-content layout="column" flex ng-if="$ctrl.preActivities.length">
-          <activity-collection show-commands="selectedIndex == 1" layout="column" commands="$ctrl.commands" flex
-                               user="$ctrl.user" activities="$ctrl.preActivities"></activity-collection>
-        </md-content>
-      </md-tab>
+
     </md-tabs>
 
   </md-content>
@@ -77,15 +79,17 @@
         <span class="md-body-1">{{ $ctrl.user.email}}</span>
       </div>
       <span flex="20"></span>
-      <md-button ng-show="$ctrl.user" class="md-primary md-raised" ng-click="selectedIndex = 0; $ctrl.toggleMenu()">
-        Lista
-      </md-button>
-      <md-button ng-show="$ctrl.user" class="md-primary md-raised" ng-click="selectedIndex = 1; $ctrl.toggleMenu()">
+      <md-button ng-show="$ctrl.user" class="md-primary md-raised"
+                 ng-click="$ctrl.list(); selectedIndex = 0; $ctrl.toggleMenu()">
         Coletas
       </md-button>
+      <md-button ng-show="$ctrl.user" class="md-primary md-raised"
+                 ng-click="$ctrl.list(); selectedIndex = 1; $ctrl.toggleMenu()">
+        Lista DE ATIVIDADES
+      </md-button>
       <md-button ng-click="$ctrl.authenticate($event)" aria-label="Login" class="md-accent" style="top: 50%">
-        <span ng-if="!$ctrl.auth()">ENTRAR</span>
-        <span ng-if="$ctrl.auth()">SAIR</span>
+        <span ng-if="!$ctrl.user">ENTRAR</span>
+        <span ng-if="$ctrl.user">SAIR</span>
       </md-button>
     </md-content>
   </md-sidenav>

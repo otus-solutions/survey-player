@@ -59,7 +59,7 @@
         .then(function (promiseArray) {
           promiseArray.forEach(function (promise) {
             var ds = promise.data;
-            dsMap[ds.data.id] = ds.data;
+            dsMap[ds.data.id || ds.id] = ds.data;
           });
           defer.resolve(dsMap);
         });
@@ -79,8 +79,10 @@
         return SurveyItemRestService.getByID(id).then(function (response) {
           ActivityIndexedDbService.updateDatasource(id, response.data);
           return response;
+        }).catch(function () {
+          $rootScope.online = false;
+          return ActivityIndexedDbService.getDatasource(id);
         });
-
       } else {
         return ActivityIndexedDbService.getDatasource(id);
       }

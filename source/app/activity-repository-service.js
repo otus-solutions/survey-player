@@ -22,7 +22,7 @@
     self.discard = discard;
     self.getById = getById;
     self.getSurveys = getSurveys;
-    self.getOfflineSurveys = getOfflineSurveys;
+    self.getAllActivities = getAllActivities;
     self.getByAcronymOffline = getByAcronymOffline;
 
 
@@ -36,21 +36,22 @@
       });
     }
 
-    function getSurveys(user) {
-      return ActivityCollectionService.getSurveys().then(function (surveys) {
-        return surveys.map(function (survey) {
-          return ActivityFactory.createOfflineActivity(SurveyFormFactory.fromJsonObject(survey), user);
-        });
+    function getSurveys() {
+      return ActivityCollectionService.getSurveyList().then(function (surveys) {
+        return surveys;
       }).catch(function (err) {
         return Promise.reject(err);
       });
     }
 
-    function getOfflineSurveys(user) {
-      return ActivityCollectionService.getOfflineSurveys().then(function (surveys) {
+    function getAllActivities(user) {
+      return ActivityCollectionService.getAllActivities().then(function (surveys) {
         return surveys.map(function (survey) {
-          return ActivityFactory.createOfflineActivity(SurveyFormFactory.fromJsonObject(survey), user);
+          return ActivityFactory.createOfflineActivity(SurveyFormFactory.fromJsonObject(survey), user).toObjectJson();
         });
+
+      }).catch(function (err) {
+        return Promise.reject(err);
       });
     }
 

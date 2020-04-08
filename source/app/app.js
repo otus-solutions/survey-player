@@ -33,11 +33,11 @@
   Runner.$inject = [
     '$injector',
     'StorageLoaderService',
-    '$rootScope'
+    'ServiceWorker'
   ];
 
-  function Runner($injector, StorageLoaderService, $rootScope) {
-
+  function Runner($injector, StorageLoaderService, ServiceWorker) {
+    ServiceWorker.register();
     _loadOtusDb(StorageLoaderService)
       .then(function () {
       });
@@ -45,8 +45,6 @@
 
   function _loadOtusDb(StorageLoaderService) {
     var OTUS_DB = 'otus';
-
-    // StorageLoaderService.initializeSessionStorage();
 
     return StorageLoaderService.dbExists(OTUS_DB).then(function (dbExists) {
       if (dbExists) {

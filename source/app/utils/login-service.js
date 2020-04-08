@@ -31,20 +31,19 @@
       return _token && $rootScope.online ? true : false;
     }
 
-    function authenticate(ev) {
+    function authenticate() {
       if (!self.isAuthenticated()) {
-        return _login(ev);
+        return _login();
       } else {
-        return _logout(ev);
+        return _logout();
       }
     }
 
-    function _login(ev) {
+    function _login() {
       return $mdDialog.show({
         controller: DialogController,
         templateUrl: 'app/utils/login-template.html',
         parent: angular.element(document.body),
-        targetEvent: ev,
         clickOutsideToClose: true
       }).then(function (response) {
         return response;
@@ -53,12 +52,11 @@
       });
     }
 
-    function _logout(ev) {
+    function _logout() {
       var confirm = $mdDialog.confirm()
         .title(TITLE_LOGOUT)
         .textContent(CONTENT_LOGOUT)
         .ariaLabel(ARIA_LABEL_LOGOUT)
-        .targetEvent(ev)
         .ok(YES)
         .cancel(NO);
 

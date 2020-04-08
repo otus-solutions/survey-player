@@ -9,7 +9,7 @@
 
   function Service() {
     const LOGO_SOURCE = "static-resource/image/coruja_pesquisadora.png";
-    const BACKGROUND_COLOR = "#fafafa";
+    const BACKGROUND_COLOR = "#009688";
     const MESSAGE = "Por favor, aguarde o carregamento.";
     const LOCKED_MESSAGE = "Loading bloqueado pela chave: ";
     const NEW_KEY_NOT_ADDED = "Não foi possível atribuir a nova chave: ";
@@ -83,7 +83,7 @@
       self.loading_screen = pleaseWait({
         logo: LOGO_SOURCE,
         backgroundColor: BACKGROUND_COLOR,
-        loadingHtml: "<p class='loading-message' style='color:#009688;'>" + self.message + "</p>" +
+        loadingHtml: "<p class='loading-message' style='color:#FFF;'>" + self.message + "</p>" +
           "<div class='sk-circle'>" +
           "<div class='sk-circle1 sk-child'></div>" +
           "<div class='sk-circle2 sk-child'></div>" +

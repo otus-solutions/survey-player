@@ -90,10 +90,7 @@
                 $rootScope.$broadcast("logged", {any: {}});
               } else if (response.length > 1){
                 _dropDatabase();
-              } else {
-                $rootScope.$broadcast("login", {any: {}});
               }
-
 
             });
           });
@@ -101,9 +98,9 @@
       }
     }
 
-    function setSelectedCollection(id) {
-      if (id) {
-        sessionStorage.setItem(COLLECTION, id);
+    function setSelectedCollection(collection) {
+      if (collection) {
+        sessionStorage.setItem(COLLECTION, collection.code);
       } else {
         sessionStorage.removeItem(COLLECTION);
       }
@@ -180,6 +177,7 @@
             delete _user.token;
             _token = angular.copy(user.token);
             alasql(query, [Array.prototype.concat.apply(user)]);
+            $rootScope.online = true;
             deferred.resolve();
           });
         });
@@ -207,7 +205,6 @@
     }
 
     function getCallbackAddress() {
-      exitModeOffline();
       return sessionStorage.getItem(CALLBACK_ADDRESS) ? sessionStorage.getItem(CALLBACK_ADDRESS) : location.href;
     }
 
@@ -226,6 +223,7 @@
       sessionStorage.removeItem(AUTH_TOKEN);
       sessionStorage.removeItem(CALLBACK_ADDRESS);
       sessionStorage.removeItem(LOGGED_USER);
+      sessionStorage.removeItem(MODE);
     }
   }
 })();

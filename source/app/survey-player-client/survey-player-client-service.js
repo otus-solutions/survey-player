@@ -22,7 +22,7 @@
     self.getSurveyTemplate = getSurveyTemplate;
     self.saveActivity = saveActivity;
     self.getSurveys = getSurveys;
-    self.getOfflineSurveys = getOfflineSurveys;
+    self.getAllActivities = getAllActivities;
 
     function getSurveyTemplate() {
       if (!SurveyApiService.getModeOffline()) {
@@ -55,11 +55,9 @@
     }
 
     function getSurveys() {
-      return ActivityRepositoryService.getSurveys(SurveyApiService.getLoggedUser()).then(function (response) {
+      return ActivityRepositoryService.getSurveys().then(function (response) {
         if (Array.isArray(response)) {
-          return response.map(function (activity) {
-            return activity.toObjectJson();
-          });
+          return response;
         } else {
           return [];
         }
@@ -68,17 +66,18 @@
       });
     }
 
-    function getOfflineSurveys() {
-      return ActivityRepositoryService.getOfflineSurveys(SurveyApiService.getLoggedUser()).then(function (response) {
+    function getAllActivities() {
+      return ActivityRepositoryService.getAllActivities(SurveyApiService.getLoggedUser()).then(function (response) {
         if (Array.isArray(response)) {
-          return response.map(function (activity) {
-            return activity.toObjectJson();
-          });
+          return response;
         } else {
           return [];
         }
+      }).catch(function (err) {
+          return Promise.reject(err);
       });
     }
+
   }
 
 })();

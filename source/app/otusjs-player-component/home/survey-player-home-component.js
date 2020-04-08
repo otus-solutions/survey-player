@@ -25,51 +25,38 @@
     self.authenticate = authenticate;
     self.toggleMenu = toggleMenu;
     self.$onInit = onInit;
-    self.update = update;
-    $scope.selectedIndex = null;
+    self.list = list;
+    $scope.selectedIndex = 0;
     self.commands = [];
     self.preActivities = [];
     self.isLoading = false;
 
 
     function onInit() {
-      ServiceWorker.unregister();
       self.commands = [];
-      update();
+      list();
     }
 
-    function update() {
+    function list() {
       self.isLoading = true;
         SurveyClientService.getSurveys().then(function (response) {
           self.preActivities = angular.copy(Array.prototype.concat.apply(response));
+          _setUser();
           self.isLoading = false;
         }).catch(function () {
           self.preActivities = [];
-          _updateOffline();
-        });
-
-    }
-
-    function _updateOffline() {
-      if (!$scope.$root.online){
-        _setUser();
-        SurveyClientService.getOfflineSurveys().then(function (response) {
-          self.preActivities = angular.copy(Array.prototype.concat.apply(response));
+          _setUser();
           self.isLoading = false;
         });
-      } else {
-        _setUser();
-        self.isLoading = false;
-      }
+
     }
 
-    function authenticate(ev) {
+    function authenticate() {
       $mdSidenav('userMenu').close();
-      LoginService.authenticate(ev).then(function (response) {
+      LoginService.authenticate().then(function (response) {
         _setUser();
         if (response) {
           _showMessage(response);
-          update();
         }
       }, function (err) {
         _setUser();
@@ -79,9 +66,6 @@
 
     function _setUser() {
       self.user = SurveyApiService.getLoggedUser() ? SurveyApiService.getLoggedUser() : '';
-      if (self.user.email) {
-        ServiceWorker.register();
-      }
     }
 
     function toggleMenu() {
@@ -102,7 +86,7 @@
     });
 
     $scope.$on("login", function () {
-      $("#shortLogin").click();
+      self.authenticate();
     });
 
   }

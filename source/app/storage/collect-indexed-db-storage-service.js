@@ -53,14 +53,21 @@
     }
 
     function insertCollection(newCollection) {
+      var request = $q.defer();
       if (_isValid(newCollection)) {
         alasql(INIT_QUERY, [], function () {
           alasql(TABLE_COLLECTION, [], function (res) {
             var query = "INSERT INTO ".concat(DB_TABLE_COLLECTIONS).concat(' SELECT * FROM ?');
-            alasql.promise(query, [Array.prototype.concat.apply(newCollection)]);
+            alasql.promise(query, [Array.prototype.concat.apply(newCollection)]).then(function () {
+              request.resolve(newCollection)
+            }).catch(function () {
+              request.reject()
+            });
+
           });
         });
       }
+      return request.promise;
     }
 
     function updateCollection(collection) {

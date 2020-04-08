@@ -25,8 +25,10 @@
     self.getActivity = getActivity;
     self.getDatasource = getDatasource;
     self.updateDatasource = updateDatasource;
+    self.getSurveyList = getSurveyList;
 
     function _persist(activities, datasources) {
+      alasql('DROP INDEXEDDB DATABASE surveyPlayer;');
       alasql(INIT_QUERY, [], function () {
         alasql(CREATE_TABLES, [], function (res) {
           if (res[0] === 1) {
@@ -66,6 +68,25 @@
       alasql(INIT_QUERY, [], function () {
         alasql.promise('SELECT * FROM '.concat(DB_TABLE_ACTIVITIES)).then(function (response) {
           defer.resolve(response);
+        }).catch(function (err) {
+          defer.reject(err);
+        });
+
+      });
+
+      return defer.promise;
+    }
+
+    function getSurveyList() {
+      var defer = $q.defer();
+      alasql(INIT_QUERY, [], function () {
+        alasql.promise('SELECT acronym, version, surveyTemplate FROM '.concat(DB_TABLE_ACTIVITIES)).then(function (response) {
+          var list = response.map(function (survey) {
+            survey.name = survey.surveyTemplate.identity.name;
+            delete survey.surveyTemplate;
+            return survey
+          });
+          defer.resolve(list);
         }).catch(function (err) {
           defer.reject(err);
         });

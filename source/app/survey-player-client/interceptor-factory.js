@@ -7,7 +7,6 @@
   Interceptor.$inject = ['SurveyApiService', '$rootScope'];
 
   function Interceptor(SurveyApiService, $rootScope) {
-
     return {
       request: function (config) {
         config.headers['Authorization'] = 'Bearer ' + SurveyApiService.getAuthToken();
@@ -26,7 +25,6 @@
               $rootScope.online = true;
               $rootScope.$broadcast('logged');
               $rootScope.$broadcast('login');
-              $rootScope.$broadcast('online');
             }
           }
         }
