@@ -203,7 +203,6 @@
     }
 
     function initializeCollection(collect) {
-      LoadingScreenService.start();
       self.collectToInitialize = collect;
       self.collectToInitialize.initialize(_updateReadyGeoJSON);
 
@@ -216,10 +215,8 @@
       _addButtonADD();
       if (self.collectToInitialize.geoJson.coordinates === geoJson.coordinates){
         CollectIndexedDbService.updateCollection(self.collectToInitialize.toJSON());
-        LoadingScreenService.finish();
         _messages(MESSAGE_INITIALIZE);
       }
-
     }
 
     function newCollection() {
