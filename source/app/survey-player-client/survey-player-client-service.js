@@ -66,8 +66,8 @@
       });
     }
 
-    function getAllActivities() {
-      return ActivityRepositoryService.getAllActivities(SurveyApiService.getLoggedUser()).then(function (response) {
+    function getAllActivities(filter) {
+      return ActivityRepositoryService.getAllActivities(SurveyApiService.getLoggedUser(), filter).then(function (response) {
         if (Array.isArray(response)) {
           return response;
         } else {

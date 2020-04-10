@@ -38,6 +38,7 @@
     self.exitModeOffline = exitModeOffline;
     self.setSelectedCollection = setSelectedCollection;
     self.getSelectedCollection = getSelectedCollection;
+    self.initDB = initDB;
 
     const CURRENT_ACTIVITY = 'Current_Activity';
     const AUTH_TOKEN = 'Auth_Token';
@@ -55,6 +56,8 @@
     const TOKEN = true;
     const MODE = 'MODE';
     init();
+    initDB();
+
 
     var _loginUrl;
     var _datasourceUrl;
@@ -75,27 +78,28 @@
       _staticVariableUrl = $cookies.get(STATIC_VARIABLE_ADDRESS);
       _fileUploadUrl = $cookies.get(FILE_UPLOAD_ADDRESS);
       _collectUrl = $cookies.get(COLLECT_ADDRESS);
-      _initDB();
     }
 
-    function _initDB() {
-      if (!$rootScope.online){
-        alasql(INIT_QUERY, [], function () {
-          alasql(TABLE_USER, [], function () {
-            alasql.promise('SELECT * FROM User').then(function (response) {
-              if (response.length === 1) {
-                _user = angular.copy(response[0]);
-                _token = angular.copy(response[0].token);
-                delete _user.token;
-                $rootScope.$broadcast("logged", {any: {}});
-              } else if (response.length > 1){
-                _dropDatabase();
-              }
+    function initDB() {
+      alasql(INIT_QUERY, [], function () {
+        alasql(TABLE_USER, [], function () {
+          alasql.promise('SELECT * FROM User').then(function (response) {
+            if (response.length === 1) {
+              _user = angular.copy(response[0]);
+              _token = angular.copy(response[0].token);
+              $rootScope.$broadcast("logged", {any: {}});
+              delete _user.token;
+            } else if (response.length > 1) {
+              alasql('DELETE FROM User;')
+            }
 
-            });
+            $rootScope.$broadcast("listSurveys", {any: {}});
+
+
           });
         });
-      }
+      });
+
     }
 
     function setSelectedCollection(collection) {
@@ -167,10 +171,11 @@
 
     function setLoggedUser(user) {
       var deferred = $q.defer();
-      _dropDatabase();
-      if (user){
+      console.log(user);
+      if (user) {
         alasql(INIT_QUERY, [], function () {
           alasql(TABLE_USER, [], function (res) {
+            // alasql("DELETE FROM User")
             var query = "SELECT * INTO User ".concat(' FROM ?');
             _user = angular.copy(user);
             sessionStorage.setItem(LOGGED_USER, JSON.stringify(user));
@@ -181,6 +186,8 @@
             deferred.resolve();
           });
         });
+      } else {
+        _dropDatabase()
       }
 
       return deferred.promise;

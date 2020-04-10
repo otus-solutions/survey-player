@@ -28,7 +28,6 @@
     self.getSurveyList = getSurveyList;
 
     function _persist(activities, datasources) {
-      alasql('DROP INDEXEDDB DATABASE surveyPlayer;');
       alasql(INIT_QUERY, [], function () {
         alasql(CREATE_TABLES, [], function (res) {
           if (res[0] === 1) {
@@ -43,6 +42,7 @@
 
     function update(activities) {
       if (Array.isArray(activities) && _isValid(activities)) {
+        alasql('DROP INDEXEDDB DATABASE surveyPlayer;');
         activities.forEach(function (activity) {
           activity.acronym = activity.surveyTemplate.identity.acronym;
         });

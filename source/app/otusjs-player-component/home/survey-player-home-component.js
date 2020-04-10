@@ -34,20 +34,19 @@
 
     function onInit() {
       self.commands = [];
-      list();
     }
 
     function list() {
       self.isLoading = true;
-        SurveyClientService.getSurveys().then(function (response) {
-          self.preActivities = angular.copy(Array.prototype.concat.apply(response));
-          _setUser();
-          self.isLoading = false;
-        }).catch(function () {
-          self.preActivities = [];
-          _setUser();
-          self.isLoading = false;
-        });
+      SurveyClientService.getSurveys().then(function (response) {
+        self.preActivities = angular.copy(Array.prototype.concat.apply(response));
+        _setUser();
+        self.isLoading = false;
+      }).catch(function () {
+        self.preActivities = [];
+        _setUser();
+        self.isLoading = false;
+      });
 
     }
 
@@ -87,6 +86,10 @@
 
     $scope.$on("login", function () {
       self.authenticate();
+    });
+
+    $scope.$on("listSurveys", function () {
+      self.list();
     });
 
   }

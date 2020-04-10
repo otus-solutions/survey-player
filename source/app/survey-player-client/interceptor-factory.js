@@ -24,7 +24,7 @@
               SurveyApiService.setLoggedUser();
               $rootScope.online = true;
               $rootScope.$broadcast('logged');
-              $rootScope.$broadcast('login');
+              if (/authentication/.test(response.config.url) === false) $rootScope.$broadcast('login');
             }
           }
         }

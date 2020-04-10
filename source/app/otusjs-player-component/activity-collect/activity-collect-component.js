@@ -146,6 +146,9 @@
     }
 
     function onInit() {
+      SurveyClientService.getSurveys().then(function (activities) {
+        self.allActivities = angular.copy(activities);
+      });
       _canSyncAllCollections();
       self.STATUS = ACTIVITY_STATUS;
       _clear();
@@ -154,12 +157,12 @@
 
     function _restore() {
       self.selectedCollectionId = SurveyApiService.getSelectedCollection();
-      if (self.selectedCollectionId){
-          self.group.collections.forEach(function (collection) {
-            if (collection.code === self.selectedCollectionId) {
-              fill(collection);
-            }
-          });
+      if (self.selectedCollectionId) {
+        self.group.collections.forEach(function (collection) {
+          if (collection.code === self.selectedCollectionId) {
+            fill(collection);
+          }
+        });
       }
     }
 
@@ -175,14 +178,16 @@
       self.collect = collect.toJSON();
       _showPrompt(REMOVE_COLLECTION).then(function (response) {
         if (response) {
-          CollectIndexedDbService.removeCollection(self.collect.code);
-          _messages(MESSAGE_REMOVE_SUCCESS);
-          self.group.collections = self.group.collections.filter(function (collection) {
-            return collection.code !== self.collect.code;
-          });
-          !self.group.collections.length ? self.back() : null;
-        } else {
-          _messages(MESSAGE_REMOVE_FAILED);
+          try {
+            CollectIndexedDbService.removeCollection(self.collect.code);
+            _messages(MESSAGE_REMOVE_SUCCESS);
+            self.group.collections = self.group.collections.filter(function (collection) {
+              return collection.code !== self.collect.code;
+            });
+            !self.group.collections.length ? self.back() : null;
+          } catch (e) {
+            _messages(MESSAGE_REMOVE_FAILED);
+          }
         }
         delete self.collect;
       });
@@ -213,16 +218,12 @@
       _clear();
       _addButtonSaveAll();
       _addButtonADD();
-      if (self.collectToInitialize.geoJson.coordinates === geoJson.coordinates){
-        CollectIndexedDbService.updateCollection(self.collectToInitialize.toJSON());
-        _messages(MESSAGE_INITIALIZE);
-      }
+      self.collectToInitialize.geoJson = geoJson;
+      CollectIndexedDbService.updateCollection(self.collectToInitialize.toJSON());
+      _messages(MESSAGE_INITIALIZE);
     }
 
     function newCollection() {
-      SurveyClientService.getAllActivities().then(function (activities) {
-        self.allActivities = angular.copy(activities);
-      });
       let json = {
         userEmail: self.user.email,
         groupId: self.group._id,
@@ -311,7 +312,7 @@
       _showPrompt(SEND_COLLECTION).then(function (response) {
         if (response) {
           ActivityCollectionRestService.saveOffline(self.collect).then(function () {
-            self.removeCollection(collect);
+            CollectIndexedDbService.removeCollection(collect.code);
             _messages(MESSAGE_SEND_SUCCESS);
           }).catch(function () {
             _messages(MESSAGE_SEND_FAILED);
@@ -323,13 +324,24 @@
 
     function _save() {
       try {
-        if (self.selected.length && self.selectedCollection.observation) {
-          self.selectedCollection.addActivities(self.selected);
-          self.selectedCollection.userEmail = self.user.email;
-          CollectIndexedDbService.insertCollection(self.selectedCollection.toJSON()).then(function (response) {
-            self.group.addCollection(self.selectedCollection);
-            _clear();
-            _addButtonADD();
+        if (self.selected.length) {
+          LoadingScreenService.start();
+          SurveyClientService.getAllActivities(self.selected).then(function (activities) {
+            self.selectedCollection.addActivities(activities);
+            self.selectedCollection.userEmail = self.user.email;
+            CollectIndexedDbService.insertCollection(self.selectedCollection.toJSON()).then(function (response) {
+              self.group.addCollection(self.selectedCollection);
+              _clear();
+              _addButtonADD();
+              LoadingScreenService.finish();
+            }).catch(function () {
+              LoadingScreenService.finish();
+              _messages('Não foi possível salvar a coleta!');
+
+            });
+          }).catch(function () {
+            LoadingScreenService.finish();
+            _messages('Não foi possível salvar a coleta!');
           });
         } else {
           if (!self.selectedCollection.observation) _messages('Preencha o campo "Observação".');

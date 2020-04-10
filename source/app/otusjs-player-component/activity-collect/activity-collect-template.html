@@ -1,22 +1,29 @@
-<md-content layout="column" layout-wrap layout-fill="" flex layout-padding="" layout-margin=""
+<style>
+  figcaption {
+    display: flex !important;
+  }
+</style>
+<md-content layout="column" layout-wrap layout-fill="" flex layout-padding=""
             ng-show="!$ctrl.selectedCollection && !$ctrl.fillCollection" ng-init="search">
-  <div layout="row" layout-xs="column" flex layout-align="start center" layout-align-xs="center start" layout-padding=""
+
+  <div layout="row" flex layout-align="start center" layout-align-xs="center start" layout-padding="" layout-wrap=""
        ng-show="$ctrl.group.collections.length">
-    <div layout="row" layout-align="start center">
+    <md-subheader flex-xs="100">Filtros:</md-subheader>
+    <div layout="row" layout-xs="column" layout-align="start center" layout-align-xs="center center">
       <md-button class="md-icon-button md-mini md-raised md-primary" aria-label="Iniciadas"
-                 ng-click="search = true"></md-button>
-      <span flex>Coletas iniciadas</span>
+                 ng-click="search = true"><md-icon>filter_list</md-icon></md-button>
+      <span flex layout-align="center">Iniciadas</span>
     </div>
-    <div layout="row" layout-align="start center">
+    <div layout="row" layout-xs="column" layout-align="start center" layout-align-xs="center center">
       <md-button class="md-icon-button md-mini md-raised md-accent" aria-label="Não iniciadas"
-                 ng-click="search = false"></md-button>
-      <span flex>Coletas não iniciadas</span>
+                 ng-click="search = false"><md-icon>filter_list</md-icon></md-button>
+      <span flex>Não iniciadas</span>
     </div>
-    <div layout="row" layout-align="start center" ng-show="search != undefined">
+    <div layout="row" layout-xs="column" layout-align="start center" layout-align-xs="center center" ng-show="search != undefined">
       <md-button class="md-icon-button md-mini md-warn" ng-click="search = undefined">
         <md-icon>close</md-icon>
       </md-button>
-      <span flex>Limpar filtro</span>
+      <span flex>Limpar</span>
     </div>
 
   </div>
@@ -25,7 +32,7 @@
   </div>
   <md-grid-list flex="100" ng-if="$ctrl.group.collections.length"
                 md-cols-xs="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="4" md-cols-gt-lg="6"
-                md-row-height-gt-md="3:2" md-row-height-xs="3:1" md-row-height="3:2" md-row-height-gt-xs="2:1"
+                md-row-height-gt-md="3:2" md-row-height-xs="3:2" md-row-height="3:2" md-row-height-gt-xs="2:1"
                 md-row-height-gt-sm="3:2"
                 md-gutter="20px" md-gutter-gt-sm="18px" layout-padding="">
     <md-grid-tile class="md-whiteframe-2dp"
@@ -34,36 +41,37 @@
       <div layout-fill="" flex>
         <md-toolbar md-scroll-shrink class="md-toolbar-tools"
                     ng-class="collect.hasInitialized ? 'md-primary' : 'md-accent'">
-          <md-button class="md-icon-button md-mini" ng-click="$ctrl.removeCollection(collect)">
-            <md-icon>delete_forever</md-icon>
-            <md-tooltip md-direction="top">Apagar</md-tooltip>
-          </md-button>
-          <span class="md-caption" flex="" ng-if="collect.date">{{ collect.date | date : 'dd/MM/yyyy H:mm'}}</span>
-          <span flex="" ng-if="!collect.date"></span>
 
+          <span class="md-caption" flex="" ng-if="collect.date">{{ collect.date | date : 'dd/MM/yyyy H:mm'}}</span>
+          <span class="md-caption" flex="" ng-if="!collect.date">Coleta não iniciada</span>
+          <span flex="" ng-if="!collect.date"></span>
           <md-button class="md-icon-button md-mini" ng-click="$ctrl.saveCollection(collect, $index)"
                      ng-show="collect.hasInitialized" ng-disabled="!$ctrl.canSend(collect)">
             <md-icon>cloud_upload</md-icon>
             <md-tooltip md-direction="top">Enviar</md-tooltip>
           </md-button>
 
-          <md-button class="" ng-click="$ctrl.initializeCollection(collect)" ng-show="!collect.hasInitialized">
-            <span>INICIAR</span>
-            <md-tooltip md-direction="top">Iniciar</md-tooltip>
-          </md-button>
-
         </md-toolbar>
-        <div layout-margin="" layout="column">
-          <span class="md-body-1">{{ collect.observation }}</span>
+        <div layout-margin="" layout="column" flex>
+          <span class="md-body-1 md-truncate">{{ collect.observation || 'Sem observação'}}</span>
           <span class="md-subheader">{{ collect.activities.length }} atividade(s)</span>
 
         </div>
-        <md-grid-tile-footer layout-padding="" layout-align="end center" flex
+        <md-grid-tile-footer layout-align="end space-between" flex="100" layout="column"
                              style="background-color: transparent; color: #000">
-          <md-button class="md-accent" ng-click="$ctrl.fill(collect)" ng-show="collect.hasInitialized" flex="100"
-                     layout-fill="">
+          <md-button class="md-icon-button md-mini" ng-click="$ctrl.removeCollection(collect)">
+            <md-icon>delete_forever</md-icon>
+            <md-tooltip md-direction="top">Apagar coleta</md-tooltip>
+          </md-button>
+
+          <span flex="100"></span>
+          <md-button class="md-accent" ng-click="$ctrl.fill(collect)" ng-show="collect.hasInitialized">
             <span>Preencher</span>
-            <md-tooltip md-direction="top">Preencher</md-tooltip>
+            <md-tooltip md-direction="top">Preencher coleta</md-tooltip>
+          </md-button>
+          <md-button class="md-accent" ng-click="$ctrl.initializeCollection(collect)" ng-show="!collect.hasInitialized">
+            <span>INICIAR</span>
+            <md-tooltip md-direction="top">Iniciar coleta</md-tooltip>
           </md-button>
         </md-grid-tile-footer>
       </div>
@@ -88,9 +96,9 @@
         <md-input-container class="md-subheader" style="margin: 20px 22px 0 0">
           <span ng-if="$ctrl.isChecked()">DESMARCAR</span>
           <span ng-if="!$ctrl.isChecked()">SELECIONAR</span>
-          TODOS
+          TODOS&nbsp;
           <md-checkbox aria-label="Select All" class="md-primary md-raised"
-                       ng-checked="$ctrl.isChecked()"
+                       ng-checked="$ctrl.isChecked()" style="margin-top:-15px"
                        md-indeterminate="$ctrl.isIndeterminate()"
                        ng-click="$ctrl.toggleAll()">
           </md-checkbox>
@@ -99,12 +107,12 @@
       <md-list-item class="md-2-line" ng-repeat="activity in $ctrl.allActivities track by $index" ng-click="null">
         <md-chips layout-padding="">
           <md-chip>
-            <strong>{{ activity.surveyForm.acronym}}</strong>
+            <strong>{{ activity.acronym}}</strong>
           </md-chip>
         </md-chips>
         <div class="md-list-item-text" layout="column">
-          <span class="md-body-1"> {{ activity.surveyForm.name }}</span>
-          <p class="md-caption">Versão: {{ activity.surveyForm.version }}</p>
+          <span class="md-body-1"> {{ activity.name }}</span>
+          <p class="md-caption">Versão: {{ activity.version }}</p>
         </div>
         <md-checkbox ng-checked="$ctrl.exists(activity, $ctrl.selected)" aria-label="Selecionar"
                      class="md-primary md-hue" ng-click="$ctrl.toggle(activity, $ctrl.selected)">

@@ -47,8 +47,6 @@
         clickOutsideToClose: true
       }).then(function (response) {
         return response;
-      }).catch(function (err) {
-        return err;
       });
     }
 
@@ -81,7 +79,7 @@
 
       $scope.login = function () {
         var _auth = Auth($scope.emailUser, $scope.passUser);
-        return $http.post(SurveyApiService.getLoginUrl(), _auth).then(function (response) {
+        $http.post(SurveyApiService.getLoginUrl(), _auth).then(function (response) {
           var user = response['data']['data'];
           SurveyApiService.setLoggedUser(user).then(function () {
             $mdDialog.hide(AUTHENTICATED_USER);

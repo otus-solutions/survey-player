@@ -44,10 +44,13 @@
       });
     }
 
-    function getAllActivities(user) {
+    function getAllActivities(user, filter) {
       return ActivityCollectionService.getAllActivities().then(function (surveys) {
-        return surveys.map(function (survey) {
-          return ActivityFactory.createOfflineActivity(SurveyFormFactory.fromJsonObject(survey), user).toObjectJson();
+        return Array.prototype.concat.apply(filter).map(function (selectedSurvey) {
+          let surveyForm = surveys.find(function (survey) {
+            return survey.acronym === selectedSurvey.acronym;
+          });
+          return ActivityFactory.createOfflineActivity(SurveyFormFactory.fromJsonObject(surveyForm), user).toObjectJson();
         });
 
       }).catch(function (err) {
