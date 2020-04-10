@@ -1,5 +1,6 @@
 <div layout="column" layout-padding="" ng-if="!$ctrl.selectedGroup">
-<h2 class="md-title" flex="" align="center">Crie grupos de coletas informando uma observação sobre o grupo e após crie suas coletas de atividades.</h2>
+  <h2 class="md-title" flex="" align="center">Crie grupos de coletas informando uma observação sobre o grupo e após crie
+    suas coletas de atividades.</h2>
   <div layout="row" flex="100" layout-align="center start">
     <md-input-container flex="100" flex-gt-lg="40" flex-gt-md="50" flex-gt-sm="60" flex-gt-xs="80">
       <label>Observação do grupo:</label>
@@ -12,25 +13,26 @@
     </md-button>
   </div>
   <md-content layout="column" flex="100" layout-align="center center" layout-fill="">
-    <div class="md-border-dashed" layout-align="center center" flex-gt-lg="10" ng-if="!$ctrl.groups.length && $ctrl.ready">
+    <div class="md-border-dashed" layout-align="center center" flex-gt-lg="10"
+         ng-if="!$ctrl.groups.length && $ctrl.ready">
       <span class="md-title"><md-icon>add</md-icon>Adicione grupos</span>
     </div>
     <md-content layout="column" flex="100" layout-padding layout-fill="">
 
-    <md-list flex="" ng-show="$ctrl.groups.length">
-      <md-subheader>Grupos de coletas</md-subheader>
-      <md-list-item class="md-2-line" ng-repeat="group in $ctrl.groups" ng-click="$ctrl.selectGroup(group)">
-        <md-icon class="md-avatar-icon">group_work</md-icon>
-        <div class="md-list-item-text">
-          <h3>{{group.observation}}</h3>
-          <small><p>{{group.collections.length}} Coleta(s)</p></small>
-        </div>
-        <md-button class="md-icon-button md-mini md-accent">
-          <md-icon>navigate_next</md-icon>
-        </md-button>
-        <md-divider></md-divider>
-      </md-list-item>
-    </md-list>
+      <md-list flex="" ng-show="$ctrl.groups.length">
+        <md-subheader>Grupos de coletas</md-subheader>
+        <md-list-item class="md-2-line" ng-repeat="group in $ctrl.groups" ng-click="$ctrl.selectGroup(group)">
+          <md-icon class="md-avatar-icon">group_work</md-icon>
+          <div class="md-list-item-text">
+            <h3>{{group.observation}}</h3>
+            <small><p>{{group.collections.length}} Coleta(s)</p></small>
+          </div>
+          <md-button class="md-icon-button md-mini md-accent">
+            <md-icon>navigate_next</md-icon>
+          </md-button>
+          <md-divider></md-divider>
+        </md-list-item>
+      </md-list>
     </md-content>
   </md-content>
 </div>

@@ -91,6 +91,8 @@
         _groupFactory(response)
         self.ready = true;
         LoadingScreenService.finish();
+      }).catch(function () {
+        LoadingScreenService.finish();
       });
     }
 
