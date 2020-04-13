@@ -15,7 +15,8 @@
     'ActivityIndexedDbService',
     'CollectIndexedDbService',
     'SurveyApiService',
-    'ActivityCollectionRestService'
+    'ActivityCollectionRestService',
+    '$rootScope'
   ];
 
   /**
@@ -26,7 +27,7 @@
    * @namespace ActivityCollectionService
    * @memberof Services
    */
-  function Service($q, ActivityRemoteStorageService, ActivityIndexedDbService, CollectIndexedDbService, SurveyApiService, ActivityCollectionRestService) {
+  function Service($q, ActivityRemoteStorageService, ActivityIndexedDbService, CollectIndexedDbService, SurveyApiService) {
     var self = this;
     var _remoteStorage = ActivityRemoteStorageService;
 
@@ -34,9 +35,9 @@
 
     self.getById = getById;
     self.update = update;
-    self.getSurveys = getSurveys;
-    self.getOfflineSurveys = getOfflineSurveys;
+    self.getSurveyList = getSurveyList;
     self.getByAcronymOffline = getByAcronymOffline;
+    self.getAllActivities = getAllActivities;
 
     function getById(activityInfo) {
       var request = $q.defer();
@@ -93,36 +94,56 @@
                 }
                 return offlineActivity;
               });
-              SurveyApiService.setModeOffline();
               CollectIndexedDbService.updateCollection(collection);
+              request.resolve();
             }
           });
-        });
+
+        }).catch(function () {
+        request.reject();
+      });
       return request.promise;
     }
 
-    function getSurveys() {
+    function getSurveyList() {
       var request = $q.defer();
+      _remoteStorage.getSurveys()
+        .then(function (response) {
+          ActivityIndexedDbService.update(response);
+          request.resolve(response.map(function (survey) {
+            return {
+              acronym: survey.acronym,
+              version: survey.version,
+              name: survey.surveyTemplate.identity.name
+            };
+          }));
+        }).catch(function (err) {
+        ActivityIndexedDbService.getSurveyList().then(function (response) {
+          request.resolve(response);
+        }).catch(function () {
+          request.reject(err);
+        });
+      });
+
+      return request.promise;
+    }
+
+    function getAllActivities() {
+      var request = $q.defer();
+
       _remoteStorage.getSurveys()
         .then(function (response) {
           ActivityIndexedDbService.update(response);
           request.resolve(response);
         }).catch(function (err) {
-        request.reject(err);
+        ActivityIndexedDbService.getAllActivities().then(function (response) {
+          request.resolve(response);
+        }).catch(function () {
+          request.reject(err);
+        });
       });
 
       return request.promise;
     }
-
-    function getOfflineSurveys() {
-      var request = $q.defer();
-      ActivityIndexedDbService.getAllActivities().then(function (response) {
-        request.resolve(response);
-      }).catch(function (err) {
-        request.reject(err);
-      });
-      return request.promise;
-    }
-
   }
 }());

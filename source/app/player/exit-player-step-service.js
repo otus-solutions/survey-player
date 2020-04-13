@@ -7,10 +7,11 @@
 
   Service.$inject = [
     'otusjs.model.activity.ActivityFacadeService',
-    'SurveyApiService'
+    'SurveyApiService',
+    '$state'
   ];
 
-  function Service(ActivityFacadeService, SurveyApiService) {
+  function Service(ActivityFacadeService, SurveyApiService, $state) {
     var self = this;
     var _currentItem;
 
@@ -24,7 +25,8 @@
     }
 
     function effect(pipe, flowData) {
-      location.href = SurveyApiService.getCallbackAddress();
+      if (location.origin == SurveyApiService.getCallbackAddress()) $state.go('/home')
+      else location.href = SurveyApiService.getCallbackAddress();
     }
 
     function afterEffect(pipe, flowData) {

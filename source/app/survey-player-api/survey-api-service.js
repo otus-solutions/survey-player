@@ -38,6 +38,7 @@
     self.exitModeOffline = exitModeOffline;
     self.setSelectedCollection = setSelectedCollection;
     self.getSelectedCollection = getSelectedCollection;
+    self.initDB = initDB;
 
     const CURRENT_ACTIVITY = 'Current_Activity';
     const AUTH_TOKEN = 'Auth_Token';
@@ -55,6 +56,8 @@
     const TOKEN = true;
     const MODE = 'MODE';
     init();
+    initDB();
+
 
     var _loginUrl;
     var _datasourceUrl;
@@ -75,35 +78,33 @@
       _staticVariableUrl = $cookies.get(STATIC_VARIABLE_ADDRESS);
       _fileUploadUrl = $cookies.get(FILE_UPLOAD_ADDRESS);
       _collectUrl = $cookies.get(COLLECT_ADDRESS);
-      _initDB();
     }
 
-    function _initDB() {
-      if (!$rootScope.online){
-        alasql(INIT_QUERY, [], function () {
-          alasql(TABLE_USER, [], function () {
-            alasql.promise('SELECT * FROM User').then(function (response) {
-              if (response.length === 1) {
-                _user = angular.copy(response[0]);
-                _token = angular.copy(response[0].token);
-                delete _user.token;
-                $rootScope.$broadcast("logged", {any: {}});
-              } else if (response.length > 1){
-                _dropDatabase();
-              } else {
-                $rootScope.$broadcast("login", {any: {}});
-              }
+    function initDB() {
+      alasql(INIT_QUERY, [], function () {
+        alasql(TABLE_USER, [], function () {
+          alasql.promise('SELECT * FROM User').then(function (response) {
+            if (response.length === 1) {
+              _user = angular.copy(response[0]);
+              _token = angular.copy(response[0].token);
+              $rootScope.$broadcast("logged", {any: {}});
+              delete _user.token;
+            } else if (response.length > 1) {
+              alasql('DELETE FROM User;')
+            }
+
+            $rootScope.$broadcast("listSurveys", {any: {}});
 
 
-            });
           });
         });
-      }
+      });
+
     }
 
-    function setSelectedCollection(id) {
-      if (id) {
-        sessionStorage.setItem(COLLECTION, id);
+    function setSelectedCollection(collection) {
+      if (collection) {
+        sessionStorage.setItem(COLLECTION, collection.code);
       } else {
         sessionStorage.removeItem(COLLECTION);
       }
@@ -170,19 +171,23 @@
 
     function setLoggedUser(user) {
       var deferred = $q.defer();
-      _dropDatabase();
-      if (user){
+      console.log(user);
+      if (user) {
         alasql(INIT_QUERY, [], function () {
           alasql(TABLE_USER, [], function (res) {
+            // alasql("DELETE FROM User")
             var query = "SELECT * INTO User ".concat(' FROM ?');
             _user = angular.copy(user);
             sessionStorage.setItem(LOGGED_USER, JSON.stringify(user));
             delete _user.token;
             _token = angular.copy(user.token);
             alasql(query, [Array.prototype.concat.apply(user)]);
+            $rootScope.online = true;
             deferred.resolve();
           });
         });
+      } else {
+        _dropDatabase()
       }
 
       return deferred.promise;
@@ -207,7 +212,6 @@
     }
 
     function getCallbackAddress() {
-      exitModeOffline();
       return sessionStorage.getItem(CALLBACK_ADDRESS) ? sessionStorage.getItem(CALLBACK_ADDRESS) : location.href;
     }
 
@@ -226,6 +230,7 @@
       sessionStorage.removeItem(AUTH_TOKEN);
       sessionStorage.removeItem(CALLBACK_ADDRESS);
       sessionStorage.removeItem(LOGGED_USER);
+      sessionStorage.removeItem(MODE);
     }
   }
 })();

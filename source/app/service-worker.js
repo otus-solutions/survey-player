@@ -24,7 +24,7 @@
         navigator.serviceWorker
           .register('/sw.js', {scope: '/'})
           .then(function () {
-            console.log('Service Worker Registered');
+            console.info('Service Worker Registered');
           });
       }
     }

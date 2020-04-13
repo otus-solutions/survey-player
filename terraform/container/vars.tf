@@ -17,6 +17,10 @@ variable "survey-player-datasource-url" {
   default = "http://localhost:51002/otus-rest/v01/configuration/datasources"
 }
 
+variable "survey-player-survey-url" {
+  default = "http://localhost:51002/otus-rest/v01/configuration/surveys"
+}
+
 variable "survey-player-fileUpload-url" {
   default = "http://localhost:51002/otus-rest/v01/upload"
 }

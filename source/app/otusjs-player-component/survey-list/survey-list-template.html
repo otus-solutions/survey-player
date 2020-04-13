@@ -13,12 +13,12 @@
     <md-list-item class="md-2-line" ng-repeat="preActivity in $ctrl.preActivities" ng-click="null">
       <md-chips layout-padding="">
         <md-chip>
-          <strong>{{ preActivity.surveyForm.acronym}}</strong>
+          <strong>{{ preActivity.acronym}}</strong>
         </md-chip>
       </md-chips>
       <div class="md-list-item-text" layout="column">
-        <span class="md-body-1"> {{ preActivity.surveyForm.name }}</span>
-        <p class="md-caption">Versão: {{ preActivity.surveyForm.version }}</p>
+        <span class="md-body-1"> {{ preActivity.name }}</span>
+        <p class="md-caption">Versão: {{ preActivity.version }}</p>
       </div>
       <md-divider></md-divider>
     </md-list-item>
