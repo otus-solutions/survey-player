@@ -47,7 +47,7 @@
 
     const PRINCIPAL_THEME = 'md-accent md-raised md-icon-button';
     const OTHER_THEME = 'md-icon-button';
-    const POSITION = 'bottom right';
+    const POSITION = 'bottom left';
     const DELAY = 3000;
     const MESSAGE_SEND_SUCCESS = 'Coleta foi enviada com sucesso.';
     const MESSAGE_SEND_FAILED = 'Não foi possível enviar a coleta! Tente novamente.';
@@ -313,12 +313,15 @@
         if (response) {
           ActivityCollectionRestService.saveOffline(self.collect).then(function () {
             CollectIndexedDbService.removeCollection(collect.code);
+            self.group.collections = self.group.collections.filter(function (collection) {
+              return collection.code !== self.collect.code;
+            });
+            !self.group.collections.length ? self.back() : null;
             _messages(MESSAGE_SEND_SUCCESS);
           }).catch(function () {
             _messages(MESSAGE_SEND_FAILED);
           });
         }
-
       });
     }
 
