@@ -34,6 +34,7 @@
 
     function onInit() {
       self.commands = [];
+      _setUser();
     }
 
     function list() {
