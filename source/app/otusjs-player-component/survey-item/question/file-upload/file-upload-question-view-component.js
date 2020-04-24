@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -50,7 +50,7 @@
     function downloadFile(idx) {
       var fileInfo = self.sentFiles[idx];
       _uploadInterface.getFile(fileInfo)
-        .then(function(responseBlob) {
+        .then(function (responseBlob) {
           var link = document.createElement('a');
           var downloadUrl = URL.createObjectURL(responseBlob);
           link.setAttribute('href', downloadUrl);
@@ -61,7 +61,7 @@
     }
 
     function _populatePendingList(filesArray) {
-      self.pendingList = self.pendingList.concat(filesArray.map(function(file) {
+      self.pendingList = self.pendingList.concat(filesArray.map(function (file) {
         file.status = 'pending';
         file.control = _pendingArrayControl++;
         return file;

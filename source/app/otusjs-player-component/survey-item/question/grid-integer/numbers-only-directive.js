@@ -1,12 +1,12 @@
-(function() {
+(function () {
   'use strict';
 
   angular
     .module('otusjs.player.component')
-    .directive('numbersOnly', function() {
+    .directive('numbersOnly', function () {
       return {
         require: 'ngModel',
-        link: function(scope, element, attr, ngModelCtrl) {
+        link: function (scope, element, attr, ngModelCtrl) {
           function fromUser(text) {
             if (text) {
               var stringfiedText = String(text);
@@ -19,6 +19,7 @@
             }
             return undefined;
           }
+
           ngModelCtrl.$parsers.push(fromUser);
         }
       };

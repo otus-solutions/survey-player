@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -23,153 +23,153 @@
       run
     ]);
 
-    function run(
-      SavePlayerStepService,
-      PlayerConfigurationService,
-      ApplyAnswer,
-      ClearSkippedAnswersStepService,
-      InitializeSurveyActivity,
-      FinalizeSurveyActivity,
-      SaveSurveyActivity,
-      LoadPreviousItem,
-      LoadNextItem,
-      UpdateItemTracking,
-      LoadSurveyActivity,
-      LoadSurveyActivityCover,
-      ReadValidationError,
-      RunValidation,
-      SetupValidation,
-      HandleValidationError
-    ) {
+  function run(
+    SavePlayerStepService,
+    PlayerConfigurationService,
+    ApplyAnswer,
+    ClearSkippedAnswersStepService,
+    InitializeSurveyActivity,
+    FinalizeSurveyActivity,
+    SaveSurveyActivity,
+    LoadPreviousItem,
+    LoadNextItem,
+    UpdateItemTracking,
+    LoadSurveyActivity,
+    LoadSurveyActivityCover,
+    ReadValidationError,
+    RunValidation,
+    SetupValidation,
+    HandleValidationError
+  ) {
 
-      /**************************************************************
-       * Player Start Phase
-       *
-       * Here we put the configurations that will affect the phase
-       * where the player is itself starting.
-       * This phase is divided in three sub-phases and each one can be
-       * configured separately.
-       *
-       **************************************************************/
-      /* PreStart Phase */
-      // PlayerConfigurationService.onPrePlayerStart();
+    /**************************************************************
+     * Player Start Phase
+     *
+     * Here we put the configurations that will affect the phase
+     * where the player is itself starting.
+     * This phase is divided in three sub-phases and each one can be
+     * configured separately.
+     *
+     **************************************************************/
+    /* PreStart Phase */
+    // PlayerConfigurationService.onPrePlayerStart();
 
-      /* ExecutionStart Phase */
-      PlayerConfigurationService.onPlayerStart(LoadSurveyActivity);
+    /* ExecutionStart Phase */
+    PlayerConfigurationService.onPlayerStart(LoadSurveyActivity);
 
-      /* PostStart Phase */
-      // PlayerConfigurationService.onPostPlayerStart(LoadSurveyActivityCover);
+    /* PostStart Phase */
+    // PlayerConfigurationService.onPostPlayerStart(LoadSurveyActivityCover);
 
-      /**************************************************************
-       * Play Phase
-       *
-       * Here we put the configurations that will affect the phase
-       * where the player is starting the SurveyActiviy.
-       * This phase is divided in three sub-phases and each one can be
-       * configured separately.
-       *
-       **************************************************************/
-      /* PrePlat Phase */
-      // PlayerConfigurationService.onPrePlay();
+    /**************************************************************
+     * Play Phase
+     *
+     * Here we put the configurations that will affect the phase
+     * where the player is starting the SurveyActiviy.
+     * This phase is divided in three sub-phases and each one can be
+     * configured separately.
+     *
+     **************************************************************/
+    /* PrePlat Phase */
+    // PlayerConfigurationService.onPrePlay();
 
-      /* ExecutionPlay Phase */
-      PlayerConfigurationService.onPlay(InitializeSurveyActivity);
+    /* ExecutionPlay Phase */
+    PlayerConfigurationService.onPlay(InitializeSurveyActivity);
 
-      /* PostPlay Phase */
-      PlayerConfigurationService.onPostPlay(LoadNextItem);
-      PlayerConfigurationService.onPostPlay(SetupValidation);
+    /* PostPlay Phase */
+    PlayerConfigurationService.onPostPlay(LoadNextItem);
+    PlayerConfigurationService.onPostPlay(SetupValidation);
 
-      /**************************************************************
-       * Ahead Phase
-       *
-       * Here we put the configurations that will affect the phase
-       * where the player is moving to the next item of SurveyActiviy.
-       * This phase is divided in three sub-phases and each one can be
-       * configured separately.
-       *
-       **************************************************************/
-      /* PreAhead Phase */
-      PlayerConfigurationService.onPreAhead(ApplyAnswer);
-      PlayerConfigurationService.onPreAhead(RunValidation);
-      PlayerConfigurationService.onPreAhead(ReadValidationError);
-      PlayerConfigurationService.onPreAhead(HandleValidationError);
-      PlayerConfigurationService.onPreAhead(UpdateItemTracking);
+    /**************************************************************
+     * Ahead Phase
+     *
+     * Here we put the configurations that will affect the phase
+     * where the player is moving to the next item of SurveyActiviy.
+     * This phase is divided in three sub-phases and each one can be
+     * configured separately.
+     *
+     **************************************************************/
+    /* PreAhead Phase */
+    PlayerConfigurationService.onPreAhead(ApplyAnswer);
+    PlayerConfigurationService.onPreAhead(RunValidation);
+    PlayerConfigurationService.onPreAhead(ReadValidationError);
+    PlayerConfigurationService.onPreAhead(HandleValidationError);
+    PlayerConfigurationService.onPreAhead(UpdateItemTracking);
 
-      /* ExecutionAhead Phase */
-      PlayerConfigurationService.onAhead(LoadNextItem);
+    /* ExecutionAhead Phase */
+    PlayerConfigurationService.onAhead(LoadNextItem);
 
-      /* PostAhead Phase */
-      PlayerConfigurationService.onPostAhead(SetupValidation);
+    /* PostAhead Phase */
+    PlayerConfigurationService.onPostAhead(SetupValidation);
 
-      /**************************************************************
-       * Back Phase
-       *
-       * Here we put the configurations that will affect the phase
-       * where the player is moving to the previous item of
-       * SurveyActiviy.
-       * This phase is divided in three sub-phases and each one can be
-       * configured separately.
-       *
-       **************************************************************/
-      /* PreBack Phase */
-      // PlayerConfigurationService.onPreBack();
+    /**************************************************************
+     * Back Phase
+     *
+     * Here we put the configurations that will affect the phase
+     * where the player is moving to the previous item of
+     * SurveyActiviy.
+     * This phase is divided in three sub-phases and each one can be
+     * configured separately.
+     *
+     **************************************************************/
+    /* PreBack Phase */
+    // PlayerConfigurationService.onPreBack();
 
-      /* ExecutionBack Phase */
-      PlayerConfigurationService.onBack(LoadPreviousItem);
+    /* ExecutionBack Phase */
+    PlayerConfigurationService.onBack(LoadPreviousItem);
 
-      /* PostBack Phase */
-      PlayerConfigurationService.onPostBack(SetupValidation);
+    /* PostBack Phase */
+    PlayerConfigurationService.onPostBack(SetupValidation);
 
-      /**************************************************************
-       * Save Phase
-       *
-       * Here we put the configurations that will affect the phase
-       * where the player is saving the current state of SurveyActiviy.
-       * This phase is divided in three sub-phases and each one can be
-       * configured separately.
-       *
-       **************************************************************/
-      /* PreSave Phase */
-      PlayerConfigurationService.onPreSave(ApplyAnswer);
-      // PlayerConfigurationService.onPreSave(UpdateItemTracking);
+    /**************************************************************
+     * Save Phase
+     *
+     * Here we put the configurations that will affect the phase
+     * where the player is saving the current state of SurveyActiviy.
+     * This phase is divided in three sub-phases and each one can be
+     * configured separately.
+     *
+     **************************************************************/
+    /* PreSave Phase */
+    PlayerConfigurationService.onPreSave(ApplyAnswer);
+    // PlayerConfigurationService.onPreSave(UpdateItemTracking);
 
-      /* ExecutionSave Phase */
-      PlayerConfigurationService.onSave(SaveSurveyActivity);
+    /* ExecutionSave Phase */
+    PlayerConfigurationService.onSave(SaveSurveyActivity);
 
-      /* PostSave Phase */
+    /* PostSave Phase */
 
-      /**************************************************************
-       * Stop Phase
-       *
-       * Here we put the configurations that will affect the phase
-       * where the player is stoping the current SurveyActiviy.
-       * This phase is divided in three sub-phases and each one can be
-       * configured separately.
-       *
-       **************************************************************/
-      /* PreBack Phase */
+    /**************************************************************
+     * Stop Phase
+     *
+     * Here we put the configurations that will affect the phase
+     * where the player is stoping the current SurveyActiviy.
+     * This phase is divided in three sub-phases and each one can be
+     * configured separately.
+     *
+     **************************************************************/
+    /* PreBack Phase */
 
-      /* ExecutionStop Phase */
+    /* ExecutionStop Phase */
 
-      /* PostStop Phase */
+    /* PostStop Phase */
 
-      /**************************************************************
-       * Eject Phase
-       *
-       * Here we put the configurations that will affect the phase
-       * where the player is ejecting (finalizing) the current
-       * SurveyActiviy.
-       * This phase is divided in three sub-phases and each one can be
-       * configured separately.
-       *
-       **************************************************************/
-      /* PreBack Phase */
+    /**************************************************************
+     * Eject Phase
+     *
+     * Here we put the configurations that will affect the phase
+     * where the player is ejecting (finalizing) the current
+     * SurveyActiviy.
+     * This phase is divided in three sub-phases and each one can be
+     * configured separately.
+     *
+     **************************************************************/
+    /* PreBack Phase */
 
-      /* ExecutionStop Phase */
-      PlayerConfigurationService.onEject(ClearSkippedAnswersStepService);
-      PlayerConfigurationService.onEject(FinalizeSurveyActivity);
-      PlayerConfigurationService.onEject(SavePlayerStepService);
+    /* ExecutionStop Phase */
+    PlayerConfigurationService.onEject(ClearSkippedAnswersStepService);
+    PlayerConfigurationService.onEject(FinalizeSurveyActivity);
+    PlayerConfigurationService.onEject(SavePlayerStepService);
 
-      /* PostStop Phase */
-    }
+    /* PostStop Phase */
+  }
 }());

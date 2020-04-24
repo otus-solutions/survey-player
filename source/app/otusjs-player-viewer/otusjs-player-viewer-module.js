@@ -1,7 +1,7 @@
-(function() {
-    'use strict';
+(function () {
+  'use strict';
 
-    angular
-        .module('otusjs.player.viewer', []);
+  angular
+    .module('otusjs.player.viewer', []);
 
 }());

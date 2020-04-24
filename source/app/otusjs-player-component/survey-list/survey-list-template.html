@@ -1,0 +1,27 @@
+<style>
+  md-chips.md-default-theme .md-chips, md-chips .md-chips {
+    box-shadow: none !important;
+  }
+</style>
+<md-content layout="column" layout-padding="" flex="">
+  <md-list flex ng-cloak>
+    <div layout-align="start center" flex="100" layout="row">
+      <md-subheader flex>
+        Atividades
+      </md-subheader>
+    </div>
+    <md-list-item class="md-2-line" ng-repeat="preActivity in $ctrl.preActivities" ng-click="null">
+      <md-chips layout-padding="">
+        <md-chip>
+          <strong>{{ preActivity.acronym}}</strong>
+        </md-chip>
+      </md-chips>
+      <div class="md-list-item-text" layout="column">
+        <span class="md-body-1"> {{ preActivity.name }}</span>
+        <p class="md-caption">Versão: {{ preActivity.version }}</p>
+      </div>
+      <md-divider></md-divider>
+    </md-list-item>
+  </md-list>
+</md-content>
+

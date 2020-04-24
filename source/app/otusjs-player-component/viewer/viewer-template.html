@@ -1,13 +1,13 @@
 <md-content id="activity-viewer">
   <md-progress-circular ng-if="!$ctrl.ready" class="md-primary" md-diameter="70"></md-progress-circular>
 
-  <div layout="row" ng-if="$ctrl.ready"  flex>
-  <span flex class="no-print"></span>
+  <div layout="row" ng-if="$ctrl.ready" flex>
+    <span flex class="no-print"></span>
 
     <div layout="column" id="sheet" class="md-whiteframe-1dp" flex>
       <div layout="row" layout-align="center center">
-      <span class="md-title">{{$ctrl.activityData.acronym}} - {{$ctrl.activityData.name}}</span>
-    </div>
+        <span class="md-title">{{$ctrl.activityData.acronym}} - {{$ctrl.activityData.name}}</span>
+      </div>
 
       <div layout="column" ng-show="$ctrl.filters.participantData">
         <div layout="row">

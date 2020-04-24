@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -60,7 +60,7 @@
         self.itemData.getLinesList().forEach(function (line, outerIndex) {
           self.answerArray[outerIndex] = [];
           line.getGridIntegerList().forEach(function (gridInteger,
-            innerIndex) {
+                                                      innerIndex) {
             self.answerArray[outerIndex][innerIndex] =
               _buildAnswerObject(gridInteger);
           });
@@ -80,7 +80,7 @@
       var result = false;
       self.itemData.getLinesList().forEach(function (line, outerIndex) {
         line.getGridIntegerList().forEach(function (gridInteger,
-          innerIndex) {
+                                                    innerIndex) {
           if (self.answerArray[outerIndex][innerIndex].value !== null) {
             result = true;
           }
@@ -92,7 +92,7 @@
     function assignNullsToEmptyValues() {
       self.itemData.getLinesList().forEach(function (line, outerIndex) {
         line.getGridIntegerList().forEach(function (gridInteger,
-          innerIndex) {
+                                                    innerIndex) {
           if (self.answerArray[outerIndex][innerIndex].value === '' || self
             .answerArray[outerIndex][innerIndex].value === undefined) {
             self.answerArray[outerIndex][innerIndex].value = null;

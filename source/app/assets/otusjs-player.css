@@ -11,7 +11,7 @@ otus-survey-header {
   color: #727272;
 }
 
-otus-survey-header > md-toolbar  {
+otus-survey-header > md-toolbar {
   min-height: 50px !important;
 }
 
@@ -32,9 +32,21 @@ otus-survey-item {
   text-overflow: ellipsis;
 }
 
-.fade-out { opacity: 0; transition: 0s!important; }
-.fade-in { opacity: 1; transition: 1s!important; }
-.txtqst {width: 100%!important; margin-top:2%!important;}
+.fade-out {
+  opacity: 0;
+  transition: 0s !important;
+}
+
+.fade-in {
+  opacity: 1;
+  transition: 1s !important;
+}
+
+.txtqst {
+  width: 100% !important;
+  margin-top: 2% !important;
+}
+
 .fab-speed-dial {
   z-index: 70;
   position: fixed;
@@ -50,6 +62,7 @@ otus-static-variable div md-content {
   .fab-speed-dial {
     left: 2px;
   }
+
   otus-static-variable {
     max-height: 60%;
   }
@@ -60,7 +73,7 @@ otus-static-variable div md-content {
   .nav-up {
     height: 0 !important;
     width: 0 !important;
-    top:-200px;
+    top: -200px;
     left: 200px;
   }
 }
@@ -82,4 +95,8 @@ otus-survey-header {
 md-sidenav {
   z-index: 65 !important;
   min-width: 320px !important;
+}
+
+.checkboxToolbar:not(.md-checked) .md-icon {
+  border-color: #FFFFFF !important;
 }

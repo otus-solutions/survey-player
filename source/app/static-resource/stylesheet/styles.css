@@ -20,9 +20,10 @@ md-input-container.hide-error-msg .md-errors-spacer:empty {
   display: none;
 }
 
-.md-subheader.md-default-theme, .md-subheader{
+.md-subheader.md-default-theme, .md-subheader {
   background-color: transparent !important;
 }
+
 /** finish style participant search **/
 
 .selectedState {
@@ -93,6 +94,7 @@ md-input-container.hide-error-msg .md-errors-spacer:empty {
   .md-dashboard-autocomplete input:not(.md-input) {
     font-size: 11px;
   }
+
   .md-dashboard-autocomplete .md-show-clear-button button {
     display: none;
   }
@@ -106,6 +108,7 @@ md-input-container.hide-error-msg .md-errors-spacer:empty {
   .md-dashboard-autocomplete input:not(.md-input) {
     font-size: 12px;
   }
+
   .md-dashboard-autocomplete .md-show-clear-button button {
     display: none;
   }
@@ -124,22 +127,23 @@ md-input-container.hide-error-msg .md-errors-spacer:empty {
   white-space: normal;
 }
 
-otus-participant-dashboard-toolbar>div>md-toolbar>div>otus-participant-search>md-autocomplete>md-autocomplete-wrap>input {
-  color: rgb(255, 255, 255) !important;
-}
-otus-participant-dashboard-toolbar>div>md-toolbar>div>otus-participant-search>md-autocomplete>md-autocomplete-wrap>button {
+otus-participant-dashboard-toolbar > div > md-toolbar > div > otus-participant-search > md-autocomplete > md-autocomplete-wrap > input {
   color: rgb(255, 255, 255) !important;
 }
 
-otus-participant-dashboard-toolbar>div>md-toolbar>div>otus-participant-search>md-autocomplete>md-autocomplete-wrap>input::-webkit-input-placeholder {
+otus-participant-dashboard-toolbar > div > md-toolbar > div > otus-participant-search > md-autocomplete > md-autocomplete-wrap > button {
   color: rgb(255, 255, 255) !important;
 }
 
-otus-participant-dashboard-toolbar>div>md-toolbar>div>otus-participant-search>md-autocomplete>md-autocomplete-wrap>button>md-icon>svg>g>path {
+otus-participant-dashboard-toolbar > div > md-toolbar > div > otus-participant-search > md-autocomplete > md-autocomplete-wrap > input::-webkit-input-placeholder {
+  color: rgb(255, 255, 255) !important;
+}
+
+otus-participant-dashboard-toolbar > div > md-toolbar > div > otus-participant-search > md-autocomplete > md-autocomplete-wrap > button > md-icon > svg > g > path {
   fill: rgb(255, 254, 254) !important;
 }
 
-otus-participant-dashboard-toolbar>div>md-toolbar>div>otus-participant-search>md-autocomplete {
+otus-participant-dashboard-toolbar > div > md-toolbar > div > otus-participant-search > md-autocomplete {
   color: rgb(255, 255, 255) !important;
 }
 
@@ -201,7 +205,7 @@ md-input-container.input-container-lot-margin {
   background-color: unset;
 }
 
-md-content.md-default-theme.backgroud-color-default{
+md-content.md-default-theme.backgroud-color-default {
   background-color: unset;
 }
 
@@ -254,7 +258,7 @@ md-content.no-background-color {
   font-family: arial;
 }
 
-.dtp>.dtp-content>.dtp-date-view>header.dtp-header {
+.dtp > .dtp-content > .dtp-date-view > header.dtp-header {
   background: rgb(0, 121, 107) !important;
 }
 
@@ -262,15 +266,15 @@ md-content.no-background-color {
   background: rgb(0, 150, 136) !important;
 }
 
-.dtp table.dtp-picker-days tr>td>a.selected {
+.dtp table.dtp-picker-days tr > td > a.selected {
   background: rgb(0, 121, 107) !important;
 }
 
-.dtp table.dtp-picker-days tr>td>a.hilite:not(.selected) {
+.dtp table.dtp-picker-days tr > td > a.hilite:not(.selected) {
   color: rgb(0, 150, 136) !important;
 }
 
-.dtp .dtp-picker-time>a.dtp-select-hour.selected {
+.dtp .dtp-picker-time > a.dtp-select-hour.selected {
   background: rgb(0, 121, 107) !important;
 }
 
@@ -314,15 +318,15 @@ md-content.no-background-color {
   background-color: rgb(0, 145, 234) !important;
 }
 
-.otus-panel{
+.otus-panel {
   margin-top: 20px;
   margin-bottom: 20px;
   background-color: #f5f7f9;
   padding: 10px;
 }
 
-.otus-panel-subheader{
-  color:white;
+.otus-panel-subheader {
+  color: white;
   font-size: 1.2em;
   border-radius: 3px;
   position: relative;
@@ -331,51 +335,51 @@ md-content.no-background-color {
   padding: 20px;
 }
 
-.dashboard-legend{
-  padding:2px;
+.dashboard-legend {
+  padding: 2px;
   border-bottom: 0.5px solid #ccc;
   position: relative;
   top: -18px;
 }
 
-.legend-separator{
+.legend-separator {
   border-left: 1px solid #ccc;
 }
 
-.bull-legend{
+.bull-legend {
   margin-right: 5px;
   margin-left: 5px;
   font-size: 32px;
 }
 
-.bull-legend.required{
+.bull-legend.required {
   color: red;
 }
 
-.bull-legend.optional{
+.bull-legend.optional {
   color: orange;
 }
 
 .indicator-legend {
   vertical-align: middle;
-  margin-top:0px;
+  margin-top: 0px;
   /* margin-left: 5px; */
-  text-align:left;
-  font-size:56px;
+  text-align: left;
+  font-size: 56px;
   margin-bottom: 5px;
-  color:rgb(128, 128, 128);
+  color: rgb(128, 128, 128);
 }
 
 .icon-size-larger {
-  text-align:left;
-  font-size:68px;
-  height:60px;
-  width:78px;
+  text-align: left;
+  font-size: 68px;
+  height: 60px;
+  width: 78px;
   margin: 1px !important;
-  padding-top:10px;
+  padding-top: 10px;
 }
 
-.md-subheader{
+.md-subheader {
   display: inline-block !important;
 }
 
@@ -390,7 +394,7 @@ md-content.no-background-color {
 .icon-color {
   height: 15px;
   width: 15px;
-  display:inline-block;
+  display: inline-block;
   border-radius: 50%;
   margin: 5px 5px 0px 5px;
 }
@@ -404,10 +408,11 @@ md-sidenav.md-closed.md-locked-open-add-active {
 }
 
 md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar {
-  color: rgb(0,121,107);
-  background: rgb(0,121,107);
+  color: rgb(0, 121, 107);
+  background: rgb(0, 121, 107);
 }
-md-tab-content{
+
+md-tab-content {
   margin-top: 10px !important;
 }
 
@@ -416,7 +421,9 @@ md-tab-content{
   outline: none;
   height: 100%;
   width: 100%;
-  padding: 0; }
+  padding: 0;
+}
+
 .selectdemoSelectHeader .demo-select-header {
   box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1), 0 0 0 0 rgba(0, 0, 0, 0.14), 0 0 0 0 rgba(0, 0, 0, 0.12);
   padding-left: 10.667px;
@@ -425,10 +432,13 @@ md-tab-content{
   position: relative;
   display: flex;
   align-items: center;
-  width: auto; }
-.selectdemoSelectHeader md-content._md {
-  max-height: 240px; }
+  width: auto;
+}
 
-.selectdemoSelectHeader>md-select-menu {
+.selectdemoSelectHeader md-content._md {
+  max-height: 240px;
+}
+
+.selectdemoSelectHeader > md-select-menu {
   margin-top: 45px !important;
 }

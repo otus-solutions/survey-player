@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -47,7 +47,7 @@
       _rest.setContentType(type);
     }
 
-    function _restTest(){
+    function _restTest() {
       if (!_rest) {
         initialize();
       }

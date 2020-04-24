@@ -64,7 +64,6 @@ describe('checkbox question controller component', function () {
   });
 
 
-
   describe('the update function and the parent onUpdate function call', function () {
     beforeEach(function () {
       spyOn(Mock.CurrentItemService, 'getFilling').and.returnValue(Mock.nullAnswer);
@@ -133,7 +132,8 @@ describe('checkbox question controller component', function () {
         ],
         'objectType': 'AnswerFill',
         'type': 'CheckboxQuestion',
-        clear: function () {}
+        clear: function () {
+        }
       }
     };
 
@@ -146,7 +146,8 @@ describe('checkbox question controller component', function () {
 
   function mockBindings() {
     Mock.parentContainer = {
-      onUpdate: function () {}
+      onUpdate: function () {
+      }
     };
 
     var otusQuestion = {

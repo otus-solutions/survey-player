@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -29,48 +29,48 @@
     self.view = false;
 
     /* Question Methods */
-    self.$onInit = function() {
+    self.$onInit = function () {
       self.dataReady = false;
       self.answer = CurrentItemService.getFilling(self.itemData.templateID).answer.value;
       self.otusQuestion.answer = self;
       _setupDatasourceQuery();
     };
 
-    self.update = function() {
+    self.update = function () {
       var _answerUpdate;
       if (!self.answer) {
-         _answerUpdate = null;
-     } else{
+        _answerUpdate = null;
+      } else {
         _answerUpdate = self.answer.value;
-     }
+      }
       self.onUpdate({
         valueType: 'answer',
         value: _answerUpdate
-    });
+      });
     };
 
-    self.clear = function() {
+    self.clear = function () {
       CurrentItemService.getFilling(self.itemData.templateID).answer.clear();
       delete self.answer;
     };
 
-    self.setOther = function() {
-      self.answer = {value:"Outro"};
+    self.setOther = function () {
+      self.answer = {value: "Outro"};
       self.update();
     };
 
     /* Datasource Methods */
     function _setupDatasourceQuery() {
       DatasourceService.fetchDatasources(self.itemData.templateID)
-        .then(function(dataList) {
+        .then(function (dataList) {
           _datasource = _datasource.concat(dataList);
           if (_datasource.length) {
             self.searchQuery = SearchQueryFactory.newStringSearch(_datasource).perform;
             self.dataReady = true;
           }
-       }, function(err){
+        }, function (err) {
           self.dataError = true;
-       });
+        });
       self.autoCompleteSettings = {
         selectedItem: null,
         searchText: "",

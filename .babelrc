@@ -1,4 +1,8 @@
 {
-  "presets": ["es6"],
-  "plugins": ["es6-promise"]
+  "presets": [
+    "es6"
+  ],
+  "plugins": [
+    "es6-promise"
+  ]
 }

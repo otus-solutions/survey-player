@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -20,13 +20,15 @@
     self.afterEffect = afterEffect;
     self.getEffectResult = getEffectResult;
 
-    function beforeEffect(pipe, flowData) {}
-
-    function effect(pipe, flowData) {
-        NavigationService.updateItemTracking();
+    function beforeEffect(pipe, flowData) {
     }
 
-    function afterEffect(pipe, flowData) {}
+    function effect(pipe, flowData) {
+      NavigationService.updateItemTracking();
+    }
+
+    function afterEffect(pipe, flowData) {
+    }
 
     function getEffectResult(pipe, flowData) {
       return flowData;

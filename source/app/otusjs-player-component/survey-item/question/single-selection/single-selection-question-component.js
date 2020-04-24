@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -10,7 +10,7 @@
         itemData: '<',
         onUpdate: '&'
       },
-      require : {
+      require: {
         otusQuestion: '^otusQuestion'
       }
     });
@@ -20,7 +20,7 @@
     '$element'
   ];
 
-  function Controller(CurrentItemService,$element) {
+  function Controller(CurrentItemService, $element) {
     var self = this;
 
     self.$onInit = onInit;

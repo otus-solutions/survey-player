@@ -36,7 +36,7 @@ describe('checkbox question view controller component', function () {
   function mockBindings() {
     Mock.itemData = {
       data: {
-        answer:{
+        answer: {
           value: 1
         }
       },

@@ -32,7 +32,7 @@
           name: variable.name,
           sending: variable.sending
 
-        }
+        };
       });
     }
 

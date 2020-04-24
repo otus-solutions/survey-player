@@ -1,14 +1,15 @@
-describe('NavigationService', function() {
+describe('NavigationService', function () {
   var UNIT_NAME = 'otusjs.player.data.navigation.NavigationService';
   var Mock = {};
   var Injections = [];
   var service = {};
 
-  beforeEach(function() {
+  beforeEach(function () {
     angular.mock.module('otusjs.player');
     angular.mock.module('otusjs.player.standalone');
+    spyOn(window, 'alasql');
 
-    angular.mock.inject(function($injector) {
+    angular.mock.inject(function ($injector) {
       mockItemData($injector);
       Injections.NavigationStackItemFactory = $injector.get('otusjs.model.navigation.NavigationTrackingItemFactory');
       Injections.RouteService = $injector.get('otusjs.player.data.navigation.RouteService');
@@ -54,7 +55,7 @@ describe('NavigationService', function() {
   });
 
   function mockItemData($injector) {
-    Mock.data = '{"items":[{"extents":"SurveyItem","objectType":"CalendarQuestion","templateID":"VAL1","customID":"VAL1","dataType":"LocalDate","label":{"ptBR":{"extends":"StudioObject","objectType":"Label","oid":"","plainText":"","formattedText":""},"enUS":{"extends":"StudioObject","objectType":"Label","oid":"","plainText":"","formattedText":""},"esES":{"extends":"StudioObject","objectType":"Label","oid":"","plainText":"","formattedText":""}},"metadata":{"extents":"StudioObject","objectType":"MetadataGroup","options":[]},"fillingRules":{"extends":"StudioObject","objectType":"FillingRules","options":{"mandatory":{"extends":"StudioObject","objectType":"Rule","validatorType":"mandatory","data":{"reference":true}},"rangeDate":{"extends":"StudioObject","objectType":"Rule","validatorType":"rangeDate","data":{"reference":{"initial":"2016-09-01T03:00:00.000Z","end":"2016-10-01T03:00:00.000Z"}}},"minDate":{"extends":"StudioObject","objectType":"Rule","validatorType":"minDate","data":{"reference":"2016-07-01T03:00:00.000Z"}},"maxDate":{"extends":"StudioObject","objectType":"Rule","validatorType":"maxDate","data":{"reference":"2016-12-01T02:00:00.000Z"}}}}}],"navigation":{"extents":"SurveyItem","objectType":"CalendarQuestion","templateID":"VAL1","customID":"VAL1","dataType":"LocalDate","label":{"ptBR":{"extends":"StudioObject","objectType":"Label","oid":"","plainText":"","formattedText":""},"enUS":{"extends":"StudioObject","objectType":"Label","oid":"","plainText":"","formattedText":""},"esES":{"extends":"StudioObject","objectType":"Label","oid":"","plainText":"","formattedText":""}},"metadata":{"extents":"StudioObject","objectType":"MetadataGroup","options":[]},"fillingRules":{"extends":"StudioObject","objectType":"FillingRules","options":{"mandatory":{"extends":"StudioObject","objectType":"Rule","validatorType":"mandatory","data":{"reference":true}},"rangeDate":{"extends":"StudioObject","objectType":"Rule","validatorType":"rangeDate","data":{"reference":{"initial":"2016-09-01T03:00:00.000Z","end":"2016-10-01T03:00:00.000Z"}}},"minDate":{"extends":"StudioObject","objectType":"Rule","validatorType":"minDate","data":{"reference":"2016-07-01T03:00:00.000Z"}},"maxDate":{"extends":"StudioObject","objectType":"Rule","validatorType":"maxDate","data":{"reference":"2016-12-01T02:00:00.000Z"}}}}}}'
+    Mock.data = '{"items":[{"extents":"SurveyItem","objectType":"CalendarQuestion","templateID":"VAL1","customID":"VAL1","dataType":"LocalDate","label":{"ptBR":{"extends":"StudioObject","objectType":"Label","oid":"","plainText":"","formattedText":""},"enUS":{"extends":"StudioObject","objectType":"Label","oid":"","plainText":"","formattedText":""},"esES":{"extends":"StudioObject","objectType":"Label","oid":"","plainText":"","formattedText":""}},"metadata":{"extents":"StudioObject","objectType":"MetadataGroup","options":[]},"fillingRules":{"extends":"StudioObject","objectType":"FillingRules","options":{"mandatory":{"extends":"StudioObject","objectType":"Rule","validatorType":"mandatory","data":{"reference":true}},"rangeDate":{"extends":"StudioObject","objectType":"Rule","validatorType":"rangeDate","data":{"reference":{"initial":"2016-09-01T03:00:00.000Z","end":"2016-10-01T03:00:00.000Z"}}},"minDate":{"extends":"StudioObject","objectType":"Rule","validatorType":"minDate","data":{"reference":"2016-07-01T03:00:00.000Z"}},"maxDate":{"extends":"StudioObject","objectType":"Rule","validatorType":"maxDate","data":{"reference":"2016-12-01T02:00:00.000Z"}}}}}],"navigation":{"extents":"SurveyItem","objectType":"CalendarQuestion","templateID":"VAL1","customID":"VAL1","dataType":"LocalDate","label":{"ptBR":{"extends":"StudioObject","objectType":"Label","oid":"","plainText":"","formattedText":""},"enUS":{"extends":"StudioObject","objectType":"Label","oid":"","plainText":"","formattedText":""},"esES":{"extends":"StudioObject","objectType":"Label","oid":"","plainText":"","formattedText":""}},"metadata":{"extents":"StudioObject","objectType":"MetadataGroup","options":[]},"fillingRules":{"extends":"StudioObject","objectType":"FillingRules","options":{"mandatory":{"extends":"StudioObject","objectType":"Rule","validatorType":"mandatory","data":{"reference":true}},"rangeDate":{"extends":"StudioObject","objectType":"Rule","validatorType":"rangeDate","data":{"reference":{"initial":"2016-09-01T03:00:00.000Z","end":"2016-10-01T03:00:00.000Z"}}},"minDate":{"extends":"StudioObject","objectType":"Rule","validatorType":"minDate","data":{"reference":"2016-07-01T03:00:00.000Z"}},"maxDate":{"extends":"StudioObject","objectType":"Rule","validatorType":"maxDate","data":{"reference":"2016-12-01T02:00:00.000Z"}}}}}}';
     Mock.itemVAL1 = {
       "extents": "SurveyItem",
       "objectType": "CalendarQuestion",
@@ -139,7 +140,7 @@ describe('NavigationService', function() {
           "name": "VAL1_VAL2",
           "isDefault": true,
           "conditions": []
-        },{
+        }, {
           "extents": "SurveyTemplateObject",
           "objectType": "Route",
           "origin": "VAL1",
@@ -176,13 +177,16 @@ describe('NavigationService', function() {
           }
         }];
       },
-      visitGroup: function () { },
-      updateCurrentGroup: function () {}
+      visitGroup: function () {
+      },
+      updateCurrentGroup: function () {
+      }
     };
 
     Mock.currentSurvey = {
       getSurvey: function () {
-        return {getNavigationTracker: function () {
+        return {
+          getNavigationTracker: function () {
             return Mock.navigation;
           }
         };
@@ -198,7 +202,7 @@ describe('NavigationService', function() {
 
 });
 
-xdescribe('NavigationService', function() {
+xdescribe('NavigationService', function () {
 
   var UNIT_NAME = 'otusjs.player.data.navigation.NavigationService';
   var Mock = {};
@@ -207,10 +211,10 @@ xdescribe('NavigationService', function() {
   var CAD1 = 'CAD1';
   var CAD2 = 'CAD2';
 
-  beforeEach(function() {
+  beforeEach(function () {
     module('otusjs.player.data');
 
-    inject(function(_$injector_) {
+    inject(function (_$injector_) {
       /* Test data */
       mockItemData();
       mockNavigationData();
@@ -230,13 +234,13 @@ xdescribe('NavigationService', function() {
     });
   });
 
-  describe('initialize method', function() {
+  describe('initialize method', function () {
 
-    beforeEach(function() {
+    beforeEach(function () {
       spyOn(Mock.CurrentSurveyService, 'getSurvey').and.returnValue(Mock.newSurveyActivity);
     });
 
-    it('should just keep a reference to navigation stack', function() {
+    it('should just keep a reference to navigation stack', function () {
       service.initialize();
 
       expect(service.getStack()).toEqual(Mock.newStack);
@@ -244,23 +248,23 @@ xdescribe('NavigationService', function() {
 
   });
 
-  describe('getNextItems method', function() {
+  describe('getNextItems method', function () {
 
-    describe('on all cases', function() {
+    describe('on all cases', function () {
 
-      beforeEach(function() {
+      beforeEach(function () {
         spyOn(Mock.CurrentItemService, 'getNavigation').and.returnValue(Mock.navigationCAD1);
         spyOn(Mock.ActivityFacadeService, 'getCurrentItem').and.returnValue(Mock.CurrentItemService);
         spyOn(Mock.CurrentSurveyService, 'getItemByTemplateID');
       });
 
-      it('should request the routes of current item from current navigation', function() {
+      it('should request the routes of current item from current navigation', function () {
         var nextItems = service.getNextItems();
 
         expect(Mock.navigationCAD1.listRoutes).toHaveBeenCalledWith();
       });
 
-      it('should retrieve the respective item of each current item route destination', function() {
+      it('should retrieve the respective item of each current item route destination', function () {
         var nextItems = service.getNextItems();
 
         expect(Mock.CurrentSurveyService.getItemByTemplateID).toHaveBeenCalledWith(CAD2);
@@ -268,15 +272,15 @@ xdescribe('NavigationService', function() {
 
     });
 
-    describe('when exists next items', function() {
+    describe('when exists next items', function () {
 
-      beforeEach(function() {
+      beforeEach(function () {
         spyOn(Mock.CurrentItemService, 'getNavigation').and.returnValue(Mock.navigationCAD1);
         spyOn(Mock.ActivityFacadeService, 'getCurrentItem').and.returnValue(Mock.CurrentItemService);
         spyOn(Mock.CurrentSurveyService, 'getItemByTemplateID').and.returnValue(Mock.itemCAD2);
       });
 
-      it('should return an array with the next items from current item', function() {
+      it('should return an array with the next items from current item', function () {
         var nextItems = service.getNextItems();
 
         expect(nextItems[0].extents).toEqual('SurveyItem');
@@ -284,14 +288,14 @@ xdescribe('NavigationService', function() {
 
     });
 
-    describe('when not exists next items', function() {
+    describe('when not exists next items', function () {
 
-      beforeEach(function() {
+      beforeEach(function () {
         spyOn(Mock.CurrentItemService, 'getNavigation').and.returnValue(Mock.navigationCAD2);
         spyOn(Mock.ActivityFacadeService, 'getCurrentItem').and.returnValue(Mock.CurrentItemService);
       });
 
-      it('should return an empty array', function() {
+      it('should return an empty array', function () {
         var nextItems = service.getNextItems();
 
         expect(nextItems.length).toBe(0);
@@ -301,11 +305,11 @@ xdescribe('NavigationService', function() {
 
   });
 
-  xdescribe('getPreviousItem method', function() {
+  xdescribe('getPreviousItem method', function () {
 
-    describe('on all cases', function() {
+    describe('on all cases', function () {
 
-      beforeEach(function() {
+      beforeEach(function () {
         spyOn(Mock.CurrentSurveyService, 'getSurvey').and.returnValue(Mock.savedSurveyActivity);
         spyOn(Mock.CurrentSurveyService, 'getItems').and.returnValue([Mock.itemCAD1, Mock.itemCAD2]);
         spyOn(Mock.CurrentSurveyService, 'getNavigations').and.returnValue([Mock.navigationCAD1, Mock.navigationCAD2]);
@@ -320,7 +324,7 @@ xdescribe('NavigationService', function() {
         service.initialize();
       });
 
-      it('should request the ID of previous item of current item', function() {
+      it('should request the ID of previous item of current item', function () {
         spyOn(Mock.savedStack, 'getCurrentItem').and.returnValue(Mock.itemB);
         spyOn(Mock.itemB, 'getPrevious').and.returnValue(Mock.itemA);
 
@@ -331,20 +335,20 @@ xdescribe('NavigationService', function() {
 
     });
 
-    describe('when exists a previous item', function() {
+    describe('when exists a previous item', function () {
 
-      beforeEach(function() {
+      beforeEach(function () {
         spyOn(Mock.CurrentSurveyService, 'getItemByTemplateID').and.returnValue(Mock.itemCAD1);
         spyOn(Mock.CurrentItemService, 'getPreviousItem').and.returnValue(CAD1);
       });
 
-      it('should retrieve the respective item of previous item ID', function() {
+      it('should retrieve the respective item of previous item ID', function () {
         var nextItems = service.getPreviousItem();
 
         expect(Mock.CurrentSurveyService.getItemByTemplateID).toHaveBeenCalledWith(CAD1);
       });
 
-      it('should return the item that precedes the current item', function() {
+      it('should return the item that precedes the current item', function () {
         var item = service.getPreviousItem();
 
         expect(item.extents).toEqual('SurveyItem');
@@ -352,13 +356,13 @@ xdescribe('NavigationService', function() {
 
     });
 
-    describe('when not exists a previous item', function() {
+    describe('when not exists a previous item', function () {
 
-      beforeEach(function() {
+      beforeEach(function () {
         spyOn(Mock.CurrentItemService, 'getPreviousItem').and.returnValue(null);
       });
 
-      it('should return null', function() {
+      it('should return null', function () {
         var item = service.getPreviousItem();
 
         expect(item).toBe(null);
@@ -368,27 +372,27 @@ xdescribe('NavigationService', function() {
 
   });
 
-  describe('hasNext method', function() {
+  describe('hasNext method', function () {
 
-    describe('when exists next item', function() {
+    describe('when exists next item', function () {
 
-      beforeEach(function() {
+      beforeEach(function () {
         spyOn(Mock.CurrentItemService, 'getNavigation').and.returnValue(Mock.navigationCAD1);
       });
 
-      it('should return true', function() {
+      it('should return true', function () {
         expect(service.hasNext()).toBe(true);
       });
 
     });
 
-    describe('when not exists next item', function() {
+    describe('when not exists next item', function () {
 
-      beforeEach(function() {
+      beforeEach(function () {
         spyOn(Mock.CurrentItemService, 'getNavigation').and.returnValue(Mock.navigationCAD2);
       });
 
-      it('should return false', function() {
+      it('should return false', function () {
         expect(service.hasNext()).toBe(false);
       });
 
@@ -396,11 +400,11 @@ xdescribe('NavigationService', function() {
 
   });
 
-  describe('hasPrevious method', function() {
+  describe('hasPrevious method', function () {
 
-    describe('when exists previous item', function() {
+    describe('when exists previous item', function () {
 
-      beforeEach(function() {
+      beforeEach(function () {
         spyOn(Mock.CurrentSurveyService, 'getSurvey').and.returnValue(Mock.savedSurveyActivity);
         spyOn(Mock.CurrentSurveyService, 'getItems').and.returnValue([Mock.itemCAD1, Mock.itemCAD2]);
         spyOn(Mock.CurrentSurveyService, 'getNavigations').and.returnValue([Mock.navigationCAD1, Mock.navigationCAD2]);
@@ -415,7 +419,7 @@ xdescribe('NavigationService', function() {
         service.initialize();
       });
 
-      it('should return true', function() {
+      it('should return true', function () {
         spyOn(Mock.savedStack, 'getCurrentItem').and.returnValue(Mock.itemB);
         spyOn(Mock.itemB, 'getPrevious').and.returnValue(Mock.itemA);
 
@@ -424,9 +428,9 @@ xdescribe('NavigationService', function() {
 
     });
 
-    describe('when not exists previous item', function() {
+    describe('when not exists previous item', function () {
 
-      beforeEach(function() {
+      beforeEach(function () {
         spyOn(Mock.CurrentSurveyService, 'getSurvey').and.returnValue(Mock.savedSurveyActivity);
         spyOn(Mock.CurrentSurveyService, 'getItems').and.returnValue([Mock.itemCAD1, Mock.itemCAD2]);
         spyOn(Mock.CurrentSurveyService, 'getNavigations').and.returnValue([Mock.navigationCAD1, Mock.navigationCAD2]);
@@ -441,7 +445,7 @@ xdescribe('NavigationService', function() {
         service.initialize();
       });
 
-      it('should return false', function() {
+      it('should return false', function () {
         spyOn(Mock.savedStack, 'getCurrentItem').and.returnValue(Mock.itemA);
         spyOn(Mock.itemA, 'getPrevious').and.returnValue(null);
 
@@ -452,9 +456,9 @@ xdescribe('NavigationService', function() {
 
   });
 
-  describe('loadNextItem method', function() {
+  describe('loadNextItem method', function () {
 
-    beforeEach(function() {
+    beforeEach(function () {
       spyOn(Mock.CurrentSurveyService, 'getSurvey').and.returnValue(Mock.newSurveyActivity);
       spyOn(Mock.CurrentSurveyService, 'getItems').and.returnValue([Mock.itemCAD1, Mock.itemCAD2]);
       spyOn(Mock.CurrentSurveyService, 'getNavigations').and.returnValue([Mock.navigationCAD1, Mock.navigationCAD2]);
@@ -476,37 +480,37 @@ xdescribe('NavigationService', function() {
       service.initialize();
     });
 
-    describe('when already exists a current item', function() {
+    describe('when already exists a current item', function () {
 
-      it('should retrieve the navigation of current item', function() {
+      it('should retrieve the navigation of current item', function () {
         service.loadNextItem();
 
         expect(Mock.CurrentItemService.getNavigation).toHaveBeenCalledWith();
       });
 
-      it('should retrieve the route to be used by navigation', function() {
+      it('should retrieve the route to be used by navigation', function () {
         service.loadNextItem();
 
         expect(Mock.RouteService.calculateRoute).toHaveBeenCalledWith(Mock.navigationCAD1);
       });
 
-      it('should retrieve the item that corresponds to route destination', function() {
+      it('should retrieve the item that corresponds to route destination', function () {
         service.loadNextItem();
 
         expect(Mock.RouteService.calculateRoute).toHaveBeenCalledWith(Mock.navigationCAD1);
       });
 
-      it('should retrieve the navigation that corresponds to route destination', function() {
+      it('should retrieve the navigation that corresponds to route destination', function () {
         service.loadNextItem();
 
         expect(Mock.CurrentSurveyService.getNavigationByOrigin).toHaveBeenCalledWith(Mock.routeToCAD3.destination);
       });
 
-      it('should load a next item', function() {
+      it('should load a next item', function () {
 
       });
 
-      it('should stack up the next item', function() {
+      it('should stack up the next item', function () {
         service.loadNextItem();
 
         expect(Mock.newStack.add).toHaveBeenCalledWith(Mock.stackItem);
@@ -514,13 +518,13 @@ xdescribe('NavigationService', function() {
 
     });
 
-    describe('when does not exists a current item but a saved path to continue', function() {
+    describe('when does not exists a current item but a saved path to continue', function () {
 
-      it('should load the last visited item of path', function() {
+      it('should load the last visited item of path', function () {
 
       });
 
-      it('should stack up the next item', function() {
+      it('should stack up the next item', function () {
         service.loadNextItem();
 
         expect(Mock.newStack.add).toHaveBeenCalledWith(Mock.stackItem);
@@ -528,13 +532,13 @@ xdescribe('NavigationService', function() {
 
     });
 
-    describe('when does not exists neither a current item or a saved path to continue', function() {
+    describe('when does not exists neither a current item or a saved path to continue', function () {
 
-      it('should load the first item of activity', function() {
+      it('should load the first item of activity', function () {
 
       });
 
-      it('should stack up the next item', function() {
+      it('should stack up the next item', function () {
         service.loadNextItem();
 
         expect(Mock.newStack.add).toHaveBeenCalledWith(Mock.stackItem);
@@ -951,11 +955,29 @@ xdescribe('NavigationService', function() {
     Mock.savedStack = $injector.get('otusjs.model.navigation.NavigationTrackerFactory').create();
 
     itemFactory = $injector.get('otusjs.model.navigation.NavigationTrackingItemFactory');
-    var options = { id: 'CAD1', label: 'Label', type: 'IntegerQuestion', answer: 'Label da resposta', metadata: 'Label do metdado.' };
+    var options = {
+      id: 'CAD1',
+      label: 'Label',
+      type: 'IntegerQuestion',
+      answer: 'Label da resposta',
+      metadata: 'Label do metdado.'
+    };
     Mock.itemA = itemFactory.create(options);
-    options = { id: 'CAD2', label: 'Label', type: 'IntegerQuestion', answer: 'Label da resposta', metadata: 'Label do metdado.' };
+    options = {
+      id: 'CAD2',
+      label: 'Label',
+      type: 'IntegerQuestion',
+      answer: 'Label da resposta',
+      metadata: 'Label do metdado.'
+    };
     Mock.itemB = itemFactory.create(options);
-    options = { id: 'CAD3', label: 'Label', type: 'IntegerQuestion', answer: 'Label da resposta', metadata: 'Label do metdado.' };
+    options = {
+      id: 'CAD3',
+      label: 'Label',
+      type: 'IntegerQuestion',
+      answer: 'Label da resposta',
+      metadata: 'Label do metdado.'
+    };
     Mock.itemC = itemFactory.create(options);
 
     Mock.savedStack.add(Mock.itemA);

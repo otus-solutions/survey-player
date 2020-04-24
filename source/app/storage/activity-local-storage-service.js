@@ -2,7 +2,7 @@
  * ActivityLocalStorageServiceService
  * @namespace Services
  */
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -42,6 +42,7 @@
     /* Datasources Methods */
     self.getDatasource = getDatasource;
     self.registerDatasource = registerDatasource;
+
     // self.initialize({}, indexedDB.open('otus'));
 
     /**
@@ -82,8 +83,9 @@
      * Clears the collection data.
      */
     function clear() {
+      _db.loadDatabase();
       _collection.clear();
-      self.options.unique.forEach(function(uniqueIndex) {
+      self.options.unique.forEach(function (uniqueIndex) {
         _collection.constraints.unique[uniqueIndex].keyMap = {};
         _collection.constraints.unique[uniqueIndex].lokiMap = {};
       });
@@ -92,12 +94,14 @@
 
     /* Datasources  Methods */
     function registerDatasource(datasource) {
+      _db.loadDatabase();
       if (_collection) {
         _collection.insert({
           name: 'datasource',
           dataMap: datasource
         });
       }
+      _db.saveDatabase();
       return self.getDatasource;
     }
 

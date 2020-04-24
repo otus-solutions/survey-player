@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -20,6 +20,7 @@
     function create() {
       return new HttpFileUpload($http, SurveyApiService);
     }
+
     return self;
   }
 

@@ -38,7 +38,7 @@ describe('text question view controller component', function () {
     Mock.CurrentItemService = {
       getFilling: function () {
         return {
-          answer:{
+          answer: {
             value: null
           }
         };

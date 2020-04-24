@@ -1,14 +1,15 @@
-describe('otusPlayerDisplay Component Test unit', function() {
+describe('otusPlayerDisplay Component Test unit', function () {
 
   var Mock = {};
   var Injections = [];
   var controller;
 
-  beforeEach(function() {
+  beforeEach(function () {
     angular.mock.module('otusjs.player');
     angular.mock.module('otusjs.player.standalone');
+    spyOn(window, 'alasql');
 
-    angular.mock.inject(function (_$controller_, _$injector_,$rootScope, $compile) {
+    angular.mock.inject(function (_$controller_, _$injector_, $rootScope, $compile) {
       mock($rootScope, $compile);
       Injections.$scope = Mock.$scope;
       Injections.$document = _$injector_.get('$document');
@@ -46,8 +47,8 @@ describe('otusPlayerDisplay Component Test unit', function() {
     expect(controller.ids).toEqual([]);
   });
 
-  xit('should try to find element section on controller template', function() {
-    Mock.itemData = [{'templateID':'ATCA1'}];
+  xit('should try to find element section on controller template', function () {
+    Mock.itemData = [{'templateID': 'ATCA1'}];
 
     controller.loadItem(Mock.itemData);
     // Injections.$scope.$digest();
@@ -72,7 +73,7 @@ describe('otusPlayerDisplay Component Test unit', function() {
   }
 });
 
-xdescribe('otusPlayerDisplay component', function() {
+xdescribe('otusPlayerDisplay component', function () {
 
   var UNIT_NAME = 'otusPlayerDisplay';
   var SURVEY_ITEM = '<otus-survey-item item-data="itemData" />';
@@ -81,11 +82,11 @@ xdescribe('otusPlayerDisplay component', function() {
   var Bindings = {};
   var component = {};
 
-  beforeEach(function() {
+  beforeEach(function () {
     module('otusjs.player.core');
     module('otusjs.player.component');
 
-    inject(function(_$componentController_, $rootScope, _$compile_) {
+    inject(function (_$componentController_, $rootScope, _$compile_) {
       /* Test data */
       mockItemData();
 
@@ -99,17 +100,17 @@ xdescribe('otusPlayerDisplay component', function() {
     });
   });
 
-  describe('loadItem method', function() {
+  describe('loadItem method', function () {
 
-    describe('when already exists an item loaded', function() {
+    describe('when already exists an item loaded', function () {
 
-      beforeEach(function() {
+      beforeEach(function () {
         Mock.currentItem = {};
         Mock.currentItem.destroy = jasmine.createSpy('destroy');
         component.currentItem = Mock.currentItem;
       });
 
-      it('should destroy it', function() {
+      it('should destroy it', function () {
         component.loadItem(Mock.itemData);
 
         expect(Mock.currentItem.destroy).toHaveBeenCalledWith();
@@ -117,7 +118,7 @@ xdescribe('otusPlayerDisplay component', function() {
 
     });
 
-    it('should set itemData attribute in component scope with parameter itemData', function() {
+    it('should set itemData attribute in component scope with parameter itemData', function () {
       Mock.itemData = {};
 
       component.loadItem(Mock.itemData);
@@ -125,7 +126,7 @@ xdescribe('otusPlayerDisplay component', function() {
       expect(Mock.$scope.itemData).toEqual(Mock.itemData);
     });
 
-    it('should try to find element section on component template', function() {
+    it('should try to find element section on component template', function () {
       Mock.itemData = {};
 
       component.loadItem(Mock.itemData);
@@ -133,7 +134,7 @@ xdescribe('otusPlayerDisplay component', function() {
       expect(Mock.$element.find).toHaveBeenCalledWith('section');
     });
 
-    it('should prepend the compiled otus-survey-item', function() {
+    it('should prepend the compiled otus-survey-item', function () {
       Mock.itemData = {};
 
       component.loadItem(Mock.itemData);
@@ -143,9 +144,9 @@ xdescribe('otusPlayerDisplay component', function() {
 
   });
 
-  describe('onInit method', function() {
+  describe('onInit method', function () {
 
-    it('should initialize the playerCommander attribute from parent controller with itself', function() {
+    it('should initialize the playerCommander attribute from parent controller with itself', function () {
       component.$onInit();
 
       expect(Injections.$scope.$parent.$ctrl.playerDisplay).toEqual(component);
@@ -154,11 +155,12 @@ xdescribe('otusPlayerDisplay component', function() {
   });
 
   function mockItemData() {
-    Mock.itemData = {}
+    Mock.itemData = {};
     Mock.itemData.customID = 'VAL1';
   }
 
-  function mockBindings() {}
+  function mockBindings() {
+  }
 
   function mockScope($rootScope) {
     Mock.$scope = $rootScope.$new();

@@ -1,4 +1,4 @@
-(function() {
+(function () {
   //
   // var baseDir = __dirname + '/app/index.html';
 
@@ -19,15 +19,32 @@
   var gulp_if = require('gulp-if');
   var clean = require('gulp-clean');
   var uncache = require('gulp-uncache');
+  var jeditor = require('gulp-json-editor');
 
-  gulp.task('compress', function() {
-    runSequence('clean_dist', 'copy_code', 'embeded_template', 'copy_node_modules', 'compress-hash');
+  gulp.task('compress', function () {
+    runSequence('clean_dist', 'copy_code','copy_manifest', 'copy_sw', 'embeded_template', 'copy_node_modules', 'compress-hash');
   });
 
-  gulp.task('copy_code', function (){
+  gulp.task('copy_code', function () {
     return gulp.src('./app/**/*')
       .pipe(gulp_if('index.html', replace('src="app/', 'src="')))
       .pipe(gulp_if('index.html', replace('href="app/', 'href="')))
+      .pipe(gulp.dest('dist/survey-player'));
+  });
+
+  gulp.task('copy_manifest', function () {
+    return gulp.src('./manifest.json')
+      .pipe(replace('app/', ''))
+      .pipe(jeditor(function (json) {
+        json.start_url =String(process.env.URL || '/');
+        return json;
+      }))
+      .pipe(gulp.dest('dist/survey-player'));
+  });
+
+  gulp.task('copy_sw', function () {
+    return gulp.src('./sw.js')
+      .pipe(replace('/app/', '/'))
       .pipe(gulp.dest('dist/survey-player'));
   });
 
@@ -36,13 +53,13 @@
       .pipe(uncache({
         append: 'hash',
         rename: true,
-        srcDir:'dist/survey-player',
-        distDir:'dist/survey-player'
+        srcDir: 'dist/survey-player',
+        distDir: 'dist/survey-player'
       }))
       .pipe(gulp.dest('dist/survey-player'));
   });
 
-  gulp.task('embeded_template', function() {
+  gulp.task('embeded_template', function () {
     return gulp.src('./dist/survey-player/**/*')
       .pipe(gulp_if('*.js', embedTemplates({
         basePath: '.'
@@ -61,10 +78,10 @@
   });
 
 
-  gulp.task('compress-compress', function() {
+  gulp.task('compress-compress', function () {
     return gulp.src('app/index.html', {allowEmpty: true})
       .pipe(useref({
-        transformPath: function(filePath) {
+        transformPath: function (filePath) {
           return filePath.replace('app/', '');
         }
       }))
@@ -81,11 +98,14 @@
       .pipe(gulp.dest('dist/survey-player/'));
   });
 
-  gulp.task('browser-sync', function() {
+  gulp.task('browser-sync', function () {
     var activityUrl = process.env.ACTIVITY_URL || "http://localhost:51002/otus-rest/v01/activities";
     var datasourceUrl = process.env.DATASOURCE_URL || "http://localhost:51002/otus-rest/v01/configuration/datasources";
     var fileuploadUrl = process.env.FILEUPLOAD_URL || "http://localhost:51002/otus-rest/v01/upload";
     var staticvariableUrl = process.env.STATICVARIABLE_URL || "http://localhost:51002/otus-rest/v01/static-variable";
+    var loginUrl = process.env.LOGIN_URL || "http://localhost:51002/otus-rest/v01/authentication";
+    var surveyUrl = process.env.SURVEY_URL || "http://localhost:51002/otus-rest/v01/configuration/surveys";
+    var collectUrl = process.env.COLLECT_URL || "http://localhost:51002/otus-rest/v01/offline/activities/collection";
     browserSync.init({
       server: {
         open: 'external',
@@ -93,13 +113,16 @@
         middleware: [
           //browserSyncSpa(/^[^\.]+$/, baseDir),
 
-          function(req, res, next) {
+          function (req, res, next) {
             res.setHeader('Access-Control-Allow-Origin', '*');
             res.setHeader('Access-Control-Allow-Headers', '*');
-            res.setHeader('Set-Cookie',['Activity-Address='+activityUrl+';path=/',
-              'Datasource-Address='+datasourceUrl+';path=/',
-              'FileUpload-Address='+fileuploadUrl+';path=/',
-              'StaticVariable-Address='+staticvariableUrl+';path=/']);
+            res.setHeader('Set-Cookie', ['Activity-Address=' + activityUrl + ';path=/',
+              'Datasource-Address=' + datasourceUrl + ';path=/',
+              'FileUpload-Address=' + fileuploadUrl + ';path=/',
+              'Login-Address=' + loginUrl + ';path=/',
+              'Survey-Address=' + surveyUrl + ';path=/',
+              'Collect-Address=' + collectUrl + ';path=/',
+              'StaticVariable-Address=' + staticvariableUrl + ';path=/']);
             next();
           }
         ]
@@ -115,7 +138,7 @@
     ]).on('change', browserSync.reload);
   });
 
-  gulp.task('upgrade-version', function(value) {
+  gulp.task('upgrade-version', function (value) {
     gulp.src('./package.json')
       .pipe(bump({
         version: process.env.npm_config_value
@@ -123,7 +146,7 @@
       .pipe(gulp.dest('./'));
   });
 
-  gulp.task('sonar', function() {
+  gulp.task('sonar', function () {
     var options = {
       sonar: {
         host: {

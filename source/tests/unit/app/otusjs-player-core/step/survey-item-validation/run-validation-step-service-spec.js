@@ -1,14 +1,14 @@
-xdescribe('RunValidationStepService', function() {
+xdescribe('RunValidationStepService', function () {
 
   var Mock = {};
   var Injections = {};
   var service = {};
   var CAD1 = 'CAD1';
 
-  beforeEach(function() {
+  beforeEach(function () {
     module('otusjs.player.core');
 
-    inject(function(_$injector_) {
+    inject(function (_$injector_) {
       mockExecutionPipe();
       mockFlowData();
       mockItemData();
@@ -20,65 +20,65 @@ xdescribe('RunValidationStepService', function() {
     });
   });
 
-  describe('effect method', function() {
+  describe('effect method', function () {
 
-    beforeEach(function() {
+    beforeEach(function () {
       spyOn(Mock.currentItem, 'getItem');
       spyOn(Mock.ValidationService, 'validateElement');
 
       service.beforeEffect(Mock.pipe, Mock.flowData);
       service.effect(Mock.pipe, Mock.flowData);
-    })
+    });
 
-    it('should retrieve the current item', function() {
+    it('should retrieve the current item', function () {
       expect(Mock.currentItem.getItem).toHaveBeenCalledWith();
     });
 
-    it('should validate the item with ValidationService', function() {
+    it('should validate the item with ValidationService', function () {
       expect(Mock.ValidationService.validateElement).toHaveBeenCalledWith(Mock.itemData.customID, jasmine.any(Function));
     });
 
   });
 
-  describe('afterEffect method', function() {
+  describe('afterEffect method', function () {
 
-    describe('when validation found error', function() {
+    describe('when validation found error', function () {
 
-      beforeEach(function() {
+      beforeEach(function () {
         mockFalseValidationResponse();
         spyOn(Mock.ValidationService, 'validateElement').and.callFake(_callback);
         spyOn(Mock.ActionOverflowService, 'pipe');
         spyOn(Mock.ActionOverflowService, 'execute');
         service.effect(Mock.pipe, Mock.flowData);
         service.afterEffect(Mock.pipe, Mock.flowData);
-      })
+      });
 
-      it('should pipe ReadValidationErrorStepService to ActionOverflowService', function() {
+      it('should pipe ReadValidationErrorStepService to ActionOverflowService', function () {
         expect(Mock.ActionOverflowService.pipe).toHaveBeenCalledWith(Mock.ReadValidationErrorStepService, Mock.validationResponse);
       });
 
-      it('should execute ActionOverflowService', function() {
+      it('should execute ActionOverflowService', function () {
         expect(Mock.ActionOverflowService.execute).toHaveBeenCalledWith();
       });
 
     });
 
-    describe('when validation does not found error', function() {
+    describe('when validation does not found error', function () {
 
-      beforeEach(function() {
+      beforeEach(function () {
         mockTrueValidationResponse();
         spyOn(Mock.ValidationService, 'validateElement').and.callFake(_callback);
         spyOn(Mock.ActionOverflowService, 'pipe');
         spyOn(Mock.ActionOverflowService, 'execute');
         service.effect(Mock.pipe, Mock.flowData);
         service.afterEffect(Mock.pipe, Mock.flowData);
-      })
+      });
 
-      it('should pipe ReadValidationErrorStepService to ActionOverflowService', function() {
+      it('should pipe ReadValidationErrorStepService to ActionOverflowService', function () {
         expect(Mock.ActionOverflowService.pipe).not.toHaveBeenCalledWith(Mock.ReadValidationErrorStepService, Mock.validationResponse);
       });
 
-      it('should execute ActionOverflowService', function() {
+      it('should execute ActionOverflowService', function () {
         expect(Mock.ActionOverflowService.execute).not.toHaveBeenCalledWith();
       });
 
@@ -86,9 +86,9 @@ xdescribe('RunValidationStepService', function() {
 
   });
 
-  describe('getEffectResult method', function() {
+  describe('getEffectResult method', function () {
 
-    it('should return null', function() {
+    it('should return null', function () {
       expect(service.getEffectResult(Mock.pipe, Mock.flowData)).toBeDefined();
     });
 
@@ -243,8 +243,12 @@ xdescribe('RunValidationStepService', function() {
   function mockActivityFacadeService($injector) {
     Mock.ActivityFacadeService = $injector.get('otusjs.player.data.activity.ActivityFacadeService');
     Mock.currentItem = {};
-    Mock.currentItem.getItem = function() { return false; };
-    Mock.currentItem.shouldIgnoreResponseEvaluation = function() { return false; };
+    Mock.currentItem.getItem = function () {
+      return false;
+    };
+    Mock.currentItem.shouldIgnoreResponseEvaluation = function () {
+      return false;
+    };
 
     spyOn(Mock.ActivityFacadeService, 'getCurrentItem').and.returnValue(Mock.currentItem);
 

@@ -1,25 +1,26 @@
-describe('HtmlBuilderService', function() {
+describe('HtmlBuilderService', function () {
 
   var camelCaseString = 'CamelCaseString';
   var tagNameString = 'camel-case-string';
   var service;
 
-  beforeEach(function() {
+  beforeEach(function () {
     module('otusjs.player.core');
     angular.mock.module('otusjs.player.standalone');
+    spyOn(window, 'alasql');
 
-    inject(function(_$injector_) {
+    inject(function (_$injector_) {
       service = _$injector_.get('otusjs.player.core.renderer.HtmlBuilderService');
     });
   });
 
-  describe('generateTagName method', function() {
+  describe('generateTagName method', function () {
 
-    it('should replace camel case with hyphen and lower case', function() {
+    it('should replace camel case with hyphen and lower case', function () {
       expect(service.generateTagName(camelCaseString)).toEqual(tagNameString);
     });
 
-    it('should keep the string if it is not camel case', function() {
+    it('should keep the string if it is not camel case', function () {
       expect(service.generateTagName(camelCaseString.toLowerCase())).toEqual(camelCaseString.toLowerCase());
     });
 

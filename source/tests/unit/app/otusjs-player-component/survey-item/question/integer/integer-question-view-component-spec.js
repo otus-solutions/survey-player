@@ -37,7 +37,7 @@ describe('integer question view controller component', function () {
           value: 1
         }
       }
-    }
+    };
     controller.itemData = Mock.itemData;
   }
 });

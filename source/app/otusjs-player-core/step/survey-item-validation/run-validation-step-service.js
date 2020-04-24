@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -32,13 +32,14 @@
 
     function effect(pipe, flowData) {
       flowData.validationResponse = {};
-      ItemFillingValidatorService.applyValidation(_currentItemService, function(validationResponse) {
+      ItemFillingValidatorService.applyValidation(_currentItemService, function (validationResponse) {
         let response = validationResponse[0];
         flowData.validationResponse[response.elementID] = response;
       });
     }
 
-    function afterEffect(pipe, flowData) {}
+    function afterEffect(pipe, flowData) {
+    }
 
     function getEffectResult(pipe, flowData) {
       return flowData;
