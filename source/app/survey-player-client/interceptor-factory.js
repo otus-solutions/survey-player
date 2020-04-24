@@ -9,6 +9,7 @@
   function Interceptor(SurveyApiService, $rootScope) {
     return {
       request: function (config) {
+        if (/^http/.test(config.url)) $rootScope.online = true;
         config.headers['Authorization'] = 'Bearer ' + SurveyApiService.getAuthToken();
         return config;
       },

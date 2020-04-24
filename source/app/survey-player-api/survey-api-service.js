@@ -56,8 +56,10 @@
     const TOKEN = true;
     const MODE = 'MODE';
     init();
-    initDB();
 
+    setTimeout(function () {
+      initDB();
+    }, 5000)
 
     var _loginUrl;
     var _datasourceUrl;
@@ -81,24 +83,26 @@
     }
 
     function initDB() {
-      alasql(INIT_QUERY, [], function () {
-        alasql(TABLE_USER, [], function () {
-          alasql.promise('SELECT * FROM User').then(function (response) {
-            if (response.length === 1) {
-              _user = angular.copy(response[0]);
-              _token = angular.copy(response[0].token);
-              $rootScope.$broadcast("logged", {any: {}});
-              delete _user.token;
-            } else if (response.length > 1) {
-              alasql('DELETE FROM User;')
-            }
+      if (!_user){
+        alasql(INIT_QUERY, [], function () {
+          alasql(TABLE_USER, [], function () {
+            alasql.promise('SELECT * FROM User').then(function (response) {
+              if (response.length === 1) {
+                _user = angular.copy(response[0]);
+                _token = angular.copy(response[0].token);
+                $rootScope.$broadcast("logged", {any: {}});
+                delete _user.token;
+              } else if (response.length > 1) {
+                alasql('DELETE FROM User;')
+              }
 
-            $rootScope.$broadcast("listSurveys", {any: {}});
+              $rootScope.$broadcast("listSurveys", {any: {}});
 
 
+            });
           });
         });
-      });
+      }
 
     }
 
@@ -171,11 +175,9 @@
 
     function setLoggedUser(user) {
       var deferred = $q.defer();
-      console.log(user);
       if (user) {
         alasql(INIT_QUERY, [], function () {
           alasql(TABLE_USER, [], function (res) {
-            // alasql("DELETE FROM User")
             var query = "SELECT * INTO User ".concat(' FROM ?');
             _user = angular.copy(user);
             sessionStorage.setItem(LOGGED_USER, JSON.stringify(user));
@@ -187,7 +189,7 @@
           });
         });
       } else {
-        _dropDatabase()
+        _dropDatabase();
       }
 
       return deferred.promise;
@@ -202,7 +204,6 @@
           delete _loggedUser.token;
           return _loggedUser;
         }
-
       }
       return loggedUser;
     }
