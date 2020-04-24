@@ -18,8 +18,8 @@
     var _variable = null;
 
     self.shouldLockOpenClose = true;
-    self.iconLockOpenClose = 'arrow_left';
-    self.tooltipLockOpenClose = 'Fechar';
+    self.iconLockOpenClose = 'arrow_right';
+    self.tooltipLockOpenClose = 'Abrir';
 
     self.$onInit = onInit;
     self.isLockOpenClose = isLockOpenClose;
@@ -49,8 +49,8 @@
 
     function isLockOpenClose(){
       self.shouldLockOpenClose = !self.shouldLockOpenClose;
-      self.iconLockOpenClose = self.shouldLockOpenClose ? 'arrow_left' : 'arrow_right';
-      self.tooltipLockOpenClose = self.shouldLockOpenClose ? 'Fechar' : 'Abrir';
+      self.iconLockOpenClose = self.shouldLockOpenClose ? 'arrow_right' : 'arrow_left';
+      self.tooltipLockOpenClose = self.shouldLockOpenClose ? 'Abrir' : 'Fechar';
       $mdSidenav('left').toggle();
     }
   }
