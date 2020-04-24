@@ -8,10 +8,11 @@
   Service.$inject = [
     '$q',
     'otusjs.model.activity.ActivityFactory',
+    'SurveyFormFactory',
     'ActivityCollectionService'
   ];
 
-  function Service($q, ActivityFactory, ActivityCollectionService) {
+  function Service($q, ActivityFactory, SurveyFormFactory, ActivityCollectionService) {
     var self = this;
     var _existsWorkingInProgress = null;
 
@@ -20,12 +21,42 @@
     self.save = save;
     self.discard = discard;
     self.getById = getById;
+    self.getSurveys = getSurveys;
+    self.getAllActivities = getAllActivities;
+    self.getByAcronymOffline = getByAcronymOffline;
 
 
     function getById(activityInfo) {
       return ActivityCollectionService.getById(activityInfo).then(_toEntity);
     }
 
+    function getByAcronymOffline(id, acronym) {
+      return ActivityCollectionService.getByAcronymOffline(id, acronym).then(function (survey) {
+        return ActivityFactory.fromJsonObject(survey);
+      });
+    }
+
+    function getSurveys() {
+      return ActivityCollectionService.getSurveyList().then(function (surveys) {
+        return surveys;
+      }).catch(function (err) {
+        return Promise.reject(err);
+      });
+    }
+
+    function getAllActivities(user, filter) {
+      return ActivityCollectionService.getAllActivities().then(function (surveys) {
+        return Array.prototype.concat.apply(filter).map(function (selectedSurvey) {
+          let surveyForm = surveys.find(function (survey) {
+            return survey.acronym === selectedSurvey.acronym;
+          });
+          return ActivityFactory.createOfflineActivity(SurveyFormFactory.fromJsonObject(surveyForm), user).toObjectJson();
+        });
+
+      }).catch(function (err) {
+        return Promise.reject(err);
+      });
+    }
 
     function save(activity) {
       return _update([_toDbObject(activity)]);

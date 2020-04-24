@@ -5,7 +5,7 @@
     .module('otusjs.player.component')
     .component('otusViewerFilters', {
       templateUrl: 'app/otusjs-player-component/viewer/filters/viewer-filters-template.html',
-      controller:'otusViewFiltersController as $ctrl',
+      controller: 'otusViewFiltersController as $ctrl',
       bindings: {
         filters: '='
       }

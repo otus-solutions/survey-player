@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -47,7 +47,7 @@
     function _findAlternativeRoute() {
       var alternativeRoute = null;
 
-      _alternativeRoutes.some(function(route) {
+      _alternativeRoutes.some(function (route) {
         if (_routeCanBeUsed(route)) {
           alternativeRoute = route;
           return true;

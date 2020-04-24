@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -88,19 +88,19 @@
       if (!_uploadInterface) _uploadInterface = FileUploadService.getUploadInterface();
 
       _uploadInterface.uploadFile(file, _questionID)
-      .then(function(response) {
-        var _oid = response.data.data;
-        self.pendingCounter--;
-        var fileInfo = _removeFile(file);
-        fileInfo.oid = _oid;
-        self.sentFiles.push(FileUploadAnswerFactory.buildAnswer(fileInfo));
-        _updateView();
-        _updateAnswer();
-      }, function(err) {
-        _toastError('enviar');
-        file.status = 'pending';
-        self.pendingCounter--;
-      });
+        .then(function (response) {
+          var _oid = response.data.data;
+          self.pendingCounter--;
+          var fileInfo = _removeFile(file);
+          fileInfo.oid = _oid;
+          self.sentFiles.push(FileUploadAnswerFactory.buildAnswer(fileInfo));
+          _updateView();
+          _updateAnswer();
+        }, function (err) {
+          _toastError('enviar');
+          file.status = 'pending';
+          self.pendingCounter--;
+        });
     }
 
     function _removeFile(file) {
@@ -111,36 +111,37 @@
     function downloadFile(idx) {
       var fileInfo = self.sentFiles[idx];
       _uploadInterface.getFile(fileInfo)
-        .then(function(responseBlob) {
+        .then(function (responseBlob) {
           var link = document.createElement('a');
           var downloadUrl = URL.createObjectURL(responseBlob);
           link.setAttribute('href', downloadUrl);
           link.download = responseBlob.name;
           document.body.appendChild(link);
           link.click();
-        }, function(err) {
+        }, function (err) {
           _toastError('transferir');
         });
     }
 
     function deleteFile(idx) {
       var file = self.sentFiles[idx];
-      _showConfirm(event).then(function() {
+      _showConfirm(event).then(function () {
         _uploadInterface.deleteFile(file.oid)
-          .then(function(response) {
+          .then(function (response) {
             self.sentFiles.splice(idx, 1);
             _updateAnswer();
-          }, function(err) {
+          }, function (err) {
             _toastError('excluir');
           });
-      }, function() {});
+      }, function () {
+      });
     }
 
     var _toastLocker = {
       enviar: false,
       transferir: false,
       excluir: false
-   };
+    };
 
     function _toastError(action) {
       if (!_toastLocker[action]) {
@@ -148,7 +149,7 @@
         var toast = $mdToast.show($mdToast.simple()
           .textContent('Erro ao ' + action + ' um ou mais arquivos!')
           .hideDelay(3000));
-        toast.then(function(log) {
+        toast.then(function (log) {
           _toastLocker[action] = false;
         });
       }
@@ -168,7 +169,7 @@
     }
 
     function _populatePendingList(filesArray) {
-      self.pendingList = self.pendingList.concat(filesArray.map(function(file) {
+      self.pendingList = self.pendingList.concat(filesArray.map(function (file) {
         file.status = 'pending';
         file.control = _pendingArrayControl++;
         return file;

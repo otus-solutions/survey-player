@@ -1,15 +1,16 @@
-describe('PlayerService', function() {
+describe('PlayerService', function () {
 
   var UNIT_NAME = 'otusjs.player.core.player.PlayerService';
   var Mock = {};
   var Injections = {};
   var service = {};
 
-  beforeEach(function() {
+  beforeEach(function () {
     module('otusjs.player.core');
     angular.mock.module('otusjs.player.standalone');
+    spyOn(window, 'alasql');
 
-    inject(function(_$injector_) {
+    inject(function (_$injector_) {
       /* Injectable mocks */
       mockActivityFacadeService(_$injector_);
       mockPlayerStartActionService(_$injector_);
@@ -23,11 +24,11 @@ describe('PlayerService', function() {
     Mock.test = Promise.resolve('passou');
   });
 
-  it('service method defined',function () {
+  it('service method defined', function () {
     expect(service).toBeDefined();
   });
 
-  it('service methods checking',function () {
+  it('service methods checking', function () {
     expect(service.bindComponent).toBeDefined();
     expect(service.getItemData).toBeDefined();
     expect(service.goAhead).toBeDefined();
@@ -49,7 +50,7 @@ describe('PlayerService', function() {
   });
 
   it('registerHardBlocker method should call getHardBlocker', function () {
-    spyOn(service,'registerHardBlocker').and.callThrough();
+    spyOn(service, 'registerHardBlocker').and.callThrough();
     service.registerHardBlocker(Mock.test);
     expect(service.registerHardBlocker).toHaveBeenCalledTimes(1);
   });
@@ -60,7 +61,7 @@ describe('PlayerService', function() {
   });
 
   it('registerSoftBlocker method should call getSoftBlocker', function () {
-    spyOn(service,'registerSoftBlocker').and.callThrough();
+    spyOn(service, 'registerSoftBlocker').and.callThrough();
     service.registerSoftBlocker(Mock.test);
     expect(service.registerSoftBlocker).toHaveBeenCalledTimes(1);
   });
@@ -70,9 +71,9 @@ describe('PlayerService', function() {
     expect(service.getSoftBlocker()).toEqual(Mock.test);
   });
 
-  describe('getItemData method', function() {
+  describe('getItemData method', function () {
 
-    it('should retrieve the current item from activity', function() {
+    it('should retrieve the current item from activity', function () {
       var itemData = service.getItemData();
 
       expect(itemData).toEqual(Mock.itemData);
@@ -80,9 +81,9 @@ describe('PlayerService', function() {
 
   });
 
-  describe('goAhead method', function() {
+  describe('goAhead method', function () {
 
-    it('should execute the AheadActionService', function() {
+    it('should execute the AheadActionService', function () {
       spyOn(Mock.AheadActionService, 'execute');
 
       service.goAhead();
@@ -92,9 +93,9 @@ describe('PlayerService', function() {
 
   });
 
-  describe('goBack method', function() {
+  describe('goBack method', function () {
 
-    it('should execute the AheadActionService', function() {
+    it('should execute the AheadActionService', function () {
       spyOn(Mock.BackActionService, 'execute');
 
       service.goBack();
@@ -104,9 +105,9 @@ describe('PlayerService', function() {
 
   });
 
-  describe('play method', function() {
+  describe('play method', function () {
 
-    it('should execute the PlayActionService', function() {
+    it('should execute the PlayActionService', function () {
       spyOn(Mock.PlayActionService, 'execute');
 
       service.play();
@@ -116,9 +117,9 @@ describe('PlayerService', function() {
 
   });
 
-  describe('setup method', function() {
+  describe('setup method', function () {
 
-    it('should execute the PlayerStartActionService', function() {
+    it('should execute the PlayerStartActionService', function () {
       spyOn(Mock.PlayerStartActionService, 'execute');
 
       service.setup();
@@ -135,7 +136,7 @@ describe('PlayerService', function() {
 
   function mockPlayerStartActionService($injector) {
     Mock.PlayerStartActionService = $injector.get('otusjs.player.core.phase.PlayerStartActionService');
-    Mock.itemData = { customID: 'VAL1' };
+    Mock.itemData = {customID: 'VAL1'};
     Mock.itemService = {};
     Mock.itemService.getItems = jasmine.createSpy('getItems').and.returnValue(Mock.itemData);
     spyOn(Mock.ActivityFacadeService, 'getCurrentItem').and.returnValue(Mock.itemService);

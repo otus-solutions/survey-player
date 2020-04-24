@@ -2,7 +2,7 @@
  * ActivityRemoteStorageService
  * @namespace Services
  */
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -32,6 +32,7 @@
     /* Public methods */
     self.getById = getById;
     self.update = update;
+    self.getSurveys = getSurveys;
 
     /**
      * Find activity in collection. An object-like query can be passed to filter
@@ -46,7 +47,7 @@
 
       ActivityRestService
         .getById(activityInfo)
-        .then(function(response) {
+        .then(function (response) {
           deferred.resolve(response);
         }).catch(function () {
         deferred.reject();
@@ -60,7 +61,7 @@
 
       ActivityRestService
         .update(activity)
-        .then(function(response) {
+        .then(function (response) {
           deferred.resolve(response);
         }).catch(function () {
         deferred.reject();
@@ -69,8 +70,19 @@
       return deferred.promise;
     }
 
+    function getSurveys() {
+      var deferred = $q.defer();
 
+      ActivityRestService
+        .getSurveys()
+        .then(function (response) {
+          deferred.resolve(response);
+        }).catch(function (err) {
+        deferred.reject(err);
+      });
 
+      return deferred.promise;
+    }
 
 
   }

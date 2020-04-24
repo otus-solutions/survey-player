@@ -1,13 +1,13 @@
-xdescribe('ApplyAnswerStepService', function() {
+xdescribe('ApplyAnswerStepService', function () {
 
   var Mock = {};
   var Injections = {};
   var service = {};
 
-  beforeEach(function() {
+  beforeEach(function () {
     module('otusjs.player.core');
 
-    inject(function(_$injector_) {
+    inject(function (_$injector_) {
       mockExecutionPipe();
       mockFlowData();
       mockNavigationService(_$injector_);
@@ -16,13 +16,13 @@ xdescribe('ApplyAnswerStepService', function() {
     });
   });
 
-  describe('effect method', function() {
+  describe('effect method', function () {
 
-    beforeEach(function() {
+    beforeEach(function () {
       service.beforeEffect(Mock.pipe, Mock.flowData);
-    })
+    });
 
-    it('should call ActivityFacadeService.applyAnswer', function() {
+    it('should call ActivityFacadeService.applyAnswer', function () {
       spyOn(Mock.ActivityFacadeService, 'applyAnswer');
 
       service.effect(Mock.pipe, Mock.flowData);
@@ -46,10 +46,18 @@ xdescribe('ApplyAnswerStepService', function() {
     Mock.NavigationService = $injector.get('otusjs.player.data.navigation.NavigationService');
 
     var currentItem = {};
-    currentItem.getItem = function() { return Mock.itemData; };
-    currentItem.shouldIgnoreResponseEvaluation = function() { return false; };
-    currentItem.getFilling = function() { return Mock.itemFilling; };
-    currentItem.shouldApplyAnswer = function() { return true; };
+    currentItem.getItem = function () {
+      return Mock.itemData;
+    };
+    currentItem.shouldIgnoreResponseEvaluation = function () {
+      return false;
+    };
+    currentItem.getFilling = function () {
+      return Mock.itemFilling;
+    };
+    currentItem.shouldApplyAnswer = function () {
+      return true;
+    };
     spyOn(Mock.NavigationService, 'getCurrentItem').and.returnValue(currentItem);
 
     Injections.NavigationService = Mock.NavigationService;

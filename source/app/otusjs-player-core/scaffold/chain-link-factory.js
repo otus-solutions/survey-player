@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -66,7 +66,7 @@
         }
       }
 
-      return { pipe: pipe, flowData: flowData };
+      return {pipe: pipe, flowData: flowData};
     }
 
     function catchFlowData(procedure) {

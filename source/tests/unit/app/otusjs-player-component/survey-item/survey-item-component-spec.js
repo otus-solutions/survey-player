@@ -1,11 +1,12 @@
-describe('surveyItem Component Test unit', function() {
+describe('surveyItem Component Test unit', function () {
   var controller;
   var Injections = [];
   var Mock = {};
 
-  beforeEach(function() {
+  beforeEach(function () {
     angular.mock.module('otusjs.player');
     angular.mock.module('otusjs.player.standalone');
+    spyOn(window, 'alasql');
     angular.mock.inject(function (_$controller_, $rootScope, _$injector_) {
       mock($rootScope);
       Injections.$scope = Mock.$scope;
@@ -13,9 +14,9 @@ describe('surveyItem Component Test unit', function() {
       Injections.CurrentItemService = _$injector_.get('otusjs.player.data.activity.CurrentItemService');
 
       controller = _$controller_('otusSurveyItemCtrl', Injections);
-      controller.itemData = {templateID:"TST1"}
+      controller.itemData = {templateID: "TST1"};
     });
-     controller.$onInit();
+    controller.$onInit();
   });
 
   it('controller method should have a defined controller', function () {

@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -11,12 +11,12 @@
       }
     }).controller("otusSingleSelectionQuestionViewCtrl", Controller);
 
-   function Controller() {
+  function Controller() {
     var self = this;
 
-     self.view = true;
+    self.view = true;
 
-    self.$onInit = function() {
+    self.$onInit = function () {
       self.answer = self.itemData.data.answer.value;
     };
 

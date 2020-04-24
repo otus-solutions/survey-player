@@ -1,4 +1,4 @@
-describe('NavigationService', function() {
+describe('NavigationService', function () {
 
   var UNIT_NAME = 'otusjs.player.data.navigation.RouteService';
   var Mock = {};
@@ -7,10 +7,10 @@ describe('NavigationService', function() {
   var CAD1 = 'CAD1';
   var CAD2 = 'CAD2';
 
-  beforeEach(function() {
+  beforeEach(function () {
     module('otusjs.player.data');
 
-    inject(function(_$injector_) {
+    inject(function (_$injector_) {
       /* Test data */
       mockNavigationData();
 
@@ -21,43 +21,43 @@ describe('NavigationService', function() {
     });
   });
 
-  describe('calculateRoute method', function() {
+  describe('calculateRoute method', function () {
 
-    describe('when Navigation has only the default route', function() {
+    describe('when Navigation has only the default route', function () {
 
-      beforeEach(function() {
+      beforeEach(function () {
         service.setup(Mock.navigationCAD2);
       });
 
-      it('should return the default route', function() {
+      it('should return the default route', function () {
         expect(service.calculateRoute()).toEqual(Mock.navigationCAD2.routes[0]);
       });
 
     });
 
-    describe('when Navigation has alternative routes', function() {
+    describe('when Navigation has alternative routes', function () {
 
-      describe('and no condition, of any alternative route, is satisfied', function() {
+      describe('and no condition, of any alternative route, is satisfied', function () {
 
-        beforeEach(function() {
+        beforeEach(function () {
           service.setup(Mock.navigationCAD1);
           spyOn(Mock.RuleService, 'isRuleApplicable').and.returnValue(false);
         });
 
-        it('should return the default route', function() {
+        it('should return the default route', function () {
           expect(service.calculateRoute()).toEqual(Mock.navigationCAD1.routes[0]);
         });
 
       });
 
-      describe('and some condition, of any alternative route, is satisfied', function() {
+      describe('and some condition, of any alternative route, is satisfied', function () {
 
-        beforeEach(function() {
+        beforeEach(function () {
           service.setup(Mock.navigationCAD1);
           spyOn(Mock.RuleService, 'isRuleApplicable').and.returnValue(true);
         });
 
-        it('should return the alternative route that own these condition', function() {
+        it('should return the alternative route that own these condition', function () {
           expect(service.calculateRoute()).toEqual(Mock.navigationCAD1.routes[1]);
         });
 
@@ -67,21 +67,21 @@ describe('NavigationService', function() {
 
   });
 
-  describe('setup method', function() {
+  describe('setup method', function () {
 
-    it('should keep a reference to a Navigation', function() {
+    it('should keep a reference to a Navigation', function () {
       service.setup(Mock.navigationCAD1);
 
       expect(service.getCurrentNavigation()).toEqual(Mock.navigationCAD1);
     });
 
-    it('should keep a reference to default route of Navigation', function() {
+    it('should keep a reference to default route of Navigation', function () {
       service.setup(Mock.navigationCAD1);
 
       expect(service.getDefaultRoute()).toEqual(Mock.navigationCAD1.routes[0]);
     });
 
-    it('should keep an array with the alternative routes of Navigation', function() {
+    it('should keep an array with the alternative routes of Navigation', function () {
       service.setup(Mock.navigationCAD1);
 
       expect(service.getAlternativeRoutes()).toEqual(Mock.navigationCAD1.routes.slice(1));
@@ -98,16 +98,16 @@ describe('NavigationService', function() {
       "destination": "CAD3",
       "isDefault": false,
       "conditions": [{
-          "extents": "StudioObject",
-          "objectType": "RouteCondition",
-          "name": "ROUTE_CONDITION",
-          "rules": [{
-              "extents": "SurveyTemplateObject",
-              "objectType": "Rule",
-              "when": "CAD1",
-              "operator": "equal",
-              "answer": 1
-          }]
+        "extents": "StudioObject",
+        "objectType": "RouteCondition",
+        "name": "ROUTE_CONDITION",
+        "rules": [{
+          "extents": "SurveyTemplateObject",
+          "objectType": "Rule",
+          "when": "CAD1",
+          "operator": "equal",
+          "answer": 1
+        }]
       }]
     };
     Mock.routeToCAD3.conditions[0].listRules = jasmine.createSpy('listRules').and.returnValue(Mock.routeToCAD3.conditions[0].rules);

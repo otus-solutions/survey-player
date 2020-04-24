@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -55,7 +55,7 @@
       return $filter('date')(new Date(reference), 'hh:mm a');
     }
 
-    function reference (type) {
+    function reference(type) {
       var reference = CurrentItemService.getFillingRules(templateID)[type].data.reference;
       return reference;
     }

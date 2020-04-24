@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -37,7 +37,7 @@
 
         if (surveyItem.isQuestion()) {
           flowData.validationResult[templateID] = {};
-          flowData.validationResponse[templateID].validatorsResponse.forEach(function(validator) {
+          flowData.validationResponse[templateID].validatorsResponse.forEach(function (validator) {
             if (validator.name === 'mandatory' || validator.data.reference) {
               flowData.validationResult[templateID][validator.name] = !validator.result && (angular.equals(flowData.metadataToEvaluate[templateID].data, {}));
             } else {
@@ -49,14 +49,15 @@
       });
     }
 
-    function afterEffect(pipe, flowData) {}
+    function afterEffect(pipe, flowData) {
+    }
 
     function getEffectResult(pipe, flowData) {
       return flowData;
     }
 
     function _hasError(flowData, templateID) {
-      return Object.keys(flowData.validationResult[templateID]).some(function(validator) {
+      return Object.keys(flowData.validationResult[templateID]).some(function (validator) {
         return flowData.validationResult[templateID][validator];
       });
     }
