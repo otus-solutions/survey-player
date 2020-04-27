@@ -1,12 +1,5 @@
 <div layout="row" layout-align="center center">
 
-  <md-button id="previousQuestion" class="md-raised md-primary" aria-label="Voltar" ng-click="$ctrl.goBack()"
-             ng-disabled="$ctrl.isGoBackDisabled">
-    <md-icon ng-hide="$ctrl.loadingBack">arrow_back</md-icon>
-    <md-progress-linear md-mode="indeterminate" ng-show="$ctrl.loadingBack"></md-progress-linear>
-    Voltar
-  </md-button>
-
   <md-button id="cancelActivity" class="md-fab md-warn md-mini" aria-label="Cancelar" ng-click="$ctrl.stop()">
     <md-icon md-font-set="material-icons">close</md-icon>
     <md-tooltip md-direction="top">
@@ -21,9 +14,16 @@
     </md-tooltip>
   </md-button>
 
+  <md-button id="previousQuestion" class="md-primary" aria-label="Voltar" ng-click="$ctrl.goBack()"
+             ng-disabled="$ctrl.isGoBackDisabled">
+    <!--    <md-icon ng-hide="$ctrl.loadingBack">arrow_back</md-icon>-->
+    <md-progress-linear md-mode="indeterminate" ng-show="$ctrl.loadingBack"></md-progress-linear>
+    Voltar
+  </md-button>
+
   <md-button id="nextQuestion" class="md-raised md-primary" aria-label="Próxima" ng-click="$ctrl.goAhead()" ng-disabled="$ctrl.isGoAheadDisabled">
     <md-progress-linear md-mode="indeterminate" ng-show="$ctrl.loadingAhead"></md-progress-linear>
-    Próxima
-    <md-icon ng-hide="$ctrl.loadingAhead" md-font-set="material-icons">arrow_forward</md-icon>
+    Avançar
+<!--    <md-icon ng-hide="$ctrl.loadingAhead" md-font-set="material-icons">arrow_forward</md-icon>-->
   </md-button>
 </div>
