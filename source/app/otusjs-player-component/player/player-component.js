@@ -28,6 +28,7 @@
     self.showCover = showCover;
     self.$onInit = onInit;
     self.onProcessingPlayer = onProcessingPlayer;
+    self.goIsLockOpenClose = goIsLockOpenClose;
 
     var didScroll;
     var lastScrollTop = 0;
@@ -158,6 +159,10 @@
 
     function onProcessingPlayer() {
       self.onProcessing();
+    }
+
+    function goIsLockOpenClose() {
+      self.isButtonOpenClose();
     }
   }
 }());

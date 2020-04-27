@@ -1,29 +1,43 @@
-<div layout="row" layout-align="center center">
+<div layout="row" layout-align="space-between center">
+  <div>
+    <md-button id="cancelActivity" hide-gt-xs class="md-fab md-raised md-mini" aria-label="Cancelar"
+      ng-click="$ctrl.stop()">
+      <md-icon md-font-set="material-icons">close</md-icon>
+      <md-tooltip md-direction="top">
+        Cancelar
+      </md-tooltip>
+    </md-button>
 
-  <md-button id="cancelActivity" class="md-fab md-warn md-mini" aria-label="Cancelar" ng-click="$ctrl.stop()">
-    <md-icon md-font-set="material-icons">close</md-icon>
-    <md-tooltip md-direction="top">
+    <md-button id="cancelActivity" hide-xs aria-label="Cancelar" ng-click="$ctrl.stop()">
       Cancelar
-    </md-tooltip>
-  </md-button>
+    </md-button>
 
-  <md-button id="saveActivity" class="md-fab md-accent md-mini" aria-label="Salvar" ng-click="$ctrl.pause()" >
-    <md-icon md-font-set="material-icons">save</md-icon>
-    <md-tooltip md-direction="top">
-      Salvar
-    </md-tooltip>
-  </md-button>
+    <md-button id="saveActivity" class="md-fab md-accent md-mini" aria-label="Salvar" ng-click="$ctrl.pause()">
+      <md-icon md-font-set="material-icons">save</md-icon>
+      <md-tooltip md-direction="top">
+        Salvar
+      </md-tooltip>
+    </md-button>
+  </div>
 
-  <md-button id="previousQuestion" class="md-primary" aria-label="Voltar" ng-click="$ctrl.goBack()"
-             ng-disabled="$ctrl.isGoBackDisabled">
-    <!--    <md-icon ng-hide="$ctrl.loadingBack">arrow_back</md-icon>-->
-    <md-progress-linear md-mode="indeterminate" ng-show="$ctrl.loadingBack"></md-progress-linear>
-    Voltar
-  </md-button>
+  <div layout="row" layout-align="center center">
+    <md-button id="previousQuestion" class="md-primary" aria-label="Voltar" ng-click="$ctrl.goBack()"
+      ng-disabled="$ctrl.isGoBackDisabled">
+      <!--    <md-icon ng-hide="$ctrl.loadingBack">arrow_back</md-icon>-->
+      <md-progress-linear md-mode="indeterminate" ng-show="$ctrl.loadingBack"></md-progress-linear>
+      Voltar
+    </md-button>
 
-  <md-button id="nextQuestion" class="md-raised md-primary" aria-label="Próxima" ng-click="$ctrl.goAhead()" ng-disabled="$ctrl.isGoAheadDisabled">
-    <md-progress-linear md-mode="indeterminate" ng-show="$ctrl.loadingAhead"></md-progress-linear>
-    Avançar
-<!--    <md-icon ng-hide="$ctrl.loadingAhead" md-font-set="material-icons">arrow_forward</md-icon>-->
-  </md-button>
+    <md-button id="nextQuestion" class="md-raised md-primary" aria-label="Próxima" ng-click="$ctrl.goAhead()"
+      ng-disabled="$ctrl.isGoAheadDisabled">
+      <md-progress-linear md-mode="indeterminate" ng-show="$ctrl.loadingAhead"></md-progress-linear>
+      Avançar
+      <!--    <md-icon ng-hide="$ctrl.loadingAhead" md-font-set="material-icons">arrow_forward</md-icon>-->
+    </md-button>
+  </div>
+  <div>
+    <md-button hide-xs id="variavelStatic" class="md-accent" aria-label="Variavel estática" ng-click="$ctrl.buttomStaticVarible()">
+      <md-icon md-font-set="material-icons">vertical_split</md-icon>
+    </md-button>
+  </div>
 </div>

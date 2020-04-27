@@ -5,7 +5,10 @@
     .module('otusjs.player.component')
     .component('otusStaticVariable', {
       templateUrl: 'app/otusjs-player-component/static-variable/static-variable-template.html',
-      controller: 'otusStaticVariableCtrl as $ctrl'
+      controller: 'otusStaticVariableCtrl as $ctrl',
+      bindings: {
+        isLockOpenClose: '=?'
+      }
     }).controller('otusStaticVariableCtrl', Controller);
 
   Controller.$inject = [
@@ -22,10 +25,10 @@
     self.tooltipLockOpenClose = 'Abrir';
 
     self.$onInit = onInit;
-    self.isLockOpenClose = isLockOpenClose;
 
     function onInit() {
       _getWholeStaticVariableList();
+      self.isLockOpenClose = _isLockOpenClose;
     }
 
     function _getWholeStaticVariableList() {
@@ -43,11 +46,10 @@
         self.variable = [];
       }
 
-
       return self.variable;
     }
 
-    function isLockOpenClose() {
+    function _isLockOpenClose() {
       self.shouldLockOpenClose = !self.shouldLockOpenClose;
       self.iconLockOpenClose = self.shouldLockOpenClose ? 'arrow_right' : 'arrow_left';
       self.tooltipLockOpenClose = self.shouldLockOpenClose ? 'Abrir' : 'Fechar';

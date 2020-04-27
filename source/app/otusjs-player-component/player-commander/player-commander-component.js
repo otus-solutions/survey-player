@@ -11,7 +11,8 @@
         onGoBack: '&',
         onPause: '&',
         onStop: '&',
-        onProcessing: '=?'
+        onProcessing: '=?',
+        onIsLockingOpenClose: '&'
       }
     });
 
@@ -44,6 +45,7 @@
     self.pause = pause;
     self.stop = stop;
     self.remove = remove;
+    self.buttomStaticVarible = buttomStaticVarible;
     self.$onInit = onInit;
     self.$postLink = postLink;
     self.onProcessing = _onProcessing;
@@ -167,6 +169,10 @@
         deferred.reject();
       });
       return deferred.promise;
+    }
+
+    function buttomStaticVarible() {
+      self.onIsLockingOpenClose();
     }
 
   }

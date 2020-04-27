@@ -7,11 +7,12 @@
 <div layout="column" flex ng-show="$ctrl.showActivity">
   <otus-survey-header class="nav-down survey-header" layout="row" layout-xs="column"></otus-survey-header>
   <md-content layout="column" flex>
-    <otus-static-variable></otus-static-variable>
+    <otus-static-variable is-lock-open-close='$ctrl.isButtonOpenClose'></otus-static-variable>
     <otus-player-display go-back="$ctrl.goBack()" on-processing-player="$ctrl.onProcessingPlayer()" style="position: relative"></otus-player-display>
   </md-content>
 
-  <otus-player-commander layout="column" layout-align="center center"
+  <otus-player-commander layout="column"
+                         on-is-locking-open-close='$ctrl.goIsLockOpenClose()'
                          on-go-back="$ctrl.goBack()"
                          on-pause="$ctrl.pause()"
                          on-stop="$ctrl.stop()"
