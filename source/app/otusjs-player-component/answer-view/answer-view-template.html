@@ -3,9 +3,8 @@
   <md-card-title layout="row">
     <md-card-title-text layout="column" flex>
       <div layout="row">
-        <otus-label class="md-headline" item-label="$ctrl.itemData.label.ptBR.formattedText" flex layout-padding style="color: gray">
+        <otus-label class="md-headline" item-label="$ctrl.itemData.label.ptBR.formattedText" flex layout-padding style="color: gray"></otus-label>
       </div>
-
       <span class="md-caption truncate" ng-if="$ctrl.comment" style="color: gray">{{$ctrl.comment}}</span>
     </md-card-title-text>
   </md-card-title>
@@ -50,6 +49,14 @@
         </md-tabs>
       </div>
     </md-content>
+
+    <md-button class="md-icon-button md-raised md-accent md-whiteframe-3dp" ng-click="$ctrl.goingBack()" >
+      <md-icon md-font-set="material-icons" class="material-icons ng-binding md-layoutTheme-theme">edit</md-icon>
+      <md-tooltip md-direction="down">
+        Editar questão
+      </md-tooltip>
+    </md-button>
+
   </md-card-content>
 
 </md-card>
