@@ -110,3 +110,11 @@ md-sidenav {
 .checkboxToolbar:not(.md-checked) .md-icon {
   border-color: #FFFFFF !important;
 }
+
+.question-divider {
+  display: block;
+  margin: 0;
+  border-top-width: 2px;
+  border-top-style: solid;
+  border-color: rgb(0,121,107);
+}
