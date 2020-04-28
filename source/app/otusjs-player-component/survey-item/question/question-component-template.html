@@ -1,13 +1,13 @@
 <md-content layout="row" layout-fill="" layout-align="space-between end">
 
   <div layout="row" layout-xs="column" layout-align-gt-xs="space-between start"
-       flex-gt-md="45" flex-md="70" flex-sm
+       flex-gt-md="45" flex-md="70" flex-sm flex-xs
        layout-padding style="margin-left: 10px">
-    <div bind-html-compile="$ctrl.template"></div>
+    <div bind-html-compile="$ctrl.template" layout="column" flex-gt-sm="60" flex-xs></div>
     <metadata-group on-update="$ctrl.update(valueType, value)" item-data="$ctrl.itemData"></metadata-group>
   </div>
 
-  <span hide-sm layout="column"></span>
+  <span hide-md flex="10"></span>
 
 </md-content>
 
