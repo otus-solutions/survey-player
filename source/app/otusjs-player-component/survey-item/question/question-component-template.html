@@ -1,22 +1,20 @@
-<md-content layout="column">
-  <!--  <div layout="row">-->
-  <md-tabs md-dynamic-height layout="column" flex=95>
-    <md-tab label="Resposta">
-      <md-content class="md-padding" bind-html-compile="$ctrl.template"></md-content>
-    </md-tab>
-    <md-tab label="Metadado">
-      <md-content class="md-padding">
-        <metadata-group on-update="$ctrl.update(valueType, value)" item-data="$ctrl.itemData"></metadata-group>
-      </md-content>
-    </md-tab>
-    <md-tab label="Comentário">
-      <md-content class="md-padding">
-        <otus-comment on-update="$ctrl.update(valueType, value)" item-data="$ctrl.itemData"></otus-comment>
-      </md-content>
-    </md-tab>
-  </md-tabs>
+<md-content layout="row" layout-fill="" layout-align="space-between end">
+
+  <div layout="row" layout-xs="column" layout-align-gt-xs="space-between start"
+       flex-gt-md="45" flex-md="70" flex-sm
+       layout-padding style="margin-left: 10px">
+    <div bind-html-compile="$ctrl.template"></div>
+    <metadata-group on-update="$ctrl.update(valueType, value)" item-data="$ctrl.itemData"></metadata-group>
+  </div>
+
+  <span hide-sm layout="column"></span>
+
+</md-content>
+
+  <otus-comment on-update="$ctrl.update(valueType, value)" item-data="$ctrl.itemData"></otus-comment>
+
   <div layout="row">
     <otus-question-menu on-clear="$ctrl.clear(value)" on-accept="$ctrl.forceAnswer(value)"></otus-question-menu>
   </div>
-  <!--  </div>-->
-</md-content>
+
+

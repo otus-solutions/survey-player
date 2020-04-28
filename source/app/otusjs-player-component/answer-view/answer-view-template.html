@@ -14,7 +14,8 @@
                     layout="column"></otus-misc-item>
     <md-content ng-if="!$ctrl.isItem()" layout="row" layout-fill="" layout-align="space-between end">
 
-      <div layout="row" layout-xs="column" layout-align-gt-xs="space-between start" flex-gt-md="45" flex-md="70"
+      <div layout="row" layout-xs="column" layout-align-gt-xs="space-between start"
+           flex-gt-md="45" flex-md="70" flex-sm
            layout-padding style="margin-left: 10px">
         <div bind-html-compile="$ctrl.template"></div>
 
@@ -30,7 +31,7 @@
       </div>
 
       <div layout="column">
-        <md-button hide-xs class="md-accent md-whiteframe-3dp" ng-click="$ctrl.goingBack()" >
+        <md-button hide-sm class="md-accent md-whiteframe-3dp" ng-click="$ctrl.goingBack()" >
           <md-icon md-font-set="material-icons" class="material-icons ng-binding md-layoutTheme-theme">edit</md-icon>
           Editar questão
           <md-tooltip md-direction="down">
@@ -45,12 +46,14 @@
       <textarea ng-model="$ctrl.itemData.data.comment" ng-disabled="true"></textarea>
     </md-input-container>
 
-    <md-button hide-gt-xs class="md-fab md-mini md-accent md-whiteframe-3dp" ng-click="$ctrl.goingBack()" >
-      <md-icon md-font-set="material-icons" class="material-icons ng-binding md-layoutTheme-theme">edit</md-icon>
-      <md-tooltip md-direction="down">
-        Editar questão
-      </md-tooltip>
-    </md-button>
+    <div hide-gt-sm layout="row" layout-align="end">
+      <md-button class="md-fab md-mini md-accent md-whiteframe-3dp" ng-click="$ctrl.goingBack()">
+        <md-icon md-font-set="material-icons" class="material-icons ng-binding md-layoutTheme-theme">edit</md-icon>
+        <md-tooltip md-direction="down">
+          Editar questão
+        </md-tooltip>
+      </md-button>
+    </div>
 
   </md-card-content>
 </md-card>
