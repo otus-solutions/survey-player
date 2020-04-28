@@ -40,6 +40,15 @@
       });
     };
 
+    self.clearAnswer = function () {
+      self.onClear({
+        value: 'answer'
+      });
+      self.onClear({
+        value: 'metadata'
+      });
+    };
+
     self.showConfirm = function (ev) {
       if (!self.forceAnswer) {
         $mdDialog

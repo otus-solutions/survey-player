@@ -3,7 +3,7 @@
   <md-fab-trigger>
     <md-button class="md-fab md-mini md-raised" aria-label="Limpar Resposta">
       <md-icon>delete</md-icon>
-      <md-tooltip md-direction="down">
+      <md-tooltip md-direction="top">
         Limpar
       </md-tooltip>
     </md-button>
@@ -11,19 +11,13 @@
   <md-fab-actions>
     <md-button ng-click="$ctrl.clear('comment')" class="md-fab md-raised md-mini" aria-label="Comentario">
       <md-icon>comment</md-icon>
-      <md-tooltip md-direction="down">
+      <md-tooltip md-direction="top">
         Limpar comentário
       </md-tooltip>
     </md-button>
-    <md-button ng-click="$ctrl.clear('metadata')" class="md-fab md-raised md-mini" aria-label="Metadado">
-      <md-icon>label</md-icon>
-      <md-tooltip md-direction="down">
-        Limpar metadata
-      </md-tooltip>
-    </md-button>
-    <md-button ng-click="$ctrl.clear('answer')" class="md-fab md-raised md-mini" aria-label="Questão">
+    <md-button ng-click="$ctrl.clearAnswer()" class="md-fab md-raised md-mini" aria-label="Questão">
       <md-icon>question_answer</md-icon>
-      <md-tooltip md-direction="down">
+      <md-tooltip md-direction="top">
         Limpar resposta
       </md-tooltip>
     </md-button>
@@ -33,7 +27,7 @@
            style="position: absolute; margin-bottom: 4px; right: 50px; bottom: 0" ng-click="$ctrl.showConfirm($event)"
            ng-show="$ctrl.showAccept()" class="md-fab md-mini md-raised" aria-label="Aceitar resposta">
   <md-icon>check</md-icon>
-  <md-tooltip md-direction="down">
+  <md-tooltip md-direction="top">
     Aceitar resposta
   </md-tooltip>
 </md-button>
