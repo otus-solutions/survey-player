@@ -66,6 +66,16 @@ otus-static-variable div md-content {
   otus-static-variable {
     max-height: 60%;
   }
+
+  .question-label {
+    font-size: small;
+  }
+}
+
+@media screen and (min-width: 601px) {
+  .question-label {
+    font-size: medium;
+  }
 }
 
 
