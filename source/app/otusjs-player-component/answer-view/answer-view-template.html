@@ -5,7 +5,7 @@
   </div>
 
   <div layout="column" layout-align="space-between">
-    <otus-misc-item ng-if="$ctrl.isItem() && ($ctrl.itemData.objectType === 'ImageItem')" item-data="$ctrl.itemData"
+    <otus-misc-item ng-if="$ctrl.isItem()" item-data="$ctrl.itemData"
                     layout="column"></otus-misc-item>
     <div ng-if="!$ctrl.isItem()" layout="row" layout-fill="" layout-align="space-between end">
 
