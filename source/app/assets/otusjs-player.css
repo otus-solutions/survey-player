@@ -58,6 +58,24 @@ otus-static-variable div md-content {
   max-height: 100%;
 }
 
+.comment-box {
+  height:auto;
+  color: #999;
+  font-family:'Ubuntu', Helvetica, Arial, sans-serif;
+  width: 100%;
+  background: #fff;
+  border-radius:5px;
+  line-height: 2em;
+  border: 2px;
+  box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.1);
+  padding: 4px;
+  -webkit-transition: height 2s ease;
+  -moz-transition: height 2s ease;
+  -ms-transition: height 2s ease;
+  -o-transition: height 2s ease;
+  transition: height 2s ease;
+}
+
 @media screen and (max-width: 600px) {
   .fab-speed-dial {
     left: 2px;
@@ -70,14 +88,21 @@ otus-static-variable div md-content {
   .question-label {
     font-size: small;
   }
+
+  .comment-box {
+    font-size: small;
+  }
 }
 
 @media screen and (min-width: 601px) {
   .question-label {
     font-size: medium;
   }
-}
 
+  .comment-box {
+    font-size: medium;
+  }
+}
 
 @media screen and (max-height: 650px) {
   .nav-up {
@@ -119,26 +144,6 @@ md-sidenav {
   display: block;
   margin: 0;
   border-top-width: 2px;
-  border-top-style: double;
+  border-top-style: solid;
   border-color: rgb(201,201,201);
 }
- .comment-box {
-   height:auto;
-   max-width:600px;
-   color:#999;
-   /*font-weight:400;*/
-   /*font-size:30px;*/
-   font-family:'Ubuntu', Helvetica, Arial, sans-serif;
-   width:100%;
-   background:#fff;
-   border-radius:5px;
-   line-height:2em;
-   border: 2px;
-   box-shadow:0px 0px 5px 1px rgba(0,0,0,0.1);
-   padding:4px;
-   -webkit-transition: height 2s ease;
-   -moz-transition: height 2s ease;
-   -ms-transition: height 2s ease;
-   -o-transition: height 2s ease;
-   transition: height 2s ease;
- }
