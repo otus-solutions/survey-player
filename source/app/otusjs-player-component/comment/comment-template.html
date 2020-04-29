@@ -1,8 +1,5 @@
-<md-content layout-padding>
-  <div layout="row">
-    <md-input-container md-no-float class="md-block" flex>
-      <label>Comentário</label>
-      <textarea ng-model="$ctrl.comment" ng-change="$ctrl.update()" placeholder="Digite o texto aqui"></textarea>
-    </md-input-container>
-  </div>
-</md-content>
+<div layout="column" layout-padding style="border: black">
+  <label>Comentário</label>
+  <textarea class="comment-box" ng-model="$ctrl.comment" ng-change="$ctrl.update()" placeholder="Digite o texto aqui"></textarea>
+</div>
+

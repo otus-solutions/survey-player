@@ -1,7 +1,7 @@
 <div layout="column" layout-margin>
 
   <div layout-padding layout="row">
-    <otus-label class="md-headline question-label" item-label="$ctrl.itemData.label.ptBR.formattedText" flex layout-padding style="color: gray"></otus-label>
+    <otus-label class="md-headline question-label answer-label-color" item-label="$ctrl.itemData.label.ptBR.formattedText" flex layout-padding ></otus-label>
   </div>
 
   <div layout="column" layout-align="space-between" flex>
@@ -35,14 +35,13 @@
       <span hide-gt-sm flex="10"></span>
     </div>
 
-    <md-content layout-padding>
-      <div layout="row">
-        <md-input-container class="md-block" flex>
-          <label>Comentário</label>
-          <textarea ng-model="$ctrl.itemData.data.comment" ng-disabled="true"></textarea>
-        </md-input-container>
-      </div>
-    </md-content>
+    <div layout="row">
+      <md-input-container class="md-block" flex ng-if="$ctrl.itemData.data.comment.length>0" style="margin-bottom: 0">
+        <label>Comentário</label>
+        <textarea ng-model="$ctrl.itemData.data.comment" ng-disabled="true"></textarea>
+      </md-input-container>
+      <span class="answer-label-color" ng-if="$ctrl.itemData.data.comment.length==0">Sem registro de comentário.</span>
+    </div>
 
 <!--    icon-->
     <div hide-gt-sm layout="row" layout-align="end">
