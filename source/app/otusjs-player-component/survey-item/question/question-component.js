@@ -100,7 +100,7 @@
     }
 
     function isAccept() {
-      return self.itemData.fillingRules.options.accept === undefined ? false : true;
+      return self.itemData.fillingRules.options.accept !== undefined;
     }
 
     function _canBeIgnored(error) {

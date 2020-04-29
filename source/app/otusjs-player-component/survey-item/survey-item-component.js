@@ -53,11 +53,11 @@
     }
 
     function isQuestion() {
-      return (self.itemData.objectType === 'ImageItem') || (self.itemData.objectType === 'TextItem') ? false : true;
+      return !(self.itemData.objectType === 'ImageItem') || (self.itemData.objectType === 'TextItem');
     }
 
     function isItem() {
-      return (self.itemData.objectType === 'ImageItem') || (self.itemData.objectType === 'TextItem') ? true : false;
+      return (self.itemData.objectType === 'ImageItem') || (self.itemData.objectType === 'TextItem');
     }
 
     function update(prop, value) {
