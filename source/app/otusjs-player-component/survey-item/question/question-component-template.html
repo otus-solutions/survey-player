@@ -10,8 +10,13 @@
 
 </div>
 
-<otus-comment on-update="$ctrl.update(valueType, value)" item-data="$ctrl.itemData"></otus-comment>
 
-<div layout="row" layout-align="end">
-  <otus-question-menu on-clear="$ctrl.clear(value)" on-accept="$ctrl.forceAnswer(value)"></otus-question-menu>
+<div layout="row" layout-xs="column" layout-align-gt-xs="space-between end" >
+
+  <otus-comment layout-fill flex-gt-xs="75" on-update="$ctrl.update(valueType, value)" item-data="$ctrl.itemData"></otus-comment>
+
+  <div layout="row" layout-align="end" layout-margin="1px">
+    <otus-question-menu on-clear="$ctrl.clear(value)" on-accept="$ctrl.forceAnswer(value)"></otus-question-menu>
+  </div>
+
 </div>
