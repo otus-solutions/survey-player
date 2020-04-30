@@ -35,7 +35,7 @@
     "lokijs": "1.4.2",
     "angular-mousewheel": "1.0.5",
     "angular-ui-router": "^0.3.1",
-    "jquery": "3.0.0",
+    "jquery": "3.5.0",
     "fuse.js": "2.6.2",
     "please-wait": "0.0.5",
     "otus-model-js": "1.28.0",
