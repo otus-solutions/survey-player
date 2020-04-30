@@ -112,12 +112,13 @@ otus-static-variable div md-content {
     font-size: medium;
   }
 }
-
-.nav-up {
-  height: 0;
-  width: 0;
-  top: -200px;
-  left: 200px;
+@media screen and (max-height: 650px) {
+  .nav-up {
+    height: 0;
+    width: 0;
+    top: -200px;
+    left: 200px;
+  }
 }
 
 md-sidenav {
