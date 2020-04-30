@@ -123,6 +123,7 @@ otus-static-variable div md-content {
     font-size: medium;
   }
 }
+
 @media screen and (max-height: 650px) {
   .nav-up {
     height: 0;

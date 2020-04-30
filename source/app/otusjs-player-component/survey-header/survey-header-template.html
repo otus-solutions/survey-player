@@ -6,10 +6,10 @@
     </div>
     <div layout="row" layout-align="center center">
       <md-chips>
-        <md-chip>{{ $ctrl.surveyIdentity.acronym }}</md-chip>
+        <md-chip class="question-label">{{ $ctrl.surveyIdentity.acronym }}</md-chip>
       </md-chips>
       <div class="md-body-2">
-        <span>{{ $ctrl.surveyIdentity.name }}</span>
+        <span class="question-label">{{ $ctrl.surveyIdentity.name }}</span>
       </div>
     </div>
     <span hide-gt-xs flex-xs="5"></span>
@@ -18,9 +18,9 @@
   <div layout="row" layout-margin layout-align="center center">
     <md-icon md-svg-icon="file-document-box"></md-icon>
     <div>
-      <span>{{ $ctrl.participantData.name }}</span>
+      <span class="question-label">{{ $ctrl.participantData.name }}</span>
       <span> | </span>
-      <span>{{ $ctrl.participantData.recruitmentNumber }}</span>
+      <span class="question-label">{{ $ctrl.participantData.recruitmentNumber }}</span>
     </div>
   </div>
 </md-whiteframe>
