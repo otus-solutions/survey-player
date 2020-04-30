@@ -85,6 +85,12 @@ otus-static-variable div md-content {
   transition: height 2s ease;
 }
 
+.disabled-comment-box {
+  margin-bottom: 0;
+  margin-left: 24px;
+  margin-right: 24px;
+}
+
 @media screen and (max-width: 600px) {
   .fab-speed-dial {
     left: 2px;
@@ -100,6 +106,11 @@ otus-static-variable div md-content {
 
   .comment-box {
     font-size: small;
+  }
+
+  .disabled-comment-box {
+    font-size: small;
+    margin-left: 1px;
   }
 }
 
