@@ -1,34 +1,14 @@
-<!--<link-->
-<!--  href="app/otusjs-player-component/survey-item/survey-item-styles.css"-->
-<!--  rel="stylesheet" type="text/css">-->
-
-<!--<div class="survey-item-layout">-->
-
-<!--  <otus-label class="md-headline question-label survey-item-label" item-label="$ctrl.itemData.label.ptBR.formattedText"></otus-label>-->
-
-<!--  <div class="survey-item-question">-->
-<!--    <otus-question ng-if="$ctrl.isQuestion()" on-update="$ctrl.update(valueType, value)"-->
-<!--                         on-processing-player="$ctrl.onProcessingPlayer()" item-data="$ctrl.itemData"></otus-question>-->
-<!--    <otus-misc-item ng-if="$ctrl.isItem()" item-data="$ctrl.itemData"></otus-misc-item>-->
-<!--  </div>-->
-
-<!--  <otus-validation-error class="survey-item-error" error="$ctrl.$error"></otus-validation-error>-->
-
-<!--</div>-->
-
-
-
 <div layout="column" md-block layout-margin style="background-color: white" md-whiteframe="3">
 
-  <div layout="row" layout-padding ng-if="!$ctrl.isItem()">
+  <div layout="row" ng-if="!$ctrl.isItem()">
     <otus-label class="md-headline question-label" item-label="$ctrl.itemData.label.ptBR.formattedText" flex layout-padding>
   </div>
 
-  <div layout="column" layout-align="space-between center" flex>
+  <div layout="column" layout-align-gt-xs="space-between center" flex>
     <otus-question ng-if="$ctrl.isQuestion()" on-update="$ctrl.update(valueType, value)"
                    on-processing-player="$ctrl.onProcessingPlayer()" item-data="$ctrl.itemData" layout="column"
                    flex></otus-question>
-    <otus-misc-item ng-if="$ctrl.isItem()" item-data="$ctrl.itemData" layout="column" layout-padding flex></otus-misc-item>
+    <otus-misc-item ng-if="$ctrl.isItem()" item-data="$ctrl.itemData" layout="column" flex></otus-misc-item>
   </div>
 
   <otus-validation-error error="$ctrl.$error" layout="row"></otus-validation-error>
