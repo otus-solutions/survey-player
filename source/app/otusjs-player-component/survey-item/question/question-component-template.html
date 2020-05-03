@@ -3,14 +3,14 @@
   rel="stylesheet" type="text/css">
 
 <div hide-xs class="question-layout">
-  <div class="question-answer" bind-html-compile="$ctrl.template" flex-gt-xs="90" layout-align="center"></div>
+  <div class="question-answer" bind-html-compile="$ctrl.template" flex="90" layout-align="center"></div>
   <div class="question-or-divider" layout-align="center center">ou</div>
   <metadata-group class="question-metadata" on-update="$ctrl.update(valueType, value)" item-data="$ctrl.itemData"></metadata-group>
 </div>
 <div hide-gt-xs layout="column">
-  <div class="question-answer" bind-html-compile="$ctrl.template"></div>
+  <div bind-html-compile="$ctrl.template"></div>
   <div class="question-or-divider" layout-padding> ou </div>
-  <metadata-group class="question-metadata" on-update="$ctrl.update(valueType, value)" item-data="$ctrl.itemData"></metadata-group>
+  <metadata-group on-update="$ctrl.update(valueType, value)" item-data="$ctrl.itemData"></metadata-group>
 </div>
 
 <otus-comment on-update="$ctrl.update(valueType, value)" item-data="$ctrl.itemData"></otus-comment>
