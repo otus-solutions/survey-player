@@ -1,0 +1,20 @@
+.answer-view-layout {
+  display: grid;
+  width: 95vw;
+  margin-left: 8px;
+  margin-right: 8px;
+  grid-template-columns: 7fr 5fr;
+  grid-template-areas:
+    "answerViewAnswer answerViewMetadata"
+}
+
+.answer-view-answer {
+  grid-area: answerViewAnswer;
+  margin-left: 10px;
+}
+
+.answer-view-metadata {
+  grid-area: answerViewMetadata;
+}
+
+
