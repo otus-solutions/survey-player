@@ -1,22 +1,19 @@
-<div layout="row" layout-fill layout-align="space-between end" layout-padding>
+<link
+  href="app/otusjs-player-component/survey-item/question/question-component-styles.css"
+  rel="stylesheet" type="text/css">
 
-  <div layout="row" layout-xs="column" layout-align-gt-xs="space-between start" flex-gt-md="50" flex-md="60" flex-sm
-    flex-xs layout-padding style="margin-left: 10px">
-    <div bind-html-compile="$ctrl.template" layout="column" flex-gt-sm="70" flex-xs></div>
-    <metadata-group on-update="$ctrl.update(valueType, value)" item-data="$ctrl.itemData"></metadata-group>
-  </div>
-
-  <span hide-md flex="10"></span>
-
+<div hide-xs class="question-layout">
+  <div class="question-answer" bind-html-compile="$ctrl.template" flex-gt-xs="90" layout-align="center"></div>
+  <div class="question-or-divider" layout-align="center center">ou</div>
+  <metadata-group class="question-metadata" on-update="$ctrl.update(valueType, value)" item-data="$ctrl.itemData"></metadata-group>
+</div>
+<div hide-gt-xs layout="column">
+  <div class="question-answer" bind-html-compile="$ctrl.template"></div>
+  <div class="question-or-divider" layout-padding> ou </div>
+  <metadata-group class="question-metadata" on-update="$ctrl.update(valueType, value)" item-data="$ctrl.itemData"></metadata-group>
 </div>
 
+<otus-comment on-update="$ctrl.update(valueType, value)" item-data="$ctrl.itemData"></otus-comment>
 
-<div layout="row" layout-xs="column" layout-align-gt-xs="space-between end" >
-
-  <otus-comment layout-fill flex-gt-xs="75" on-update="$ctrl.update(valueType, value)" item-data="$ctrl.itemData"></otus-comment>
-
-  <div layout="row" layout-align="end" layout-margin="1px">
-    <otus-question-menu on-clear="$ctrl.clear(value)" on-accept="$ctrl.forceAnswer(value)"></otus-question-menu>
-  </div>
-
-</div>
+<otus-question-menu on-clear="$ctrl.clear(value)" on-accept="$ctrl.forceAnswer(value)"
+                    layout="row" layout-align="end center"></otus-question-menu>
