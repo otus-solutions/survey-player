@@ -3,9 +3,11 @@
   rel="stylesheet" type="text/css">
 
 <div hide-xs class="question-layout">
-  <div class="question-answer" bind-html-compile="$ctrl.template" flex="90" layout-align="center"></div>
+  <div class="question-answer" bind-html-compile="$ctrl.template" flex="90"
+       layout="row" layout-align="start center"></div>
   <div class="question-or-divider" layout-align="center center">ou</div>
-  <metadata-group class="question-metadata" on-update="$ctrl.update(valueType, value)" item-data="$ctrl.itemData"></metadata-group>
+  <metadata-group class="question-metadata" on-update="$ctrl.update(valueType, value)" item-data="$ctrl.itemData"
+                  layout="row" layout-align="start center"></metadata-group>
 </div>
 <div hide-gt-xs layout="column">
   <div bind-html-compile="$ctrl.template"></div>
@@ -16,4 +18,4 @@
 <otus-comment on-update="$ctrl.update(valueType, value)" item-data="$ctrl.itemData"></otus-comment>
 
 <otus-question-menu on-clear="$ctrl.clear(value)" on-accept="$ctrl.forceAnswer(value)"
-                    layout="row" layout-align="end center"></otus-question-menu>
+                    layout="row" layout-align="end center" layout-padding></otus-question-menu>
