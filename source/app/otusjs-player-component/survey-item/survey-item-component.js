@@ -27,6 +27,8 @@
     self.isItem = isItem;
     self.update = update;
     self.clear = clear;
+    self.clearAnswer = clearAnswer;
+    self.clearComment = clearComment;
     self.pushData = pushData;
     self.destroy = destroy;
     self.updateValidation = updateValidation;
@@ -84,6 +86,14 @@
       } else {
         throw new Error('Cannot determine property type to clear', 85, 'survey-item-component.js');
       }
+    }
+
+    function clearAnswer(){
+      self.questionComponent.clear('answer');
+    }
+
+    function clearComment() {
+      self.questionComponent.clear('comment');
     }
 
     function pushData(filling) {

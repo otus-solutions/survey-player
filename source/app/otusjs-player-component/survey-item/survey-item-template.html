@@ -9,13 +9,13 @@
       </md-button>
       <md-menu-content>
         <md-menu-item>
-          <md-button ng-click="$ctrl.clear('answer')" aria-label="Do something">
+          <md-button ng-click="$ctrl.clearAnswer()" aria-label="Do something">
             <md-icon md-menu-align-target="">delete</md-icon>
             Limpar resposta
           </md-button>
         </md-menu-item>
         <md-menu-item>
-          <md-button ng-click="$ctrl.clear('comment')" aria-label="Do something">
+          <md-button ng-click="$ctrl.clearComment()" aria-label="Do something">
             <md-icon md-menu-align-target="">backspace</md-icon>
             Limpar comentário
           </md-button>
@@ -25,7 +25,7 @@
   </md-whiteframe>
 
   <div layout="row" ng-if="!$ctrl.isItem()">
-    <otus-label class="md-headline question-label" item-label="$ctrl.itemData.label.ptBR.formattedText" flex layout-padding>
+    <otus-label class="md-headline question-label" item-label="$ctrl.itemData.label.ptBR.formattedText" flex>
   </div>
 
   <div layout="column" layout-align-gt-xs="space-between center" flex>

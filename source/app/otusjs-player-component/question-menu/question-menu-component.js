@@ -27,7 +27,6 @@
     self.showAccept = showAccept;
     self.$onInit = onInit;
     self.clear = clear;
-    self.clearAnswer = clearAnswer;
     self.showConfirm = showConfirm;
 
     function onInit() {
@@ -41,15 +40,6 @@
     function clear(value) {
       self.onClear({
         value: value
-      });
-    }
-
-    function clearAnswer() {
-      self.onClear({
-        value: 'answer'
-      });
-      self.onClear({
-        value: 'metadata'
       });
     }
 
