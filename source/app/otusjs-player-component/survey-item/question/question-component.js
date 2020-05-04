@@ -45,7 +45,6 @@
       self.menuComponent.error = false;
 
       setError();
-      _removeClassOfDuplicatedElement();
     }
 
     function update(prop, value) {
@@ -83,19 +82,6 @@
 
     function clearCommentAnswer() {
       self.comment.clear();
-    }
-
-    function _removeClassOfDuplicatedElement() {
-
-      // eslint-disable-next-line angular/log
-      console.log(window.innerWidth);
-
-      // if (window.innerWidth < 600) {
-      //   $('div').removeClass('question-layout');
-      // }
-      // else {
-      //   $('div').addClass('question-layout');
-      // }
     }
 
     function setError(error) {
