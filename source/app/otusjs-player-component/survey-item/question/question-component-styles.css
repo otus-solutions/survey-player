@@ -1,18 +1,15 @@
-.question-answer {
-  grid-area: questionAnswer;
-  margin-left: 10px;
-}
-
-.question-metadata {
-  grid-area: questionMetadata;
-}
-
 @media screen and (max-width: 600px){
   .question-layout {
-
   }
+  .question-answer {
+  }
+  .question-metadata {
+  }
+
   .question-or-divider {
+    display: flex;
     flex-direction: row;
+    color: gray;
   }
   .question-or-divider:before,
   .question-or-divider:after {
@@ -33,6 +30,16 @@
     grid-template-areas:
       "questionAnswer questionOrDivider questionMetadata"
   }
+
+  .question-answer {
+    grid-area: questionAnswer;
+    margin-left: 10px;
+  }
+
+  .question-metadata {
+    grid-area: questionMetadata;
+  }
+
   .question-or-divider {
     grid-area: questionOrDivider;
     display: flex;
