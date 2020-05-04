@@ -88,7 +88,6 @@ otus-static-variable div md-content {
 .disabled-comment-box {
   margin-bottom: 0;
   margin-left: 24px;
-
 }
 
 @media screen and (max-width: 600px) {
@@ -157,4 +156,9 @@ md-sidenav {
 .no-margin-top-bottom {
   margin-bottom: 0px;
   margin-top: 0px;
+}
+
+.no-margin-sides {
+  margin-left: 0px;
+  margin-right: 0px;
 }
