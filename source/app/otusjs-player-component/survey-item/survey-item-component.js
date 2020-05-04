@@ -55,7 +55,7 @@
     }
 
     function isQuestion() {
-      return !(self.itemData.objectType === 'ImageItem') || (self.itemData.objectType === 'TextItem');
+      return !isItem();
     }
 
     function isItem() {
