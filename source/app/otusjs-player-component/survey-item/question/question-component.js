@@ -24,6 +24,17 @@
   function OtusQuestionController(TagComponentBuilderService, CurrentItemService) {
     var self = this;
 
+    var commentButtonData = {
+      'true': {
+        icon: 'visibility',
+        tooltip: 'Ocultar Comentário'
+      },
+      'false': {
+        icon: 'visibility_off',
+        tooltip: 'Mostrar Comentário'
+      }
+    };
+
     self.$onInit = onInit;
     self.setError = setError;
     self.update = update;
@@ -33,6 +44,9 @@
     self.clearMetadataAnswer = clearMetadataAnswer;
     self.clearCommentAnswer = clearCommentAnswer;
     self.isAccept = isAccept;
+    self.showingComment = false;
+    self.commentButtonData = commentButtonData.false;
+    self.swapCommentVisibility = swapCommentVisibility;
 
     function onInit() {
       self.template = TagComponentBuilderService.createTagElement(self.itemData.objectType);
@@ -105,8 +119,13 @@
     function _canBeIgnored(error) {
       return function (validator) {
         return self.itemData.fillingRules.options[validator].data.canBeIgnored || !error[validator];
-      };
+      }
+    }
+
+    function swapCommentVisibility() {
+      self.showingComment = !self.showingComment;
+      self.commentButtonData = commentButtonData[self.showingComment];
+      console.log('swapCommentVisibility', self.showingComment);//.
     }
   }
-
 })();

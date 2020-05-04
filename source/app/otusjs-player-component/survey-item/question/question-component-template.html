@@ -10,7 +10,15 @@
                   layout-gt-xs="row" layout-align-gt-xs="start center"></metadata-group>
 </div>
 
-<otus-comment on-update="$ctrl.update(valueType, value)" item-data="$ctrl.itemData"></otus-comment>
+<div layout="row" layout-align="start center">
+  <md-button ng-click="$ctrl.swapCommentVisibility()">
+    Comentário
+    <md-icon md-font-set="material-icons">{{$ctrl.commentButtonData.icon}}</md-icon>
+    <md-tooltip md-direction="right">{{$ctrl.commentButtonData.tooltip}}</md-tooltip>
+  </md-button>
+</div>
+<otus-comment on-update="$ctrl.update(valueType, value)" item-data="$ctrl.itemData"
+              ng-if="$ctrl.showingComment"></otus-comment>
 
 <otus-question-menu on-accept="$ctrl.forceAnswer(value)"
                     layout="row" layout-align="end center" layout-padding></otus-question-menu>
