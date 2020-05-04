@@ -125,7 +125,6 @@
     function swapCommentVisibility() {
       self.showingComment = !self.showingComment;
       self.commentButtonData = commentButtonData[self.showingComment];
-      console.log('swapCommentVisibility', self.showingComment);//.
     }
   }
 })();
