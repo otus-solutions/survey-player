@@ -145,12 +145,10 @@ md-sidenav {
   color: gray;
 }
 
-.question-divider {
-  display: block;
-  margin: 0;
-  border-top-width: 2px;
-  border-top-style: solid;
-  border-color: rgb(201,201,201);
+.player-commander-divider {
+  min-height: 25px;
+  color: black;
+  border-left: 1px solid #ccc;
 }
 
 .no-margin-top-bottom {

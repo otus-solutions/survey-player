@@ -12,22 +12,24 @@
       Cancelar
     </md-button>
 
-    <md-button hide-gt-xs id="saveActivity" class="md-fab md-accent md-mini" aria-label="Salvar" ng-click="$ctrl.pause()">
+    <md-button hide-gt-xs id="saveActivity" class="md-fab md-primary md-mini" aria-label="Salvar" ng-click="$ctrl.pause()">
       <md-icon md-font-set="material-icons">save</md-icon>
       <md-tooltip md-direction="top">
         Salvar
       </md-tooltip>
     </md-button>
 
-    <md-button hide-xs id="saveActivity-xs" class="md-accent" aria-label="Salvar" ng-click="$ctrl.pause()">
+    <md-button hide-xs id="saveActivity-xs" class="md-primary" aria-label="Salvar" ng-click="$ctrl.pause()">
+      <md-icon md-font-set="material-icons">save</md-icon>
         Salvar
     </md-button>
   </div>
 
+  <span class="player-commander-divider"></span>
+
   <div layout="row" flex>
     <md-button id="previousQuestion" class="md-primary" aria-label="Voltar" ng-click="$ctrl.goBack()"
       ng-disabled="$ctrl.isGoBackDisabled" layout-fill>
-      <!--    <md-icon ng-hide="$ctrl.loadingBack">arrow_back</md-icon>-->
       <md-progress-linear md-mode="indeterminate" ng-show="$ctrl.loadingBack"></md-progress-linear>
       Voltar
     </md-button>
@@ -36,13 +38,15 @@
       ng-disabled="$ctrl.isGoAheadDisabled" layout-fill>
       <md-progress-linear md-mode="indeterminate" ng-show="$ctrl.loadingAhead"></md-progress-linear>
       Avançar
-      <!--    <md-icon ng-hide="$ctrl.loadingAhead" md-font-set="material-icons">arrow_forward</md-icon>-->
     </md-button>
   </div>
 
   <div>
     <md-button hide-xs id="variavelStatic" class="md-accent" aria-label="Variavel estática" ng-click="$ctrl.buttomStaticVarible()">
       <md-icon md-font-set="material-icons">vertical_split</md-icon>
+      <md-tooltip md-direction="top">
+        Informações Auxiliares
+      </md-tooltip>
     </md-button>
   </div>
 </div>
