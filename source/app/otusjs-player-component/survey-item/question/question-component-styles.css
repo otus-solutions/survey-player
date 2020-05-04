@@ -1,13 +1,3 @@
-.question-layout {
-  display: grid;
-  width: 95vw;
-  margin-left: 8px;
-  margin-right: 8px;
-  grid-template-columns: 6.5fr .5fr 5fr;
-  grid-template-areas:
-    "questionAnswer questionOrDivider questionMetadata"
-}
-
 .question-answer {
   grid-area: questionAnswer;
   margin-left: 10px;
@@ -17,21 +7,10 @@
   grid-area: questionMetadata;
 }
 
-.question-or-divider {
-  grid-area: questionOrDivider;
-  display: flex;
-  flex-direction: column;
-  color: gray;
-}
-.question-or-divider:before,
-.question-or-divider:after {
-  content: " ";
-  flex: 1 1;
-  border-left: 1px dashed #ccc;
-  margin: auto;
-}
-
 @media screen and (max-width: 600px){
+  .question-layout {
+
+  }
   .question-or-divider {
     flex-direction: row;
   }
@@ -40,6 +19,31 @@
     content: " ";
     flex: 1 1;
     border-bottom: 1px dashed #ccc;
+    margin: auto;
+  }
+}
+
+@media screen and (min-width: 601px){
+  .question-layout {
+    display: grid;
+    width: 95vw;
+    margin-left: 8px;
+    margin-right: 8px;
+    grid-template-columns: 6.5fr .5fr 5fr;
+    grid-template-areas:
+      "questionAnswer questionOrDivider questionMetadata"
+  }
+  .question-or-divider {
+    grid-area: questionOrDivider;
+    display: flex;
+    flex-direction: column;
+    color: gray;
+  }
+  .question-or-divider:before,
+  .question-or-divider:after {
+    content: " ";
+    flex: 1 1;
+    border-left: 1px dashed #ccc;
     margin: auto;
   }
 }

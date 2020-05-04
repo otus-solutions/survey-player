@@ -45,6 +45,7 @@
       self.menuComponent.error = false;
 
       setError();
+      _removeClassOfDuplicatedElement();
     }
 
     function update(prop, value) {
@@ -65,7 +66,6 @@
       if (value) {
         if (value === 'answer') {
           self.clearAnswer();
-        } else if (value === 'metadata') {
           self.clearMetadataAnswer();
         } else if (value === 'comment') {
           self.clearCommentAnswer();
@@ -83,6 +83,19 @@
 
     function clearCommentAnswer() {
       self.comment.clear();
+    }
+
+    function _removeClassOfDuplicatedElement() {
+
+      // eslint-disable-next-line angular/log
+      console.log(window.innerWidth);
+
+      // if (window.innerWidth < 600) {
+      //   $('div').removeClass('question-layout');
+      // }
+      // else {
+      //   $('div').addClass('question-layout');
+      // }
     }
 
     function setError(error) {

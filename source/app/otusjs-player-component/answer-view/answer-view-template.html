@@ -4,6 +4,18 @@
 
 <div layout="column" layout-padding>
 
+  <md-whiteframe layout="row" layout-align="space-between center" style="background-color: #f2f2f2">
+    <span style="color: gray">{{$ctrl.itemData.templateID}}</span>
+
+    <md-button hide-xs hide-sm class="md-accent no-margin-top-bottom" ng-click="$ctrl.goingBack()" >
+      <md-icon md-font-set="material-icons" class="material-icons ng-binding md-layoutTheme-theme">edit</md-icon>
+      Editar questão
+    </md-button>
+    <md-button hide-gt-sm class="md-fab md-accent md-raised md-mini no-margin-top-bottom no-margin-sides" ng-click="$ctrl.goingBack()" >
+      <md-icon md-font-set="material-icons" class="material-icons ng-binding md-layoutTheme-theme">edit</md-icon>
+    </md-button>
+  </md-whiteframe>
+
   <div layout="row">
     <otus-label class="md-headline question-label answer-label-color" item-label="$ctrl.itemData.label.ptBR.formattedText"
                 flex></otus-label>
@@ -37,30 +49,30 @@
     <span class="answer-label-color" ng-if="$ctrl.itemData.data.comment.length==0" style="margin-bottom: 24px">
       Sem registro de comentário.
     </span>
-    <md-input-container class="md-block" flex ng-if="$ctrl.itemData.data.comment.length>0" style="margin-bottom: 8px">
+    <md-input-container class="md-block" flex ng-if="$ctrl.itemData.data.comment.length>0" style="margin-bottom: 0px">
       <label>Comentário</label>
       <textarea ng-model="$ctrl.itemData.data.comment" ng-disabled="true"></textarea>
     </md-input-container>
   </div>
 
-  <!--      button edit with label-->
-  <div hide-sm hide-xs class="edit-answer-view-button" layout="column" layout-align="end end" style="margin-bottom: 16px; margin-right: 16px">
-    <md-button class="md-accent md-whiteframe-3dp" ng-click="$ctrl.goingBack()" >
-      <md-icon md-font-set="material-icons" class="material-icons ng-binding md-layoutTheme-theme">edit</md-icon>
-      Editar questão
-    </md-button>
-  </div>
+<!--  &lt;!&ndash;      button edit with label&ndash;&gt;-->
+<!--  <div hide-sm hide-xs class="edit-answer-view-button" layout="column" layout-align="end end" style="margin-bottom: 16px; margin-right: 16px">-->
+<!--    <md-button class="md-accent md-whiteframe-3dp" ng-click="$ctrl.goingBack()" >-->
+<!--      <md-icon md-font-set="material-icons" class="material-icons ng-binding md-layoutTheme-theme">edit</md-icon>-->
+<!--      Editar questão-->
+<!--    </md-button>-->
+<!--  </div>-->
 
-  <!-- edit question icon button -->
-  <div hide-gt-sm layout="row" layout-align="end">
-    <md-button class="md-fab md-mini md-accent md-whiteframe-3dp" ng-click="$ctrl.goingBack()">
-      <md-icon md-font-set="material-icons" class="material-icons ng-binding md-layoutTheme-theme">edit</md-icon>
-      <md-tooltip md-direction="down">
-        Editar questão
-      </md-tooltip>
-    </md-button>
-  </div>
+<!--  &lt;!&ndash; edit question icon button &ndash;&gt;-->
+<!--  <div hide-gt-sm layout="row" layout-align="end">-->
+<!--    <md-button class="md-fab md-mini md-accent md-whiteframe-3dp" ng-click="$ctrl.goingBack()">-->
+<!--      <md-icon md-font-set="material-icons" class="material-icons ng-binding md-layoutTheme-theme">edit</md-icon>-->
+<!--      <md-tooltip md-direction="down">-->
+<!--        Editar questão-->
+<!--      </md-tooltip>-->
+<!--    </md-button>-->
+<!--  </div>-->
 
 </div>
 
-<md-divider class="question-divider"></md-divider>
+<!--<md-divider class="question-divider"></md-divider>-->

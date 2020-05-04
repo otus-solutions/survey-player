@@ -1,5 +1,29 @@
 <div layout="column" md-block layout-margin style="background-color: white" md-whiteframe="3">
 
+  <md-whiteframe layout="row" layout-align="space-between center" style="background-color: #d8d8d8">
+    <span style="margin-left: 8px">{{$ctrl.itemData.templateID}}</span>
+
+    <md-menu>
+      <md-button ng-click="$mdMenu.open($event)" class="md-icon-button" aria-label="Open some menu">
+        <md-icon md-menu-origin="" >more_vert</md-icon>
+      </md-button>
+      <md-menu-content>
+        <md-menu-item>
+          <md-button ng-click="$ctrl.clear('answer')" aria-label="Do something">
+            <md-icon md-menu-align-target="">delete</md-icon>
+            Limpar resposta
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button ng-click="$ctrl.clear('comment')" aria-label="Do something">
+            <md-icon md-menu-align-target="">backspace</md-icon>
+            Limpar comentário
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+  </md-whiteframe>
+
   <div layout="row" ng-if="!$ctrl.isItem()">
     <otus-label class="md-headline question-label" item-label="$ctrl.itemData.label.ptBR.formattedText" flex layout-padding>
   </div>
