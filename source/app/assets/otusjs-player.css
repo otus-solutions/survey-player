@@ -160,3 +160,11 @@ md-sidenav {
   margin-left: 0px;
   margin-right: 0px;
 }
+
+.survey-item-header {
+  background-color: #d8d8d8;  border-radius: 4px
+}
+
+.survey-item-ID {
+  margin-left: 8px;
+}
