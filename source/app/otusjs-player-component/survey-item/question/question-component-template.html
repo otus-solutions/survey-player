@@ -5,12 +5,12 @@
 <div class="question-layout" layout-xs="column">
   <div class="question-answer" bind-html-compile="$ctrl.template" flex-gt-xs="90"
        layout-gt-xs="row" layout-align-gt-xs="start center"></div>
-  <div class="question-or-divider" layout-align-gt-xs="center center">ou</div>
+  <div class="question-or-divider" layout-align-gt-xs="center center"> ou </div>
   <metadata-group class="question-metadata" on-update="$ctrl.update(valueType, value)" item-data="$ctrl.itemData"
                   layout-gt-xs="row" layout-align-gt-xs="start center"></metadata-group>
 </div>
 
 <otus-comment on-update="$ctrl.update(valueType, value)" item-data="$ctrl.itemData"></otus-comment>
 
-<otus-question-menu on-clear="$ctrl.clear(value)" on-accept="$ctrl.forceAnswer(value)"
+<otus-question-menu on-accept="$ctrl.forceAnswer(value)"
                     layout="row" layout-align="end center" layout-padding></otus-question-menu>
