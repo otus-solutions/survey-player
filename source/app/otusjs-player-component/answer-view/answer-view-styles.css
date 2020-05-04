@@ -1,3 +1,8 @@
+.answer-view-header {
+  background-color: #f2f2f2;
+  border-radius: 4px;
+}
+
 .answer-view-layout {
   display: grid;
   width: 95vw;
@@ -18,3 +23,12 @@
 }
 
 
+.edit-question-button-gt-sm {
+  margin: 0 6px;
+  height: 40px;
+  min-width: 0;
+  line-height: 24px;
+  padding: 8px;
+  width: 40px;
+  border-radius: 50%;
+}
