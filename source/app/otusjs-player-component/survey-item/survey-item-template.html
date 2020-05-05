@@ -3,18 +3,18 @@
   <md-whiteframe class="survey-item-header" layout="row" layout-align="space-between center">
     <span class="survey-item-ID">{{$ctrl.itemData.templateID}}</span>
     <md-menu>
-      <md-button ng-click="$mdMenu.open($event)" class="md-icon-button" aria-label="Open some menu">
+      <md-button ng-click="$mdMenu.open($event)" class="md-icon-button" id="questionMenu">
         <md-icon md-menu-origin="" >more_vert</md-icon>
       </md-button>
       <md-menu-content>
         <md-menu-item>
-          <md-button ng-click="$ctrl.clearAnswer()" aria-label="Do something">
+          <md-button ng-click="$ctrl.clearAnswer()" id="clearAnswer">
             <md-icon md-menu-align-target="">delete</md-icon>
             Limpar resposta
           </md-button>
         </md-menu-item>
         <md-menu-item>
-          <md-button ng-click="$ctrl.clearComment()" aria-label="Do something">
+          <md-button ng-click="$ctrl.clearComment()" id="clearComment">
             <md-icon md-menu-align-target="">backspace</md-icon>
             Limpar comentário
           </md-button>
