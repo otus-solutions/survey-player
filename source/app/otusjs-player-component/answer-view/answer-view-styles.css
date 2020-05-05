@@ -32,3 +32,22 @@
   width: 40px;
   border-radius: 50%;
 }
+
+
+@media screen and (min-width: 601px) and (max-width: 960px) {
+  .answer-view-layout {
+    width: 90vw;
+  }
+}
+
+@media screen and (min-width: 961px) and (max-width: 1280px) {
+  .answer-view-layout {
+    width: 85vw;
+  }
+}
+
+@media screen and (min-width: 1281px) {
+  .answer-view-layout {
+    width: 80vw;
+  }
+}
