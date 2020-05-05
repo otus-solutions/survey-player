@@ -20,5 +20,9 @@
 <otus-comment on-update="$ctrl.update(valueType, value)" item-data="$ctrl.itemData"
               ng-if="$ctrl.showingComment"></otus-comment>
 
-<otus-question-menu on-accept="$ctrl.forceAnswer(value)"
-                    layout="row" layout-align="end center" layout-padding></otus-question-menu>
+<div layout-xs="column" layout-gt-xs="row" layout-align-gt-xs="space-between center">
+  <otus-validation-error error="$ctrl.otusSurveyItem.$error" layout="row"></otus-validation-error>
+
+  <otus-question-menu on-accept="$ctrl.forceAnswer(value)"
+                      layout="row" layout-align="end center" layout-padding></otus-question-menu>
+</div>
