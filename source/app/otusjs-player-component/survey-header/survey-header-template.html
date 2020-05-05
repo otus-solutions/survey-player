@@ -1,26 +1,28 @@
-<md-whiteframe layout="row" layout-xs="column" class="md-whiteframe-5dp" layout-fill
-  layout-align-gt-xs="center center" layout-align-xs="start none">
-  <div layout="row" layout-align-gt-xs="start center" layout-align-xs="space-between center" flex>
-    <div class="md-padding">
-      <img src="app/static-resource/image/coruja_pesquisadora.png" height="50px" class="toolbar-icon">
-    </div>
-    <div layout="row" layout-align="center center">
-      <md-chips>
-        <md-chip class="question-label">{{ $ctrl.surveyIdentity.acronym }}</md-chip>
-      </md-chips>
-      <div class="md-body-2">
-        <span class="question-label">{{ $ctrl.surveyIdentity.name }}</span>
-      </div>
-    </div>
-    <span hide-gt-xs flex-xs="5"></span>
+<md-whiteframe class="md-whiteframe-5dp" layout="row" layout-align="start center" layout-fill>
+  
+  <div class="md-padding">
+    <img src="app/static-resource/image/coruja_pesquisadora.png" height="50px" class="toolbar-icon">
   </div>
 
-  <div layout="row" layout-margin layout-align="center center">
-    <md-icon md-svg-icon="file-document-box"></md-icon>
-    <div>
-      <span class="question-label">{{ $ctrl.participantData.name }}</span>
-      <span> | </span>
-      <span class="question-label">{{ $ctrl.participantData.recruitmentNumber }}</span>
+  <div layout-xs="column" layout-gt-xs="row" layout-align-gt-xs="space-between center" flex>
+
+    <div layout="row" layout-align="center center">
+      <md-chips>
+        <md-chip class="header-font">{{ $ctrl.surveyIdentity.acronym }}</md-chip>
+      </md-chips>
+      <div class="md-body-2">
+        <span class="header-font">{{ $ctrl.surveyIdentity.name }}</span>
+      </div>
+    </div>
+
+    <div layout-margin class="no-padding no-margin-top-bottom" layout="row" layout-align="center center">
+      <md-icon md-svg-icon="file-document-box" class="no-margin-top-bottom"></md-icon>
+      <div class="no-margin-top-bottom">
+        <span class="header-font">{{ $ctrl.participantData.name }}</span>
+        <span> | </span>
+        <span class="header-font">{{ $ctrl.participantData.recruitmentNumber }}</span>
+      </div>
     </div>
   </div>
+
 </md-whiteframe>

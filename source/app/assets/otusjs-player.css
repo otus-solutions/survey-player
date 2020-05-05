@@ -106,6 +106,10 @@ otus-static-variable div md-content {
     font-size: small;
   }
 
+  .header-font {
+    font-size: smaller;
+  }
+
   .question-label {
     font-size: small;
   }
@@ -124,6 +128,11 @@ otus-static-variable div md-content {
 
   .responsive-font-size {
     font-size: medium;
+  }
+
+  .header-font {
+    font-size: medium;
+    padding: 8px;
   }
 
   .question-label {
