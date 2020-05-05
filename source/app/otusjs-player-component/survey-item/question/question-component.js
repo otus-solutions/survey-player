@@ -57,6 +57,8 @@
       self.comment = CurrentItemService.getFilling(self.itemData.templateID).comment || {};
       self.menuComponent = {};
       self.menuComponent.error = false;
+      self.showingComment = false;
+      self.commentButtonData = commentButtonData.false;
 
       setError();
     }
