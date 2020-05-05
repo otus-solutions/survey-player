@@ -125,6 +125,7 @@ otus-static-variable div md-content {
 
   .question-label {
     font-size: medium;
+    padding: 8px;
   }
 
   .comment-box {
