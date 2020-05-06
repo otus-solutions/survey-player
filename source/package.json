@@ -1,6 +1,6 @@
 {
   "name": "survey-player",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Survey Player Module Otus",
   "keywords": [
     "preview",
@@ -39,7 +39,7 @@
     "gulp-json-editor": "^2.5.4",
     "jquery": "3.0.0",
     "lokijs": "1.4.2",
-    "otus-model-js": "git@github.com:ccem-dev/otus-model-js.git#htlv-hmv",
+    "otus-model-js": "1.31.0",
     "otus-validation-js": "1.1.0",
     "please-wait": "0.0.5",
     "trail-js": "git@github.com:ccem-dev/trail-js.git#dev"
