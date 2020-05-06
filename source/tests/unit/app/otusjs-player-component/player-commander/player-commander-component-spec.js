@@ -1,4 +1,4 @@
-xdescribe('otusPlayerCommander component', function() {
+xdescribe('otusPlayerCommander component', function () {
 
   var UNIT_NAME = 'otusPlayerCommander';
   var Mock = {};
@@ -6,11 +6,11 @@ xdescribe('otusPlayerCommander component', function() {
   var Bindings = {};
   var component = {};
 
-  beforeEach(function() {
+  beforeEach(function () {
     module('otusjs.player.core');
     module('otusjs.player.component');
 
-    inject(function(_$componentController_, $rootScope) {
+    inject(function (_$componentController_, $rootScope) {
       /* Injectable mocks */
       mockBindings();
       mockScope($rootScope);
@@ -19,9 +19,9 @@ xdescribe('otusPlayerCommander component', function() {
     });
   });
 
-  describe('goAhead method', function() {
+  describe('goAhead method', function () {
 
-    it('should output an onGoAhead', function() {
+    it('should output an onGoAhead', function () {
       spyOn(component, 'onGoAhead');
 
       component.goAhead();
@@ -31,9 +31,9 @@ xdescribe('otusPlayerCommander component', function() {
 
   });
 
-  describe('goBack method', function() {
+  describe('goBack method', function () {
 
-    it('should output an onGoBack', function() {
+    it('should output an onGoBack', function () {
       spyOn(component, 'onGoBack');
 
       component.goBack();
@@ -43,9 +43,9 @@ xdescribe('otusPlayerCommander component', function() {
 
   });
 
-  describe('pause method', function() {
+  describe('pause method', function () {
 
-    it('should output an onPause', function() {
+    it('should output an onPause', function () {
       spyOn(component, 'onPause');
 
       component.pause();
@@ -55,9 +55,9 @@ xdescribe('otusPlayerCommander component', function() {
 
   });
 
-  describe('stop method', function() {
+  describe('stop method', function () {
 
-    it('should output an onStop', function() {
+    it('should output an onStop', function () {
       spyOn(component, 'onStop');
 
       component.stop();
@@ -67,9 +67,9 @@ xdescribe('otusPlayerCommander component', function() {
 
   });
 
-  describe('onInit method', function() {
+  describe('onInit method', function () {
 
-    it('should initialize the playerCommander attribute from parent controller with itself', function() {
+    it('should initialize the playerCommander attribute from parent controller with itself', function () {
       component.$onInit();
 
       expect(Mock.$scope.$parent.$ctrl.playerCommander).toEqual(component);
@@ -78,11 +78,16 @@ xdescribe('otusPlayerCommander component', function() {
   });
 
   function mockBindings() {
-    Bindings.onGoAhead = function() {};
-    Bindings.onGoBack = function() {};
-    Bindings.onPause = function() {};
-    Bindings.onPlay = function() {};
-    Bindings.onStop = function() {};
+    Bindings.onGoAhead = function () {
+    };
+    Bindings.onGoBack = function () {
+    };
+    Bindings.onPause = function () {
+    };
+    Bindings.onPlay = function () {
+    };
+    Bindings.onStop = function () {
+    };
   }
 
   function mockScope($rootScope) {

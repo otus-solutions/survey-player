@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -17,6 +17,7 @@
     function create(scope, element) {
       return new OtusTextEditorWidget(scope, element, UpdateQuestionEventFactory);
     }
+
     return self;
   }
 
@@ -68,7 +69,7 @@
     }
 
 
-    element.on('focusout', function(event) {
+    element.on('focusout', function (event) {
       _saveLabel();
       UpdateQuestionEventFactory.create().execute(self);
     });

@@ -1,14 +1,15 @@
-describe('PlayerConfigurationService', function() {
+describe('PlayerConfigurationService', function () {
 
   var Mock = {};
   var Injections = {};
   var service = {};
 
-  beforeEach(function() {
+  beforeEach(function () {
     module('otusjs.player.core');
     angular.mock.module('otusjs.player.standalone');
+    spyOn(window, 'alasql');
 
-    inject(function(_$injector_) {
+    inject(function (_$injector_) {
       mockChainLink(_$injector_);
 
       mockPlayerStartActionService(_$injector_);
@@ -30,9 +31,9 @@ describe('PlayerConfigurationService', function() {
     });
   });
 
-  describe('onPrePlayerStart method', function() {
+  describe('onPrePlayerStart method', function () {
 
-    it('should pipe the step on PrePlayerStartActionService', function() {
+    it('should pipe the step on PrePlayerStartActionService', function () {
       spyOn(Mock.PrePlayerStartActionService, 'pipe');
 
       service.onPrePlayerStart(Mock.step);
@@ -42,9 +43,9 @@ describe('PlayerConfigurationService', function() {
 
   });
 
-  describe('onPlayerStart method', function() {
+  describe('onPlayerStart method', function () {
 
-    it('should pipe the step on ExecutionPlayerStartActionService', function() {
+    it('should pipe the step on ExecutionPlayerStartActionService', function () {
       spyOn(Mock.ExecutionPlayerStartActionService, 'pipe');
 
       service.onPlayerStart(Mock.step);
@@ -54,9 +55,9 @@ describe('PlayerConfigurationService', function() {
 
   });
 
-  describe('onPostPlayerStart method', function() {
+  describe('onPostPlayerStart method', function () {
 
-    it('should pipe the step on PostPlayerStartActionService', function() {
+    it('should pipe the step on PostPlayerStartActionService', function () {
       spyOn(Mock.PostPlayerStartActionService, 'pipe');
 
       service.onPostPlayerStart(Mock.step);
@@ -66,9 +67,9 @@ describe('PlayerConfigurationService', function() {
 
   });
 
-  describe('onPrePlay method', function() {
+  describe('onPrePlay method', function () {
 
-    it('should pipe the step on PrePlayActionService', function() {
+    it('should pipe the step on PrePlayActionService', function () {
       spyOn(Mock.PrePlayActionService, 'pipe');
 
       service.onPrePlay(Mock.step);
@@ -78,9 +79,9 @@ describe('PlayerConfigurationService', function() {
 
   });
 
-  describe('onPlay method', function() {
+  describe('onPlay method', function () {
 
-    it('should pipe the step on ExecutionPlayActionService', function() {
+    it('should pipe the step on ExecutionPlayActionService', function () {
       spyOn(Mock.ExecutionPlayActionService, 'pipe');
 
       service.onPlay(Mock.step);
@@ -90,9 +91,9 @@ describe('PlayerConfigurationService', function() {
 
   });
 
-  describe('onPostPlay method', function() {
+  describe('onPostPlay method', function () {
 
-    it('should pipe the step on PostPlayActionService', function() {
+    it('should pipe the step on PostPlayActionService', function () {
       spyOn(Mock.PostPlayActionService, 'pipe');
 
       service.onPostPlay(Mock.step);
@@ -102,9 +103,9 @@ describe('PlayerConfigurationService', function() {
 
   });
 
-  describe('onPreAhead method', function() {
+  describe('onPreAhead method', function () {
 
-    it('should pipe the step on PreAheadActionService', function() {
+    it('should pipe the step on PreAheadActionService', function () {
       spyOn(Mock.PreAheadActionService, 'pipe');
 
       service.onPreAhead(Mock.step);
@@ -114,9 +115,9 @@ describe('PlayerConfigurationService', function() {
 
   });
 
-  describe('onAhead method', function() {
+  describe('onAhead method', function () {
 
-    it('should pipe the step on ExecutionAheadActionService', function() {
+    it('should pipe the step on ExecutionAheadActionService', function () {
       spyOn(Mock.ExecutionAheadActionService, 'pipe');
 
       service.onAhead(Mock.step);
@@ -126,9 +127,9 @@ describe('PlayerConfigurationService', function() {
 
   });
 
-  describe('onPostAhead method', function() {
+  describe('onPostAhead method', function () {
 
-    it('should pipe the step on PostAheadActionService', function() {
+    it('should pipe the step on PostAheadActionService', function () {
       spyOn(Mock.PostAheadActionService, 'pipe');
 
       service.onPostAhead(Mock.step);

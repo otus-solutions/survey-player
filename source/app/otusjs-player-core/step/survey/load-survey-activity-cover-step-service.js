@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -18,11 +18,14 @@
     self.afterEffect = afterEffect;
     self.getEffectResult = getEffectResult;
 
-    function beforeEffect(pipe, flowData) { }
+    function beforeEffect(pipe, flowData) {
+    }
 
-    function effect(pipe, flowData) { }
+    function effect(pipe, flowData) {
+    }
 
-    function afterEffect(pipe, flowData) { }
+    function afterEffect(pipe, flowData) {
+    }
 
     function getEffectResult(pipe, flowData) {
       return flowData;

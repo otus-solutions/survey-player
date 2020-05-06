@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -8,7 +8,6 @@
       'ngMessages',
       'ngAnimate',
       'ui.router',
-
       'angular-bind-html-compile',
       /* Exportable dependencies */
       'otusjs.player.core',
@@ -33,27 +32,28 @@
 
   Runner.$inject = [
     '$injector',
-    'StorageLoaderService'
+    'StorageLoaderService',
+    'ServiceWorker'
   ];
 
-  function Runner($injector, StorageLoaderService) {
+  function Runner($injector, StorageLoaderService, ServiceWorker) {
+    ServiceWorker.register();
     _loadOtusDb(StorageLoaderService)
-      .then(function() {
+      .then(function () {
       });
   }
 
   function _loadOtusDb(StorageLoaderService) {
     var OTUS_DB = 'otus';
 
-    // StorageLoaderService.initializeSessionStorage();
-
-    return StorageLoaderService.dbExists(OTUS_DB).then(function(dbExists) {
+    return StorageLoaderService.dbExists(OTUS_DB).then(function (dbExists) {
       if (dbExists) {
         return StorageLoaderService.loadIndexedStorage(OTUS_DB);
       } else {
         return StorageLoaderService.createIndexedStorage(OTUS_DB);
       }
     });
+
   }
 
 }());

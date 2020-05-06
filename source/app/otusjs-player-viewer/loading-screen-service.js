@@ -9,7 +9,7 @@
 
   function Service() {
     const LOGO_SOURCE = "static-resource/image/coruja_pesquisadora.png";
-    const BACKGROUND_COLOR = "#fafafa";
+    const BACKGROUND_COLOR = "#009688";
     const MESSAGE = "Por favor, aguarde o carregamento.";
     const LOCKED_MESSAGE = "Loading bloqueado pela chave: ";
     const NEW_KEY_NOT_ADDED = "Não foi possível atribuir a nova chave: ";
@@ -36,11 +36,11 @@
 
     function _printKeyMsg(key, msg) {
       var fullMsg = LOCKED_MESSAGE + self.key;
-      if(key || msg) fullMsg += ' - ' + msg + key;
+      if (key || msg) fullMsg += ' - ' + msg + key;
     }
 
     function startingLockedByKey(key) {
-      if(!self.key || self.key === key){
+      if (!self.key || self.key === key) {
         self.key = key;
         start();
       } else {
@@ -49,7 +49,7 @@
     }
 
     function finishUnlockedByKey(key) {
-      if(self.key === key){
+      if (self.key === key) {
         self.key = '';
         finish();
       } else {
@@ -58,13 +58,13 @@
     }
 
     function start() {
-      if (!self.loading_screen){
+      if (!self.loading_screen) {
         _constructor();
       }
     }
 
     function finish() {
-      if(!self.key){
+      if (!self.key) {
         if (self.loading_screen) {
           self.loading_screen.finish();
           self.loading_screen = null;
@@ -83,7 +83,7 @@
       self.loading_screen = pleaseWait({
         logo: LOGO_SOURCE,
         backgroundColor: BACKGROUND_COLOR,
-        loadingHtml: "<p class='loading-message' style='color:#009688;'>" + self.message + "</p>" +
+        loadingHtml: "<p class='loading-message' style='color:#FFF;'>" + self.message + "</p>" +
           "<div class='sk-circle'>" +
           "<div class='sk-circle1 sk-child'></div>" +
           "<div class='sk-circle2 sk-child'></div>" +

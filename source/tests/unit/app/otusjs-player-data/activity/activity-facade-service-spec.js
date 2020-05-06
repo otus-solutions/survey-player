@@ -1,4 +1,4 @@
-describe('ActivityFacadeService', function() {
+describe('ActivityFacadeService', function () {
 
   var UNIT_NAME = 'otusjs.player.data.activity.ActivityFacadeService';
   var Mock = {};
@@ -11,10 +11,10 @@ describe('ActivityFacadeService', function() {
   var METADATA = 'METADATA';
   var COMMENT = 'COMMENT';
 
-  beforeEach(function() {
+  beforeEach(function () {
     module('otusjs.player.data');
 
-    inject(function(_$injector_) {
+    inject(function (_$injector_) {
       /* Test data */
       mockSurvey();
       mockAnswerData();
@@ -29,9 +29,9 @@ describe('ActivityFacadeService', function() {
     });
   });
 
-  describe('applyAnswer method', function() {
+  describe('applyAnswer method', function () {
 
-    it('should delegates the filling applies to current question', function() {
+    it('should delegates the filling applies to current question', function () {
       spyOn(Mock.CurrentItemService, 'applyFilling');
 
       service.applyAnswer(Mock.answerData);
@@ -41,9 +41,9 @@ describe('ActivityFacadeService', function() {
 
   });
 
-  describe('attachItemValidationError method', function() {
+  describe('attachItemValidationError method', function () {
 
-    it('should delegates the validation error attachment', function() {
+    it('should delegates the validation error attachment', function () {
       spyOn(Mock.CurrentItemService, 'attachValidationError');
 
       service.attachItemValidationError(Mock.validationErrorData);
@@ -53,9 +53,9 @@ describe('ActivityFacadeService', function() {
 
   });
 
-  describe('fetchItemAnswerByCustomID method', function() {
+  describe('fetchItemAnswerByCustomID method', function () {
 
-    it('should retrieve the answer of item from survey activity', function() {
+    it('should retrieve the answer of item from survey activity', function () {
       spyOn(Mock.CurrentSurveyService, 'getAnswerByItemID');
 
       service.fetchItemAnswerByCustomID(CAD1);
@@ -65,9 +65,9 @@ describe('ActivityFacadeService', function() {
 
   });
 
-  describe('fetchItemByID method', function() {
+  describe('fetchItemByID method', function () {
 
-    it('should return the item', function() {
+    it('should return the item', function () {
       spyOn(Mock.CurrentSurveyService, 'getItemByTemplateID');
 
       service.fetchItemByID(CAD1);
@@ -77,15 +77,15 @@ describe('ActivityFacadeService', function() {
 
   });
 
-  describe('initialize method', function() {
+  describe('initialize method', function () {
 
-    beforeEach(function() {
+    beforeEach(function () {
       spyOn(Mock.CurrentSurveyService, 'initialize');
       spyOn(Mock.CurrentSurveyService, 'getItems').and.returnValue(Mock.surveyTemplate.itemContainer);
       spyOn(Mock.CurrentSurveyService, 'getNavigations').and.returnValue(Mock.surveyTemplate.navigationList);
     });
 
-    it('should initialize the survey', function() {
+    it('should initialize the survey', function () {
       service.initialize();
 
       expect(Mock.CurrentSurveyService.initialize).toHaveBeenCalledWith();
@@ -93,9 +93,9 @@ describe('ActivityFacadeService', function() {
 
   });
 
-  describe('setupAnswer method', function() {
+  describe('setupAnswer method', function () {
 
-    it('should delegates the filling of current question', function() {
+    it('should delegates the filling of current question', function () {
       spyOn(Mock.CurrentItemService, 'fill');
 
       service.setupAnswer(Mock.answerData);
@@ -105,9 +105,9 @@ describe('ActivityFacadeService', function() {
 
   });
 
-  describe('getWholeTemplateStaticVariableList method', function() {
+  describe('getWholeTemplateStaticVariableList method', function () {
 
-    it('should keep a reference to variable into activity module', function() {
+    it('should keep a reference to variable into activity module', function () {
       spyOn(Mock.CurrentSurveyService, 'getWholeTemplateStaticVariableList');
 
       service.getWholeTemplateStaticVariableList();
@@ -160,14 +160,15 @@ describe('ActivityFacadeService', function() {
     Mock.surveyTemplate.NavigationManager.selectNavigationByOrigin = jasmine.createSpy('selectNavigationByOrigin').and.returnValue(Mock.CAD1Navigation);
   }
 
-  function mockVariableData(){
+  function mockVariableData() {
     Mock.Variable = [
       {
-        "label" : "CÓDIGO DO ACTÍGRAFO:",
-        "translatedValue" : "Sim"
+        "label": "CÓDIGO DO ACTÍGRAFO:",
+        "translatedValue": "Sim"
       }
     ];
   }
+
   function mockSurveyData() {
     Mock.surveyTemplate = {
       "extents": "StudioObject",

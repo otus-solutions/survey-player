@@ -1,14 +1,15 @@
-describe('PlayActionService', function() {
+describe('PlayActionService', function () {
 
   var Mock = {};
   var Injections = {};
   var service = {};
 
-  beforeEach(function() {
+  beforeEach(function () {
     module('otusjs.player.core');
     angular.mock.module('otusjs.player.standalone');
+    spyOn(window, 'alasql');
 
-    inject(function(_$injector_) {
+    inject(function (_$injector_) {
       mockActionPipeService(_$injector_);
       mockPrePlayActionService(_$injector_);
       mockExecutionPlayActionService(_$injector_);
@@ -17,27 +18,27 @@ describe('PlayActionService', function() {
     });
   });
 
-  describe('execute method', function() {
+  describe('execute method', function () {
 
-    beforeEach(function() {
+    beforeEach(function () {
       spyOn(Mock.PrePlayActionService, 'execute').and.returnValue(Mock.ActionPipeService.flowData);
       spyOn(Mock.ExecutionPlayActionService, 'execute').and.returnValue(Mock.ActionPipeService.flowData);
       spyOn(Mock.PostPlayActionService, 'execute').and.returnValue(Mock.ActionPipeService.flowData);
-    })
+    });
 
-    it('should execute PrePlayActionService', function() {
+    it('should execute PrePlayActionService', function () {
       service.execute();
 
       expect(Mock.PrePlayActionService.execute).toHaveBeenCalledWith(Mock.ActionPipeService.flowData);
     });
 
-    it('should execute ExecutionPlayActionService', function() {
+    it('should execute ExecutionPlayActionService', function () {
       service.execute();
 
       expect(Mock.ExecutionPlayActionService.execute).toHaveBeenCalledWith(Mock.ActionPipeService.flowData);
     });
 
-    it('should execute PostPlayActionService', function() {
+    it('should execute PostPlayActionService', function () {
       service.execute();
 
       expect(Mock.PostPlayActionService.execute).toHaveBeenCalledWith(Mock.ActionPipeService.flowData);

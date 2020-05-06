@@ -1,54 +1,54 @@
-(function() {
-    'use strict';
+(function () {
+  'use strict';
 
-    angular
-        .module('otusjs.player.component')
-        .factory('OtusButtonWidgetFactory', OtusButtonWidgetFactory);
+  angular
+    .module('otusjs.player.component')
+    .factory('OtusButtonWidgetFactory', OtusButtonWidgetFactory);
 
-    function OtusButtonWidgetFactory() {
-        var self = this;
+  function OtusButtonWidgetFactory() {
+    var self = this;
 
-        /* Public interface */
-        self.create = create;
+    /* Public interface */
+    self.create = create;
 
-        function create(templateData, templateConfig, parentWidget) {
-            return new OtusButtonWidget(templateData, templateConfig, parentWidget);
-        }
-
-        return self;
+    function create(templateData, templateConfig, parentWidget) {
+      return new OtusButtonWidget(templateData, templateConfig, parentWidget);
     }
 
-    function OtusButtonWidget(templateData, templateConfig, parentWidget) {
-        var self = this;
+    return self;
+  }
 
-        /* Valid values */
-        var validTooltipDirections = ['top', 'bottom', 'left', 'right'];
+  function OtusButtonWidget(templateData, templateConfig, parentWidget) {
+    var self = this;
 
-        /* Type definitions */
-        self.className = self.constructor.name;
-        self.css = {};
-        self.template = {};
-        self.event = {};
+    /* Valid values */
+    var validTooltipDirections = ['top', 'bottom', 'left', 'right'];
 
-        /* Template definitions */
-        self.template.ariaLabel = templateConfig.ariaLabel || templateConfig.label;
-        self.template.label = templateConfig.label;
-        self.template.tooltip = templateConfig.tooltip || templateConfig.label;
-        self.template.tooltipDirection = (templateConfig.tooltipDirection !== undefined && (validTooltipDirections.indexOf(templateConfig.tooltipDirection) !== -1)) ? templateConfig.tooltipDirection : 'top';
-        self.template.leftIcon = templateConfig.iconButton || templateConfig.leftIcon;
-        self.template.rightIcon = templateConfig.rightIcon;
+    /* Type definitions */
+    self.className = self.constructor.name;
+    self.css = {};
+    self.template = {};
+    self.event = {};
 
-        self.template.hasLeftIcon = self.template.leftIcon !== undefined;
-        self.template.hasRightIcon = (templateConfig.iconButton === undefined && self.template.rightIcon !== undefined);
+    /* Template definitions */
+    self.template.ariaLabel = templateConfig.ariaLabel || templateConfig.label;
+    self.template.label = templateConfig.label;
+    self.template.tooltip = templateConfig.tooltip || templateConfig.label;
+    self.template.tooltipDirection = (templateConfig.tooltipDirection !== undefined && (validTooltipDirections.indexOf(templateConfig.tooltipDirection) !== -1)) ? templateConfig.tooltipDirection : 'top';
+    self.template.leftIcon = templateConfig.iconButton || templateConfig.leftIcon;
+    self.template.rightIcon = templateConfig.rightIcon;
 
-        /* CSS definitions */
-        self.css.iconButton = (templateConfig.iconButton !== undefined) ? 'md-icon-button' : '';
+    self.template.hasLeftIcon = self.template.leftIcon !== undefined;
+    self.template.hasRightIcon = (templateConfig.iconButton === undefined && self.template.rightIcon !== undefined);
 
-        /* Instance definitions */
-        self.parent = parentWidget;
+    /* CSS definitions */
+    self.css.iconButton = (templateConfig.iconButton !== undefined) ? 'md-icon-button' : '';
 
-        /* Event definitions */
-        self.event.click = templateData.click;
-    }
+    /* Instance definitions */
+    self.parent = parentWidget;
+
+    /* Event definitions */
+    self.event.click = templateData.click;
+  }
 
 }());

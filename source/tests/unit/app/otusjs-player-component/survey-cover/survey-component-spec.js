@@ -1,4 +1,4 @@
-xdescribe('otusSurveyCover component', function() {
+xdescribe('otusSurveyCover component', function () {
 
   var UNIT_NAME = 'otusSurveyCover';
   var SURVEY_ITEM = '<otus-survey-item item-data="itemData" />';
@@ -7,11 +7,11 @@ xdescribe('otusSurveyCover component', function() {
   var Bindings = {};
   var component = {};
 
-  beforeEach(function() {
+  beforeEach(function () {
     module('otusjs.player.core');
     module('otusjs.player.component');
 
-    inject(function(_$componentController_, $rootScope, _$compile_) {
+    inject(function (_$componentController_, $rootScope, _$compile_) {
       /* Injectable mocks */
       mockBindings();
       mockScope($rootScope);
@@ -22,17 +22,17 @@ xdescribe('otusSurveyCover component', function() {
     });
   });
 
-  describe('loadItem method', function() {
+  describe('loadItem method', function () {
 
-    describe('when already exists an item loaded', function() {
+    describe('when already exists an item loaded', function () {
 
-      beforeEach(function() {
+      beforeEach(function () {
         Mock.currentItem = {};
         Mock.currentItem.destroy = jasmine.createSpy('destroy');
         component.currentItem = Mock.currentItem;
       });
 
-      it('should destroy it', function() {
+      it('should destroy it', function () {
         component.loadItem();
 
         expect(Mock.currentItem.destroy).toHaveBeenCalledWith();
@@ -40,7 +40,7 @@ xdescribe('otusSurveyCover component', function() {
 
     });
 
-    it('should set itemData attribute in component scope with parameter itemData', function() {
+    it('should set itemData attribute in component scope with parameter itemData', function () {
       Mock.itemData = {};
 
       component.loadItem(Mock.itemData);
@@ -48,7 +48,7 @@ xdescribe('otusSurveyCover component', function() {
       expect(Mock.$scope.itemData).toEqual(Mock.itemData);
     });
 
-    it('should try to find element section on component template', function() {
+    it('should try to find element section on component template', function () {
       Mock.itemData = {};
 
       component.loadItem(Mock.itemData);
@@ -56,7 +56,7 @@ xdescribe('otusSurveyCover component', function() {
       expect(Mock.$element.find).toHaveBeenCalledWith('section');
     });
 
-    it('should prepend the compiled otus-survey-item', function() {
+    it('should prepend the compiled otus-survey-item', function () {
       Mock.itemData = {};
 
       component.loadItem(Mock.itemData);
@@ -66,9 +66,9 @@ xdescribe('otusSurveyCover component', function() {
 
   });
 
-  describe('onInit method', function() {
+  describe('onInit method', function () {
 
-    it('should initialize the playerCommander attribute from parent controller with itself', function() {
+    it('should initialize the playerCommander attribute from parent controller with itself', function () {
       component.$onInit();
 
       expect(Injections.$scope.$parent.$ctrl.playerDisplay).toEqual(component);
@@ -76,7 +76,8 @@ xdescribe('otusSurveyCover component', function() {
 
   });
 
-  function mockBindings() {}
+  function mockBindings() {
+  }
 
   function mockScope($rootScope) {
     Mock.$scope = $rootScope.$new();

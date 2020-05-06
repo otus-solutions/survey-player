@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -66,7 +66,7 @@
     }
 
     function currentTime(e) {
-      var imuDate = new ImmutableDate()
+      var imuDate = new ImmutableDate();
 
       imuDate.setSeconds(0);
       imuDate.setMilliseconds(0);

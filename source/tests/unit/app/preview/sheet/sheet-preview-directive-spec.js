@@ -1,8 +1,8 @@
-xdescribe('otusSheetPreview', function() {
+xdescribe('otusSheetPreview', function () {
 
   var $route, $rootScope, $location, $httpBackend;
 
-  beforeEach(inject(function($injector) {
+  beforeEach(inject(function ($injector) {
     module('otus.preview');
 
     //$route = $injector.get('$route');
@@ -13,15 +13,15 @@ xdescribe('otusSheetPreview', function() {
     $httpBackend.when('GET', '/app/ui-preview/sheet/sheet-preview-container.html').respond('sheet');
   }));
 
-  describe('test of directive otusSheetPreview', function() {
+  describe('test of directive otusSheetPreview', function () {
 
-    it('element must be well defined', function() {
+    it('element must be well defined', function () {
       var element = $compile("<otus-sheet-preview></otus-sheet-preview>")($rootScope);
       expect(element).toBeDefined();
     });
 
-    it('should go to the sheet-preview-containe state', function() {
-      $rootScope.$apply(function() {
+    it('should go to the sheet-preview-containe state', function () {
+      $rootScope.$apply(function () {
         $location.path('/sheet');
       });
       expect($location.path()).toBe('/sheet');

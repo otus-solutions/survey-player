@@ -9,10 +9,12 @@
     '$q',
     'otusjs.utils.DatasourceService',
     'ActivityLocalStorageService',
-    'SurveyItemRestService'
+    'SurveyItemRestService',
+    'ActivityIndexedDbService',
+    '$rootScope'
   ];
 
-  function service($q, DatasourceService, ActivityLocalStorageService, SurveyItemRestService) {
+  function service($q, DatasourceService, ActivityLocalStorageService, SurveyItemRestService, ActivityIndexedDbService, $rootScope) {
     var self = this;
 
     /* Public Interface */
@@ -57,7 +59,7 @@
         .then(function (promiseArray) {
           promiseArray.forEach(function (promise) {
             var ds = promise.data;
-            dsMap[ds.data.id] = ds.data;
+            dsMap[ds.data.id || ds.id] = ds.data;
           });
           defer.resolve(dsMap);
         });
@@ -73,7 +75,17 @@
     }
 
     function _getDatasourcesByID(id) {
-      return SurveyItemRestService.getByID(id);
+      if ($rootScope.online) {
+        return SurveyItemRestService.getByID(id).then(function (response) {
+          ActivityIndexedDbService.updateDatasource(id, response.data);
+          return response;
+        }).catch(function () {
+          $rootScope.online = false;
+          return ActivityIndexedDbService.getDatasource(id);
+        });
+      } else {
+        return ActivityIndexedDbService.getDatasource(id);
+      }
     }
   }
 }());

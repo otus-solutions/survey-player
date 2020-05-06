@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -12,10 +12,10 @@
       }
     });
 
-    Controller.$inject = [
-      '$scope',
-      'otusjs.player.data.activity.ActivityFacadeService'
-    ];
+  Controller.$inject = [
+    '$scope',
+    'otusjs.player.data.activity.ActivityFacadeService'
+  ];
 
 
   function Controller($scope, ActivityFacadeService) {

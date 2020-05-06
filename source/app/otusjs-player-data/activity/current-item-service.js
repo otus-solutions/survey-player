@@ -46,10 +46,10 @@
     function attachValidationError(validationError) {
       _validationError = validationError;
       _observerArray.forEach(observer => {
-        if(validationError[observer.itemData.templateID]){
-           observer.updateValidation(validationError[observer.itemData.templateID]);
+        if (validationError[observer.itemData.templateID]) {
+          observer.updateValidation(validationError[observer.itemData.templateID]);
         }
-      })
+      });
     }
 
     function clearData() {
@@ -89,7 +89,7 @@
 
     function getItemsByTemplateID(templateID) {
       return _surveyItemGroup.find(item => {
-        return item.templateID === templateID
+        return item.templateID === templateID;
       });
     }
 

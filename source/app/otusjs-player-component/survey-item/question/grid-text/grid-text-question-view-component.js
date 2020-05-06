@@ -23,5 +23,5 @@
       self.answerArray = self.itemData.data.answer.value;
       self.view = true;
     }
-   }
+  }
 }());

@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -16,6 +16,7 @@
     }).controller("otusIntegerQuestionCtrl", Controller);
 
   Controller.$inject = [
+    '$document',
     'otusjs.player.data.activity.CurrentItemService'
   ];
 
@@ -32,11 +33,10 @@
       self.answer = CurrentItemService.getFilling(self.itemData.templateID).answer.value;
       self.otusQuestion.answer = self;
 
-      $document.on('focus blur', 'select, textarea, input', function(e){
-        if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ){
+      $document.on('focus blur', 'select, textarea, input', function (e) {
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
           self.mobileInput = true;
-        }
-        else{
+        } else {
           self.mobileInput = false;
         }
       });

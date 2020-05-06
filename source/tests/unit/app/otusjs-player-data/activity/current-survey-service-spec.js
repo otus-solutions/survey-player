@@ -2252,7 +2252,8 @@ describe('Current Question Service', function () {
     surveyActivity: {
       getGroupByItemID: function () {
       },
-      getGroupItemsByItemID: function(){}
+      getGroupItemsByItemID: function () {
+      }
     }
   };
 });

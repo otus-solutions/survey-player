@@ -33,7 +33,7 @@ describe('grid text question view controller component', function () {
 
   //mock functions
   function mockController(_$controller_) {
-    Injections = [Mock.CurrentItemService]
+    Injections = [Mock.CurrentItemService];
     controller = _$controller_('otusGridTextQuestionCtrl', Injections);
 
   }

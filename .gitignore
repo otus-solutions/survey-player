@@ -4,3 +4,4 @@ terraform.*
 .terraform
 **/*swp
 **/.npmrc
+**/dist

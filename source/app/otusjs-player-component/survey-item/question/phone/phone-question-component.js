@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -10,7 +10,7 @@
         itemData: '<',
         onUpdate: '&'
       },
-      require : {
+      require: {
         otusQuestion: '^otusQuestion'
       }
     }).controller("otusPhoneQuestionCtrl", Controller);

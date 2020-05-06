@@ -6,19 +6,20 @@ describe('answer view component', function () {
   beforeEach(function () {
 
     angular.mock.module('otusjs.player.standalone');
+    spyOn(window, 'alasql');
 
-    Mock.mountedTag ='<otus-autocomplete-question-view item-data="$ctrl.itemData" />';
+    Mock.mountedTag = '<otus-autocomplete-question-view item-data="$ctrl.itemData" />';
     Mock.icon = 'youtube_searched_for';
     Mock.answer = "Resposta: Medicamentos";
     Mock.comment = "Contém comentário(s)";
-    Mock.metadata = ["Não quer responder","Não sabe","Não se aplica","Não há dados"];
+    Mock.metadata = ["Não quer responder", "Não sabe", "Não se aplica", "Não há dados"];
     var date = new Date();
     Mock.dateString = date.toISOString();
 
 
     angular.mock.module('otusjs.player');
 
-    inject(function(_$controller_,_$injector_) {
+    inject(function (_$controller_, _$injector_) {
       Mock.TagComponentBuilderService = _$injector_.get("otusjs.player.core.renderer.TagComponentBuilderService");
       Mock.PlayerService = _$injector_.get("otusjs.player.core.player.PlayerService");
       Mock.filter = _$injector_.get("$filter");
@@ -57,8 +58,8 @@ describe('answer view component', function () {
 
   describe('goingBack', function () {
     it('should call PlayerService.setGoBackTo', function () {
-      spyOn(Mock.PlayerService,"setGoBackTo").and.callThrough();
-      spyOn(controller,"goBack").and.callThrough();
+      spyOn(Mock.PlayerService, "setGoBackTo").and.callThrough();
+      spyOn(controller, "goBack").and.callThrough();
       controller.goingBack('TST2');
       expect(Mock.PlayerService.setGoBackTo).toHaveBeenCalledWith(Mock.itemData.templateID);
       expect(controller.goBack).toHaveBeenCalled();
@@ -82,7 +83,7 @@ describe('answer view component', function () {
       controller.icon = "CalendarQuestion";
       controller.itemData.data.answer.value = Mock.dateString;
       controller.$onInit();
-      var date = 'Resposta: '+Mock.filter('date')(new Date(Mock.dateString), 'dd/MM/yyyy');
+      var date = 'Resposta: ' + Mock.filter('date')(new Date(Mock.dateString), 'dd/MM/yyyy');
       expect(controller.answer).toEqual(date);
     });
   });
@@ -95,7 +96,7 @@ describe('answer view component', function () {
       controller.itemData.data.metadata.value = null;
       controller.itemData.data.answer.value = Mock.dateString;
       controller.$onInit();
-      var time = 'Resposta: '+Mock.filter('date')(new Date(Mock.dateString), 'HH:mm');
+      var time = 'Resposta: ' + Mock.filter('date')(new Date(Mock.dateString), 'HH:mm');
       expect(controller.answer).toEqual(time);
     });
   });
@@ -105,64 +106,64 @@ describe('answer view component', function () {
       controller.icon = "SingleSelectionQuestion";
       controller.itemData.options = [
         {
-          "extents" : "StudioObject",
-          "objectType" : "AnswerOption",
-          "dataType" : "Integer",
-          "label" : {
-            "ptBR" : {
-              "extends" : "StudioObject",
-              "objectType" : "Label",
-              "oid" : "",
-              "plainText" : "Não",
-              "formattedText" : "Não"
+          "extents": "StudioObject",
+          "objectType": "AnswerOption",
+          "dataType": "Integer",
+          "label": {
+            "ptBR": {
+              "extends": "StudioObject",
+              "objectType": "Label",
+              "oid": "",
+              "plainText": "Não",
+              "formattedText": "Não"
             },
-            "enUS" : {
-              "extends" : "StudioObject",
-              "objectType" : "Label",
-              "oid" : "",
-              "plainText" : "",
-              "formattedText" : ""
+            "enUS": {
+              "extends": "StudioObject",
+              "objectType": "Label",
+              "oid": "",
+              "plainText": "",
+              "formattedText": ""
             },
-            "esES" : {
-              "extends" : "StudioObject",
-              "objectType" : "Label",
-              "oid" : "",
-              "plainText" : "",
-              "formattedText" : ""
+            "esES": {
+              "extends": "StudioObject",
+              "objectType": "Label",
+              "oid": "",
+              "plainText": "",
+              "formattedText": ""
             }
           },
-          "value" : 1,
-          "extractionValue" : "0"
+          "value": 1,
+          "extractionValue": "0"
         },
         {
-          "extents" : "StudioObject",
-          "objectType" : "AnswerOption",
-          "dataType" : "Integer",
-          "label" : {
-            "ptBR" : {
-              "extends" : "StudioObject",
-              "objectType" : "Label",
-              "oid" : "",
-              "plainText" : "Sim",
-              "formattedText" : "Sim"
+          "extents": "StudioObject",
+          "objectType": "AnswerOption",
+          "dataType": "Integer",
+          "label": {
+            "ptBR": {
+              "extends": "StudioObject",
+              "objectType": "Label",
+              "oid": "",
+              "plainText": "Sim",
+              "formattedText": "Sim"
             },
-            "enUS" : {
-              "extends" : "StudioObject",
-              "objectType" : "Label",
-              "oid" : "",
-              "plainText" : "",
-              "formattedText" : ""
+            "enUS": {
+              "extends": "StudioObject",
+              "objectType": "Label",
+              "oid": "",
+              "plainText": "",
+              "formattedText": ""
             },
-            "esES" : {
-              "extends" : "StudioObject",
-              "objectType" : "Label",
-              "oid" : "",
-              "plainText" : "",
-              "formattedText" : ""
+            "esES": {
+              "extends": "StudioObject",
+              "objectType": "Label",
+              "oid": "",
+              "plainText": "",
+              "formattedText": ""
             }
           },
-          "value" : 2,
-          "extractionValue" : "1"
+          "value": 2,
+          "extractionValue": "1"
         }
       ];
       controller.itemData.data = {
@@ -175,7 +176,7 @@ describe('answer view component', function () {
       };
 
       controller.$onInit();
-      var response = 'Resposta: '+'Não';
+      var response = 'Resposta: ' + 'Não';
       expect(controller.answer).toEqual(response);
     });
   });
@@ -186,19 +187,19 @@ describe('answer view component', function () {
       controller.objectType = "FileUploadQuestion";
       controller.itemData.data = getData();
       controller.itemData.data.answer = {
-          "value": [
-            {
-              "objectType": "FileAnswer",
-              "name": "ELSABOX.txt",
-              "size": 30,
-              "type": "text/plain",
-              "sentDate": "2017-10-03T19:39:52.380Z",
-              "oid": ""
-            }
-          ]
+        "value": [
+          {
+            "objectType": "FileAnswer",
+            "name": "ELSABOX.txt",
+            "size": 30,
+            "type": "text/plain",
+            "sentDate": "2017-10-03T19:39:52.380Z",
+            "oid": ""
+          }
+        ]
       };
       controller.$onInit();
-      var response = 'Resposta: '+'ELSABOX.txt; ';
+      var response = 'Resposta: ' + 'ELSABOX.txt; ';
       expect(controller.answer).toEqual(response);
     });
   });
@@ -218,7 +219,7 @@ describe('answer view component', function () {
 
     it('should return false with TextItem', function () {
       controller.itemData.data = getData();
-      controller.itemData.value = {"ptBR": {"formattedText" :" TextItem"}};
+      controller.itemData.value = {"ptBR": {"formattedText": " TextItem"}};
       controller.itemData.objectType = "TextItem";
       controller.$onInit();
       expect(controller.isQuestion()).toEqual(false);
@@ -240,7 +241,7 @@ describe('answer view component', function () {
 
     it('should return true with TextItem', function () {
       controller.itemData.data = getData();
-      controller.itemData.value = {"ptBR": {"formattedText" :" TextItem"}};
+      controller.itemData.value = {"ptBR": {"formattedText": " TextItem"}};
       controller.itemData.objectType = "TextItem";
       controller.$onInit();
       expect(controller.isItem()).toEqual(true);
@@ -255,139 +256,140 @@ describe('answer view component', function () {
       'answer': {
         'value': 'Medicamentos'
       },
-      'comment':'comment'
-    }
+      'comment': 'comment'
+    };
   }
 
   function mockBindings() {
     Mock.parentContainer = {
-      goBack: function () {}
+      goBack: function () {
+      }
     };
 
     Mock.question = '<div style=\'text-align: justify;\'><b>ENTREVISTADOR: </b></div>';
-    Mock.label = "ENTREVISTADOR"
+    Mock.label = "ENTREVISTADOR";
 
     Mock.itemData = {
-      'dataSources' : [
+      'dataSources': [
         'medicamentos'
       ],
       'isQuestion': function () {
         return true;
       },
       'data': getData(),
-      'label' : {
-        'ptBR' : {
-          'extends' : 'StudioObject',
-          'objectType' : 'Label',
-          'oid' : '',
-          'plainText' : 'ENTREVISTADOR',
-          'formattedText' : '<div style=\'text-align: justify;\'><b>ENTREVISTADOR: </b></div>'
+      'label': {
+        'ptBR': {
+          'extends': 'StudioObject',
+          'objectType': 'Label',
+          'oid': '',
+          'plainText': 'ENTREVISTADOR',
+          'formattedText': '<div style=\'text-align: justify;\'><b>ENTREVISTADOR: </b></div>'
         }
       },
-      'metadata' : {
-        'extents' : 'StudioObject',
-        'objectType' : 'MetadataGroup',
-        'options' : [
+      'metadata': {
+        'extents': 'StudioObject',
+        'objectType': 'MetadataGroup',
+        'options': [
           {
-            'extends' : 'StudioObject',
-            'objectType' : 'MetadataAnswer',
-            'dataType' : 'Integer',
-            'value' : 1,
-            'extractionValue' : '.Q',
-            'label' : {
-              'ptBR' : {
-                'extends' : 'StudioObject',
-                'objectType' : 'Label',
-                'oid' : '',
-                'plainText' : 'Não quer responder',
-                'formattedText' : '<div>Não quer responder</div>'
+            'extends': 'StudioObject',
+            'objectType': 'MetadataAnswer',
+            'dataType': 'Integer',
+            'value': 1,
+            'extractionValue': '.Q',
+            'label': {
+              'ptBR': {
+                'extends': 'StudioObject',
+                'objectType': 'Label',
+                'oid': '',
+                'plainText': 'Não quer responder',
+                'formattedText': '<div>Não quer responder</div>'
               }
             }
           },
           {
-            'extends' : 'StudioObject',
-            'objectType' : 'MetadataAnswer',
-            'dataType' : 'Integer',
-            'value' : 2,
-            'extractionValue' : '.S',
-            'label' : {
-              'ptBR' : {
-                'extends' : 'StudioObject',
-                'objectType' : 'Label',
-                'oid' : '',
-                'plainText' : 'Não sabe',
-                'formattedText' : 'Não sabe'
+            'extends': 'StudioObject',
+            'objectType': 'MetadataAnswer',
+            'dataType': 'Integer',
+            'value': 2,
+            'extractionValue': '.S',
+            'label': {
+              'ptBR': {
+                'extends': 'StudioObject',
+                'objectType': 'Label',
+                'oid': '',
+                'plainText': 'Não sabe',
+                'formattedText': 'Não sabe'
               },
-              'enUS' : {
-                'extends' : 'StudioObject',
-                'objectType' : 'Label',
-                'oid' : '',
-                'plainText' : '',
-                'formattedText' : ''
+              'enUS': {
+                'extends': 'StudioObject',
+                'objectType': 'Label',
+                'oid': '',
+                'plainText': '',
+                'formattedText': ''
               },
-              'esES' : {
-                'extends' : 'StudioObject',
-                'objectType' : 'Label',
-                'oid' : '',
-                'plainText' : '',
-                'formattedText' : ''
+              'esES': {
+                'extends': 'StudioObject',
+                'objectType': 'Label',
+                'oid': '',
+                'plainText': '',
+                'formattedText': ''
               }
             }
           },
           {
-            'extends' : 'StudioObject',
-            'objectType' : 'MetadataAnswer',
-            'dataType' : 'Integer',
-            'value' : 3,
-            'extractionValue' : '.A',
-            'label' : {
-              'ptBR' : {
-                'extends' : 'StudioObject',
-                'objectType' : 'Label',
-                'oid' : '',
-                'plainText' : 'Não se aplica',
-                'formattedText' : 'Não se aplica'
+            'extends': 'StudioObject',
+            'objectType': 'MetadataAnswer',
+            'dataType': 'Integer',
+            'value': 3,
+            'extractionValue': '.A',
+            'label': {
+              'ptBR': {
+                'extends': 'StudioObject',
+                'objectType': 'Label',
+                'oid': '',
+                'plainText': 'Não se aplica',
+                'formattedText': 'Não se aplica'
               }
             }
           },
           {
-            'extends' : 'StudioObject',
-            'objectType' : 'MetadataAnswer',
-            'dataType' : 'Integer',
-            'value' : 4,
-            'extractionValue' : '.F',
-            'label' : {
-              'ptBR' : {
-                'extends' : 'StudioObject',
-                'objectType' : 'Label',
-                'oid' : '',
-                'plainText' : 'Não há dados',
-                'formattedText' : 'Não há dados'
+            'extends': 'StudioObject',
+            'objectType': 'MetadataAnswer',
+            'dataType': 'Integer',
+            'value': 4,
+            'extractionValue': '.F',
+            'label': {
+              'ptBR': {
+                'extends': 'StudioObject',
+                'objectType': 'Label',
+                'oid': '',
+                'plainText': 'Não há dados',
+                'formattedText': 'Não há dados'
               }
             }
           }
         ]
       },
-      'fillingRules' : {
-        'extends' : 'StudioObject',
-        'objectType' : 'FillingRules',
-        'options' : {
-          'mandatory' : {
-            'data' : {
-              'reference' : true,
-              'canBeIgnored' : false
+      'fillingRules': {
+        'extends': 'StudioObject',
+        'objectType': 'FillingRules',
+        'options': {
+          'mandatory': {
+            'data': {
+              'reference': true,
+              'canBeIgnored': false
             },
-            'extends' : 'StudioObject',
-            'objectType' : 'Rule',
-            'validatorType' : 'mandatory'
+            'extends': 'StudioObject',
+            'objectType': 'Rule',
+            'validatorType': 'mandatory'
           }
         }
       },
-      'extents' : 'SurveyItem',
-      'objectType' : 'AutocompleteQuestion',
-      'templateID' : 'TST2',
-      'customID' : 'TST2_1',
-      'dataType' : 'String'
+      'extents': 'SurveyItem',
+      'objectType': 'AutocompleteQuestion',
+      'templateID': 'TST2',
+      'customID': 'TST2_1',
+      'dataType': 'String'
     };
 
     controller.question = Mock.question;
@@ -395,6 +397,7 @@ describe('answer view component', function () {
     controller.goBack = Mock.parentContainer.goBack;
     controller.icon = Mock.itemData.objectType;
   }
+
   //
 
 });

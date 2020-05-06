@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -8,10 +8,11 @@
   Service.$inject = [
     '$q',
     '$http',
-    'SurveyApiService'
+    'SurveyApiService',
+    '$rootScope'
   ];
 
-  function Service($q, $http, SurveyApiService) {
+  function Service($q, $http, SurveyApiService, $rootScope) {
     var self = this;
     var _rest = null;
 
@@ -19,16 +20,21 @@
 
     self.getById = getById;
     self.update = update;
+    self.getSurveys = getSurveys;
 
     function _getActivityAddress() {
       return SurveyApiService.getActivityUrl();
     }
 
+    function _getSurveyAddress() {
+      return SurveyApiService.getSurveyUrl();
+    }
+
     function getById(activityInfo) {
       var defer = $q.defer();
-      $http.get(_getActivityAddress() + '/' + activityInfo).success(function(response) {
+      $http.get(_getActivityAddress() + '/' + activityInfo).success(function (response) {
         defer.resolve(response.data);
-      }).error(function(error) {
+      }).error(function (error) {
         console.error('Cannot GET a survey template.');
       });
       return defer.promise;
@@ -36,10 +42,20 @@
 
     function update(activity) {
       var defer = $q.defer();
-      $http.put(_getActivityAddress(), activity[0]).success(function(response) {
+      $http.put(_getActivityAddress(), activity[0]).success(function (response) {
         defer.resolve(response.data);
-      }).error(function(error) {
+      }).error(function (error) {
         console.error('Cannot GET a survey template.');
+      });
+      return defer.promise;
+    }
+
+    function getSurveys() {
+      var defer = $q.defer();
+      $http.get(_getSurveyAddress()).success(function (response) {
+        defer.resolve(response.data);
+      }).error(function (error) {
+        defer.reject(error);
       });
       return defer.promise;
     }

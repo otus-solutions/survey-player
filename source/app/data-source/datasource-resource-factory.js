@@ -17,12 +17,13 @@
     self.create = create;
 
     function create() {
-      return new HttpFileUpload($http, SurveyApiService);
+      return new Datasource($http, SurveyApiService);
     }
+
     return self;
   }
 
-  function HttpFileUpload($http, SurveyApiService) {
+  function Datasource($http, SurveyApiService) {
     var self = this;
     var _restPrefix;
 

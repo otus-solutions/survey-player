@@ -2,8 +2,8 @@
   initial override style
 **/
 
-.pg-loading-screen {
-  opacity: 0.9 !important;
+.pg-loading-screen{
+  opacity: 0.8 !important;
 }
 
 
@@ -32,7 +32,7 @@
   margin: 0 auto;
   width: 15%;
   height: 15%;
-  background-color: #009688;
+  background-color: #FFFFFF;
   border-radius: 100%;
   -webkit-animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;
   animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;

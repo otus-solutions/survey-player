@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -14,7 +14,7 @@
       var chars = stringToFormat.split('');
       var tagName = '';
 
-      chars.forEach(function(character, index) {
+      chars.forEach(function (character, index) {
         var lowerChar = '';
 
         if (character === character.toUpperCase()) {

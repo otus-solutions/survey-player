@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -10,7 +10,7 @@
         itemData: '<',
         onUpdate: '&'
       },
-      require : {
+      require: {
         otusQuestion: '^otusQuestion'
       }
     }).controller("otusDecimalQuestionCtrl", Controller);
@@ -25,28 +25,27 @@
 
     self.view = false;
 
-    self.$onInit = function() {
+    self.$onInit = function () {
       self.answer = CurrentItemService.getFilling(self.itemData.templateID).answer.value;
       self.otusQuestion.answer = self;
 
-      $document.on('focus blur', 'select, textarea, input', function(e){
-        if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ){
+      $document.on('focus blur', 'select, textarea, input', function (e) {
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
           self.mobileInput = true;
-        }
-        else{
+        } else {
           self.mobileInput = false;
         }
       });
     };
 
-    self.update = function() {
+    self.update = function () {
       self.onUpdate({
         valueType: 'answer',
         value: self.answer
       });
     };
 
-    self.clear = function() {
+    self.clear = function () {
       CurrentItemService.getFilling(self.itemData.templateID).answer.clear();
       delete self.answer;
     };

@@ -32,8 +32,7 @@
           var variables = currentSurvey.getStaticVariableList();
           if (!variables || !variables.length) {
             resolve([]);
-          }
-          else{
+          } else {
             var participant = ActivityFacadeService.getCurrentSurvey().getSurvey().participantData;
             var request = StaticVariableDataSourceRequestFactory.create(participant.recruitmentNumber, variables);
             StaticVariableRestService.getParticipantStaticVariable(request)

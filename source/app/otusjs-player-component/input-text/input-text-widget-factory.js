@@ -1,58 +1,58 @@
-(function() {
-    'use strict';
+(function () {
+  'use strict';
 
-    angular
-        .module('otusjs.player.component')
-        .factory('OtusInputTextWidgetFactory', OtusInputTextWidgetFactory);
+  angular
+    .module('otusjs.player.component')
+    .factory('OtusInputTextWidgetFactory', OtusInputTextWidgetFactory);
 
-    function OtusInputTextWidgetFactory() {
-        var self = this;
+  function OtusInputTextWidgetFactory() {
+    var self = this;
 
-        self.create = create;
+    self.create = create;
 
-        function create(templateData, templateConfig, element, parentWidget) {
-            return new OtusInputTextWidget(templateData, templateConfig, element, parentWidget);
-        }
-
-        return self;
+    function create(templateData, templateConfig, element, parentWidget) {
+      return new OtusInputTextWidget(templateData, templateConfig, element, parentWidget);
     }
 
-    function OtusInputTextWidget(templateData, templateConfig, element, parentWidget) {
-        var self = this;
+    return self;
+  }
 
-        /* Type definitions */
-        self.className = self.constructor.name;
-        self.css = {};
-        self.template = {};
-        self.event = {};
+  function OtusInputTextWidget(templateData, templateConfig, element, parentWidget) {
+    var self = this;
 
-        /* Template definitions */
-        self.template.ariaLabel = templateConfig.ariaLabel || templateConfig.label;
-        self.template.label = templateConfig.label;
-        self.template.leftIcon = templateConfig.iconButton || templateConfig.leftIcon;
-        self.template.rightIcon = templateConfig.rightIcon;
+    /* Type definitions */
+    self.className = self.constructor.name;
+    self.css = {};
+    self.template = {};
+    self.event = {};
 
-        self.template.hasLeftIcon = self.template.leftIcon !== undefined;
-        self.template.hasRightIcon = (templateConfig.iconButton === undefined && self.template.rightIcon !== undefined);
+    /* Template definitions */
+    self.template.ariaLabel = templateConfig.ariaLabel || templateConfig.label;
+    self.template.label = templateConfig.label;
+    self.template.leftIcon = templateConfig.iconButton || templateConfig.leftIcon;
+    self.template.rightIcon = templateConfig.rightIcon;
 
-        /* Instance definitions */
-        self.parent = parentWidget;
-        self.modelReference = templateData.model;
+    self.template.hasLeftIcon = self.template.leftIcon !== undefined;
+    self.template.hasRightIcon = (templateConfig.iconButton === undefined && self.template.rightIcon !== undefined);
 
-        /* CSS definitions */
-        self.style = templateData.style;
+    /* Instance definitions */
+    self.parent = parentWidget;
+    self.modelReference = templateData.model;
 
-        if (templateData.model instanceof Function)
-            self.model = templateData.model();
-        else
-            self.model = templateData.model;
+    /* CSS definitions */
+    self.style = templateData.style;
 
-        element.on('change', function() {
-            if (self.modelReference instanceof Function)
-                self.modelReference(self.model);
-            else
-                self.modelReference = self.model;
-        });
-    }
+    if (templateData.model instanceof Function)
+      self.model = templateData.model();
+    else
+      self.model = templateData.model;
+
+    element.on('change', function () {
+      if (self.modelReference instanceof Function)
+        self.modelReference(self.model);
+      else
+        self.modelReference = self.model;
+    });
+  }
 
 }());

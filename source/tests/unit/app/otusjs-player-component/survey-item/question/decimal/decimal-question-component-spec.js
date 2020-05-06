@@ -1,42 +1,42 @@
 describe('decimal question view controller component', function () {
-    var Mock = {};
-    var controller;
+  var Mock = {};
+  var controller;
 
-    beforeEach(function () {
-        angular.mock.module('otusjs.player.component', function ($provide) {
-          $provide.value('otusjs.player.data.activity.CurrentItemService', {});
-        });
-
-        inject(function (_$controller_) {
-            mockController(_$controller_);
-        });
-        mockBindings();
+  beforeEach(function () {
+    angular.mock.module('otusjs.player.component', function ($provide) {
+      $provide.value('otusjs.player.data.activity.CurrentItemService', {});
     });
 
-    describe('the initialization', function () {
-        it('should have a defined controller', function () {
-            expect(controller).toBeDefined();
-        });
+    inject(function (_$controller_) {
+      mockController(_$controller_);
+    });
+    mockBindings();
+  });
 
-        it('should build an new component with values', function () {
-            expect(controller.view).toEqual(false);
-        });
+  describe('the initialization', function () {
+    it('should have a defined controller', function () {
+      expect(controller).toBeDefined();
     });
 
-    //mock functions
-    function mockController(_$controller_) {
+    it('should build an new component with values', function () {
+      expect(controller.view).toEqual(false);
+    });
+  });
 
-        controller = _$controller_('otusDecimalQuestionCtrl');
-    }
+  //mock functions
+  function mockController(_$controller_) {
 
-    function mockBindings() {
-        Mock.itemData = {
-            data: {
-                answer: {
-                    value: 1
-                }
-            }
-        };
-        controller.itemData = Mock.itemData;
-    }
+    controller = _$controller_('otusDecimalQuestionCtrl');
+  }
+
+  function mockBindings() {
+    Mock.itemData = {
+      data: {
+        answer: {
+          value: 1
+        }
+      }
+    };
+    controller.itemData = Mock.itemData;
+  }
 });
