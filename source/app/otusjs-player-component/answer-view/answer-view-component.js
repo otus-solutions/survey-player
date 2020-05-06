@@ -61,7 +61,7 @@
 
 
     function _containMetadada() {
-      return self.itemData.data.metadata.value !== null ? true : false;
+      return (self.itemData.data.metadata.value !== null);
     }
 
     function _metadadaBuilder() {
