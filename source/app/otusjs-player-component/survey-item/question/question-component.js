@@ -46,6 +46,7 @@
     self.isAccept = isAccept;
     self.showingComment = false;
     self.commentButtonData = commentButtonData.false;
+    self.hasMetadata = hasMetadata;
     self.swapCommentVisibility = swapCommentVisibility;
 
     function onInit() {
@@ -122,6 +123,10 @@
       return function (validator) {
         return self.itemData.fillingRules.options[validator].data.canBeIgnored || !error[validator];
       }
+    }
+
+    function hasMetadata(){
+      return (self.itemData.metadata.options.length > 0);
     }
 
     function swapCommentVisibility() {
