@@ -5,21 +5,23 @@
 <div layout="column" layout-padding class="display-side-margin">
 
   <md-whiteframe class="answer-view-header" layout="row" layout-align="space-between center">
-    <span style="color: gray">{{$ctrl.itemData.templateID}}</span>
-    <md-button hide-xs hide-sm class="md-accent no-margin-top-bottom" ng-click="$ctrl.goingBack()" >
-      <md-icon md-font-set="material-icons" class="material-icons ng-binding md-layoutTheme-theme">edit</md-icon>
-      Editar questão
-    </md-button>
-    <md-button hide-gt-sm class="md-accent no-margin-top-bottom no-margin-sides edit-question-button-gt-sm" ng-click="$ctrl.goingBack()" >
-      <md-icon md-font-set="material-icons" class="material-icons ng-binding md-layoutTheme-theme" layout-align="end center">edit</md-icon>
-    </md-button>
+    <span class="answer-view-font">{{$ctrl.itemData.templateID}}</span>
+    <div ng-if="!$ctrl.isItem()">
+      <md-button hide-xs hide-sm class="md-accent no-margin-top-bottom" ng-click="$ctrl.goingBack()">
+        <md-icon md-font-set="material-icons" class="material-icons ng-binding md-layoutTheme-theme">edit</md-icon>
+        Editar questão
+      </md-button>
+      <md-button hide-gt-sm class="md-accent no-margin-top-bottom no-margin-sides edit-question-button-gt-sm" ng-click="$ctrl.goingBack()" >
+        <md-icon md-font-set="material-icons" class="material-icons ng-binding md-layoutTheme-theme" layout-align="end center">edit</md-icon>
+      </md-button>
+    </div>
   </md-whiteframe>
 
-  <div layout="row">
-    <otus-label class="md-headline question-label answer-label-color" item-label="$ctrl.itemData.label.ptBR.formattedText" flex></otus-label>
+  <div layout="row" ng-if="!$ctrl.isItem()">
+    <otus-label class="md-headline question-label answer-view-font" item-label="$ctrl.itemData.label.ptBR.formattedText" flex></otus-label>
   </div>
 
-  <otus-misc-item ng-if="$ctrl.isItem()" item-data="$ctrl.itemData" layout="column" flex></otus-misc-item>
+  <otus-misc-item ng-if="$ctrl.isItem()" item-data="$ctrl.itemData" class="answer-view-font" layout="column" flex></otus-misc-item>
 
   <div hide-xs class="answer-view-layout" ng-if="!$ctrl.isItem()">
     <div class="answer-view-answer" bind-html-compile="$ctrl.template" flex-gt-sm="90"></div>
@@ -42,9 +44,8 @@
     </md-radio-group>
   </div>
 
-  <!-- comment out grid-->
   <div class="disabled-comment-box" layout="row">
-    <span class="answer-label-color" ng-if="$ctrl.itemData.data.comment.length==0" style="margin-bottom: 24px">
+    <span class="answer-view-font" ng-if="$ctrl.itemData.data.comment.length==0" style="margin-bottom: 24px">
       Sem registro de comentário.
     </span>
     <md-input-container class="md-block" flex ng-if="$ctrl.itemData.data.comment.length>0" style="margin-bottom: 0px">
