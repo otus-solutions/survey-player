@@ -3,6 +3,10 @@
   border-radius: 4px;
 }
 
+.answer-view-font {
+  color: gray;
+}
+
 .answer-view-layout {
   display: grid;
   width: 95vw;
