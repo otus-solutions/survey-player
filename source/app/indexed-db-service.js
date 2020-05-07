@@ -13,7 +13,7 @@
   function Service($q, $window) {
     var self = this;
     var _dbManager = {};
-    var _idbAdapter = new LokiIndexedAdapter('otus');
+    var _idbAdapter = new LokiIndexedAdapter('otus-survey-player');
 
     /* Public methods */
     self.getDb = getDb;

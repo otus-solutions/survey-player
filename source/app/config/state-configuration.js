@@ -121,7 +121,7 @@
     }
 
     function _loadOtusDb() {
-      var OTUS_DB = 'otus';
+      var OTUS_DB = 'otus-survey-player';
       var deferred = $q.defer();
 
       StorageLoaderService.dbExists(OTUS_DB).then(function (dbExists) {
