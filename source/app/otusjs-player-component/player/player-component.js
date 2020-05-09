@@ -69,7 +69,7 @@
     }
 
     function catchMouseWheel($event) {
-      if (event.deltaY > 0) {
+      if ($event.deltaY > 0) {
         goAhead();
       } else {
         goBack();

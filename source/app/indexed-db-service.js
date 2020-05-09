@@ -13,7 +13,7 @@
   function Service($q, $window) {
     var self = this;
     var _dbManager = {};
-    var _idbAdapter = new LokiIndexedAdapter('otus-survey-player');
+    var _idbAdapter = new LokiIndexedAdapter('otus');
 
     /* Public methods */
     self.getDb = getDb;
@@ -44,6 +44,7 @@
       _dbManager[dbName] = {};
       _dbManager[dbName].loading = $q.defer();
       _dbManager[dbName].storages = storages;
+      console.log(_dbManager[dbName].lokiDb)
       _dbManager[dbName].lokiDb = new loki(dbName, {
         autoload: true,
         autoloadCallback: function () {
@@ -51,6 +52,7 @@
         },
         adapter: _idbAdapter
       });
+
       return _dbManager[dbName].loading.promise;
     }
 

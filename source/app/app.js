@@ -44,7 +44,7 @@
   }
 
   function _loadOtusDb(StorageLoaderService) {
-    var OTUS_DB = 'otus-survey-player';
+    var OTUS_DB = 'otus';
 
     return StorageLoaderService.dbExists(OTUS_DB).then(function (dbExists) {
       if (dbExists) {
