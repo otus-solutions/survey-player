@@ -61,7 +61,7 @@
 
 
     function _containMetadada() {
-      return self.itemData.data.metadata.value !== null ? true : false;
+      return (self.itemData.data.metadata.value !== null);
     }
 
     function _metadadaBuilder() {
@@ -120,11 +120,11 @@
     }
 
     function isQuestion() {
-      return (self.itemData.objectType === 'ImageItem') || (self.itemData.objectType === 'TextItem') ? false : true;
+      return !isItem();
     }
 
     function isItem() {
-      return (self.itemData.objectType === 'ImageItem') || (self.itemData.objectType === 'TextItem') ? true : false;
+      return (self.itemData.objectType === 'ImageItem') || (self.itemData.objectType === 'TextItem');
     }
 
     function _formatAnswer() {

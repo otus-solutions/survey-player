@@ -25,22 +25,25 @@
 
     /* Public methods */
     self.showAccept = showAccept;
+    self.$onInit = onInit;
+    self.clear = clear;
+    self.showConfirm = showConfirm;
 
-    self.$onInit = function () {
+    function onInit() {
       self.otusQuestion.menuComponent = self;
       _enableDialogSettings();
       _disableDialogSettings();
 
       self.forceAnswer = self.otusQuestion.menuComponent.otusQuestion.filling.forceAnswer;
-    };
+    }
 
-    self.clear = function (value) {
+    function clear(value) {
       self.onClear({
         value: value
       });
-    };
+    }
 
-    self.showConfirm = function (ev) {
+    function showConfirm(ev) {
       if (!self.forceAnswer) {
         $mdDialog
           .show(self.enableDialogSettings)

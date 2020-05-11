@@ -1,0 +1,57 @@
+.answer-view-header {
+  background-color: #f2f2f2;
+  border-radius: 4px;
+}
+
+.answer-view-font {
+  color: gray;
+}
+
+.answer-view-layout {
+  display: grid;
+  width: 95vw;
+  margin-left: 8px;
+  margin-right: 8px;
+  grid-template-columns: 7fr 5fr;
+  grid-template-areas:
+    "answerViewAnswer answerViewMetadata"
+}
+
+.answer-view-answer {
+  grid-area: answerViewAnswer;
+  margin-left: 10px;
+}
+
+.answer-view-metadata {
+  grid-area: answerViewMetadata;
+}
+
+
+.edit-question-button-gt-sm {
+  margin: 0 6px;
+  height: 40px;
+  min-width: 0;
+  line-height: 24px;
+  padding: 8px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+
+@media screen and (min-width: 601px) and (max-width: 960px) {
+  .answer-view-layout {
+    width: 90vw;
+  }
+}
+
+@media screen and (min-width: 961px) and (max-width: 1280px) {
+  .answer-view-layout {
+    width: 85vw;
+  }
+}
+
+@media screen and (min-width: 1281px) {
+  .answer-view-layout {
+    width: 80vw;
+  }
+}

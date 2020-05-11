@@ -1,16 +1,37 @@
-<md-card flex>
-  <md-card-title layout="row" ng-if="!$ctrl.isItem()">
-    <md-card-title-text layout="column" flex>
-      <div layout="row">
-        <otus-label class="md-headline" item-label="$ctrl.itemData.label.ptBR.formattedText" flex layout-padding>
-      </div>
-    </md-card-title-text>
-  </md-card-title>
-  <md-card-content layout="column" layout-align="space-between" flex>
+<div layout="column" md-block layout-margin style="background-color: white" md-whiteframe="3" class="display-side-margin">
+
+  <md-whiteframe class="survey-item-header" layout="row" layout-align="space-between center">
+    <span class="survey-item-ID">{{$ctrl.itemData.templateID}}</span>
+    <md-menu>
+      <md-button ng-click="$mdMenu.open($event)" class="md-icon-button" id="questionMenu">
+        <md-icon md-menu-origin="" >more_vert</md-icon>
+      </md-button>
+      <md-menu-content>
+        <md-menu-item>
+          <md-button ng-click="$ctrl.clearAnswer()" id="clearAnswer">
+            <md-icon md-menu-align-target="">delete</md-icon>
+            Limpar resposta
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button ng-click="$ctrl.clearComment()" id="clearComment">
+            <md-icon md-menu-align-target="">backspace</md-icon>
+            Limpar comentário
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+  </md-whiteframe>
+
+  <div layout="row" ng-if="!$ctrl.isItem()">
+    <otus-label class="question-label" item-label="$ctrl.itemData.label.ptBR.formattedText" flex>
+  </div>
+
+  <div layout="column" layout-align-gt-xs="space-between center" flex>
     <otus-question ng-if="$ctrl.isQuestion()" on-update="$ctrl.update(valueType, value)"
-                   on-processing-player="$ctrl.onProcessingPlayer()" item-data="$ctrl.itemData" layout="column"
-                   flex></otus-question>
+                   on-processing-player="$ctrl.onProcessingPlayer()" item-data="$ctrl.itemData"
+                   layout="column" flex></otus-question>
     <otus-misc-item ng-if="$ctrl.isItem()" item-data="$ctrl.itemData" layout="column" flex></otus-misc-item>
-  </md-card-content>
-  <otus-validation-error error="$ctrl.$error" layout="row"></otus-validation-error>
-</md-card>
+  </div>
+
+</div>

@@ -1,9 +1,5 @@
-<md-content layout-padding>
-  <div layout="row">
-    <md-input-container md-no-float class="md-block" flex-gt-sm="45">
-      <md-icon class="material-icons">email</md-icon>
-      <input name="email" type="email" ng-model="$ctrl.answer" ng-change="$ctrl.update()" placeholder="email@email.com"
-             aria-label="{{$ctrl.ariaLabel()}}" ng-disabled="$ctrl.view"></input>
-    </md-input-container>
-  </div>
-</md-content>
+<md-input-container md-no-float class="md-block no-margin-top-bottom" flex-gt-sm="45">
+  <md-icon class="material-icons">email</md-icon>
+  <input name="email" type="email" ng-model="$ctrl.answer" ng-change="$ctrl.update()" placeholder="email@email.com"
+    aria-label="{{$ctrl.ariaLabel()}}" ng-disabled="$ctrl.view"></input>
+</md-input-container>
