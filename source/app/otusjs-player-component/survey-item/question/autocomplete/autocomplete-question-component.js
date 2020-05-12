@@ -17,26 +17,31 @@
     .controller("otusAutocompleteQuestionCtrl", Controller);
 
   Controller.$inject = [
+    '$scope',
     'otusjs.player.data.activity.CurrentItemService',
     'otusjs.utils.DatasourceService',
     'otusjs.utils.SearchQueryFactory'
   ];
 
-  function Controller(CurrentItemService, DatasourceService, SearchQueryFactory) {
+  function Controller($scope, CurrentItemService, DatasourceService, SearchQueryFactory) {
     var self = this;
     var _datasource = [];
 
     self.view = false;
+    self.$onInit = onInit;
+    self.update = update;
+    self.clear = clear;
+    self.setOther = setOther;
 
     /* Question Methods */
-    self.$onInit = function () {
+    function onInit() {
       self.dataReady = false;
       self.answer = CurrentItemService.getFilling(self.itemData.templateID).answer.value;
       self.otusQuestion.answer = self;
       _setupDatasourceQuery();
-    };
+    }
 
-    self.update = function () {
+    function update() {
       var _answerUpdate;
       if (!self.answer) {
         _answerUpdate = null;
@@ -47,17 +52,17 @@
         valueType: 'answer',
         value: _answerUpdate
       });
-    };
+    }
 
-    self.clear = function () {
+    function clear() {
       CurrentItemService.getFilling(self.itemData.templateID).answer.clear();
       delete self.answer;
-    };
+    }
 
-    self.setOther = function () {
+    function setOther() {
       self.answer = {value: "Outro"};
       self.update();
-    };
+    }
 
     /* Datasource Methods */
     function _setupDatasourceQuery() {
@@ -77,4 +82,5 @@
       };
     }
   }
+
 }());
