@@ -38,19 +38,6 @@
 
   function Runner($injector, StorageLoaderService, ServiceWorker) {
     ServiceWorker.register();
-    // _loadOtusDb(StorageLoaderService)
-    //   .then(function () {
-    //   });
   }
-
-  // function _loadOtusDb(StorageLoaderService) {
-  //   const OTUS_DB = 'otus-survey-player';
-  //   return StorageLoaderService.dbExists(OTUS_DB).then(function (dbExists) {
-  //     if (dbExists) {
-  //       return StorageLoaderService.loadIndexedStorage(OTUS_DB);
-  //     }
-  //     return StorageLoaderService.createIndexedStorage(OTUS_DB);
-  //   });
-  // }
 
 }());
