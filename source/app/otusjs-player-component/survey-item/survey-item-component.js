@@ -40,8 +40,6 @@
       $scope.$parent.$ctrl.currentItems.push(self);
       CurrentItemService.observerRegistry(self);
 
-      console.log($scope.$parent.$ctrl.currentItems)
-
       self.$error = {};
       self.questionComponent = {};
       self.errorComponent = {};

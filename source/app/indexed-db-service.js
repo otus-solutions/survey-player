@@ -44,7 +44,6 @@
       _dbManager[dbName] = {};
       _dbManager[dbName].loading = $q.defer();
       _dbManager[dbName].storages = storages;
-      console.log(_dbManager[dbName].lokiDb)
       _dbManager[dbName].lokiDb = new loki(dbName, {
         autoload: true,
         autoloadCallback: function () {
