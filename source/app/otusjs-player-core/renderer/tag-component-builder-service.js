@@ -20,12 +20,9 @@
 
     function _replace(tagName, onlyView) {
       if (onlyView) {
-
         return '<otus-' + tagName + '-view item-data="$ctrl.itemData" />';
-      } else {
-
-        return '<otus-' + tagName + ' item-data="$ctrl.itemData" on-update="$ctrl.update(valueType, value)" />';
       }
+      return '<otus-' + tagName + ' item-data="$ctrl.itemData" on-update="$ctrl.update(valueType, value)" />';
     }
   }
 })();

@@ -21,6 +21,7 @@
 
     /* Question Methods */
     self.$onInit = function () {
+      self.dataReady = true;
       self.answer = self.itemData.data.answer.value;
     };
 

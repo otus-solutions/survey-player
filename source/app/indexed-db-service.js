@@ -53,6 +53,7 @@
         },
         adapter: _idbAdapter
       });
+
       return _dbManager[dbName].loading.promise;
     }
 

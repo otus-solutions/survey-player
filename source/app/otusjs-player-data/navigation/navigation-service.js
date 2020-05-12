@@ -8,10 +8,11 @@
   Service.$inject = [
     'otusjs.model.navigation.NavigationTrackingItemFactory',
     'otusjs.player.data.activity.ActivityFacadeService',
-    'otusjs.player.data.navigation.RouteService'
+    'otusjs.player.data.navigation.RouteService',
+    'otusjs.player.core.player.PlayerService'
   ];
 
-  function Service(NavigationTrackingItemFactory, ActivityFacadeService, RouteService) {
+  function Service(NavigationTrackingItemFactory, ActivityFacadeService, RouteService, PlayerService) {
     var self = this;
     var _navigationTracker = null;
 
@@ -33,8 +34,12 @@
 
     function getPreviousItem() {
       if (hasPrevious()) {
-        var previousID = _navigationTracker.getCurrentItemGroup()[0].getPrevious();
-        return ActivityFacadeService.getCurrentSurvey().getItemByTemplateID(previousID);
+        if (PlayerService.isGoingBack()) {
+          return ActivityFacadeService.getCurrentSurvey().getItemByTemplateID(PlayerService.getGoBackTo());
+        } else {
+          var previousID = _navigationTracker.getCurrentItemGroup()[0].getPrevious();
+          return ActivityFacadeService.getCurrentSurvey().getItemByTemplateID(previousID);
+        }
       } else {
         return null;
       }
