@@ -30,6 +30,7 @@
 
     function setupDatasources(dsDefsArray) {
       SurveyItemRestService.initialize();
+      ActivityLocalStorageService.clear();
       return $q(function (resolve, reject) {
         try {
           _getDatasources(dsDefsArray)

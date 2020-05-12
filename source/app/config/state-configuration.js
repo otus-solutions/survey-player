@@ -88,24 +88,19 @@
               _setPlayerConfiguration();
             });
           }
-        } else {
-          if (SurveyApiService.getAuthToken() && SurveyApiService.getCurrentActivity()) {
-            SurveyClientService.getSurveyTemplate().then(function (response) {
-              _loadOtusDb().then(function () {
-                self.template = angular.copy(response);
-                _isValid = true;
-                _setPlayerConfiguration();
-
-                LoadingScreenService.finish();
-              });
-
-
-            }).catch(function () {
-              $state.go('/error');
-              LoadingScreenService.finish();
-            });
-          }
         }
+        else if (SurveyApiService.getAuthToken() && SurveyApiService.getCurrentActivity()) {
+          SurveyClientService.getSurveyTemplate().then(function (response) {
+            self.template = angular.copy(response);
+            _isValid = true;
+            _setPlayerConfiguration();
+            LoadingScreenService.finish();
+          }).catch(function () {
+            $state.go('/error');
+            LoadingScreenService.finish();
+          });
+        }
+
       });
     }
 
@@ -121,17 +116,16 @@
     }
 
     function _loadOtusDb() {
-      var OTUS_DB = 'otus';
+      var DB_NAME = 'survey-player';
       var deferred = $q.defer();
 
-      StorageLoaderService.dbExists(OTUS_DB).then(function (dbExists) {
+      StorageLoaderService.dbExists(DB_NAME).then(function (dbExists) {
         if (dbExists) {
-          StorageLoaderService.loadIndexedStorage(OTUS_DB);
+          StorageLoaderService.loadIndexedStorage(DB_NAME);
           deferred.resolve();
         } else {
-          StorageLoaderService.createIndexedStorage(OTUS_DB);
+          StorageLoaderService.createIndexedStorage(DB_NAME);
           deferred.resolve();
-
         }
       });
 
