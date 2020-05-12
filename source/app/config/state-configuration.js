@@ -91,12 +91,10 @@
         }
         else if (SurveyApiService.getAuthToken() && SurveyApiService.getCurrentActivity()) {
           SurveyClientService.getSurveyTemplate().then(function (response) {
-            // _loadOtusDb().then(function () {
             self.template = angular.copy(response);
             _isValid = true;
             _setPlayerConfiguration();
             LoadingScreenService.finish();
-            // });
           }).catch(function () {
             $state.go('/error');
             LoadingScreenService.finish();
