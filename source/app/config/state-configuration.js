@@ -118,15 +118,15 @@
     }
 
     function _loadOtusDb() {
-      var OTUS_DB = 'otus-survey-player';
+      var DB_NAME = 'survey-player';
       var deferred = $q.defer();
 
-      StorageLoaderService.dbExists(OTUS_DB).then(function (dbExists) {
+      StorageLoaderService.dbExists(DB_NAME).then(function (dbExists) {
         if (dbExists) {
-          StorageLoaderService.loadIndexedStorage(OTUS_DB);
+          StorageLoaderService.loadIndexedStorage(DB_NAME);
           deferred.resolve();
         } else {
-          StorageLoaderService.createIndexedStorage(OTUS_DB);
+          StorageLoaderService.createIndexedStorage(DB_NAME);
           deferred.resolve();
         }
       });
