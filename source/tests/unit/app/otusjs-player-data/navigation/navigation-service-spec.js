@@ -1,4 +1,4 @@
-fdescribe('NavigationService', function () {
+describe('NavigationService', function () {
   var UNIT_NAME = 'otusjs.player.data.navigation.NavigationService';
   var Mock = {};
   var Injections = [];
@@ -21,6 +21,8 @@ fdescribe('NavigationService', function () {
 
     spyOn(Injections.ActivityFacadeService, 'getCurrentSurvey').and.returnValue(Mock.currentSurvey);
     spyOn(Injections.ActivityFacadeService, 'fetchItemGroupByID').and.returnValue([Mock.itemVAL1]);
+    spyOn(Injections.PlayerService, 'isGoingBack').and.returnValue(true);
+    spyOn(Injections.PlayerService, 'getGoBackTo').and.returnValue("TP22");
 
     service.initialize();
 
@@ -53,6 +55,13 @@ fdescribe('NavigationService', function () {
   it('updateItemTracking Method should execute', function () {
     service.updateItemTracking();
     expect(Injections.ActivityFacadeService.getCurrentSurvey).toHaveBeenCalledTimes(1);
+  });
+
+  it('getPreviousItem Method should execute', function () {
+    service.getPreviousItem();
+    expect(Injections.PlayerService.isGoingBack).toHaveBeenCalledTimes(1);
+    expect(Injections.PlayerService.getGoBackTo).toHaveBeenCalledTimes(1);
+    expect(Injections.ActivityFacadeService.getCurrentSurvey).toHaveBeenCalledTimes(2);
   });
 
   function mockItemData($injector) {
