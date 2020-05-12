@@ -35,6 +35,7 @@
     function getPreviousItem() {
       if (hasPrevious()) {
         if (PlayerService.isGoingBack()) {
+          PlayerService.setGoBackTo(null);
           return ActivityFacadeService.getCurrentSurvey().getItemByTemplateID(PlayerService.getGoBackTo());
         } else {
           var previousID = _navigationTracker.getCurrentItemGroup()[0].getPrevious();
