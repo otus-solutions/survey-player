@@ -2,14 +2,13 @@
   <p layout="row" ng-hide="$ctrl.dataReady || $ctrl.dataError">Aguarde. Preparando lista de opções.</p>
   <p layout="row" md-warn ng-show="$ctrl.dataError">Erro ao carregar opções.</p>
   <md-autocomplete
-
     ng-disabled="!$ctrl.dataReady || $ctrl.answer"
     md-search-text="$ctrl.autoCompleteSettings.searchText"
     md-selected-item="$ctrl.answer"
     md-selected-item-change="$ctrl.update()"
     md-items="meds in $ctrl.searchQuery($ctrl.autoCompleteSettings.searchText)"
     md-item-text="meds.value"
-    md-min-length="7"
+    md-min-length="3"
     placeholder="Inicie a digitação">
     <md-item-template layout-fill flex>
       <span md-highlight-text="$ctrl.autoCompleteSettings.searchText" md-highlight-flags="gi">{{meds.value}}</span>
