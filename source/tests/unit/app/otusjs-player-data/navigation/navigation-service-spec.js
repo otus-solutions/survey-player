@@ -1,4 +1,4 @@
-describe('NavigationService', function () {
+fdescribe('NavigationService', function () {
   var UNIT_NAME = 'otusjs.player.data.navigation.NavigationService';
   var Mock = {};
   var Injections = [];
@@ -14,6 +14,7 @@ describe('NavigationService', function () {
       Injections.NavigationStackItemFactory = $injector.get('otusjs.model.navigation.NavigationTrackingItemFactory');
       Injections.RouteService = $injector.get('otusjs.player.data.navigation.RouteService');
       Injections.ActivityFacadeService = $injector.get('otusjs.player.data.activity.ActivityFacadeService');
+      Injections.PlayerService = $injector.get('otusjs.player.core.player.PlayerService');
 
       service = $injector.get(UNIT_NAME, Injections);
     });
