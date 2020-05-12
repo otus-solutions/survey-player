@@ -38,22 +38,6 @@
 
   function Runner($injector, StorageLoaderService, ServiceWorker) {
     ServiceWorker.register();
-    _loadOtusDb(StorageLoaderService)
-      .then(function () {
-      });
-  }
-
-  function _loadOtusDb(StorageLoaderService) {
-    var OTUS_DB = 'otus';
-
-    return StorageLoaderService.dbExists(OTUS_DB).then(function (dbExists) {
-      if (dbExists) {
-        return StorageLoaderService.loadIndexedStorage(OTUS_DB);
-      } else {
-        return StorageLoaderService.createIndexedStorage(OTUS_DB);
-      }
-    });
-
   }
 
 }());

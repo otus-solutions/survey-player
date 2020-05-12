@@ -12,7 +12,7 @@
     placeholder="Inicie a digitação"
     class="autocomplete-fancy">
     <md-item-template layout-fill flex class="autocomplete-fancy">
-      <span md-highlight-text="$ctrl.autoCompleteSettings.searchText" md-highlight-flags="gi">{{meds.value}}</span>
+    <span md-highlight-text="$ctrl.autoCompleteSettings.searchText" md-highlight-flags="gi">{{meds.value}}</span>
     </md-item-template>
     <md-not-found>
       <span ng-click="$ctrl.setOther()">"{{$ctrl.autoCompleteSettings.searchText}}" não encontrado. Clique para responder com "Outro"</span>

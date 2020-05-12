@@ -11,9 +11,11 @@
   ];
 
   function Service($q, $window) {
+    const DB_NAME = 'survey-player';
+
     var self = this;
     var _dbManager = {};
-    var _idbAdapter = new LokiIndexedAdapter('otus');
+    var _idbAdapter = new LokiIndexedAdapter(DB_NAME);
 
     /* Public methods */
     self.getDb = getDb;
@@ -78,7 +80,6 @@
 
     function _existentDbLoadHandler(dbName) {
       _dbManager[dbName].storages.forEach(function (storage) {
-
         storage.initialize(
           getDb(dbName).getCollection(storage.collectionName) || addCollection(dbName, storage),
           getDb(dbName)
@@ -88,10 +89,10 @@
     }
 
     function deleteDatabase() {
-      _dbManager.otus.lokiDb.collections.forEach(function (collection) {
+      _dbManager[DB_NAME].lokiDb.collections.forEach(function (collection) {
         collection.clear();
       });
-      _dbManager.otus.lokiDb.deleteDatabase();
+      _dbManager[DB_NAME].lokiDb.deleteDatabase();
     }
 
     function addCollection(dbName, storage) {
