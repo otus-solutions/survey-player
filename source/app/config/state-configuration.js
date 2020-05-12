@@ -88,24 +88,21 @@
               _setPlayerConfiguration();
             });
           }
-        } else {
-          if (SurveyApiService.getAuthToken() && SurveyApiService.getCurrentActivity()) {
-            SurveyClientService.getSurveyTemplate().then(function (response) {
-              _loadOtusDb().then(function () {
-                self.template = angular.copy(response);
-                _isValid = true;
-                _setPlayerConfiguration();
-
-                LoadingScreenService.finish();
-              });
-
-
-            }).catch(function () {
-              $state.go('/error');
-              LoadingScreenService.finish();
-            });
-          }
         }
+        else if (SurveyApiService.getAuthToken() && SurveyApiService.getCurrentActivity()) {
+          SurveyClientService.getSurveyTemplate().then(function (response) {
+            // _loadOtusDb().then(function () {
+            self.template = angular.copy(response);
+            _isValid = true;
+            _setPlayerConfiguration();
+            LoadingScreenService.finish();
+            // });
+          }).catch(function () {
+            $state.go('/error');
+            LoadingScreenService.finish();
+          });
+        }
+
       });
     }
 
@@ -121,7 +118,7 @@
     }
 
     function _loadOtusDb() {
-      var OTUS_DB = 'otus';
+      var OTUS_DB = 'otus-survey-player';
       var deferred = $q.defer();
 
       StorageLoaderService.dbExists(OTUS_DB).then(function (dbExists) {
@@ -131,7 +128,6 @@
         } else {
           StorageLoaderService.createIndexedStorage(OTUS_DB);
           deferred.resolve();
-
         }
       });
 
