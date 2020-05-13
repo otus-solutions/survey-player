@@ -34,7 +34,7 @@
       })
       .backgroundPalette('grey');
     /* 24 is the size default of icons */
-    $mdIconProvider.defaultIconSet('app/assets/icons/mdi.svg', 24);
+    $mdIconProvider.defaultIconSet('assets/icons/mdi.svg', 24);
   }
 
 }());
