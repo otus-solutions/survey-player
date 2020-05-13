@@ -17,13 +17,12 @@
     .controller("otusAutocompleteQuestionCtrl", Controller);
 
   Controller.$inject = [
-    '$scope',
     'otusjs.player.data.activity.CurrentItemService',
     'otusjs.utils.DatasourceService',
     'otusjs.utils.SearchQueryFactory'
   ];
 
-  function Controller($scope, CurrentItemService, DatasourceService, SearchQueryFactory) {
+  function Controller(CurrentItemService, DatasourceService, SearchQueryFactory) {
     var self = this;
     var _datasource = [];
 
