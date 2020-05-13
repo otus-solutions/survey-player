@@ -64,7 +64,6 @@
       .pipe(gulp_if('*.js', embedTemplates({
         basePath: '.'
       })))
-      // .pipe(gulp_if('otus-player-component/**/*.js', replace('app/', '')))
       .pipe(gulp.dest('dist/survey-player'));
   });
 
