@@ -27,8 +27,8 @@
 
   gulp.task('copy_code', function () {
     return gulp.src('./app/**/*')
-      .pipe(gulp_if('index.html', replace('src="app/', 'src="')))
-      .pipe(gulp_if('index.html', replace('href="app/', 'href="')))
+      .pipe(gulp_if('*.html', replace('src="app/', 'src="')))
+      .pipe(gulp_if('*.html', replace('href="app/', 'href="')))
       .pipe(gulp.dest('dist/survey-player'));
   });
 

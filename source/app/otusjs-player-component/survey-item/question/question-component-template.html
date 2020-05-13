@@ -1,5 +1,5 @@
 <link
-  href="app/otusjs-player-component/survey-item/question/question-component-styles.css"
+  href="otusjs-player-component/survey-item/question/question-component-styles.css"
   rel="stylesheet" type="text/css">
 
 <div class="question-layout" layout-xs="column">
@@ -12,7 +12,7 @@
 <div layout="row" layout-align="start center">
   <md-button ng-click="$ctrl.swapCommentVisibility()">
     Comentário
-    <md-icon md-font-set="material-icons">{{$ctrl.commentButtonData.icon}}</md-icon>
+    <md-icon layout-padding md-font-set="material-icons">{{$ctrl.commentButtonData.icon}}</md-icon>
     <md-tooltip md-direction="right">{{$ctrl.commentButtonData.tooltip}}</md-tooltip>
   </md-button>
 </div>
