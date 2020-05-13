@@ -27,7 +27,6 @@
     self.isQuestion = isQuestion;
     self.isItem = isItem;
 
-
     function onInit() {
       self.hueClass = 'md-primary';
       self.iconEye = 'remove_red_eye';
@@ -41,24 +40,27 @@
       self.template = TagComponentBuilderService.createTagElement(self.itemData.objectType, true);
       self.itemData = angular.copy(self.itemData);
       self.icon = ICON[self.icon];
-      if (self.itemData.isQuestion()) {
-        _metadadaBuilder();
 
-        self.answer = _containMetadada() ? 'Metadado: ' + self.METADADA[self.itemData.data.metadata.value - 1] : 'Resposta: ' + _formatAnswer();
-        self.comment = self.itemData.data.comment ? 'Contém comentário(s)' : '';
+      switch (self.itemData.objectType) {
+        case "TextItem":
+          self.txtqst = "txtqst";
+          self.label = self.itemData.value.ptBR.plainText;
+          self.labelFormatted = self.itemData.value.ptBR.formattedText;
+          break;
 
-        self.label = self.itemData.label.ptBR.plainText;
-        self.labelFormatted = self.itemData.label.ptBR.formattedText;
-      } else if (self.itemData.objectType === "TextItem") {
-        self.txtqst = "txtqst";
-        self.label = self.itemData.value.ptBR.plainText;
-        self.labelFormatted = self.itemData.value.ptBR.formattedText;
-      } else if (self.itemData.objectType === "ImageItem") {
-        self.label = "[IMAGEM]";
+        case "ImageItem":
+          self.label = "[IMAGEM]";
+          break;
+
+        default:
+          _metadadaBuilder();
+          self.answer = _containMetadada() ? 'Metadado: ' + self.METADADA[self.itemData.data.metadata.value - 1] : 'Resposta: ' + _formatAnswer();
+          self.comment = self.itemData.data.comment ? 'Contém comentário(s)' : '';
+
+          self.label = self.itemData.label.ptBR.plainText;
+          self.labelFormatted = self.itemData.label.ptBR.formattedText;
       }
-
     }
-
 
     function _containMetadada() {
       return (self.itemData.data.metadata.value !== null);

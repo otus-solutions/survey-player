@@ -208,10 +208,20 @@ md-sidenav {
   margin-right: 0px;
 }
 
+.survey-item {
+  background-color: white;
+  border-radius: 16px
+}
+
 .survey-item-header {
-  background-color: #d8d8d8;  border-radius: 4px
+  background-color: #d8d8d8;
+  border-radius: 8px
 }
 
 .survey-item-ID {
   margin-left: 8px;
+}
+
+.autocomplete-fancy {
+  border-radius: 8px
 }
