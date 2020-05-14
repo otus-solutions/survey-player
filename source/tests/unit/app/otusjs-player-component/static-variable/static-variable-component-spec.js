@@ -13,6 +13,8 @@ describe('Static Variable Component Test unit', function () {
       controller = _$controller_('otusStaticVariableCtrl', Injections);
     });
 
+    spyOn(Injections.ActivityFacadeService, "getWholeTemplateStaticVariableList").and.returnValue([{}]);
+    controller.$onInit();
   });
 
   it('controller method should have a defined controller', function () {
@@ -27,7 +29,11 @@ describe('Static Variable Component Test unit', function () {
   it('Methods should isLockedOpen execute', function () {
     controller.isLockOpenClose();
     expect(controller.shouldLockOpenClose).toBeFalsy();
-    expect(controller.iconLockOpenClose).toEqual('arrow_right');
-    expect(controller.tooltipLockOpenClose).toEqual('Abrir');
+  });
+
+  it('Methods should isLockedOpen execute when shouldLockOpenClose is false', function () {
+    controller.shouldLockOpenClose = false;
+    controller.isLockOpenClose();
+    expect(controller.shouldLockOpenClose).toBeTruthy();
   });
 });

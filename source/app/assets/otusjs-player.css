@@ -7,16 +7,25 @@ md-icon[md-svg-icon="check"] {
 }
 
 /* SURVEY HEADER */
-otus-survey-header {
-  color: #727272;
-}
-
-otus-survey-header > md-toolbar {
-  min-height: 50px !important;
-}
-
 otus-survey-header md-chips-wrap {
   box-shadow: 0 0px !important;
+}
+
+otus-survey-header {
+  transition: top linear;
+  color: #727272;
+  height: 60px;
+  padding-bottom:8px;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+@media screen and (max-width: 600px) {
+  otus-survey-header {
+    height: 120px;
+    padding-bottom:8px;
+  }
 }
 
 /* SURVEY ITEM */
@@ -58,6 +67,29 @@ otus-static-variable div md-content {
   max-height: 100%;
 }
 
+.comment-box {
+  height:auto;
+  color: #999;
+  font-family:'Ubuntu', Helvetica, Arial, sans-serif;
+  width: 100%;
+  background: #fff;
+  border-radius:5px;
+  line-height: 2em;
+  border: 2px;
+  box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.1);
+  padding: 4px;
+  -webkit-transition: height 2s ease;
+  -moz-transition: height 2s ease;
+  -ms-transition: height 2s ease;
+  -o-transition: height 2s ease;
+  transition: height 2s ease;
+}
+
+.disabled-comment-box {
+  margin-bottom: 0;
+  margin-left: 24px;
+}
+
 @media screen and (max-width: 600px) {
   .fab-speed-dial {
     left: 2px;
@@ -66,29 +98,80 @@ otus-static-variable div md-content {
   otus-static-variable {
     max-height: 60%;
   }
+
+  .display-side-margin {
+  }
+
+  .responsive-font-size {
+    font-size: small;
+  }
+
+  .header-font {
+    font-size: smaller;
+  }
+
+  .question-label {
+    font-size: small;
+  }
+
+  .comment-box {
+    font-size: small;
+  }
+
+  .disabled-comment-box {
+    font-size: small;
+    margin-left: 1px;
+  }
 }
 
+@media screen and (min-width: 601px) {
+
+  .responsive-font-size {
+    font-size: medium;
+  }
+
+  .header-font {
+    font-size: medium;
+    padding: 8px;
+  }
+
+  .question-label {
+    font-size: medium;
+    padding: 8px;
+  }
+
+  .comment-box {
+    font-size: medium;
+  }
+}
 
 @media screen and (max-height: 650px) {
   .nav-up {
-    height: 0 !important;
-    width: 0 !important;
+    height: 0;
+    width: 0;
     top: -200px;
     left: 200px;
   }
 }
 
-otus-survey-header {
-  transition: top 0.2s ease-in-out;
-  height: 50px !important;
-  position: relative;
-  top: 0;
-  left: 0;
+@media screen and (min-width: 601px) and (max-width: 960px) {
+  .display-side-margin {
+    margin-right: 2%;
+    margin-left: 2%;
+  }
 }
 
-@media screen and (max-width: 600px) {
-  otus-survey-header {
-    height: 100px !important;
+@media screen and (min-width: 961px) and (max-width: 1280px) {
+  .display-side-margin {
+    margin-right: 5%;
+    margin-left: 5%;
+  }
+}
+
+@media screen and (min-width: 1281px) {
+  .display-side-margin {
+    margin-right: 10%;
+    margin-left: 10%;
   }
 }
 
@@ -99,4 +182,46 @@ md-sidenav {
 
 .checkboxToolbar:not(.md-checked) .md-icon {
   border-color: #FFFFFF !important;
+}
+
+.player-commander-divider {
+  min-height: 25px;
+  color: black;
+  border-left: 1px solid #ccc;
+}
+
+.no-padding {
+  padding: 0px;
+}
+
+.no-margin {
+  margin: 0px;
+}
+
+.no-margin-top-bottom {
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+.no-margin-sides {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.survey-item {
+  background-color: white;
+  border-radius: 16px
+}
+
+.survey-item-header {
+  background-color: #d8d8d8;
+  border-radius: 8px
+}
+
+.survey-item-ID {
+  margin-left: 8px;
+}
+
+.autocomplete-fancy {
+  border-radius: 8px
 }

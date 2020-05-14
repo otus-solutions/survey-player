@@ -1,88 +1,57 @@
-<md-card flex layout="column">
-  <md-toolbar layout="row" layout-align="start center" ng-class="$ctrl.hueClass">
-    <md-button class="md-icon-button md-whiteframe-3dp" ng-click="$ctrl.goingBack()"
-               ng-if="!$ctrl.isItem() && $ctrl.view">
-      <md-icon md-font-set="material-icons" class="material-icons ng-binding md-layoutTheme-theme">edit</md-icon>
-      <md-tooltip md-direction="down">
+<link
+  href="otusjs-player-component/answer-view/answer-view-styles.css"
+  rel="stylesheet" type="text/css">
+
+<div layout="column" layout-padding class="display-side-margin">
+
+  <md-whiteframe class="answer-view-header" layout="row" layout-align="space-between center">
+    <span class="answer-view-font">{{$ctrl.itemData.templateID}}</span>
+    <div ng-if="!$ctrl.isItem()">
+      <md-button hide-xs hide-sm class="md-accent no-margin-top-bottom" ng-click="$ctrl.goingBack()">
+        <md-icon md-font-set="material-icons" class="material-icons ng-binding md-layoutTheme-theme">edit</md-icon>
         Editar questão
-      </md-tooltip>
-    </md-button>
-    <md-button class="md-icon-button md-whiteframe-3dp" ng-if="!$ctrl.isItem() && !$ctrl.view">
-      <md-icon md-font-set="material-icons" class="material-icons ng-binding md-layoutTheme-theme">question_answer
-      </md-icon>
-      <md-tooltip md-direction="down">
-        Questão respondida
-      </md-tooltip>
-    </md-button>
-    <md-card-header-text ng-if="!$ctrl.view" layout-align="start center" layout="column" style="display: flex"
-                         layout-fill class="truncate" ng-if="!$ctrl.view" flex="50">
-      <otus-label class="md-title truncate" item-label="$ctrl.label" style="width: 95%"></otus-label>
-      <span class="md-caption truncate" ng-if="$ctrl.answer" style="margin-top:-5px; width: 95%">{{$ctrl.answer}}</span>
-      <span class="md-caption truncate" ng-if="$ctrl.comment"
-            style="margin-top:-5px; width: 95%">{{$ctrl.comment}}</span>
-    </md-card-header-text>
-    <div class="md-toolbar-tools" layout="row" flex layout-align="center center">
-      <h4 flex ng-if="$ctrl.view" flex style="margin: 0 !important;text-align: center">
-        Modo de visualização
-      </h4>
-      <span flex ng-if="!$ctrl.view"></span>
-      <md-button class="md-icon-button" ng-click="$ctrl.viewQuestion()">
-        <md-icon md-font-set="material-icons" class="material-icons ng-binding md-layoutTheme-theme">{{$ctrl.iconEye}}
-        </md-icon>
-        <md-tooltip md-direction="down">
-          {{$ctrl.iconTooltip}}
-        </md-tooltip>
+      </md-button>
+      <md-button hide-gt-sm class="md-accent no-margin-top-bottom no-margin-sides edit-question-button-gt-sm" ng-click="$ctrl.goingBack()" >
+        <md-icon md-font-set="material-icons" class="material-icons ng-binding md-layoutTheme-theme" layout-align="end center">edit</md-icon>
       </md-button>
     </div>
-  </md-toolbar>
-  <div ng-if="$ctrl.view">
-    <md-card-header layout="row" flex>
-      <md-card-header-text layout-align="center start" ng-if="$ctrl.view" layout-padding layout-margin>
-        <otus-label class="md-title md-headline" layout-padding item-label="$ctrl.labelFormatted"></otus-label>
-      </md-card-header-text>
-    </md-card-header>
-    <md-card-content layout="row" layout-align="space-between" flex>
-      <otus-misc-item ng-if="$ctrl.isItem() && ($ctrl.itemData.objectType === 'ImageItem')" item-data="$ctrl.itemData"
-                      layout="column" flex></otus-misc-item>
-      <md-content ng-if="!$ctrl.isItem()" layout="column" layout-fill="" flex>
-        <div layout="row" flex>
-          <md-tabs md-dynamic-height layout="column" flex=95>
-            <md-tab label="Resposta">
-              <md-content class="md-padding" bind-html-compile="$ctrl.template"></md-content>
-            </md-tab>
-            <md-tab label="Metadado">
-              <md-content class="md-padding">
-                <md-content layout-padding style="margin-left: 10px">
-                  <md-radio-group id="metadataGroupRadioGroup" ng-model="$ctrl.itemData.data.metadata.value"
-                                  layout-padding
-                                  flex>
-                    <md-content value="{{option.value}}" ng-repeat="option in $ctrl.itemData.metadata.options"
-                                layout="row" style="margin: 10px">
-                      <md-radio-button aria-label="{{option.label}}" value="{{option.value}}"
-                                       style="outline: none;border: 0;"
-                                       flex ng-disabled="true">
-                        <otus-label item-label="option.label.ptBR.formattedText"></otus-label>
-                      </md-radio-button>
-                    </md-content>
-                  </md-radio-group>
-                </md-content>
-              </md-content>
-            </md-tab>
-            <md-tab label="Comentário">
-              <md-content class="md-padding">
-                <md-content layout-padding>
-                  <div layout="row">
-                    <md-input-container md-no-float class="md-block" flex>
-                      <textarea ng-model="$ctrl.itemData.data.comment" ng-disabled="true"
-                                aria-label="Comentário"></textarea>
-                    </md-input-container>
-                  </div>
-                </md-content>
-              </md-content>
-            </md-tab>
-          </md-tabs>
-        </div>
-      </md-content>
-    </md-card-content>
+  </md-whiteframe>
+
+  <div layout="row" ng-if="!$ctrl.isItem()">
+    <otus-label class="md-headline question-label answer-view-font" item-label="$ctrl.itemData.label.ptBR.formattedText" flex></otus-label>
   </div>
-</md-card>
+
+  <otus-misc-item ng-if="$ctrl.isItem()" item-data="$ctrl.itemData" class="answer-view-font" layout="column" flex></otus-misc-item>
+
+  <div hide-xs class="answer-view-layout" ng-if="!$ctrl.isItem()">
+    <div class="answer-view-answer" bind-html-compile="$ctrl.template" flex-gt-sm="90"></div>
+    <md-radio-group class="answer-view-metadata" id="metadataGroupRadioGroup-xs" ng-model="$ctrl.itemData.data.metadata.value">
+      <div value="{{option.value}}" ng-repeat="option in $ctrl.itemData.metadata.options" layout="row">
+        <md-radio-button aria-label="{{option.label}}" value="{{option.value}}" ng-disabled="true">
+          <otus-label item-label="option.label.ptBR.formattedText"></otus-label>
+        </md-radio-button>
+      </div>
+    </md-radio-group>
+  </div>
+  <div hide-gt-xs layout="column">
+    <div bind-html-compile="$ctrl.template" style="margin-bottom: 16px"></div>
+    <md-radio-group id="metadataGroupRadioGroup" ng-model="$ctrl.itemData.data.metadata.value">
+      <div value="{{option.value}}" ng-repeat="option in $ctrl.itemData.metadata.options" layout="row">
+        <md-radio-button aria-label="{{option.label}}" value="{{option.value}}" ng-disabled="true">
+          <otus-label item-label="option.label.ptBR.formattedText"></otus-label>
+        </md-radio-button>
+      </div>
+    </md-radio-group>
+  </div>
+
+  <div class="disabled-comment-box" layout="row">
+    <span class="answer-view-font" ng-if="$ctrl.itemData.data.comment.length==0">
+      Sem registro de comentário.
+    </span>
+    <md-input-container class="md-block" flex ng-if="$ctrl.itemData.data.comment.length>0" style="margin-bottom: 0px">
+      <label>Comentário</label>
+      <textarea ng-model="$ctrl.itemData.data.comment" ng-disabled="true"></textarea>
+    </md-input-container>
+  </div>
+
+</div>

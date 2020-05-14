@@ -21,20 +21,23 @@
 
   function OtusCommentController(CurrentItemService) {
     var self = this;
+    self.update = update;
+    self.clear = clear;
+    self.$onInit = onInit;
 
-    self.$onInit = function () {
+    function onInit() {
       self.comment = CurrentItemService.getFilling(self.itemData.templateID).comment;
       self.otusQuestion.comment = self;
     };
 
-    self.update = function () {
+    function update() {
       self.onUpdate({
         valueType: 'comment',
         value: self.comment
       });
     };
 
-    self.clear = function () {
+    function clear() {
       CurrentItemService.getFilling(self.itemData.templateID).comment = "";
       delete self.comment;
     };

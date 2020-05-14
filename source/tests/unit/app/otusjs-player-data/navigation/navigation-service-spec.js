@@ -14,12 +14,15 @@ describe('NavigationService', function () {
       Injections.NavigationStackItemFactory = $injector.get('otusjs.model.navigation.NavigationTrackingItemFactory');
       Injections.RouteService = $injector.get('otusjs.player.data.navigation.RouteService');
       Injections.ActivityFacadeService = $injector.get('otusjs.player.data.activity.ActivityFacadeService');
+      Injections.PlayerService = $injector.get('otusjs.player.core.player.PlayerService');
 
       service = $injector.get(UNIT_NAME, Injections);
     });
 
     spyOn(Injections.ActivityFacadeService, 'getCurrentSurvey').and.returnValue(Mock.currentSurvey);
     spyOn(Injections.ActivityFacadeService, 'fetchItemGroupByID').and.returnValue([Mock.itemVAL1]);
+    spyOn(Injections.PlayerService, 'isGoingBack').and.returnValue(true);
+    spyOn(Injections.PlayerService, 'getGoBackTo').and.returnValue("TP22");
 
     service.initialize();
 
@@ -52,6 +55,13 @@ describe('NavigationService', function () {
   it('updateItemTracking Method should execute', function () {
     service.updateItemTracking();
     expect(Injections.ActivityFacadeService.getCurrentSurvey).toHaveBeenCalledTimes(1);
+  });
+
+  it('getPreviousItem Method should execute', function () {
+    service.getPreviousItem();
+    expect(Injections.PlayerService.isGoingBack).toHaveBeenCalledTimes(1);
+    expect(Injections.PlayerService.getGoBackTo).toHaveBeenCalledTimes(1);
+    expect(Injections.ActivityFacadeService.getCurrentSurvey).toHaveBeenCalledTimes(2);
   });
 
   function mockItemData($injector) {

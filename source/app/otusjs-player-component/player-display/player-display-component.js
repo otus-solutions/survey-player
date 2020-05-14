@@ -77,14 +77,6 @@
         _focusOnItem(itemsData[0].templateID);
       }
 
-      if (PlayerService.isGoingBack()) {
-        if (PlayerService.getGoBackTo() !== itemsData[0].templateID) {
-          self.goBack();
-          _onProcessingPlayer();
-        } else {
-          PlayerService.setGoBackTo(null);
-        }
-      }
     }
 
     function _removeQuestions(itemsData) {

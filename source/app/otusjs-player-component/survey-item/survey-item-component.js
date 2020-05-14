@@ -27,6 +27,8 @@
     self.isItem = isItem;
     self.update = update;
     self.clear = clear;
+    self.clearAnswer = clearAnswer;
+    self.clearComment = clearComment;
     self.pushData = pushData;
     self.destroy = destroy;
     self.updateValidation = updateValidation;
@@ -53,11 +55,11 @@
     }
 
     function isQuestion() {
-      return (self.itemData.objectType === 'ImageItem') || (self.itemData.objectType === 'TextItem') ? false : true;
+      return !isItem();
     }
 
     function isItem() {
-      return (self.itemData.objectType === 'ImageItem') || (self.itemData.objectType === 'TextItem') ? true : false;
+      return (self.itemData.objectType === 'ImageItem') || (self.itemData.objectType === 'TextItem');
     }
 
     function update(prop, value) {
@@ -84,6 +86,14 @@
       } else {
         throw new Error('Cannot determine property type to clear', 85, 'survey-item-component.js');
       }
+    }
+
+    function clearAnswer(){
+      self.questionComponent.clear('answer');
+    }
+
+    function clearComment() {
+      self.questionComponent.clear('comment');
     }
 
     function pushData(filling) {

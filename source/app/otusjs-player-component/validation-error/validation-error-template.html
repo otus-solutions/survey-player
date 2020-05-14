@@ -1,124 +1,124 @@
-<ng-messages layout="column" layout-align="end start" for="$ctrl.$error" layout-padding ng-messages-multiple
-             role="alert" flex>
+<div ng-messages layout="column" layout-align="end start" for="$ctrl.$error"
+     layout-padding ng-messages-multiple role="alert" flex>
 
-  <ng-message class="md-button md-warn" when="mandatory">
+  <div ng-message class="md-button md-warn no-margin no-padding" when="mandatory">
     <md-icon hide-xs md-font-set="material-icons">error_outline</md-icon>
-    <span></span>
-    <span class="md-body-1">Questão de preenchimento obrigatório</span>
-  </ng-message>
+    <span hide-xs></span>
+    <span class="responsive-font-size">Questão de preenchimento obrigatório</span>
+  </div>
 
-  <ng-message class="md-button md-warn" when="distinct">
+  <div ng-message class="md-button md-warn no-margin no-padding" when="distinct">
     <md-icon hide-xs md-font-set="material-icons">error_outline</md-icon>
-    <span></span>
-    <span class="md-body-1">Insira um valor diferente de {{ $ctrl.reference('distinct') }}</span>
-  </ng-message>
+    <span hide-xs></span>
+    <span class="responsive-font-size">Insira um valor diferente de {{ $ctrl.reference('distinct') }}</span>
+  </div>
 
-  <ng-message class="md-button md-warn" when="lowerLimit">
+  <div ng-message class="md-button md-warn no-margin no-padding" when="lowerLimit">
     <md-icon hide-xs md-font-set="material-icons">error_outline</md-icon>
-    <span></span>
-    <span class="md-body-1">O valor deve ser maior ou igual a {{ $ctrl.reference('lowerLimit') }}</span>
-  </ng-message>
+    <span hide-xs></span>
+    <span class="responsive-font-size">O valor deve ser maior ou igual a {{ $ctrl.reference('lowerLimit') }}</span>
+  </div>
 
-  <ng-message class="md-button md-warn" when="upperLimit">
+  <div ng-message class="md-button md-warn no-margin no-padding" when="upperLimit">
     <md-icon hide-xs md-font-set="material-icons">error_outline</md-icon>
-    <span></span>
-    <span class="md-body-1">O valor deve ser menor ou igual a {{ $ctrl.reference('upperLimit') }}</span>
-  </ng-message>
+    <span hide-xs></span>
+    <span class="responsive-font-size">O valor deve ser menor ou igual a {{ $ctrl.reference('upperLimit') }}</span>
+  </div>
 
-  <ng-message class="md-button md-warn" when="rangeDate">
+  <div ng-message class="md-button md-warn no-margin no-padding" when="rangeDate">
     <md-icon hide-xs md-font-set="material-icons">error_outline</md-icon>
-    <span></span>
-    <span class="md-body-1">O valor deve ser maior que {{ $ctrl.referenceAsDate('rangeDate').initial }} e menor que {{ $ctrl.referenceAsDate('rangeDate').end }}</span>
-  </ng-message>
+    <span hide-xs></span>
+    <span class="responsive-font-size">O valor deve ser maior que {{ $ctrl.referenceAsDate('rangeDate').initial }} e menor que {{ $ctrl.referenceAsDate('rangeDate').end }}</span>
+  </div>
 
-  <ng-message class="md-button md-warn" when="maxDate">
+  <div ng-message class="md-button md-warn no-margin no-padding" when="maxDate">
     <md-icon hide-xs md-font-set="material-icons">error_outline</md-icon>
-    <span></span>
-    <span class="md-body-1">A data deve ser menor que {{ $ctrl.referenceAsDate('maxDate')}}</span>
-  </ng-message>
+    <span hide-xs></span>
+    <span class="responsive-font-size">A data deve ser menor que {{ $ctrl.referenceAsDate('maxDate')}}</span>
+  </div>
 
-  <ng-message class="md-button md-warn" when="minDate">
+  <div ng-message class="md-button md-warn no-margin no-padding" when="minDate">
     <md-icon hide-xs md-font-set="material-icons">error_outline</md-icon>
-    <span></span>
-    <span class="md-body-1">A data deve ser maior que {{ $ctrl.referenceAsDate('minDate')}}</span>
-  </ng-message>
+    <span hide-xs></span>
+    <span class="responsive-font-size">A data deve ser maior que {{ $ctrl.referenceAsDate('minDate')}}</span>
+  </div>
 
-  <ng-message class="md-button md-warn" when="pastDate">
+  <div ng-message class="md-button md-warn no-margin no-padding" when="pastDate">
     <md-icon hide-xs md-font-set="material-icons">error_outline</md-icon>
-    <span></span>
-    <span class="md-body-1">A data deve ser anterior à data corrente</span>
-  </ng-message>
+    <span hide-xs></span>
+    <span class="responsive-font-size">A data deve ser anterior à data corrente</span>
+  </div>
 
-  <ng-message class="md-button md-warn" when="futureDate">
+  <div ng-message class="md-button md-warn no-margin no-padding" when="futureDate">
     <md-icon hide-xs md-font-set="material-icons">error_outline</md-icon>
-    <span></span>
-    <span class="md-body-1">A data deve ser posterior à data corrente</span>
-  </ng-message>
+    <span hide-xs></span>
+    <span class="responsive-font-size">A data deve ser posterior à data corrente</span>
+  </div>
 
-  <ng-message class="md-button md-warn" when="minLength">
+  <div ng-message class="md-button md-warn no-margin no-padding" when="minLength">
     <md-icon hide-xs md-font-set="material-icons">error_outline</md-icon>
-    <span></span>
-    <span class="md-body-1">Resposta deve ter no mínimo {{ $ctrl.reference('minLength') }} caracteres</span>
-  </ng-message>
+    <span hide-xs></span>
+    <span class="responsive-font-size">Resposta deve ter no mínimo {{ $ctrl.reference('minLength') }} caracteres</span>
+  </div>
 
-  <ng-message class="md-button md-warn" when="maxLength">
+  <div ng-message class="md-button md-warn no-margin no-padding" when="maxLength">
     <md-icon hide-xs md-font-set="material-icons">error_outline</md-icon>
-    <span></span>
-    <span class="md-body-1">Resposta deve ter no máximo {{ $ctrl.reference('maxLength') }} caracteres</span>
-  </ng-message>
+    <span hide-xs></span>
+    <span class="responsive-font-size">Resposta deve ter no máximo {{ $ctrl.reference('maxLength') }} caracteres</span>
+  </div>
 
-  <ng-message class="md-button md-warn" when="in">
+  <div ng-message class="md-button md-warn no-margin no-padding" when="in">
     <md-icon hide-xs md-font-set="material-icons">error_outline</md-icon>
-    <span></span>
-    <span class="md-body-1">O valor deve ser maior ou igual a {{ $ctrl.reference('in').initial }} e menor ou igual a {{ $ctrl.reference('in').end }}</span>
-  </ng-message>
+    <span hide-xs></span>
+    <span class="responsive-font-size">O valor deve ser maior ou igual a {{ $ctrl.reference('in').initial }} e menor ou igual a {{ $ctrl.reference('in').end }}</span>
+  </div>
 
-  <ng-message class="md-button md-warn" when="precision">
+  <div ng-message class="md-button md-warn no-margin no-padding" when="precision">
     <md-icon hide-xs md-font-set="material-icons">error_outline</md-icon>
-    <span></span>
-    <span class="md-body-1">Resposta deve conter exatamente {{ $ctrl.reference('precision') }} dígitos</span>
-  </ng-message>
+    <span hide-xs></span>
+    <span class="responsive-font-size">Resposta deve conter exatamente {{ $ctrl.reference('precision') }} dígitos</span>
+  </div>
 
-  <ng-message class="md-button md-warn" when="scale">
+  <div ng-message class="md-button md-warn no-margin no-padding" when="scale">
     <md-icon hide-xs md-font-set="material-icons">error_outline</md-icon>
-    <span></span>
-    <span class="md-body-1">Resposta deve conter exatamente {{ $ctrl.reference('scale') }} casas decimais</span>
-  </ng-message>
+    <span hide-xs></span>
+    <span class="responsive-font-size">Resposta deve conter exatamente {{ $ctrl.reference('scale') }} casas decimais</span>
+  </div>
 
-  <ng-message class="md-button md-warn" when="maxTime">
+  <div ng-message class="md-button md-warn no-margin no-padding" when="maxTime">
     <md-icon hide-xs md-font-set="material-icons">error_outline</md-icon>
-    <span></span>
-    <span class="md-body-1">Hora máxima permitida: {{ $ctrl.referenceAsTime('maxTime') }}</span>
-  </ng-message>
+    <span hide-xs></span>
+    <span class="responsive-font-size">Hora máxima permitida: {{ $ctrl.referenceAsTime('maxTime') }}</span>
+  </div>
 
-  <ng-message class="md-button md-warn" when="minTime">
+  <div ng-message class="md-button md-warn no-margin no-padding" when="minTime">
     <md-icon hide-xs md-font-set="material-icons">error_outline</md-icon>
-    <span></span>
-    <span class="md-body-1">Hora mínima permitida: {{ $ctrl.referenceAsTime('minTime') }}</span>
-  </ng-message>
+    <span hide-xs></span>
+    <span class="responsive-font-size">Hora mínima permitida: {{ $ctrl.referenceAsTime('minTime') }}</span>
+  </div>
 
-  <ng-message class="md-button md-warn" when="quantity">
+  <div ng-message class="md-button md-warn no-margin no-padding" when="quantity">
     <md-icon hide-xs md-font-set="material-icons">error_outline</md-icon>
-    <span></span>
-    <span class="md-body-1">Quantidade selecionada deve ser igual a {{ $ctrl.reference('quantity') }}</span>
-  </ng-message>
+    <span hide-xs></span>
+    <span class="responsive-font-size">Quantidade selecionada deve ser igual a {{ $ctrl.reference('quantity') }}</span>
+  </div>
 
-  <ng-message class="md-button md-warn" when="minSelected">
+  <div ng-message class="md-button md-warn no-margin no-padding" when="minSelected">
     <md-icon hide-xs md-font-set="material-icons">error_outline</md-icon>
-    <span></span>
-    <span class="md-body-1">Quantidade mínima selecionada deve ser {{ $ctrl.reference('minSelected') }}</span>
-  </ng-message>
+    <span hide-xs></span>
+    <span class="responsive-font-size">Quantidade mínima selecionada deve ser {{ $ctrl.reference('minSelected') }}</span>
+  </div>
 
-  <ng-message class="md-button md-warn" when="maxSelected">
+  <div ng-message class="md-button md-warn no-margin no-padding" when="maxSelected">
     <md-icon hide-xs md-font-set="material-icons">error_outline</md-icon>
-    <span></span>
-    <span class="md-body-1">Quantidade máxima selecionada deve ser {{ $ctrl.reference('maxSelected')}}</span>
-  </ng-message>
+    <span hide-xs></span>
+    <span class="responsive-font-size">Quantidade máxima selecionada deve ser {{ $ctrl.reference('maxSelected')}}</span>
+  </div>
 
-  <ng-message class="md-button md-warn" when="ImmutableDate">
+  <div ng-message class="md-button md-warn no-margin no-padding" when="ImmutableDate">
     <md-icon hide-xs md-font-set="material-icons">error_outline</md-icon>
-    <span></span>
-    <span class="md-body-1">Formato Inválido</span>
-  </ng-message>
+    <span hide-xs></span>
+    <span class="responsive-font-size">Formato Inválido</span>
+  </div>
 
-</ng-messages>
+</div>

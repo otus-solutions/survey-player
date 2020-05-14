@@ -24,6 +24,17 @@
   function OtusQuestionController(TagComponentBuilderService, CurrentItemService) {
     var self = this;
 
+    var commentButtonData = {
+      'true': {
+        icon: 'visibility',
+        tooltip: 'Ocultar Comentário'
+      },
+      'false': {
+        icon: 'visibility_off',
+        tooltip: 'Mostrar Comentário'
+      }
+    };
+
     self.$onInit = onInit;
     self.setError = setError;
     self.update = update;
@@ -33,6 +44,10 @@
     self.clearMetadataAnswer = clearMetadataAnswer;
     self.clearCommentAnswer = clearCommentAnswer;
     self.isAccept = isAccept;
+    self.showingComment = false;
+    self.commentButtonData = commentButtonData.false;
+    self.hasMetadata = hasMetadata;
+    self.swapCommentVisibility = swapCommentVisibility;
 
     function onInit() {
       self.template = TagComponentBuilderService.createTagElement(self.itemData.objectType);
@@ -43,6 +58,8 @@
       self.comment = CurrentItemService.getFilling(self.itemData.templateID).comment || {};
       self.menuComponent = {};
       self.menuComponent.error = false;
+      self.showingComment = false;
+      self.commentButtonData = commentButtonData.false;
 
       setError();
     }
@@ -65,7 +82,6 @@
       if (value) {
         if (value === 'answer') {
           self.clearAnswer();
-        } else if (value === 'metadata') {
           self.clearMetadataAnswer();
         } else if (value === 'comment') {
           self.clearCommentAnswer();
@@ -100,14 +116,22 @@
     }
 
     function isAccept() {
-      return self.itemData.fillingRules.options.accept === undefined ? false : true;
+      return self.itemData.fillingRules.options.accept !== undefined;
     }
 
     function _canBeIgnored(error) {
       return function (validator) {
         return self.itemData.fillingRules.options[validator].data.canBeIgnored || !error[validator];
-      };
+      }
+    }
+
+    function hasMetadata(){
+      return (self.itemData.metadata.options.length > 0);
+    }
+
+    function swapCommentVisibility() {
+      self.showingComment = !self.showingComment;
+      self.commentButtonData = commentButtonData[self.showingComment];
     }
   }
-
 })();

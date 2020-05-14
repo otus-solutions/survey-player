@@ -28,6 +28,7 @@
     self.showCover = showCover;
     self.$onInit = onInit;
     self.onProcessingPlayer = onProcessingPlayer;
+    self.goIsLockOpenClose = goIsLockOpenClose;
 
     var didScroll;
     var lastScrollTop = 0;
@@ -68,7 +69,7 @@
     }
 
     function catchMouseWheel($event) {
-      if (event.deltaY > 0) {
+      if ($event.deltaY > 0) {
         goAhead();
       } else {
         goBack();
@@ -158,6 +159,10 @@
 
     function onProcessingPlayer() {
       self.onProcessing();
+    }
+
+    function goIsLockOpenClose() {
+      self.isButtonOpenClose();
     }
   }
 }());

@@ -18,11 +18,11 @@
     self.isTextItem = isTextItem;
 
     function isImageItem() {
-      return self.itemData.objectType === 'ImageItem' ? true : false;
+      return (self.itemData.objectType === 'ImageItem');
     }
 
     function isTextItem() {
-      return self.itemData.objectType === 'TextItem' ? true : false;
+      return (self.itemData.objectType === 'TextItem');
     }
 
     self.$onInit = function () {

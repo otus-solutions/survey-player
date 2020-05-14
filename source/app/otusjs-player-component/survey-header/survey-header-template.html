@@ -1,34 +1,28 @@
-<md-toolbar layout="row" class="md-whiteframe-5dp" layout-align="center center">
-  <div layout="row" layout-align="start center" flex="">
-    <span hide-xs flex-gt-xs="10" flex-gt-sm="5"></span>
-    <div class="md-padding">
-      <img src="app/static-resource/image/coruja_pesquisadora.png"
-           height="50px" class="toolbar-icon">
+<md-whiteframe class="md-whiteframe-5dp" layout="row" layout-align="start center" layout-fill>
+
+  <div class="md-padding">
+    <img src="static-resource/image/coruja_pesquisadora.png" height="50px" class="toolbar-icon">
+  </div>
+
+  <div layout-xs="column" layout-gt-xs="row" layout-align-gt-xs="space-between center" flex>
+
+    <div layout="row" layout-align="center center">
+      <md-chips>
+        <md-chip class="header-font">{{ $ctrl.surveyIdentity.acronym }}</md-chip>
+      </md-chips>
+      <div class="md-body-2">
+        <span class="header-font">{{ $ctrl.surveyIdentity.name }}</span>
+      </div>
     </div>
-    <md-chips>
-      <md-chip>{{ $ctrl.surveyIdentity.acronym }}</md-chip>
-    </md-chips>
-    <div class="md-body-2">
-      <span>{{ $ctrl.surveyIdentity.name }}</span>
+
+    <div layout-margin class="no-padding no-margin-top-bottom" layout="row" layout-align="center center">
+      <md-icon md-svg-icon="file-document-box" class="no-margin-top-bottom"></md-icon>
+      <div class="no-margin-top-bottom">
+        <span class="header-font">{{ $ctrl.participantData.name }}</span>
+        <span> | </span>
+        <span class="header-font">{{ $ctrl.participantData.recruitmentNumber }}</span>
+      </div>
     </div>
   </div>
 
-  <div hide-xs layout="row" layout-margin layout-align="center center">
-    <md-icon md-svg-icon="file-document-box"></md-icon>
-    <div>
-      <span>{{ $ctrl.participantData.name }}</span>
-      <span> | </span>
-      <span>{{ $ctrl.participantData.recruitmentNumber }}</span>
-    </div>
-  </div>
-</md-toolbar>
-<md-toolbar hide-gt-xs layout="row" layout-align="center center" class="md-whiteframe-5dp" flex>
-  <div layout="row" layout-margin layout-align="center center">
-    <md-icon md-svg-icon="file-document-box"></md-icon>
-    <div>
-      <span class="md-caption">{{ $ctrl.participantData.name }}</span>
-      <span> | </span>
-      <span class="md-caption">{{ $ctrl.participantData.recruitmentNumber }}</span>
-    </div>
-  </div>
-</md-toolbar>
+</md-whiteframe>
