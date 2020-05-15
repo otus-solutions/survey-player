@@ -28,15 +28,14 @@
 
     function isAuthenticated() {
       var _token = SurveyApiService.getAuthToken();
-      return _token && $rootScope.online ? true : false;
+      return (_token && $rootScope.online);
     }
 
     function authenticate() {
       if (!self.isAuthenticated()) {
         return _login();
-      } else {
-        return _logout();
       }
+      return _logout();
     }
 
     function _login() {
