@@ -11,7 +11,7 @@
   ];
 
   function Service($q, $window) {
-    const DB_NAME = 'survey-player';
+    const DB_NAME = 'otus';
 
     var self = this;
     var _dbManager = {};
