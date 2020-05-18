@@ -7,6 +7,7 @@
       templateUrl: 'app/otusjs-player-component/activity-collect/group/activity-group-collect-template.html',
       controller: Controller,
       bindings: {
+        selectedGroup: '=',
         user: '<',
         commands: '=',
         showCommands: '='

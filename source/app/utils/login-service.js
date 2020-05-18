@@ -60,6 +60,7 @@
 
       return $mdDialog.show(confirm).then(function() {
         SurveyApiService.clearSession();
+        SurveyApiService.setLoggedUser();
         return USER_DESCONNECT;
       });
     }
