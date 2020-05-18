@@ -64,14 +64,13 @@
     }
 
     function finish() {
-      if (!self.key) {
-        if (self.loading_screen) {
-          self.loading_screen.finish();
-          self.loading_screen = null;
-          changeMessage();
-        }
-      } else {
+      if(self.key){
         _printKeyMsg();
+      }
+      else if(self.loading_screen){
+        self.loading_screen.finish();
+        self.loading_screen = null;
+        changeMessage();
       }
     }
 

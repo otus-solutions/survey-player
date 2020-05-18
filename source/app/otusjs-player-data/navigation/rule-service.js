@@ -19,15 +19,12 @@
     function isRuleApplicable(rule) {
       var itemAnswer = ActivityFacadeService.fetchItemAnswerByTemplateID(rule.when);
 
-      if (itemAnswer && !_isSkipped(rule.when)) {
-        if (rule.isMetadata) {
-          return itemAnswer.answer.eval.run(rule, itemAnswer.metadata.value);
-        } else {
-          return itemAnswer.answer.eval.run(rule, itemAnswer.answer.value);
-        }
-      } else {
+      if (!itemAnswer || _isSkipped(rule.when)) {
         return false;
       }
+
+      var _answerValue = (rule.isMetadata ? itemAnswer.metadata.value : itemAnswer.answer.value);
+      return itemAnswer.answer.eval.run(rule, _answerValue);
     }
 
     function _isSkipped(item) {

@@ -23,12 +23,13 @@
           var element = angular.element(event.currentTarget);
           var keycode = event.which;
           var currentValue = element.val();
+          var isValidKeyCode = isValidKey(keycode);
 
           if (currentValue.length === 0) {
             lastValidValue = '';
-          } else if (isNumberKey(keycode) || isValidKey(keycode)) {
+          } else if (isNumberKey(keycode) || isValidKeyCode) {
             lastValidValue = element.val();
-          } else if (!isValidKey(keycode)) {
+          } else if (!isValidKeyCode) {
             element.val(lastValidValue);
           }
         }

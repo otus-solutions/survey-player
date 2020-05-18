@@ -31,13 +31,13 @@
     }
 
     function execute(phaseData) {
-      if (phaseData.pipe.isFlowing) {
-        self.isFlowing = phaseData.pipe.isFlowing;
-        self.flowData = phaseData.flowData;
-        return _stepChain.execute(self, self.flowData);
-      } else {
+      if (!phaseData.pipe.isFlowing) {
         return phaseData;
       }
+
+      self.isFlowing = phaseData.pipe.isFlowing;
+      self.flowData = phaseData.flowData;
+      return _stepChain.execute(self, self.flowData);
     }
 
     function stopFlow() {

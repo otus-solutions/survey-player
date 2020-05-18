@@ -33,16 +33,16 @@
     }
 
     function getPreviousItem() {
-      if (hasPrevious()) {
-        if (PlayerService.isGoingBack()) {
-          return ActivityFacadeService.getCurrentSurvey().getItemByTemplateID(PlayerService.getGoBackTo());
-        } else {
-          var previousID = _navigationTracker.getCurrentItemGroup()[0].getPrevious();
-          return ActivityFacadeService.getCurrentSurvey().getItemByTemplateID(previousID);
-        }
-      } else {
+      if(!hasPrevious()){
         return null;
       }
+
+      if (PlayerService.isGoingBack()) {
+        return ActivityFacadeService.getCurrentSurvey().getItemByTemplateID(PlayerService.getGoBackTo());
+      }
+
+      var previousID = _navigationTracker.getCurrentItemGroup()[0].getPrevious();
+      return ActivityFacadeService.getCurrentSurvey().getItemByTemplateID(previousID);
     }
 
     function hasNext() {
@@ -60,11 +60,11 @@
     function loadNextItem() {
       if (ActivityFacadeService.getCurrentItem().hasItems()) {
         return _loadNextItem();
-      } else if (_navigationTracker.getCurrentIndex()) {
-        return _loadLastVisitedItem();
-      } else {
-        return _loadFirstItem();
       }
+      if (_navigationTracker.getCurrentIndex()) {
+        return _loadLastVisitedItem();
+      }
+      return _loadFirstItem();
     }
 
     function loadPreviousItem() {

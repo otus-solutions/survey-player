@@ -102,9 +102,7 @@
         alasql.promise('SELECT * FROM '.concat(DB_TABLE_ACTIVITIES).concat(' WHERE acronym = "'.concat(acronym).concat('"; '))).then(function (response) {
           defer.resolve(response);
         });
-
       });
-
       return defer.promise;
     }
 
@@ -118,9 +116,7 @@
             defer.reject();
           }
         });
-
       });
-
       return defer.promise;
     }
 
