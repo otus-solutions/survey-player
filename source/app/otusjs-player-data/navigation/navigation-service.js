@@ -41,6 +41,7 @@
         return ActivityFacadeService.getCurrentSurvey().getItemByTemplateID(PlayerService.getGoBackTo());
       }
 
+      updateItemTracking();
       var previousID = _navigationTracker.getCurrentItemGroup()[0].getPrevious();
       return ActivityFacadeService.getCurrentSurvey().getItemByTemplateID(previousID);
     }
