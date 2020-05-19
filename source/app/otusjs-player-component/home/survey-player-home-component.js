@@ -30,6 +30,7 @@
     self.commands = [];
     self.preActivities = [];
     self.isLoading = false;
+    self.disableAuth = true;
 
 
     function onInit() {
@@ -48,7 +49,6 @@
         _setUser();
         self.isLoading = false;
       });
-
     }
 
     function authenticate() {
@@ -83,15 +83,16 @@
 
     $scope.$on("logged", function () {
       _setUser();
+      self.disableAuth = false;
     });
 
     $scope.$on("login", function () {
       self.authenticate();
+      self.disableAuth = false;
     });
 
     $scope.$on("listSurveys", function () {
       self.list();
     });
-
   }
 }());
