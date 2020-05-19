@@ -24,7 +24,7 @@
     function execute() {
       var phaseData = PrePlayActionService.execute(ActionPipeService.flowData);
       phaseData = ExecutionPlayActionService.execute(phaseData);
-      phaseData = PostPlayActionService.execute(phaseData);
+      PostPlayActionService.execute(phaseData);
     }
   }
 })();

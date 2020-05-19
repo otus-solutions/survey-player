@@ -24,7 +24,7 @@
     function execute() {
       var phaseData = PreStopActionService.execute(ActionPipeService.flowData);
       phaseData = ExecutionStopActionService.execute(phaseData);
-      phaseData = PostStopActionService.execute(phaseData);
+      PostStopActionService.execute(phaseData);
     }
   }
 })();

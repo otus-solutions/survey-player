@@ -12,7 +12,6 @@
 
   function Service(ActivityFacadeService, SurveyApiService) {
     var self = this;
-    var _currentItem;
 
     /* Public methods */
     self.beforeEffect = beforeEffect;

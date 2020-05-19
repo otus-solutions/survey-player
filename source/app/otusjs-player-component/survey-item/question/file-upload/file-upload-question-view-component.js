@@ -73,9 +73,8 @@
       var phase = $scope.$root.$$phase;
       if (phase == '$apply' || phase == '$digest') {
         return;
-      } else {
-        $scope.$apply();
       }
+      $scope.$apply();
     }
 
   }

@@ -102,16 +102,10 @@
     }
 
     function setError(error) {
-      if (self.filling.forceAnswer) {
-        self.menuComponent.error = true;
-      } else if (self.itemData.isQuestion() && error) {
-        if (Object.keys(self.itemData.fillingRules.options).every(_canBeIgnored(error))) {
-          self.menuComponent.error = true;
-        } else {
-          self.menuComponent.error = false;
-        }
-      } else {
-        self.menuComponent.error = false;
+      self.menuComponent.error = !!self.filling.forceAnswer;
+
+      if (!self.filling.forceAnswer && error && self.itemData.isQuestion()) {
+        self.menuComponent.error = Object.keys(self.itemData.fillingRules.options).every(_canBeIgnored(error));
       }
     }
 

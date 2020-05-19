@@ -116,17 +116,17 @@
     }
 
     function _loadOtusDb() {
-      var DB_NAME = 'survey-player';
+      var DB_NAME = 'otus';
       var deferred = $q.defer();
 
       StorageLoaderService.dbExists(DB_NAME).then(function (dbExists) {
         if (dbExists) {
           StorageLoaderService.loadIndexedStorage(DB_NAME);
-          deferred.resolve();
         } else {
           StorageLoaderService.createIndexedStorage(DB_NAME);
-          deferred.resolve();
         }
+
+        deferred.resolve();
       });
 
       return deferred.promise;

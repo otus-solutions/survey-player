@@ -47,7 +47,9 @@
     }
 
     function execute(pipe, flowData) {
-      if (_preExecute) _preExecute(pipe, flowData);
+      if (_preExecute) {
+        _preExecute(pipe, flowData);
+      }
 
       if (_execute && !pipe.skipStep) {
         _execute(pipe, flowData);
@@ -59,10 +61,10 @@
 
       if (pipe.isFlowing) {
         pipe.skipStep = false;
-        if (_getFlowData) {
-          if (_next) _next.execute(pipe, _getFlowData(pipe, flowData));
-        } else {
-          if (_next) _next.execute(pipe, flowData);
+        if (_getFlowData && _next) {
+          _next.execute(pipe, _getFlowData(pipe, flowData));
+        } else if (_next){
+           _next.execute(pipe, flowData);
         }
       }
 

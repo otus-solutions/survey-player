@@ -41,15 +41,9 @@
     }
 
     function update() {
-      var _answerUpdate;
-      if (!self.answer) {
-        _answerUpdate = null;
-      } else {
-        _answerUpdate = self.answer.value;
-      }
       self.onUpdate({
         valueType: 'answer',
-        value: _answerUpdate
+        value: (self.answer ? self.answer.value : null)
       });
     }
 

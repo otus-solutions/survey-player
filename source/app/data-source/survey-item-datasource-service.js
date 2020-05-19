@@ -49,7 +49,6 @@
           reject(e);
         }
       });
-
     }
 
 
@@ -76,17 +75,16 @@
     }
 
     function _getDatasourcesByID(id) {
-      if ($rootScope.online) {
-        return SurveyItemRestService.getByID(id).then(function (response) {
-          ActivityIndexedDbService.updateDatasource(id, response.data);
-          return response;
-        }).catch(function () {
-          $rootScope.online = false;
-          return ActivityIndexedDbService.getDatasource(id);
-        });
-      } else {
+      if (!$rootScope.online) {
         return ActivityIndexedDbService.getDatasource(id);
       }
+      return SurveyItemRestService.getByID(id).then(function (response) {
+        ActivityIndexedDbService.updateDatasource(id, response.data);
+        return response;
+      }).catch(function () {
+        $rootScope.online = false;
+        return ActivityIndexedDbService.getDatasource(id);
+      });
     }
   }
 }());
