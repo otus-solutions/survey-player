@@ -83,10 +83,15 @@
           if (_activity) {
             SurveyApiService.setCurrentActivity(_activity);
             $location.search('activity', null);
-            SurveyClientService.getSurveyTemplate().then(function (response) {
-              self.template = angular.copy(response);
-              _setPlayerConfiguration();
-            });
+            SurveyClientService.getSurveyTemplate()
+              .then(function (response) {
+                self.template = angular.copy(response);
+                _setPlayerConfiguration();
+              })
+              .catch(() => {
+                $state.go('/error');
+                LoadingScreenService.finish();
+              });
           }
         }
         else if (SurveyApiService.getAuthToken() && SurveyApiService.getCurrentActivity()) {
