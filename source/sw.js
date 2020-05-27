@@ -69,7 +69,6 @@ self.addEventListener('install', function(e) {
         "/app/survey-player-client/survey-player-client-config.js",
         "/app/survey-player-client/survey-player-client-service.js",
         "/app/player-module.js",
-        "/app/player/exit-player-step-service.js",
         "/app/player/pre-player-step-service.js",
         "/app/player/save-player-step-service.js",
         "/app/player/stop-player-step-service.js",
