@@ -210,9 +210,6 @@ var CACHED_FILES = [
 ];
 
 self.addEventListener('install', function(e) {
-  //todo clean other caches
-  console.log(caches.keys());
-
   //todo this should be on activate only
   e.waitUntil(
     removeOldCacheFiles()
@@ -234,7 +231,8 @@ self.addEventListener('activate', function(e) {
 
 self.addEventListener('fetch', function(e) {
   e.respondWith(
-    caches.match(e.request, {cacheName:CACHE_NAME}).then(function(response) {
+    //todo: this match should consider CACHE_NAME
+    caches.match(e.request).then(function(response) {
       return response || fetch(e.request);
     })
   );
