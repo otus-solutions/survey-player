@@ -85,7 +85,9 @@
       file.status = 'uploading';
 
       self.pendingCounter++;
-      if (!_uploadInterface) _uploadInterface = FileUploadService.getUploadInterface();
+      if (!_uploadInterface) {
+        _uploadInterface = FileUploadService.getUploadInterface();
+      }
 
       _uploadInterface.uploadFile(file, _questionID)
         .then(function (response) {
@@ -181,23 +183,15 @@
       var phase = $scope.$root.$$phase;
       if (phase == '$apply' || phase == '$digest') {
         return;
-      } else {
-        $scope.$apply();
       }
+      $scope.$apply();
     }
 
     function _updateAnswer() {
-      if (self.sentFiles.length) {
-        self.onUpdate({
-          valueType: 'answer',
-          value: self.sentFiles
-        });
-      } else {
-        self.onUpdate({
-          valueType: 'answer',
-          value: {}
-        });
-      }
+      self.onUpdate({
+        valueType: 'answer',
+        value: (self.sentFiles.length ? self.sentFiles : {})
+      });
     }
 
     function clear() {

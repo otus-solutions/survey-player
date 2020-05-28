@@ -8,13 +8,12 @@
   Service.$inject = [
     'otusjs.player.core.player.PlayerService',
     'otusjs.player.core.player.PlayerConfigurationService',
-    'ExitPlayerStepService',
     'StopPlayerStepService',
     'SavePlayerStepService',
     'PrePlayerStepService'
   ];
 
-  function Service(PlayerService, PlayerConfigurationService, ExitPlayerStepService, StopPlayerStepService, SavePlayerStepService, PrePlayerStepService) {
+  function Service(PlayerService, PlayerConfigurationService, StopPlayerStepService, SavePlayerStepService, PrePlayerStepService) {
     var self = this;
     var _isSetupStepsReady = false;
 
@@ -30,7 +29,6 @@
 
     function _setupSteps() {
       // Application default steps
-      PlayerConfigurationService.onEject(ExitPlayerStepService);
       PlayerConfigurationService.onPrePlayerStart(PrePlayerStepService);
       PlayerConfigurationService.onSave(SavePlayerStepService);
       PlayerConfigurationService.onStop(StopPlayerStepService);

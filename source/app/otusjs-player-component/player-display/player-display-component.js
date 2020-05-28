@@ -77,6 +77,10 @@
         _focusOnItem(itemsData[0].templateID);
       }
 
+      if(PlayerService.isGoingBack()){
+        PlayerService.setGoBackTo(null);
+      }
+
     }
 
     function _removeQuestions(itemsData) {

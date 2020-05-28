@@ -15,18 +15,19 @@
       },
       responseError: function(response){
         $rootScope.status = response.status;
-        if (/^http/.test(response.config.url)) $rootScope.online = false;
+        if (/^http/.test(response.config.url)) {
+          $rootScope.online = false;
+        }
         if (!response.data){
           response.data = {}
-        } else {
-          if (response.data['STATUS']) {
-            if (response.data.STATUS === "UNAUTHORIZED"){
-              SurveyApiService.clearSession();
-              SurveyApiService.setLoggedUser();
-              $rootScope.online = true;
-              $rootScope.$broadcast('logged');
-              if (/authentication/.test(response.config.url) === false) $rootScope.$broadcast('login');
-            }
+        }
+        else if (response.data['STATUS'] && response.data.STATUS === "UNAUTHORIZED") {
+          SurveyApiService.clearSession();
+          SurveyApiService.setLoggedUser();
+          $rootScope.online = true;
+          $rootScope.$broadcast('logged');
+          if (/authentication/.test(response.config.url) === false) {
+            $rootScope.$broadcast('login');
           }
         }
         return Promise.reject(response);

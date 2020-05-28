@@ -21,13 +21,7 @@
 
     function beforeEffect(pipe, flowData) {
       _currentItemService = ActivityFacadeService.getCurrentItem();
-
-      if (!_currentItemService.shouldApplyAnswer()) {
-        pipe.skipStep = true;
-      } else {
-        pipe.skipStep = false;
-      }
-
+      pipe.skipStep = !_currentItemService.shouldApplyAnswer();
       pipe.isFlowing = true;
     }
 
@@ -56,9 +50,8 @@
     function _ensureTestableValue(filling) {
       if (_isTestableValue(filling.value)) {
         return filling.value;
-      } else {
-        return {};
       }
+      return {};
     }
   }
 })();

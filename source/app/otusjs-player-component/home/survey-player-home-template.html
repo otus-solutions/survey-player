@@ -11,7 +11,7 @@
       </md-button>
       <span layout-margin="" hide-xs show-gt-xs>{{ $ctrl.user.name }}</span>
       <md-button class="md-icon-button md-raised md-accent" aria-label="Login" id="shortLogin"
-                 ng-click="$ctrl.authenticate()" hide-xs show-gt-xs>
+                 ng-click="$ctrl.authenticate()" hide-xs show-gt-xs ng-disabled="$ctrl.disableAuth">
         <md-icon ng-if="!$ctrl.user">person</md-icon>
         <md-icon ng-if="$ctrl.user">how_to_reg</md-icon>
         <md-tooltip ng-if="!$ctrl.user">Entrar</md-tooltip>
@@ -23,27 +23,25 @@
   <md-content ng-if="!$ctrl.user" layout="column" flex="">
   </md-content>
   <md-content ng-if="$ctrl.user" layout="column" flex="">
-
-    <md-tabs class="" md-dynamic-height md-selected="selectedIndex" md-border-bottom md-autoselect>
-
-      <md-tab label="COLETAS" ng-click="$ctrl.list()">
-        <div layout="column">
-          <activity-group-collection commands="$ctrl.commands" user="$ctrl.user"
-                                     show-commands="selectedIndex == 0"></activity-group-collection>
+    <div class="" md-dynamic-height md-selected="selectedIndex" md-border-bottom md-autoselect>
+      <div layout="column">
+        <activity-group-collection selected-group="$ctrl.selectedGroup" commands="$ctrl.commands" user="$ctrl.user"
+                                   show-commands="selectedIndex == 0"></activity-group-collection>
+      </div>
+      <div ng-show="!$ctrl.preActivities.length && !$ctrl.selectedGroup" layout="row" flex="100" layout-align="center center">
+        <div layout="column" flex="50" layout-align="center center">
+          <span class="md-title" layout="row" flex="100" flex>Carregando atividades disponiveis.</span>
+          <md-progress-linear layout="row" flex="100" md-mode="indeterminate" ></md-progress-linear>
         </div>
-      </md-tab>
-      <md-tab label="ATIVIDADES" ng-click="$ctrl.list()">
-        <md-content class="md-padding" flex="100" layout="column">
-          <div flex="100" layout="row" layout-align="end center" layout-padding="" ng-if="$ctrl.preActivities.length">
-            <span class="md-subheader" flex>Verifique sempre se há atividades desatualizadas! Se necessário, conecte-se a internet para atualiza-las.</span>
-          </div>
-          <survey-list user="$ctrl.user" pre-activities="$ctrl.preActivities" layout-padding="" flex
-                       ng-if="$ctrl.preActivities.length"></survey-list>
-        </md-content>
-      </md-tab>
-
-    </md-tabs>
-
+      </div>
+      <md-content class="md-padding" flex="100" layout="column" ng-show="$ctrl.preActivities.length && !$ctrl.selectedGroup">
+        <div flex="100" layout="row" layout-align="end center" layout-padding="">
+          <span class="md-subheader" flex>Verifique sempre se há atividades desatualizadas! Se necessário, conecte-se a internet para atualiza-las.</span>
+        </div>
+        <survey-list user="$ctrl.user" pre-activities="$ctrl.preActivities" layout-padding="" flex
+                     ng-if="$ctrl.preActivities.length"></survey-list>
+      </md-content>
+    </div>
   </md-content>
   <footer>
     <md-toolbar class="md-scroll-shrink">
@@ -58,7 +56,7 @@
   </footer>
 
   <md-sidenav class="md-sidenav-left" md-component-id="userMenu"
-              md-whiteframe="4" md-disable-close-events>
+              md-whiteframe="4">
     <md-toolbar class="md-theme-indigo">
       <div class="md-toolbar-tools">
         <h1 flex md-truncate>Informações</h1>
@@ -79,14 +77,6 @@
         <span class="md-body-1">{{ $ctrl.user.email}}</span>
       </div>
       <span flex="20"></span>
-      <md-button ng-show="$ctrl.user" class="md-primary md-raised"
-                 ng-click="$ctrl.list(); selectedIndex = 0; $ctrl.toggleMenu()">
-        Coletas
-      </md-button>
-      <md-button ng-show="$ctrl.user" class="md-primary md-raised"
-                 ng-click="$ctrl.list(); selectedIndex = 1; $ctrl.toggleMenu()">
-        ATIVIDADES
-      </md-button>
       <md-button ng-click="$ctrl.authenticate($event)" aria-label="Login" class="md-accent" style="top: 50%">
         <span ng-if="!$ctrl.user">ENTRAR</span>
         <span ng-if="$ctrl.user">SAIR</span>

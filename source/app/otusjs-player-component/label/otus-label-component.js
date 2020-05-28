@@ -26,9 +26,8 @@
     function _getLabel() {
       if (self.itemLabel instanceof Object) {
         return _undefinedWrapper(self.itemLabel.ptBR.formattedText);
-      } else {
-        return _undefinedWrapper(self.itemLabel);
       }
+      return _undefinedWrapper(self.itemLabel);
     }
 
     function _undefinedWrapper(value) {
