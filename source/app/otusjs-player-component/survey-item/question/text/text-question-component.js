@@ -59,7 +59,7 @@
     }
 
     function _isEmpty() {
-      return self.answer.length == 0;
+      return (self.answer.length === 0);
     }
 
     function _runValidationSteps() {

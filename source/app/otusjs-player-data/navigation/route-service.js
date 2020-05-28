@@ -36,12 +36,10 @@
 
     function calculateRoute() {
       var alternativeRoute = _findAlternativeRoute();
-
       if (alternativeRoute) {
         return alternativeRoute;
-      } else {
-        return _defaultRoute;
       }
+      return _defaultRoute;
     }
 
     function _findAlternativeRoute() {

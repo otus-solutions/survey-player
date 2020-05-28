@@ -63,28 +63,29 @@
     }
 
     function update(prop, value) {
-      if (prop) {
-        if (prop === 'comment' || prop === 'forceAnswer') {
-          self.filling[prop] = value;
-        } else {
-          clear(prop, value);
-          self.filling[prop].value = value;
-        }
-      } else {
+      if(!prop){
         throw new Error('Cannot determine property type to update', 72, 'survey-item-component.js');
       }
+
+      if (prop === 'comment' || prop === 'forceAnswer') {
+        self.filling[prop] = value;
+      } else {
+        clear(prop, value);
+        self.filling[prop].value = value;
+      }
+
       CurrentItemService.fill(self.filling);
     }
 
     function clear(prop) {
-      if (prop) {
-        if (prop === 'metadata') {
-          self.questionComponent.clearAnswer();
-        } else if (prop === 'answer') {
-          self.questionComponent.clearMetadataAnswer();
-        }
-      } else {
+      if(!prop){
         throw new Error('Cannot determine property type to clear', 85, 'survey-item-component.js');
+      }
+
+      if (prop === 'metadata') {
+        self.questionComponent.clearAnswer();
+      } else if (prop === 'answer') {
+        self.questionComponent.clearMetadataAnswer();
       }
     }
 

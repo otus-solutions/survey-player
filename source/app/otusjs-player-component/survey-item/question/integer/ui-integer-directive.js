@@ -23,35 +23,34 @@
           var element = angular.element(event.currentTarget);
           var keycode = event.which;
           var currentValue = element.val();
+          var isValidKeyCode = isValidKey(keycode);
 
           if (currentValue.length === 0) {
             lastValidValue = '';
-          } else if (isNumberKey(keycode) || isValidKey(keycode)) {
+          } else if (isNumberKey(keycode) || isValidKeyCode) {
             lastValidValue = element.val();
-          } else if (!isValidKey(keycode)) {
+          } else if (!isValidKeyCode) {
             element.val(lastValidValue);
           }
         }
 
-        function isNumberKey(keycode) {
-          return ((keycode >= 48 && keycode <= 57) || (keycode >= 96 && keycode <= 105)) ? true : false;
+        function isNumberKey(keyCode) {
+          return ((keyCode >= 48 && keyCode <= 57) || (keyCode >= 96 && keyCode <= 105));
         }
 
-        function isValidKey(keycode) {
-          var minusKey = (keycode === 109);
-          var shiftKey = (keycode === 16);
-          var backspaceKey = (keycode === 8);
-          var homeKey = (keycode === 36);
-          var endKey = (keycode === 35);
-          var tabKey = (keycode === 9);
-          var deleteKey = (keycode === 46);
-          var controlKey = (keycode === 17);
-          // var cKey = (keycode === 67);
-          // var vKey = (keycode === 86);
-          var leftKey = (keycode === 37);
-          var rightKey = (keycode === 39);
-
-          return (minusKey || shiftKey || backspaceKey || homeKey || endKey || deleteKey || controlKey || leftKey || rightKey || tabKey);
+        function isValidKey(keyCode) {
+          return [
+            109,  // minus
+            16,   // shift
+            8,    // backspace
+            36,   // home
+            35,   // end
+            9,    // tab
+            46,   // delete
+            17,   // control
+            37,   // left
+            39    // right
+          ].includes(keyCode);
         }
       }
     };

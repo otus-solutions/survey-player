@@ -22,12 +22,7 @@
 
     function beforeEffect(pipe, flowData) {
       _currentItemService = ActivityFacadeService.getCurrentItem();
-
-      if (_currentItemService.shouldIgnoreResponseEvaluation()) {
-        pipe.skipStep = true;
-      } else {
-        pipe.skipStep = false;
-      }
+      pipe.skipStep = _currentItemService.shouldIgnoreResponseEvaluation();
     }
 
     function effect(pipe, flowData) {

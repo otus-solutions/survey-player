@@ -25,21 +25,20 @@
     self.getAllActivities = getAllActivities;
 
     function getSurveyTemplate() {
-      if (!SurveyApiService.getModeOffline()) {
-        return ActivityRepositoryService.getById(SurveyApiService.getCurrentActivity()).then(function (response) {
-          if (Array.isArray(response)) {
-            if (response.length > 0) {
-              activityToPlay = angular.copy(response[0]);
-              return activityToPlay;
-            }
-          }
-        });
-      } else {
-        return ActivityRepositoryService.getByAcronymOffline(SurveyApiService.getSelectedCollection(), SurveyApiService.getCurrentActivity()).then(function (response) {
-          activityToPlay = angular.copy(response);
-          return activityToPlay;
-        });
+      if (SurveyApiService.getModeOffline()) {
+        return ActivityRepositoryService.getByAcronymOffline(SurveyApiService.getSelectedCollection(), SurveyApiService.getCurrentActivity())
+          .then(function (response) {
+            activityToPlay = angular.copy(response);
+            return activityToPlay;
+          });
       }
+
+      return ActivityRepositoryService.getById(SurveyApiService.getCurrentActivity()).then(function (response) {
+        if (Array.isArray(response) && response.length > 0) {
+          activityToPlay = angular.copy(response[0]);
+          return activityToPlay;
+        }
+      });
     }
 
     function saveActivity(data) {
@@ -58,9 +57,8 @@
       return ActivityRepositoryService.getSurveys().then(function (response) {
         if (Array.isArray(response)) {
           return response;
-        } else {
-          return [];
         }
+        return [];
       }).catch(function (err) {
           return Promise.reject(err);
       });
@@ -70,9 +68,8 @@
       return ActivityRepositoryService.getAllActivities(SurveyApiService.getLoggedUser(), filter).then(function (response) {
         if (Array.isArray(response)) {
           return response;
-        } else {
-          return [];
         }
+        return [];
       }).catch(function (err) {
           return Promise.reject(err);
       });

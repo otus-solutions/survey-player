@@ -69,10 +69,10 @@
     function _update(toUpdate) {
       if (!toUpdate || !toUpdate.length) {
         throw new Error('No activity to update.', 'activity-repository-service.js', 50);
-      } else {
-        var work = _setupWorkProgress();
-        return ActivityCollectionService.update(toUpdate).then(work.finish);
       }
+
+      var work = _setupWorkProgress();
+      return ActivityCollectionService.update(toUpdate).then(work.finish);
     }
 
     function _setupWorkProgress() {
@@ -96,9 +96,8 @@
         return dbObjects.map(function (dbObject) {
           return _restoreEntity(dbObject);
         });
-      } else {
-        return [_restoreEntity(dbObjects)];
       }
+      return [_restoreEntity(dbObjects)];
     }
 
     function _restoreEntity(dbObject) {

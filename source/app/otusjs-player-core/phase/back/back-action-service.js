@@ -25,7 +25,7 @@
       ActionPipeService.flowData.flowDirection = 'back';
       var phaseData = PreBackActionService.execute(ActionPipeService.flowData);
       phaseData = ExecutionBackActionService.execute(phaseData);
-      phaseData = PostBackActionService.execute(phaseData);
+      PostBackActionService.execute(phaseData);
     }
   }
 })();

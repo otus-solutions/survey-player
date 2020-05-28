@@ -102,9 +102,7 @@
         alasql.promise('SELECT * FROM '.concat(DB_TABLE_ACTIVITIES).concat(' WHERE acronym = "'.concat(acronym).concat('"; '))).then(function (response) {
           defer.resolve(response);
         });
-
       });
-
       return defer.promise;
     }
 
@@ -118,32 +116,32 @@
             defer.reject();
           }
         });
-
       });
-
       return defer.promise;
     }
 
     function updateDatasource(id, data) {
       var defer = $q.defer();
       alasql(INIT_QUERY, [], function () {
-        alasql.promise('UPDATE '.concat(DB_TABLE_DATASOURCES).concat(' SET data = ? WHERE id = "'.concat(id).concat('";')), [data]).then(function (response) {
-          if (response.length) {
-            defer.resolve({data: response[0]});
-          } else {
+        alasql.promise('UPDATE '.concat(DB_TABLE_DATASOURCES).concat(' SET data = ? WHERE id = "'.concat(id).concat('";')), [data])
+          .then(function (response) {
+            if (response.length) {
+              defer.resolve({data: response[0]});
+            } else {
+              defer.reject();
+            }
+          })
+          .catch(function(e){
             defer.reject();
-          }
-        });
-
+          });
       });
-
       return defer.promise;
     }
 
     function _isValid(data) {
       var _activities = Array.prototype.concat.apply(data)
         .filter(function (activity) {
-          return activity.objectType == OBJECT_TYPE;
+          return activity.objectType === OBJECT_TYPE;
         });
       return !!_activities.length;
     }

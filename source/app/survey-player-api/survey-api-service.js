@@ -188,22 +188,20 @@
             deferred.resolve();
           });
         });
-      } else {
+      }
+      else {
         _dropDatabase();
       }
 
       return deferred.promise;
-
     }
 
     function getLoggedUser(propName) {
       var loggedUser = _user ? _user : JSON.parse(sessionStorage.getItem(LOGGED_USER));
-      if (loggedUser) {
-        if (loggedUser.hasOwnProperty('token') && !propName) {
-          var _loggedUser = angular.copy(loggedUser);
-          delete _loggedUser.token;
-          return _loggedUser;
-        }
+      if (loggedUser && loggedUser.hasOwnProperty('token') && !propName) {
+        var _loggedUser = angular.copy(loggedUser);
+        delete _loggedUser.token;
+        return _loggedUser;
       }
       return loggedUser;
     }

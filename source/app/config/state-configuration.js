@@ -83,10 +83,15 @@
           if (_activity) {
             SurveyApiService.setCurrentActivity(_activity);
             $location.search('activity', null);
-            SurveyClientService.getSurveyTemplate().then(function (response) {
-              self.template = angular.copy(response);
-              _setPlayerConfiguration();
-            });
+            SurveyClientService.getSurveyTemplate()
+              .then(function (response) {
+                self.template = angular.copy(response);
+                _setPlayerConfiguration();
+              })
+              .catch(() => {
+                $state.go('/error');
+                LoadingScreenService.finish();
+              });
           }
         }
         else if (SurveyApiService.getAuthToken() && SurveyApiService.getCurrentActivity()) {
@@ -116,17 +121,17 @@
     }
 
     function _loadOtusDb() {
-      var DB_NAME = 'survey-player';
+      var DB_NAME = 'otus';
       var deferred = $q.defer();
 
       StorageLoaderService.dbExists(DB_NAME).then(function (dbExists) {
         if (dbExists) {
           StorageLoaderService.loadIndexedStorage(DB_NAME);
-          deferred.resolve();
         } else {
           StorageLoaderService.createIndexedStorage(DB_NAME);
-          deferred.resolve();
         }
+
+        deferred.resolve();
       });
 
       return deferred.promise;

@@ -39,19 +39,11 @@
     function update(e) {
       var _answer = {};
 
-      if (e.target.validity.valid) {
-        _answer = self.answer;
-        if (self.answer === null) {
-          _answer = {};
-        } else {
-          if (self.answer.hasOwnProperty('date')) {
-            if (self.answer.date === null || self.answer.date === undefined) {
-              _answer = {};
-            }
-          }
-        }
-      } else {
+      if(!e.target.validity.valid){handle-validation-error-step-service
         _answer = "invalid format";
+      }
+      else if (self.answer !== null && (self.answer.date || !self.answer.hasOwnProperty('date'))){
+        _answer = self.answer;
       }
 
       self.onUpdate({

@@ -56,8 +56,7 @@
     }
 
     function reference(type) {
-      var reference = CurrentItemService.getFillingRules(templateID)[type].data.reference;
-      return reference;
+      return CurrentItemService.getFillingRules(templateID)[type].data.reference;
     }
 
     function focus() {

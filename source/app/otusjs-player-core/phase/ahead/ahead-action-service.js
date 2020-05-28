@@ -25,7 +25,7 @@
       ActionPipeService.flowData.flowDirection = 'ahead';
       var phaseData = PreAheadActionService.execute(ActionPipeService.flowData);
       phaseData = ExecutionAheadActionService.execute(phaseData);
-      phaseData = PostAheadActionService.execute(phaseData);
+      PostAheadActionService.execute(phaseData);
     }
   }
 })();
