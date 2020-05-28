@@ -1,8 +1,7 @@
 
 var version = "1.21.1";
-
-//var CACHE = 'survey-player';
-var CACHE = 'survey-player' + version;
+var CACHE_PREFIX = 'survey-player';
+var CACHE_NAME = CACHE_PREFIX + version;
 
 var CACHED_FILES = [
   "/node_modules/jquery/dist/jquery.min.js",
@@ -68,7 +67,6 @@ var CACHED_FILES = [
   "/app/survey-player-client/survey-player-client-config.js",
   "/app/survey-player-client/survey-player-client-service.js",
   "/app/player-module.js",
-  "/app/player/exit-player-step-service.js",
   "/app/player/pre-player-step-service.js",
   "/app/player/save-player-step-service.js",
   "/app/player/stop-player-step-service.js",
@@ -213,9 +211,46 @@ var CACHED_FILES = [
 
 self.addEventListener('install', function(e) {
   //todo clean other caches
+  console.log(caches.keys());
+
+  //todo this should be on activate only
   e.waitUntil(
-    caches.open(CACHE).then(function(cache) {
+    removeOldCacheFiles()
+  );
+  //
+
+  e.waitUntil(
+    caches.open(CACHE_NAME).then(function(cache) {
       return cache.addAll(CACHED_FILES);
     })
   );
 });
+
+self.addEventListener('activate', function(e) {
+  e.waitUntil(
+    removeOldCacheFiles()
+  );
+});
+
+self.addEventListener('fetch', function(e) {
+  e.respondWith(
+    caches.match(e.request, {cacheName:CACHE_NAME}).then(function(response) {
+      return response || fetch(e.request);
+    })
+  );
+});
+
+function removeOldCacheFiles() {
+  caches.keys().then(function(cacheNames) {
+    return Promise.all(
+      cacheNames.filter(function(cacheName) {
+        // Return true if you want to remove this cache,
+        // but remember that caches are shared across
+        // the whole origin
+        return (cacheName.startsWith(CACHE_PREFIX) && cacheName !== CACHE_NAME);
+      }).map(function(cacheName) {
+        return caches.delete(cacheName);
+      })
+    );
+  })
+}
