@@ -13,13 +13,17 @@
     });
 
   Controller.$inject = [
+    '$q',
+    '$mdDialog',
     '$scope',
     'otusjs.player.data.activity.ActivityFacadeService'
   ];
 
 
-  function Controller($scope, ActivityFacadeService) {
-    var self = this;
+  function Controller($q, $mdDialog, $scope, ActivityFacadeService) {
+    const self = this;
+    const CANCEL_TITLE = 'Sair da Atividade';
+    const CANCEL_CONTENT = 'Todos os dados, não salvos, serão perdidos. Você tem certeza que deseja sair?';
 
     /* Public methods */
     self.finalize = finalize;
@@ -33,13 +37,32 @@
     }
 
     function stop() {
-      self.onStop();
+      console.info("rodou")
+      confirmDialog(CANCEL_TITLE, CANCEL_CONTENT).then(
+        function () {
+          self.onStop();
+        });
     }
 
     function onInit() {
       $scope.$parent.$ctrl.playerBackCover = self;
       var activity = ActivityFacadeService.getCurrentSurvey().getSurvey();
       self.title = activity.getName();
+    }
+    function confirmDialog(title, content) {
+      var deferred = $q.defer();
+      $mdDialog.show($mdDialog.confirm()
+        .title(title)
+        .textContent(content)
+        .ariaLabel('Confirmar ação de atalho:' + title)
+        .ok('Ok')
+        .cancel('Cancelar')
+      ).then(function () {
+        deferred.resolve();
+      }, function () {
+        deferred.reject();
+      });
+      return deferred.promise;
     }
   }
 }());

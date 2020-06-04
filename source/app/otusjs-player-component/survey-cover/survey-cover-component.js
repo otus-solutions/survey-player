@@ -20,8 +20,10 @@
     'otusjs.player.data.activity.ActivityFacadeService'
   ];
 
-  function Controller($scope, $element, ActivityFacadeService) {
+  function Controller( $scope,  $element, ActivityFacadeService) {
     var self = this;
+    const CANCEL_TITLE = 'Cancelar Atividade';
+    const CANCEL_CONTENT = 'Todos os dados, não salvos, serão perdidos. Você tem certeza que deseja cancelar?';
 
     /* Public methods */
     self.$onInit = onInit;
@@ -69,12 +71,12 @@
       }
     }
 
-    function play() {
-      self.onPlay();
+    function stop(){
+      self.onStop();
     }
 
-    function stop() {
-      self.onStop();
+    function play() {
+      self.onPlay();
     }
 
     function show() {
@@ -85,5 +87,6 @@
     function remove() {
       $element.remove();
     }
+
   }
 }());
