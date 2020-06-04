@@ -66,7 +66,6 @@
       LoginService.authenticate().then(function (response) {
         _setUser();
         list();
-
         if (response) {
           _showMessage(response);
         }
