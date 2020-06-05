@@ -25,21 +25,31 @@
     self.authenticate = authenticate;
     self.toggleMenu = toggleMenu;
     self.$onInit = onInit;
+    self.$onChanges = onChanges;
+
     self.list = list;
     $scope.selectedIndex = 0;
     self.commands = [];
     self.preActivities = [];
     self.isLoading = false;
     self.disableAuth = true;
-
+    self.user = ""
 
     function onInit() {
       self.commands = [];
       _setUser();
     }
 
+    function onChanges(){
+      if(self.user){
+        list()
+      }
+    }
+
     function list() {
       self.isLoading = true;
+      if(self.user === "")
+        return self.isLoading = false;
       SurveyClientService.getSurveys().then(function (response) {
         self.preActivities = angular.copy(Array.prototype.concat.apply(response));
         _setUser();
@@ -55,6 +65,7 @@
       $mdSidenav('userMenu').close();
       LoginService.authenticate().then(function (response) {
         _setUser();
+        list();
         if (response) {
           _showMessage(response);
         }
@@ -65,7 +76,7 @@
     }
 
     function _setUser() {
-      self.user = SurveyApiService.getLoggedUser() ? SurveyApiService.getLoggedUser() : '';
+      self.user = SurveyApiService.getLoggedUser() ? SurveyApiService.getLoggedUser() : "";
     }
 
     function toggleMenu() {
