@@ -122,19 +122,16 @@
 
     function _loadOtusDb() {
       var DB_NAME = 'otus';
-      var deferred = $q.defer();
 
-      StorageLoaderService.dbExists(DB_NAME).then(function (dbExists) {
+      return StorageLoaderService.dbExists(DB_NAME).then(function (dbExists) {
         if (dbExists) {
-          StorageLoaderService.loadIndexedStorage(DB_NAME);
+          return StorageLoaderService.loadIndexedStorage(DB_NAME);
         } else {
-          StorageLoaderService.createIndexedStorage(DB_NAME);
+          return StorageLoaderService.createIndexedStorage(DB_NAME);
         }
 
-        deferred.resolve();
       });
 
-      return deferred.promise;
     }
   }
 
