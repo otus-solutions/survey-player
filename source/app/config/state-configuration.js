@@ -28,9 +28,33 @@
       template: '<survey-player-home layout="column" flex></survey-player-home>'
     });
 
+    $stateProvider.state('/play', {
+      url: '/?activity&token&play',
+      templateUrl: 'app/otusjs-player-component/player-finish/player-finish-template.html'
+    });
+
+    $stateProvider.state('/finish', {
+      url: '/?activity&token&finish',
+      templateUrl: 'app/otusjs-player-component/player-finish/player-finish-template.html'
+    });
+
     $urlRouterProvider.otherwise('/home');
   }
 
+  Controller.$inject = [
+    'otusjs.model.activity.ActivityFacadeService',
+    'StorageLoaderService',
+    '$compile',
+    '$q',
+    '$scope',
+    'PlayerService',
+    '$stateParams',
+    'SurveyClientService',
+    'SurveyApiService',
+    '$location',
+    '$state',
+    'LoadingScreenService'
+  ];
 
   function Controller(
     ActivityFacadeService,
@@ -53,16 +77,8 @@
     var _newScope;
     var _isValid = false;
 
-    function _generateOtusPreview() {
-      _newScope = $scope;
-      _newScope.surveyActivity = {};
-      _newScope.surveyActivity.template = _getSurveyTemplateObject();
-
-    }
-
-    function _getSurveyTemplateObject() {
-      var _activity = angular.copy(self.template);
-      return ActivityFacadeService.surveyActivity = _activity;
+    function onInit() {
+      _config();
     }
 
     function _config() {
@@ -109,45 +125,40 @@
       });
     }
 
-    function _setPlayerConfiguration() {
-      _generateOtusPreview();
-      PlayerService.setup();
-      $('#survey-preview').empty();
-      $('#survey-preview').append($compile('<otus-player layout="column" layout-fill=""></otus-player>')($scope));
-    }
-
-    function onInit() {
-      _config();
-    }
-
     function _loadOtusDb() {
-      var DB_NAME = 'otus';
+      const DB_NAME = 'otus';
 
       return StorageLoaderService.dbExists(DB_NAME).then(function (dbExists) {
         if (dbExists) {
           return StorageLoaderService.loadIndexedStorage(DB_NAME);
-        } else {
-          return StorageLoaderService.createIndexedStorage(DB_NAME);
         }
 
+        return StorageLoaderService.createIndexedStorage(DB_NAME);
       });
 
     }
+
+    function _setPlayerConfiguration() {
+      _generateOtusPreview();
+      PlayerService.setup();
+      $('#survey-preview').empty();
+      // $('#survey-preview').append($compile('<otus-player layout="column" layout-fill=""></otus-player>')($scope));
+      $('#survey-preview').append($compile('<otus-player-start layout="column" layout-fill=""></otus-player-start>')($scope));
+    }
+
+    function _generateOtusPreview() {
+      _newScope = $scope;
+      _newScope.surveyActivity = {};
+      _newScope.surveyActivity.template = _getSurveyTemplateObject();
+
+    }
+
+    function _getSurveyTemplateObject() {
+      var _activity = angular.copy(self.template);
+      return ActivityFacadeService.surveyActivity = _activity;
+    }
+
   }
 
-  Controller.$inject = [
-    'otusjs.model.activity.ActivityFacadeService',
-    'StorageLoaderService',
-    '$compile',
-    '$q',
-    '$scope',
-    'PlayerService',
-    '$stateParams',
-    'SurveyClientService',
-    'SurveyApiService',
-    '$location',
-    '$state',
-    'LoadingScreenService'
-  ];
 
 }());
