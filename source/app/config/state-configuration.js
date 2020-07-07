@@ -30,7 +30,7 @@
 
     $stateProvider.state('/play', {
       url: '/?activity&token&play',
-      templateUrl: 'app/otusjs-player-component/player-finish/player-finish-template.html'
+      templateUrl: 'app/otusjs-player-component/player-play/player-play-template.html'
     });
 
     $stateProvider.state('/finish', {
