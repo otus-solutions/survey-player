@@ -17,6 +17,7 @@
 
     /* Public methods */
     self.catchMouseWheel = catchMouseWheel;
+    self.$onInit = onInit;
     self.eject = eject;
     self.finalize = finalize;
     self.goAhead = goAhead;
@@ -26,13 +27,12 @@
     self.stop = stop;
     self.showBack = showBack;
     self.showCover = showCover;
-    self.$onInit = onInit;
     self.onProcessingPlayer = onProcessingPlayer;
     self.goIsLockOpenClose = goIsLockOpenClose;
 
-    var didScroll;
-    var lastScrollTop = 0;
-    var delta = 5;
+    let didScroll;
+    let lastScrollTop = 0;
+    const SCROLL_DELTA = 5;
 
     angular.element(document).ready(function () {
       angular.element(document.querySelector('.otus-player-display-container')).bind('wheel', function () {
@@ -54,15 +54,13 @@
     function hasScrolled() {
       var st = angular.element(document.querySelector('.otus-player-display-container')).scrollTop();
 
-      if (Math.abs(lastScrollTop - st) <= delta)
+      if (Math.abs(lastScrollTop - st) <= SCROLL_DELTA)
         return;
 
       if (st > lastScrollTop) {
         $('otus-survey-header').removeClass('nav-down').addClass('nav-up');
       } else {
-
         $('otus-survey-header').removeClass('nav-up').addClass('nav-down');
-
       }
 
       lastScrollTop = st;
@@ -74,6 +72,26 @@
       } else {
         goBack();
       }
+    }
+
+    function onInit() {
+      self.showBackCover = false;
+      self.showCover = true;
+      self.showActivity = false;
+
+      self.hardBlocker = PlayerService.getHardBlocker();
+      self.softBlocker = PlayerService.getSoftBlocker();
+
+      /*
+       * These objects are initialized by child components of Player
+       * See player-commander-component.js (onInit method)
+       * See player-display-component.js (onInit method)
+       */
+      self.playerCommander = {};
+      self.playerDisplay = {};
+      self.playerCover = {};
+      self.playerBackCover = {};
+      PlayerService.bindComponent(self);
     }
 
     function eject() {
@@ -120,34 +138,6 @@
       self.playerDisplay.remove();
       self.showBackCover = true;
       self.showActivity = false;
-    }
-
-    function onInit() {
-      self.showBackCover = false;
-      self.showCover = true;
-      self.showActivity = false;
-
-      _setupHardBlocker();
-      _setupSoftBlocker();
-
-      /*
-       * These objects are initialized by child components of Player
-       * See player-commander-component.js (onInit method)
-       * See player-display-component.js (onInit method)
-       */
-      self.playerCommander = {};
-      self.playerDisplay = {};
-      self.playerCover = {};
-      self.playerBackCover = {};
-      PlayerService.bindComponent(self);
-    }
-
-    function _setupHardBlocker() {
-      self.hardBlocker = PlayerService.getHardBlocker();
-    }
-
-    function _setupSoftBlocker() {
-      self.softBlocker = PlayerService.getSoftBlocker();
     }
 
     function _loadItem() {
