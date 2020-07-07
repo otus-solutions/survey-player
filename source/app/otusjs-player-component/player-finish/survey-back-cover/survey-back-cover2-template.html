@@ -1,0 +1,20 @@
+<div layout-fill="" layout="column">
+  <div flex="10"  layout-align="end center" layout="row">
+    <md-button layout-align="center center" class="md-icon-button md-raised md-no-focus" aria-label="Sair" ng-click="$ctrl.stop()">
+      <md-icon flex="100" md-font-set="material-icons">exit_to_app</md-icon>
+    </md-button>
+  </div>
+  <md-content class="cover-content" layout-align="center center" layout="row" flex="80">
+    <div layout-align="center center" layout="column" flex>
+      <section>
+        <h2 class="md-display-1">{{ $ctrl.title }}</h2>
+      </section>
+      <div flex="" layout="row">
+        <md-button flex="100" layout="row" class="md-raised md-primary" aria-label="Finalizar" ng-click="$ctrl.finalize()">
+          <md-icon md-font-set="material-icons">assignment_turned_in</md-icon>
+          Finalizar
+        </md-button>
+      </div>
+    </div>
+  </md-content>
+</div>

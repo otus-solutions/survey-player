@@ -42,6 +42,8 @@
       $scope.itemData.templateID = '';
       $scope.questions = [];
       self.ids = [];
+
+      console.log('player-display\n', self.onProcessingPlayer)
     }
 
     function _destroyCurrentItems() {
