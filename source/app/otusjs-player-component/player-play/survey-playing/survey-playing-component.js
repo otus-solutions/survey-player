@@ -4,7 +4,7 @@
   angular
     .module('otusjs.player.component')
     .component('otusSurveyPlaying', {
-      templateUrl: 'app/otusjs-player-component/survey-playing/survey-playing-template.html',
+      templateUrl: 'app/otusjs-player-component/player-play/survey-playing/survey-playing-template.html',
       controller: Controller
     });
 
@@ -13,7 +13,7 @@
     '$state'
   ];
 
-  function Controller(PlayerService) {
+  function Controller(PlayerService, $state) {
     let self = this;
 
     /* Public methods */
@@ -25,7 +25,7 @@
     self.goBack = goBack;
     self.pause = pause;
     self.stop = stop;
-    // self.showBack = showBack;
+    self.showBack = showBack;
     // self.showCover = showCover;
     self.onProcessingPlayer = onProcessingPlayer;
     self.goIsLockOpenClose = goIsLockOpenClose;
@@ -125,12 +125,13 @@
     //   self.playerCover.show();
     // }
 
-    // function showBack() {
-    //   self.playerCover.remove();
-    //   self.playerDisplay.remove();
-    //   self.showBackCover = true;
-    //   self.showActivity = false;
-    // }
+    function showBack() {
+      $state.go('/finish');
+      // self.playerCover.remove();
+      // self.playerDisplay.remove();
+      // self.showBackCover = true;
+      // self.showActivity = false;
+    }
 
     function _loadItem() {
       let itemData = PlayerService.getItemData();
