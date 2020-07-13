@@ -29,13 +29,13 @@
     });
 
     $stateProvider.state('/play', {
-      url: '/?activity&token&play',
-      templateUrl: 'app/otusjs-player-component/player-play/player-play-template.html'
+      url: '/play',
+      template: '<otus-survey-playing layout="column" flex></otus-survey-playing>'
     });
 
     $stateProvider.state('/finish', {
-      url: '/?activity&token&finish',
-      templateUrl: 'app/otusjs-player-component/player-finish/player-finish-template.html'
+      url: '/finish',
+      template: '<otus-survey-back-cover layout="column" flex></otus-survey-back-cover>'
     });
 
     $urlRouterProvider.otherwise('/home');
@@ -143,14 +143,14 @@
       PlayerService.setup();
       $('#survey-preview').empty();
       // $('#survey-preview').append($compile('<otus-player layout="column" layout-fill=""></otus-player>')($scope));
-      $('#survey-preview').append($compile('<otus-player-start layout="column" layout-fill=""></otus-player-start>')($scope));
+
+      $('#survey-preview').append($compile('<otus-survey-cover layout="column" layout-fill=""></otus-survey-cover>')($scope));
     }
 
     function _generateOtusPreview() {
       _newScope = $scope;
       _newScope.surveyActivity = {};
       _newScope.surveyActivity.template = _getSurveyTemplateObject();
-
     }
 
     function _getSurveyTemplateObject() {

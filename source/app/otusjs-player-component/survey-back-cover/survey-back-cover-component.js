@@ -16,40 +16,40 @@
     '$q',
     '$mdDialog',
     '$scope',
-    'otusjs.player.data.activity.ActivityFacadeService'
+    'otusjs.player.data.activity.ActivityFacadeService',
+    'otusjs.player.core.player.PlayerService'
   ];
 
 
-  function Controller($q, $mdDialog, $scope, ActivityFacadeService) {
+  function Controller($q, $mdDialog, $scope, ActivityFacadeService, PlayerService) {
     const self = this;
     const CANCEL_TITLE = 'Sair da Atividade';
     const CANCEL_CONTENT = 'Todos os dados, não salvos, serão perdidos. Você tem certeza que deseja sair?';
 
     /* Public methods */
+    self.$onInit = onInit;
     self.finalize = finalize;
     self.stop = stop;
 
-    /* Public methods */
-    self.$onInit = onInit;
+
+    function onInit() {
+      // $scope.$parent.$ctrl.playerBackCover = self;
+      const activity = ActivityFacadeService.getCurrentSurvey().getSurvey();
+      self.title = activity.getName();
+    }
 
     function finalize() {
-      self.onFinalize();
+      PlayerService.eject();
     }
 
     function stop() {
-      console.info("rodou")
-      confirmDialog(CANCEL_TITLE, CANCEL_CONTENT).then(
+      _confirmDialog(CANCEL_TITLE, CANCEL_CONTENT).then(
         function () {
-          self.onStop();
+          PlayerService.stop();
         });
     }
 
-    function onInit() {
-      $scope.$parent.$ctrl.playerBackCover = self;
-      var activity = ActivityFacadeService.getCurrentSurvey().getSurvey();
-      self.title = activity.getName();
-    }
-    function confirmDialog(title, content) {
+    function _confirmDialog(title, content) {
       var deferred = $q.defer();
       $mdDialog.show($mdDialog.confirm()
         .title(title)
