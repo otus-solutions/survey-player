@@ -19,7 +19,6 @@
       ACTIVITY: 1,
       BACK_COVER: 2
     };
-    self.TEMPLATE_VALUES = TEMPLATE_VALUES;
 
     /* Public methods */
     self.catchMouseWheel = catchMouseWheel;
@@ -35,6 +34,9 @@
     self.showCover = showCover;
     self.onProcessingPlayer = onProcessingPlayer;
     self.goIsLockOpenClose = goIsLockOpenClose;
+    self.canShowCover = canShowCover;
+    self.canShowActivity = canShowActivity;
+    self.canShowBackCover = canShowBackCover;
 
     let didScroll;
     let lastScrollTop = 0;
@@ -82,9 +84,6 @@
 
     function onInit() {
       self.templateToShow = TEMPLATE_VALUES.COVER;
-      self.showBackCover = false;
-      self.showCover = true;
-      self.showActivity = false;
 
       self.hardBlocker = PlayerService.getHardBlocker();
       self.softBlocker = PlayerService.getSoftBlocker();
@@ -126,9 +125,6 @@
 
     function play() {
       self.templateToShow = TEMPLATE_VALUES.ACTIVITY;
-      self.showBackCover = false;
-      self.showCover = false;
-      self.showActivity = true;
       PlayerService.play();
       _loadItem();
     }
@@ -145,8 +141,6 @@
       self.playerCover.remove();
       self.playerDisplay.remove();
       self.templateToShow = TEMPLATE_VALUES.BACK_COVER;
-      self.showBackCover = true;
-      self.showActivity = false;
     }
 
     function _loadItem() {
@@ -164,9 +158,16 @@
       self.isButtonOpenClose();
     }
 
-    self.showTemplate = showTemplate;
-    function showTemplate(value) {
-      return (self.templateToShow === value);
+    function canShowCover(){
+      return (self.templateToShow === TEMPLATE_VALUES.COVER);
+    }
+
+    function canShowActivity(){
+      return (self.templateToShow === TEMPLATE_VALUES.ACTIVITY);
+    }
+
+    function canShowBackCover(){
+      return (self.templateToShow === TEMPLATE_VALUES.BACK_COVER);
     }
   }
 }());

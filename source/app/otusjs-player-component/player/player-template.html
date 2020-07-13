@@ -2,11 +2,11 @@
                    on-stop="$ctrl.stop()"
                    soft-blocker="$ctrl.softBlocker"
                    hard-blocker="$ctrl.hardBlocker"
-                   ng-show="$ctrl.showTemplate($ctrl.TEMPLATE_VALUES.COVER)"
-                   layout-align="center center" layout="column" flex class="player-cover" ng-cloak>
+                   ng-show="$ctrl.canShowCover()"
+                   layout-align="center center" layout="column" flex class="player-cover" ng-cloak="false">
 </otus-survey-cover>
 
-<div layout="column" flex ng-show="$ctrl.showTemplate($ctrl.TEMPLATE_VALUES.ACTIVITY)" ng-cloak>
+<div layout="column" flex ng-show="$ctrl.canShowActivity()" ng-cloak="false">
   <otus-survey-header class="nav-down" layout="row" layout-xs="column"></otus-survey-header>
   <div layout="row" layout-xs="column" flex>
     <md-content layout="row" layout-xs="column" flex>
@@ -32,6 +32,6 @@
 
 <otus-survey-back-cover on-finalize="$ctrl.eject()"
                         on-stop="$ctrl.stop()"
-                        ng-show="$ctrl.showTemplate($ctrl.TEMPLATE_VALUES.BACK_COVER)"
-                        layout-align="center" layout="row" flex class="player-back-cover" ng-cloak>
+                        ng-show="$ctrl.canShowBackCover()"
+                        layout-align="center" layout="row" flex class="player-back-cover" ng-cloak="false">
 </otus-survey-back-cover>
