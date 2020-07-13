@@ -14,6 +14,12 @@
 
   function Controller(PlayerService) {
     var self = this;
+    const TEMPLATE_VALUES = {
+      COVER: 0,
+      ACTIVITY: 1,
+      BACK_COVER: 2
+    };
+    self.TEMPLATE_VALUES = TEMPLATE_VALUES;
 
     /* Public methods */
     self.catchMouseWheel = catchMouseWheel;
@@ -75,6 +81,7 @@
     }
 
     function onInit() {
+      self.templateToShow = TEMPLATE_VALUES.COVER;
       self.showBackCover = false;
       self.showCover = true;
       self.showActivity = false;
@@ -118,6 +125,7 @@
     }
 
     function play() {
+      self.templateToShow = TEMPLATE_VALUES.ACTIVITY;
       self.showBackCover = false;
       self.showCover = false;
       self.showActivity = true;
@@ -136,6 +144,7 @@
     function showBack() {
       self.playerCover.remove();
       self.playerDisplay.remove();
+      self.templateToShow = TEMPLATE_VALUES.BACK_COVER;
       self.showBackCover = true;
       self.showActivity = false;
     }
@@ -153,6 +162,11 @@
 
     function goIsLockOpenClose() {
       self.isButtonOpenClose();
+    }
+
+    self.showTemplate = showTemplate;
+    function showTemplate(value) {
+      return (self.templateToShow === value);
     }
   }
 }());
