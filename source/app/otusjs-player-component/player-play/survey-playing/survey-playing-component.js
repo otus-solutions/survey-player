@@ -74,19 +74,10 @@
     }
 
     function onInit() {
+      PlayerService.play();
+
       self.hardBlocker = PlayerService.getHardBlocker();
       self.softBlocker = PlayerService.getSoftBlocker();
-
-      /*
-       * These objects are initialized by child components of Player
-       * See player-commander-component.js (onInit method)
-       * See player-display-component.js (onInit method)
-       */
-      self.playerCommander = {};
-      self.playerDisplay = {};
-      self.playerCover = {};
-      self.playerBackCover = {};
-      PlayerService.bindComponent(self);
     }
 
     function eject() {

@@ -68,7 +68,6 @@
     }
 
     function play() {
-      PlayerService.play();
       $state.go('/play');
     }
 
