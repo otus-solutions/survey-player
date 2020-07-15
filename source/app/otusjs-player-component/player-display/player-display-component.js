@@ -26,10 +26,9 @@
 
   function Controller($scope, $document, $element, $compile, $location, $anchorScroll,
                       ActivityFacadeService, PlayerService, OnProcessingService) {
-    var self = this;
+    const self = this;
 
     const SURVEY_ITEM = '<otus-survey-item item-data="itemData" id="{{itemData.templateID}}" on-processing-player="$ctrl.onProcessingPlayer()" style="margin: 0;display:block;" class="animate-switch"/>';
-    const SURVEY_COVER = '<otus-cover />';
 
     /* Public methods */
     self.$onInit = onInit;
@@ -40,8 +39,6 @@
     self.currentItems = [];
 
     function onInit() {
-      console.log('player-display onInit\n')
-
       $scope.$parent.$ctrl.playerDisplay = self;
       $scope.itemData = {};
       $scope.itemData.templateID = '';
