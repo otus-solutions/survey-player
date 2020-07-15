@@ -10,35 +10,44 @@
     '$urlRouterProvider',
   ];
 
+  const STATES = {
+    MAIN: '/',
+    ERROR: '/error',
+    HOME: '/home',
+    PLAY: '/play',
+    FINISH: '/finish'
+  };
+
   function stateConfiguration($stateProvider, $urlRouterProvider) {
 
-    $stateProvider.state('/', {
+    $stateProvider.state(STATES.MAIN, {
       url: '/?activity&token&callback',
       templateUrl: 'app/activity-viewer-template.html',
       controller: Controller
     });
 
-    $stateProvider.state('/error', {
+    $stateProvider.state(STATES.ERROR, {
       url: '/error',
       template: '<h1 style="flex-direction: row; text-align: center; flex: 100; margin: auto">404 - Data Not Found</h1>'
     });
 
-    $stateProvider.state('/home', {
+    $stateProvider.state(STATES.HOME, {
       url: '/home',
       template: '<survey-player-home layout="column" flex></survey-player-home>'
     });
 
-    $stateProvider.state('/play', {
+    $stateProvider.state(STATES.PLAY, {
       url: '/play',
-      template: '<otus-survey-playing layout="column" flex></otus-survey-playing>'
+      templateUrl: 'app/otusjs-player-component/player-play/player-play-template.html',
+      controller: Controller
     });
 
-    $stateProvider.state('/finish', {
+    $stateProvider.state(STATES.FINISH, {
       url: '/finish',
       template: '<otus-survey-back-cover layout="column" flex></otus-survey-back-cover>'
     });
 
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise(STATES.HOME);
   }
 
   Controller.$inject = [
@@ -70,12 +79,12 @@
     $state,
     LoadingScreenService) {
 
-    var self = this;
+    const self = this;
     /* Lifecycle hooks */
     self.$onInit = onInit;
 
-    var _newScope;
-    var _isValid = false;
+    let _newScope;
+    let _isValid = false;
 
     function onInit() {
       _config();
@@ -85,9 +94,9 @@
       LoadingScreenService.start();
       _loadOtusDb().then(function () {
 
-        var _token = angular.copy($stateParams.token);
-        var _callback = angular.copy($stateParams.callback);
-        var _activity = angular.copy($stateParams.activity);
+        const _token = angular.copy($stateParams.token);
+        const _callback = angular.copy($stateParams.callback);
+        const _activity = angular.copy($stateParams.activity);
 
         if (_callback) {
           SurveyApiService.setCallbackAddress(angular.copy(_callback));
@@ -105,7 +114,7 @@
                 _setPlayerConfiguration();
               })
               .catch(() => {
-                $state.go('/error');
+                $state.go(STATES.ERROR);
                 LoadingScreenService.finish();
               });
           }
@@ -117,7 +126,7 @@
             _setPlayerConfiguration();
             LoadingScreenService.finish();
           }).catch(function () {
-            $state.go('/error');
+            $state.go(STATES.ERROR);
             LoadingScreenService.finish();
           });
         }
@@ -142,9 +151,14 @@
       _generateOtusPreview();
       PlayerService.setup();
       $('#survey-preview').empty();
-      // $('#survey-preview').append($compile('<otus-player layout="column" layout-fill=""></otus-player>')($scope));
-
-      $('#survey-preview').append($compile('<otus-survey-cover layout="column" layout-fill=""></otus-survey-cover>')($scope));
+      switch ($state.current.name) {
+        case STATES.MAIN:
+          $('#survey-preview').append($compile('<otus-survey-cover layout="column" layout-fill=""></otus-survey-cover>')($scope));
+          break;
+        case STATES.PLAY:
+          $('#survey-preview').append($compile('<otus-survey-playing layout="column" flex></otus-survey-playing>')($scope));
+          break;
+      }
     }
 
     function _generateOtusPreview() {
@@ -154,11 +168,10 @@
     }
 
     function _getSurveyTemplateObject() {
-      var _activity = angular.copy(self.template);
+      const _activity = angular.copy(self.template);
       return ActivityFacadeService.surveyActivity = _activity;
     }
 
   }
-
 
 }());
