@@ -48,7 +48,6 @@
       $scope.questions = [];
       self.ids = [];
 
-      PlayerService.play();
       let itemData = PlayerService.getItemData();
       if (itemData) {
         self.loadItem(itemData);

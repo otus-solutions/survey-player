@@ -30,9 +30,7 @@
       self.hardBlocker = PlayerService.getHardBlocker();
       self.softBlocker = PlayerService.getSoftBlocker();
 
-      // $scope.$parent.$ctrl.playerCover = self;
-      const activity = ActivityFacadeService.getCurrentSurvey().getSurvey();
-      self.title = activity.getName();
+      self.title = ActivityFacadeService.getCurrentSurvey().getSurvey().getName();
 
       _unblock();
     }
@@ -70,6 +68,7 @@
     }
 
     function play() {
+      PlayerService.play();
       $state.go('/play');
     }
 
@@ -78,8 +77,7 @@
     }
 
     function show() {
-      const activity = ActivityFacadeService.getCurrentSurvey().getSurvey();
-      self.title = activity.getName();
+      self.title = ActivityFacadeService.getCurrentSurvey().getSurvey().getName();
     }
 
     function remove() {
