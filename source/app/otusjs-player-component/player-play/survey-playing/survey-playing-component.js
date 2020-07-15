@@ -26,7 +26,6 @@
     self.pause = pause;
     self.stop = stop;
     self.showBack = showBack;
-    // self.showCover = showCover;
     self.onProcessingPlayer = onProcessingPlayer;
     self.goIsLockOpenClose = goIsLockOpenClose;
 
@@ -46,12 +45,12 @@
 
     setInterval(function () {
       if (didScroll) {
-        hasScrolled();
+        _hasScrolled();
         didScroll = false;
       }
     }, 250);
 
-    function hasScrolled() {
+    function _hasScrolled() {
       let st = angular.element(document.querySelector('.otus-player-display-container')).scrollTop();
 
       if (Math.abs(lastScrollTop - st) <= SCROLL_DELTA)
@@ -75,10 +74,6 @@
     }
 
     function onInit() {
-      // self.showBackCover = false;
-      // self.showCover = true;
-      // self.showActivity = false;
-
       self.hardBlocker = PlayerService.getHardBlocker();
       self.softBlocker = PlayerService.getSoftBlocker();
 
@@ -121,16 +116,8 @@
       PlayerService.stop();
     }
 
-    // function showCover() {
-    //   self.playerCover.show();
-    // }
-
     function showBack() {
       $state.go('/finish');
-      // self.playerCover.remove();
-      // self.playerDisplay.remove();
-      // self.showBackCover = true;
-      // self.showActivity = false;
     }
 
     function _loadItem() {
