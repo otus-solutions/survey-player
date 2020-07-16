@@ -150,13 +150,15 @@
     function _setPlayerConfiguration() {
       _generateOtusPreview();
       PlayerService.setup();
-      $('#survey-preview').empty();
+
+      const SURVEY_PREVIEW_ID ='#survey-preview';
+      $(SURVEY_PREVIEW_ID).empty();
       switch ($state.current.name) {
         case STATES.MAIN:
-          $('#survey-preview').append($compile('<otus-survey-cover layout="column" layout-fill=""></otus-survey-cover>')($scope));
+          $(SURVEY_PREVIEW_ID).append($compile('<otus-survey-cover layout="column" layout-fill=""></otus-survey-cover>')($scope));
           break;
         case STATES.PLAY:
-          $('#survey-preview').append($compile('<otus-survey-playing layout="column" flex></otus-survey-playing>')($scope));
+          $(SURVEY_PREVIEW_ID).append($compile('<otus-survey-playing layout="column" layout-fill="" flex></otus-survey-playing>')($scope));
           break;
       }
     }
