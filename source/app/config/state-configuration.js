@@ -44,7 +44,8 @@
 
     $stateProvider.state(STATES.FINISH, {
       url: '/finish',
-      template: '<otus-survey-back-cover layout="column" flex></otus-survey-back-cover>'
+      templateUrl: 'app/activity-viewer-template.html',
+      controller: Controller
     });
 
     $urlRouterProvider.otherwise(STATES.HOME);
@@ -159,6 +160,9 @@
           break;
         case STATES.PLAY:
           $(SURVEY_PREVIEW_ID).append($compile('<otus-survey-playing layout="column" layout-fill="" flex></otus-survey-playing>')($scope));
+          break;
+        case STATES.FINISH:
+          $(SURVEY_PREVIEW_ID).append($compile('<otus-survey-back-cover layout="column" layout-fill=""></otus-survey-back-cover>')($scope));
           break;
       }
     }
