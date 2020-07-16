@@ -7,8 +7,7 @@
       templateUrl: 'app/otusjs-player-component/player-display/player-display-template.html',
       controller: 'otusPlayerDisplayCtrl as $ctrl',
       bindings: {
-        goBack: '&',
-        // onProcessingPlayer: '&'
+        goBack: '&'
       }
     }).controller('otusPlayerDisplayCtrl', Controller);
 
@@ -33,7 +32,6 @@
     /* Public methods */
     self.$onInit = onInit;
     self.loadItem = loadItem;
-    self.showCover = showCover;
     self.remove = remove;
     self.onProcessingPlayer = onProcessingPlayer;
     self.currentItems = [];
@@ -49,16 +47,6 @@
       if (itemData) {
         self.loadItem(itemData);
       }
-    }
-
-    function _destroyCurrentItems() {
-      if (self.currentItems.length) {
-        self.currentItems.forEach(item => {
-          item.destroy();
-        });
-      }
-
-      self.currentItems = [];
     }
 
     function loadItem(itemsData) {
@@ -87,7 +75,16 @@
       if(PlayerService.isGoingBack()){
         PlayerService.setGoBackTo(null);
       }
+    }
 
+    function _destroyCurrentItems() {
+      if (self.currentItems.length) {
+        self.currentItems.forEach(item => {
+          item.destroy();
+        });
+      }
+
+      self.currentItems = [];
     }
 
     function _removeQuestions(itemsData) {
@@ -136,13 +133,6 @@
       };
     }
 
-    function showCover() {
-      _destroyCurrentItems();
-      // $element.find('#pagePlayer').empty();
-      // $element.find('#pagePlayer').append($compile(SURVEY_COVER)($scope));
-      $state.go('/');
-    }
-
     function remove() {
       $element.find('#pagePlayer').remove();
     }
@@ -152,7 +142,6 @@
     }
 
     function onProcessingPlayer() {
-      //self.onProcessingPlayer();
       OnProcessingService.onProcessing();
     }
   }
