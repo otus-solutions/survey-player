@@ -151,7 +151,21 @@
     function _setPlayerConfiguration() {
       _generateOtusPreview();
       PlayerService.setup();
+      _appendTemplateAccordingState();
+    }
 
+    function _generateOtusPreview() {
+      _newScope = $scope;
+      _newScope.surveyActivity = {};
+      _newScope.surveyActivity.template = _getSurveyTemplateObject();
+    }
+
+    function _getSurveyTemplateObject() {
+      const _activity = angular.copy(self.template);
+      return ActivityFacadeService.surveyActivity = _activity;
+    }
+
+    function _appendTemplateAccordingState(){
       const SURVEY_PREVIEW_ID ='#survey-preview';
       $(SURVEY_PREVIEW_ID).empty();
       switch ($state.current.name) {
@@ -165,17 +179,6 @@
           $(SURVEY_PREVIEW_ID).append($compile('<otus-survey-back-cover layout="column" layout-fill=""></otus-survey-back-cover>')($scope));
           break;
       }
-    }
-
-    function _generateOtusPreview() {
-      _newScope = $scope;
-      _newScope.surveyActivity = {};
-      _newScope.surveyActivity.template = _getSurveyTemplateObject();
-    }
-
-    function _getSurveyTemplateObject() {
-      const _activity = angular.copy(self.template);
-      return ActivityFacadeService.surveyActivity = _activity;
     }
 
   }
