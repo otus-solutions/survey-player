@@ -4,33 +4,30 @@
   angular
     .module('otusjs.player.component')
     .component('otusSurveyCover', {
-      templateUrl: 'app/otusjs-player-component/survey-cover/survey-cover-template.html',
-      controller: Controller
-    });
+      controller: 'otusSurveyCoverCtrl as $ctrl',
+      templateUrl: 'app/otusjs-player-component/survey-cover/survey-cover-template.html'
+    }).controller('otusSurveyCoverCtrl', Controller);
 
   Controller.$inject = [
     '$scope',
     '$element',
     '$state',
-    'otusjs.player.data.activity.ActivityFacadeService',
     'otusjs.player.core.player.PlayerService'
   ];
 
-  function Controller($scope, $element, $state, ActivityFacadeService, PlayerService) {
+  function Controller($scope, $element, $state, PlayerService) {
     let self = this;
 
     /* Public methods */
     self.$onInit = onInit;
     self.play = play;
-    self.show = show;
-    self.remove = remove;
     self.stop = stop;
 
     function onInit() {
       self.hardBlocker = PlayerService.getHardBlocker();
       self.softBlocker = PlayerService.getSoftBlocker();
 
-      self.title = ActivityFacadeService.getCurrentSurvey().getSurvey().getName();
+      self.title = PlayerService.getCurrentSurvey().getName();
 
       _unblock();
     }
@@ -73,14 +70,6 @@
 
     function stop(){
       PlayerService.stop();
-    }
-
-    function show() {
-      self.title = ActivityFacadeService.getCurrentSurvey().getSurvey().getName();
-    }
-
-    function remove() {
-      $element.remove();
     }
 
   }
