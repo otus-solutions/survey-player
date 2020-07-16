@@ -114,7 +114,7 @@
     }
 
     function end() {
-      _component.showBack();
+      _component.goToFinish();
     }
 
     function eject() {

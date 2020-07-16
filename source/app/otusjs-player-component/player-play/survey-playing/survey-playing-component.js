@@ -25,7 +25,7 @@
     self.goBack = goBack;
     self.pause = pause;
     self.stop = stop;
-    self.showBack = showBack;
+    self.goToFinish = goToFinish;
     self.onProcessingPlayer = onProcessingPlayer;
     self.goIsLockOpenClose = goIsLockOpenClose;
 
@@ -108,7 +108,7 @@
       PlayerService.stop();
     }
 
-    function showBack() {
+    function goToFinish() {
       $state.go('/finish');
     }
 
