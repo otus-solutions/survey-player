@@ -47,7 +47,6 @@
 
     function onInit() {
       $scope.$parent.$ctrl.playerCommander = self;
-      console.log('player-commander onInit\n')
     }
 
     function postLink() {
