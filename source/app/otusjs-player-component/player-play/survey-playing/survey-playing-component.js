@@ -75,6 +75,7 @@
 
     function onInit() {
       PlayerService.play();
+      PlayerService.bindComponent(self);
 
       self.hardBlocker = PlayerService.getHardBlocker();
       self.softBlocker = PlayerService.getSoftBlocker();
