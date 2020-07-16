@@ -54,9 +54,6 @@ describe('otusSurveyCover component', function () {
       controller.$onInit();
       Mock.$scope.$digest();
 
-      // console.log('hardError', controller.hardError, 'softError', controller.softError)
-      // console.log('reject?', {hardBlocker === reject}, 'reject?', softBlocker === reject)
-
       expect(controller.hardError).toBe(hardBlocker === Mock.reject);
       expect(controller.softError).toBe(softBlocker === Mock.reject);
     }
