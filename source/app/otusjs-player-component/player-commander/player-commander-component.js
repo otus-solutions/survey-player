@@ -40,7 +40,6 @@
     self.goAhead = goAhead;
     self.pause = pause;
     self.stop = stop;
-    self.remove = remove;
     self.buttomStaticVarible = buttomStaticVarible;
     self.$onInit = onInit;
     self.$postLink = postLink;
@@ -79,10 +78,6 @@
         function () {
           self.onStop();
         });
-    }
-
-    function remove() {
-      $element.remove();
     }
 
     function shortcutAction() {
