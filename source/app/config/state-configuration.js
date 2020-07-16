@@ -38,7 +38,7 @@
 
     $stateProvider.state(STATES.PLAY, {
       url: '/play',
-      templateUrl: 'app/otusjs-player-component/player-play/player-play-template.html',
+      templateUrl: 'app/otusjs-player-component/survey-playing/playing-template.html',
       controller: Controller
     });
 

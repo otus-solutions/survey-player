@@ -4,7 +4,7 @@
   angular
     .module('otusjs.player.component')
     .component('otusSurveyPlaying', {
-      templateUrl: 'app/otusjs-player-component/player-play/survey-playing/survey-playing-template.html',
+      templateUrl: 'app/otusjs-player-component/survey-playing/survey-playing-template.html',
       controller: Controller
     });
 
