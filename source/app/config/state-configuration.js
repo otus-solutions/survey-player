@@ -44,8 +44,7 @@
 
     $stateProvider.state(STATES.FINISH, {
       url: '/finish',
-      templateUrl: 'app/activity-viewer-template.html',
-      controller: Controller
+      template: '<otus-survey-back-cover layout="column" layout-fill=""></otus-survey-back-cover>'
     });
 
     $urlRouterProvider.otherwise(STATES.HOME);
