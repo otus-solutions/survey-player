@@ -16,11 +16,12 @@
     '$q',
     '$mdDialog',
     '$scope',
-    'otusjs.player.core.player.PlayerService'
+    'otusjs.player.core.player.PlayerService',
+    '$state'
   ];
 
 
-  function Controller($q, $mdDialog, $scope, PlayerService) {
+  function Controller($q, $mdDialog, $scope, PlayerService, $state) {
     const self = this;
     const CANCEL_TITLE = 'Sair da Atividade';
     const CANCEL_CONTENT = 'Todos os dados, não salvos, serão perdidos. Você tem certeza que deseja sair?';
@@ -32,7 +33,11 @@
 
 
     function onInit() {
-      self.title = PlayerService.getCurrentSurvey().getName();
+      if (PlayerService.getCurrentSurvey()) {
+        self.title = PlayerService.getCurrentSurvey().getName();
+      } else {
+        $state.go('/play')
+      }
     }
 
     function finalize() {
