@@ -10,11 +10,10 @@
 
   Controller.$inject = [
     'otusjs.player.core.player.PlayerService',
-    '$state',
-    '$window'
+    '$state'
   ];
 
-  function Controller(PlayerService, $state, $window) {
+  function Controller(PlayerService, $state) {
     let self = this;
 
     /* Public methods */
@@ -50,11 +49,6 @@
         didScroll = false;
       }
     }, 250);
-
-    $window.addEventListener('beforeunload', function (e) {
-      e.preventDefault();
-      e.returnValue = '';
-    });
 
     function _hasScrolled() {
       let st = angular.element(document.querySelector('.otus-player-display-container')).scrollTop();
