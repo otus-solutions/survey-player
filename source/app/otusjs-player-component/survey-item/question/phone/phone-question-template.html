@@ -1,5 +1,6 @@
 <md-input-container md-no-float class="md-block no-margin-top-bottom" flex-gt-sm="45">
   <md-icon class="material-icons">phone</md-icon>
-  <input type="text" ng-model="$ctrl.answer" ng-change="$ctrl.update()" placeholder="(XX) XXXXX-XXXX" ui-br-phone-number
+  <input type="tel" ng-model="$ctrl.answer" ng-change="$ctrl.update()" placeholder="(XX) XXXXX-XXXX"
+         ui-mask="(99) 99999-9999"
     ng-disabled="$ctrl.view">
 </md-input-container>
