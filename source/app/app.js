@@ -8,6 +8,7 @@
       'ngMessages',
       'ngAnimate',
       'ui.router',
+      'ui.mask',
       'angular-bind-html-compile',
       /* Exportable dependencies */
       'otusjs.player.core',
