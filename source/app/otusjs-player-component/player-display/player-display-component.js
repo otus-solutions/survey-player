@@ -7,8 +7,7 @@
       templateUrl: 'app/otusjs-player-component/player-display/player-display-template.html',
       controller: 'otusPlayerDisplayCtrl as $ctrl',
       bindings: {
-        goBack: '&',
-        onProcessingPlayer: '&'
+        goBack: '&'
       }
     }).controller('otusPlayerDisplayCtrl', Controller);
 
@@ -20,20 +19,21 @@
     '$location',
     '$anchorScroll',
     'otusjs.player.data.activity.ActivityFacadeService',
-    'otusjs.player.core.player.PlayerService'
+    'otusjs.player.core.player.PlayerService',
+    'otusjs.player.core.player.OnProcessingService'
   ];
 
-  function Controller($scope, $document, $element, $compile, $location, $anchorScroll, ActivityFacadeService, PlayerService) {
-    var self = this;
+  function Controller($scope, $document, $element, $compile, $location, $anchorScroll,
+                      ActivityFacadeService, PlayerService, OnProcessingService) {
+    const self = this;
 
-    var SURVEY_ITEM = '<otus-survey-item item-data="itemData" id="{{itemData.templateID}}" on-processing-player="$ctrl.onProcessingPlayer()" style="margin: 0;display:block;" class="animate-switch"/>';
-    var SURVEY_COVER = '<otus-cover />';
+    const SURVEY_ITEM = '<otus-survey-item item-data="itemData" id="{{itemData.templateID}}" on-processing-player="$ctrl.onProcessingPlayer()" style="margin: 0;display:block;" class="animate-switch"/>';
 
     /* Public methods */
     self.$onInit = onInit;
     self.loadItem = loadItem;
-    self.showCover = showCover;
     self.remove = remove;
+    self.onProcessingPlayer = onProcessingPlayer;
     self.currentItems = [];
 
     function onInit() {
@@ -42,16 +42,11 @@
       $scope.itemData.templateID = '';
       $scope.questions = [];
       self.ids = [];
-    }
 
-    function _destroyCurrentItems() {
-      if (self.currentItems.length) {
-        self.currentItems.forEach(item => {
-          item.destroy();
-        });
+      let itemData = PlayerService.getItemData();
+      if (itemData) {
+        self.loadItem(itemData);
       }
-
-      self.currentItems = [];
     }
 
     function loadItem(itemsData) {
@@ -70,17 +65,26 @@
             $element.find('#pagePlayer').append(element);
           }());
         }
-        _onProcessingPlayer();
+        onProcessingPlayer();
         _focusOnItem(itemsData[0].templateID);
       } else {
-        _onProcessingPlayer();
+        onProcessingPlayer();
         _focusOnItem(itemsData[0].templateID);
       }
 
       if(PlayerService.isGoingBack()){
         PlayerService.setGoBackTo(null);
       }
+    }
 
+    function _destroyCurrentItems() {
+      if (self.currentItems.length) {
+        self.currentItems.forEach(item => {
+          item.destroy();
+        });
+      }
+
+      self.currentItems = [];
     }
 
     function _removeQuestions(itemsData) {
@@ -91,7 +95,6 @@
         var length = $scope.questions.length;
         $scope.questions.splice(index, length);
         self.ids.splice(index, length);
-
       }
     }
 
@@ -130,12 +133,6 @@
       };
     }
 
-    function showCover() {
-      _destroyCurrentItems();
-      $element.find('#pagePlayer').empty();
-      $element.find('#pagePlayer').append($compile(SURVEY_COVER)($scope));
-    }
-
     function remove() {
       $element.find('#pagePlayer').remove();
     }
@@ -144,8 +141,8 @@
       return !self.currentItems.length || (self.currentItems.length && $scope.itemData.templateID !== itemData.templateID);
     }
 
-    function _onProcessingPlayer() {
-      self.onProcessingPlayer();
+    function onProcessingPlayer() {
+      OnProcessingService.onProcessing();
     }
   }
 }());

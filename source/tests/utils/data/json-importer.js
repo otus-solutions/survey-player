@@ -1,4 +1,4 @@
-var Test = {};
+const Test = {};
 Test.utils = {};
 Test.utils.data = {};
 Test.utils.data.activity = {
@@ -3638,5 +3638,238 @@ Test.utils.data.activity = {
   }
 };
 
+Test.utils.data.metadata = {
+  "extents": "StudioObject",
+  "objectType": "MetadataGroup",
+  "options": [
+    {
+      "extends": "StudioObject",
+      "objectType": "MetadataAnswer",
+      "dataType": "Integer",
+      "value": 1,
+      "extractionValue": ".Q",
+      "label": {
+        "ptBR": {
+          "extends": "StudioObject",
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "Não quer responder",
+          "formattedText": "Não quer responder"
+        },
+        "enUS": {
+          "extends": "StudioObject",
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "",
+          "formattedText": ""
+        },
+        "esES": {
+          "extends": "StudioObject",
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "",
+          "formattedText": ""
+        }
+      }
+    },
+    {
+      "extends": "StudioObject",
+      "objectType": "MetadataAnswer",
+      "dataType": "Integer",
+      "value": 2,
+      "extractionValue": ".S",
+      "label": {
+        "ptBR": {
+          "extends": "StudioObject",
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "Não sabe",
+          "formattedText": "Não sabe"
+        },
+        "enUS": {
+          "extends": "StudioObject",
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "",
+          "formattedText": ""
+        },
+        "esES": {
+          "extends": "StudioObject",
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "",
+          "formattedText": ""
+        }
+      }
+    },
+    {
+      "extends": "StudioObject",
+      "objectType": "MetadataAnswer",
+      "dataType": "Integer",
+      "value": 3,
+      "extractionValue": ".A",
+      "label": {
+        "ptBR": {
+          "extends": "StudioObject",
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "Não se aplica",
+          "formattedText": "Não se aplica"
+        },
+        "enUS": {
+          "extends": "StudioObject",
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "",
+          "formattedText": ""
+        },
+        "esES": {
+          "extends": "StudioObject",
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "",
+          "formattedText": ""
+        }
+      }
+    },
+    {
+      "extends": "StudioObject",
+      "objectType": "MetadataAnswer",
+      "dataType": "Integer",
+      "value": 4,
+      "extractionValue": ".F",
+      "label": {
+        "ptBR": {
+          "extends": "StudioObject",
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "Não há dados",
+          "formattedText": "Não há dados"
+        },
+        "enUS": {
+          "extends": "StudioObject",
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "",
+          "formattedText": ""
+        },
+        "esES": {
+          "extends": "StudioObject",
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "",
+          "formattedText": ""
+        }
+      }
+    }
+  ]
+};
 
-
+Test.utils.data.surveyItem = {
+  "extents": "SurveyItem",
+  "objectType": "SingleSelectionQuestion",
+  "templateID": "DORC1",
+  "customID": "DORC1",
+  "dataType": "Integer",
+  "label": {
+    "ptBR": {
+      "extends": "StudioObject",
+      "objectType": "Label",
+      "oid": "",
+      "plainText": "01. O(A) Sr(a) informou que tem sentido dor nos últimos 30 dias. Essa dor tem&nbsp; durado por pelo menos três meses ?",
+      "formattedText": "<div>01. O(A) Sr(a) informou que tem sentido dor nos últimos 30 dias. Essa dor tem&nbsp;<span style='letter-spacing: 0.01em;'>durado por pelo menos<u> três meses</u>?</span></div>"
+    },
+    "enUS": {
+      "extends": "StudioObject",
+      "objectType": "Label",
+      "oid": "",
+      "plainText": "",
+      "formattedText": ""
+    },
+    "esES": {
+      "extends": "StudioObject",
+      "objectType": "Label",
+      "oid": "",
+      "plainText": "",
+      "formattedText": ""
+    }
+  },
+  "options": [
+    {
+      "extents": "StudioObject",
+      "objectType": "AnswerOption",
+      "value": 1,
+      "extractionValue": "0",
+      "dataType": "Integer",
+      "label": {
+        "ptBR": {
+          "extends": "StudioObject",
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "Não",
+          "formattedText": "Não"
+        },
+        "enUS": {
+          "extends": "StudioObject",
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "",
+          "formattedText": ""
+        },
+        "esES": {
+          "extends": "StudioObject",
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "",
+          "formattedText": ""
+        }
+      }
+    },
+    {
+      "extents": "StudioObject",
+      "objectType": "AnswerOption",
+      "value": 2,
+      "extractionValue": "1",
+      "dataType": "Integer",
+      "label": {
+        "ptBR": {
+          "extends": "StudioObject",
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "Sim",
+          "formattedText": "Sim"
+        },
+        "enUS": {
+          "extends": "StudioObject",
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "",
+          "formattedText": ""
+        },
+        "esES": {
+          "extends": "StudioObject",
+          "objectType": "Label",
+          "oid": "",
+          "plainText": "",
+          "formattedText": ""
+        }
+      }
+    }
+  ],
+  "metadata": Test.utils.data.metadata,
+  "fillingRules": {
+    "extends": "StudioObject",
+    "objectType": "FillingRules",
+    "options": {
+      "mandatory": {
+        "extends": "StudioObject",
+        "objectType": "Rule",
+        "validatorType": "mandatory",
+        "data": {
+          "canBeIgnored": false,
+          "reference": true
+        }
+      }
+    }
+  }
+};

@@ -7,6 +7,7 @@ var CACHED_FILES = [
   "/node_modules/jquery/dist/jquery.min.js",
   "/node_modules/angular/angular.min.js",
   "/node_modules/angular-ui-router/release/angular-ui-router.min.js",
+  "/node_modules/angular-ui-mask/dist/mask.js",
   "/node_modules/angular-cookies/angular-cookies.min.js",
   "/node_modules/angular-material/angular-material.min.js",
   "/node_modules/angular-aria/angular-aria.min.js",

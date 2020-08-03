@@ -4,38 +4,31 @@
   angular
     .module('otusjs.player.component')
     .component('otusSurveyCover', {
-      templateUrl: 'app/otusjs-player-component/survey-cover/survey-cover-template.html',
-      controller: Controller,
-      bindings: {
-        onPlay: '&',
-        hardBlocker: '&',
-        softBlocker: '&',
-        onStop: '&'
-      }
-    });
+      controller: 'otusSurveyCoverCtrl as $ctrl',
+      templateUrl: 'app/otusjs-player-component/survey-cover/survey-cover-template.html'
+    }).controller('otusSurveyCoverCtrl', Controller);
 
   Controller.$inject = [
     '$scope',
     '$element',
-    'otusjs.player.data.activity.ActivityFacadeService'
+    '$state',
+    'otusjs.player.core.player.PlayerService'
   ];
 
-  function Controller( $scope,  $element, ActivityFacadeService) {
-    var self = this;
-    const CANCEL_TITLE = 'Cancelar Atividade';
-    const CANCEL_CONTENT = 'Todos os dados, não salvos, serão perdidos. Você tem certeza que deseja cancelar?';
+  function Controller($scope, $element, $state, PlayerService) {
+    let self = this;
 
     /* Public methods */
     self.$onInit = onInit;
     self.play = play;
-    self.show = show;
-    self.remove = remove;
     self.stop = stop;
 
     function onInit() {
-      $scope.$parent.$ctrl.playerCover = self;
-      var activity = ActivityFacadeService.getCurrentSurvey().getSurvey();
-      self.title = activity.getName();
+      self.hardBlocker = PlayerService.getHardBlocker();
+      self.softBlocker = PlayerService.getSoftBlocker();
+
+      self.title = PlayerService.getCurrentSurvey().getName();
+
       _unblock();
     }
 
@@ -45,9 +38,9 @@
       self.softProgress = false;
       self.hardProgress = false;
 
-      if (self.hardBlocker()) {
+      if (self.hardBlocker) {
         self.hardProgress = true;
-        self.hardBlocker()
+        self.hardBlocker
           .then(function () {
             self.hardProgress = false;
           })
@@ -58,9 +51,9 @@
           });
       }
 
-      if (self.softBlocker()) {
+      if (self.softBlocker) {
         self.softProgress = true;
-        self.softBlocker()
+        self.softBlocker
           .then(function () {
             self.softProgress = false;
           })
@@ -71,21 +64,12 @@
       }
     }
 
-    function stop(){
-      self.onStop();
-    }
-
     function play() {
-      self.onPlay();
+      $state.go('/play');
     }
 
-    function show() {
-      var activity = ActivityFacadeService.getCurrentSurvey().getSurvey();
-      self.title = activity.getName();
-    }
-
-    function remove() {
-      $element.remove();
+    function stop(){
+      PlayerService.stop();
     }
 
   }

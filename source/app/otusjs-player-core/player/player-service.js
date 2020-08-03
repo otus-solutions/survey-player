@@ -46,6 +46,7 @@
     self.eject = eject;
     self.stop = stop;
     self.save = save;
+    self.getCurrentSurvey = getCurrentSurvey;
 
     /**/
     self.registerHardBlocker = registerHardBlocker;
@@ -114,7 +115,7 @@
     }
 
     function end() {
-      _component.showBack();
+      _component.goToFinish();
     }
 
     function eject() {
@@ -127,6 +128,10 @@
 
     function save() {
       SaveActionService.execute();
+    }
+
+    function getCurrentSurvey(){
+      return ActivityFacadeService.getCurrentSurvey().getSurvey();
     }
   }
 })();

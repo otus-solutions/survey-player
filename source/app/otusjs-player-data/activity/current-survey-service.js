@@ -9,7 +9,7 @@
     'otusjs.model.activity.ActivityFacadeService'
   ];
 
-  function Service(ActivityFacadeService) {
+  function Service(ModelActivityFacadeService) {
     var self = this;
 
     /* Public Interface */
@@ -31,7 +31,7 @@
     self.getWholeTemplateStaticVariableList = getWholeTemplateStaticVariableList;
 
     function getSurvey() {
-      return ActivityFacadeService.surveyActivity;
+      return ModelActivityFacadeService.surveyActivity;
     }
 
     function getSurveyDatasources() { //question datasources
@@ -43,11 +43,11 @@
     }
 
     function getAnswerByItemID(id) {
-      return ActivityFacadeService.getFillingByQuestionID(id);
+      return ModelActivityFacadeService.getFillingByQuestionID(id);
     }
 
     function getItems() {
-      return ActivityFacadeService.surveyActivity.getItems();
+      return ModelActivityFacadeService.surveyActivity.getItems();
     }
 
     function getItemByCustomID(customID) {
@@ -74,7 +74,7 @@
     }
 
     function getNavigations() {
-      return ActivityFacadeService.surveyActivity.getNavigations();
+      return ModelActivityFacadeService.surveyActivity.getNavigations();
     }
 
     function getNavigationByOrigin(origin) {
@@ -91,27 +91,27 @@
     }
 
     function initialize() {
-      ActivityFacadeService.initializeActivitySurvey();
+      ModelActivityFacadeService.initializeActivitySurvey();
     }
 
     function finalize() {
-      ActivityFacadeService.finalizeActivitySurvey();
+      ModelActivityFacadeService.finalizeActivitySurvey();
     }
 
     function save() {
-      ActivityFacadeService.saveActivitySurvey();
+      ModelActivityFacadeService.saveActivitySurvey();
     }
 
     function clearSkippedAnswers() {
-      ActivityFacadeService.clearSkippedAnswers();
+      ModelActivityFacadeService.clearSkippedAnswers();
     }
 
     function getNavigationTracker() {
-      return ActivityFacadeService.getNavigationTracker();
+      return ModelActivityFacadeService.getNavigationTracker();
     }
 
     function getWholeTemplateStaticVariableList() {
-      return ActivityFacadeService.getWholeTemplateVariableList();
+      return ModelActivityFacadeService.getWholeTemplateVariableList();
     }
 
   }

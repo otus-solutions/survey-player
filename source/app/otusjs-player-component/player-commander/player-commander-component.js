@@ -11,7 +11,6 @@
         onGoBack: '&',
         onPause: '&',
         onStop: '&',
-        onProcessing: '=?',
         onIsLockingOpenClose: '&'
       }
     });
@@ -22,49 +21,31 @@
     '$scope',
     '$document',
     '$element',
-    '$timeout'
+    '$timeout',
+    'otusjs.player.core.player.OnProcessingService'
   ];
 
-  function Controller($q, $mdDialog, $scope, $document, $element, $timeout) {
-    var SAVE_TITLE = 'Salvar Atividade';
-    var SAVE_CONTENT = 'Você tem certeza que deseja salvar a atividade?';
-    var CANCEL_TITLE = 'Cancelar Atividade';
-    var CANCEL_CONTENT = 'Todos os dados, não salvos, serão perdidos. Você tem certeza que deseja cancelar?';
+  function Controller($q, $mdDialog, $scope, $document, $element, $timeout,
+                      OnProcessingService) {
+    const SAVE_TITLE = 'Salvar Atividade';
+    const SAVE_CONTENT = 'Você tem certeza que deseja salvar a atividade?';
+    const CANCEL_TITLE = 'Cancelar Atividade';
+    const CANCEL_CONTENT = 'Todos os dados, não salvos, serão perdidos. Você tem certeza que deseja cancelar?';
 
-    var self = this;
-    var pressedControl = false;
-
-    self.loadingAhead = false;
-    self.loadingBack = false;
-    self.isGoAheadDisabled = false;
-    self.isGoBackDisabled = false;
+    const self = this;
+    let pressedControl = false;
 
     /* Public methods */
     self.goBack = goBack;
     self.goAhead = goAhead;
     self.pause = pause;
     self.stop = stop;
-    self.remove = remove;
     self.buttomStaticVarible = buttomStaticVarible;
     self.$onInit = onInit;
     self.$postLink = postLink;
-    self.onProcessing = _onProcessing;
 
     function onInit() {
       $scope.$parent.$ctrl.playerCommander = self;
-    }
-
-    function _onProcessing() {
-      $timeout(function () {
-        self.loadingAhead = false;
-        $scope.$parent.$ctrl.playerCommander.loadingAhead = false;
-        self.loadingBack = false;
-        $scope.$parent.$ctrl.playerCommander.loadingBack = false;
-        self.isGoAheadDisabled = false;
-        $scope.$parent.$ctrl.playerCommander.isGoAheadDisabled = false;
-        self.isGoBackDisabled = false;
-        $scope.$parent.$ctrl.playerCommander.isGoBackDisabled = false;
-      }, 300);
     }
 
     function postLink() {
@@ -72,15 +53,15 @@
     }
 
     function goAhead() {
-      self.loadingAhead = true;
-      self.isGoAheadDisabled = true;
+      OnProcessingService.loadingAhead = true;
+      OnProcessingService.isGoAheadDisabled = true;
 
       self.onGoAhead();
     }
 
     function goBack() {
-      self.loadingBack = true;
-      self.isGoBackDisabled = true;
+      OnProcessingService.loadingBack = true;
+      OnProcessingService.isGoBackDisabled = true;
 
       self.onGoBack();
     }
@@ -97,10 +78,6 @@
         function () {
           self.onStop();
         });
-    }
-
-    function remove() {
-      $element.remove();
     }
 
     function shortcutAction() {
