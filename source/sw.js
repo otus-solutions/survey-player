@@ -248,8 +248,12 @@ self.addEventListener('activate', function (e) {
 self.addEventListener('fetch', function (event) {
   if (event.request.method === 'GET') {
     var url = event.request.url.indexOf(self.location.origin) !== -1 ?
-      "/index.html" :
+      event.request.url.split(`${self.location.origin}/`)[1] :
       event.request.url;
+
+    if(url.indexOf("#/") !== -1){
+      url = "index.html"
+    }
 
     event.respondWith(
       //todo: this match should consider CACHE_NAME
