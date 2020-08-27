@@ -1,9 +1,9 @@
-
 var version = "1.21.1";
 var CACHE_PREFIX = 'survey-player';
 var CACHE_NAME = CACHE_PREFIX + version;
 
 var CACHED_FILES = [
+  "manifest.json",
   "/node_modules/jquery/dist/jquery.min.js",
   "/node_modules/angular/angular.min.js",
   "/node_modules/angular-ui-router/release/angular-ui-router.min.js",
@@ -24,7 +24,20 @@ var CACHED_FILES = [
   "/node_modules/otus-model-js/dist/st-utils.min.js",
   "/node_modules/fuse.js/src/fuse.min.js",
   "/node_modules/otus-validation-js/dist/otus-validation-min.js",
+  "/node_modules/please-wait/build/please-wait.css",
+  "/node_modules/trail-js/dist/style.css",
+  "/node_modules/angular-material/angular-material.min.css",
   "/app/app.js",
+  "/app/static-resource/stylesheet/please-wait-style.css",
+  "/app/static-resource/image/coruja_pesquisadora.png",
+  "/app/assets/MaterialIcons-Regular.woff2",
+  "/app/assets/otusjs-player-standalone.css",
+  "/app/assets/fonts-googleapis-css.css",
+  "/app/assets/material-icons.css",
+  "/app/assets/otusjs-player.css",
+  "/app/assets/otusjs-survey-item.css",
+  "/app/assets/otusjs-viewer.css",
+  "/app/assets/icons/survey-player.png",
   "/app/service-worker.js",
   "/app/activity-rest-service.js",
   "/app/activity-collection-rest-service.js",
@@ -212,7 +225,7 @@ var CACHED_FILES = [
   "/app/index.html"
 ];
 
-self.addEventListener('install', function(e) {
+self.addEventListener('install', function (e) {
   //todo this should be on activate only
   e.waitUntil(
     removeOldCacheFiles()
@@ -220,36 +233,46 @@ self.addEventListener('install', function(e) {
   //
 
   e.waitUntil(
-    caches.open(CACHE_NAME).then(function(cache) {
+    caches.open(CACHE_NAME).then(function (cache) {
       return cache.addAll(CACHED_FILES);
     })
   );
 });
 
-self.addEventListener('activate', function(e) {
+self.addEventListener('activate', function (e) {
   e.waitUntil(
     removeOldCacheFiles()
   );
 });
 
-self.addEventListener('fetch', function(e) {
-  e.respondWith(
-    //todo: this match should consider CACHE_NAME
-    caches.match(e.request).then(function(response) {
-      return response || fetch(e.request);
-    })
-  );
+self.addEventListener('fetch', function (event) {
+  if (event.request.method === 'GET') {
+    var url = event.request.url.indexOf(self.location.origin) !== -1 ?
+      event.request.url.split(`${self.location.origin}/`)[1] :
+      event.request.url;
+
+    if(url.indexOf("#/") !== -1){
+      url = "index.html"
+    }
+
+    event.respondWith(
+      //todo: this match should consider CACHE_NAME
+      caches.match(url).then(function (response) {
+        return response || fetch(event.request);
+      })
+    );
+  }
 });
 
 function removeOldCacheFiles() {
-  caches.keys().then(function(cacheNames) {
+  caches.keys().then(function (cacheNames) {
     return Promise.all(
-      cacheNames.filter(function(cacheName) {
+      cacheNames.filter(function (cacheName) {
         // Return true if you want to remove this cache,
         // but remember that caches are shared across
         // the whole origin
         return (cacheName.startsWith(CACHE_PREFIX) && cacheName !== CACHE_NAME);
-      }).map(function(cacheName) {
+      }).map(function (cacheName) {
         return caches.delete(cacheName);
       })
     );
