@@ -19,6 +19,7 @@
 
     const TITLE_LOGOUT = 'USUÁRIO CONECTADO';
     const CONTENT_LOGOUT = 'Deseja realmente sair?';
+    const CONTENT_OFFLINE_LOGOUT = 'Você esta offline, deseja realmente sair?';
     const ARIA_LABEL_LOGOUT = 'Logout';
     const YES = 'Sim';
     const NO = 'Não';
@@ -28,7 +29,7 @@
 
     function isAuthenticated() {
       var _token = SurveyApiService.getAuthToken();
-      return (_token && $rootScope.online);
+      return _token;
     }
 
     function authenticate() {
@@ -52,10 +53,15 @@
     function _logout() {
       var confirm = $mdDialog.confirm()
         .title(TITLE_LOGOUT)
-        .textContent(CONTENT_LOGOUT)
         .ariaLabel(ARIA_LABEL_LOGOUT)
         .ok(YES)
         .cancel(NO);
+
+      if($rootScope.online){
+        confirm.textContent(CONTENT_LOGOUT)
+      } else {
+        confirm.textContent(CONTENT_OFFLINE_LOGOUT)
+      }
 
       return $mdDialog.show(confirm).then(function() {
         SurveyApiService.clearSession();
