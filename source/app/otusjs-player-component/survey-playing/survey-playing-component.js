@@ -9,11 +9,12 @@
     });
 
   Controller.$inject = [
-    'otusjs.player.core.player.PlayerService',
-    '$state'
+    '$state',
+    'STATE',
+    'otusjs.player.core.player.PlayerService'
   ];
 
-  function Controller(PlayerService, $state) {
+  function Controller($state, STATE, PlayerService) {
     let self = this;
 
     /* Public methods */
@@ -109,7 +110,7 @@
     }
 
     function goToFinish() {
-      $state.go('/finish');
+      $state.go(STATE.FINISH);
     }
 
     function _loadItem() {

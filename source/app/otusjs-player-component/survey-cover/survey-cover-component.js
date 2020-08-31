@@ -12,10 +12,11 @@
     '$scope',
     '$element',
     '$state',
+    'STATE',
     'otusjs.player.core.player.PlayerService'
   ];
 
-  function Controller($scope, $element, $state, PlayerService) {
+  function Controller($scope, $element, $state, STATE, PlayerService) {
     let self = this;
 
     /* Public methods */
@@ -65,7 +66,7 @@
     }
 
     function play() {
-      $state.go('/play');
+      $state.go(STATE.PLAY);
     }
 
     function stop(){
