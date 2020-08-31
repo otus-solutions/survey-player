@@ -9,7 +9,10 @@
       ERROR: '/error',
       HOME: '/home',
       PLAY: '/play',
-      FINISH: '/finish'
+      FINISH: '/finish',
+
+      PARTICIPANT_CONFIRMATION: '/participant-confirmation',
+      PARTICIPANT_FINISH: '/participant-finish'
     });
 
 }());
