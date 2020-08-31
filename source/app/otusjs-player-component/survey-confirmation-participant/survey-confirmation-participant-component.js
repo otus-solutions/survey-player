@@ -3,10 +3,10 @@
 
   angular
     .module('otusjs.player.component')
-    .component('otusConfirmationParticipant', {
-      controller: 'otusConfirmationParticipantCtrl as $ctrl',
-      templateUrl: 'app/otusjs-player-component/confirmation-participant/confirmation-participant-template.html'
-    }).controller('otusConfirmationParticipantCtrl', Controller);
+    .component('otusSurveyConfirmationParticipant', {
+      controller: 'otusSurveyConfirmationParticipantCtrl as $ctrl',
+      templateUrl: 'app/otusjs-player-component/survey-confirmation-participant/survey-confirmation-participant-template.html'
+    }).controller('otusSurveyConfirmationParticipantCtrl', Controller);
 
   Controller.$inject = [
     '$state',
