@@ -29,6 +29,11 @@
       template: '<survey-player-home layout="column" flex></survey-player-home>'
     });
 
+    $stateProvider.state(STATE.BEGIN, {
+      url: '/begin',
+      template: '<otus-survey-cover layout="column" layout-fill=""></otus-survey-cover>'
+    });
+
     $stateProvider.state(STATE.PLAY, {
       url: '/play',
       templateUrl: 'app/otusjs-player-component/survey-playing/playing-template.html',
@@ -38,6 +43,11 @@
     $stateProvider.state(STATE.FINISH, {
       url: '/finish',
       template: '<otus-survey-back-cover layout="column" layout-fill=""></otus-survey-back-cover>'
+    });
+
+    $stateProvider.state(STATE.PARTICIPANT_FINISH, {
+      url: '/participant-finish',
+      template: '<otus-survey-finish-participant layout="column" layout-fill=""></otus-survey-finish-participant>'
     });
 
     $urlRouterProvider.otherwise(STATE.HOME);
@@ -80,10 +90,8 @@
 
     let _newScope;
     let _isValid = false;
-    let _hasCallback = true;
 
     function onInit() {
-      console.log(STATE)
       _config();
     }
 
@@ -94,13 +102,6 @@
         const _token = angular.copy($stateParams.token);
         const _callback = angular.copy($stateParams.callback);
         const _activity = angular.copy($stateParams.activity);
-
-        console.log($state.current.name)
-        console.log(_activity)
-        console.log(_token)
-        console.log(_callback)
-
-        _hasCallback = !!_callback;
 
         if (_callback) {
           SurveyApiService.setCallbackAddress(angular.copy(_callback));
@@ -171,11 +172,11 @@
       $(SURVEY_PREVIEW_ID).empty();
       switch ($state.current.name) {
         case STATE.MAIN:
-          if(_hasCallback){
+          if(SurveyApiService.hasExternalCallback()){
             $(SURVEY_PREVIEW_ID).append($compile('<otus-survey-cover layout="column" layout-fill=""></otus-survey-cover>')($scope));
           }
           else{
-            $(SURVEY_PREVIEW_ID).append($compile('<otus-survey-cover layout="column" layout-fill=""></otus-survey-cover>')($scope));
+            $(SURVEY_PREVIEW_ID).append($compile('<otus-survey-confirmation-participant layout="column" layout-fill=""></otus-survey-confirmation-participant>')($scope));
           }
           break;
 
@@ -189,6 +190,10 @@
 
         case STATE.FINISH:
           $(SURVEY_PREVIEW_ID).append($compile('<otus-survey-back-cover layout="column" layout-fill=""></otus-survey-back-cover>')($scope));
+          break;
+
+        case STATE.PARTICIPANT_FINISH:
+          $(SURVEY_PREVIEW_ID).append($compile('<otus-survey-finish-participant layout="column" layout-fill=""></otus-survey-finish-participant>')($scope));
           break;
       }
     }
