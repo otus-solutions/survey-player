@@ -33,6 +33,8 @@
     var _hardBlocker = null;
     var _softBlocker = null;
 
+    self.hasExternalCallback = true;
+
     self.bindComponent = bindComponent;
     self.getItemData = getItemData;
     self.goAhead = goAhead;
@@ -47,6 +49,8 @@
     self.stop = stop;
     self.save = save;
     self.getCurrentSurvey = getCurrentSurvey;
+    self.setgasExternalCallback = getHasExternalCallback;
+    self.setHasExternalCallback = setHasExternalCallback;
 
     /**/
     self.registerHardBlocker = registerHardBlocker;
@@ -132,6 +136,14 @@
 
     function getCurrentSurvey(){
       return ActivityFacadeService.getCurrentSurvey().getSurvey();
+    }
+
+    function getHasExternalCallback(){
+      return self.hasExternalCallback;
+    }
+
+    function setHasExternalCallback(boolValue){
+      self.hasExternalCallback = boolValue;
     }
   }
 })();
