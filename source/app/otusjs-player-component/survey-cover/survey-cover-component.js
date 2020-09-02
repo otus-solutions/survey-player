@@ -71,6 +71,10 @@
 
     function stop(){
       PlayerService.stop();
+      if(!PlayerService.hasCallbackAddress()){
+        PlayerService.setReasonToFinishActivity(PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.GET_OUT);
+        $state.go(STATE.PARTICIPANT_FINISH);
+      }
     }
 
   }
