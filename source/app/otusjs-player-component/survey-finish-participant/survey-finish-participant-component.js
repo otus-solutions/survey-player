@@ -25,14 +25,11 @@
     self.$onInit = onInit;
 
     function onInit() {
-      self.message = 'OBRIGADO.';
-      if (PlayerService.getCurrentSurvey()) {
-        //self.title = PlayerService.getCurrentSurvey().getName();
-      } else {
-        console.log('no PlayerService.getCurrentSurvey()')
+      self.message = PlayerService.getReasonToFinishActivity();
+      if(self.message === PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.IS_NOT_ME){
+        self.message = 'OBRIGADO!';
       }
     }
-
 
   }
 }());
