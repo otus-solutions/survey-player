@@ -56,7 +56,7 @@
     self.setHasCallbackAddress = setHasCallbackAddress;
     self.getConstants = getConstants;
     self.setReasonToFinishActivity = setReasonToFinishActivity;
-    self.getReasonToFinishActivityFromSharedURL = getReasonToFinishActivityFromSharedURL;
+    self.getReasonToFinishActivity = getReasonToFinishActivity;
 
     /**/
     self.registerHardBlocker = registerHardBlocker;
@@ -160,7 +160,7 @@
       _reasonToFinishActivity = reason;
     }
 
-    function getReasonToFinishActivityFromSharedURL(){
+    function getReasonToFinishActivity(){
       return _reasonToFinishActivity;
     }
   }
