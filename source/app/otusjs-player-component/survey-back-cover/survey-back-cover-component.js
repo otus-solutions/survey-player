@@ -43,12 +43,14 @@
 
     function finalize() {
       PlayerService.eject();
+      _goToParticipantFinishIfHasNoCallbackAddress(PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.FINALIZE);
     }
 
     function stop() {
       _confirmDialog(CANCEL_TITLE, CANCEL_CONTENT).then(
         function () {
           PlayerService.stop();
+          _goToParticipantFinishIfHasNoCallbackAddress(PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.CANCEL);
         });
     }
 
@@ -66,6 +68,13 @@
         deferred.reject();
       });
       return deferred.promise;
+    }
+
+    function _goToParticipantFinishIfHasNoCallbackAddress(reason){
+      if(!PlayerService.hasCallbackAddress()){
+        PlayerService.setReasonToFinishActivity(reason);
+        $state.go(STATE.PARTICIPANT_FINISH);
+      }
     }
   }
 }());
