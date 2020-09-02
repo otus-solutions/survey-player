@@ -13,7 +13,8 @@
     'otusjs.player.core.phase.BackActionService',
     'otusjs.player.core.phase.EjectActionService',
     'otusjs.player.core.phase.StopActionService',
-    'otusjs.player.core.phase.SaveActionService'
+    'otusjs.player.core.phase.SaveActionService',
+    'PLAYER_SERVICE_CORE_CONSTANTS'
   ];
 
   function PlayerService(
@@ -24,7 +25,8 @@
     BackActionService,
     EjectActionService,
     StopActionService,
-    SaveActionService) {
+    SaveActionService,
+    PLAYER_SERVICE_CONSTANTS) {
 
     var self = this;
     var _component = null;
@@ -33,7 +35,8 @@
     var _hardBlocker = null;
     var _softBlocker = null;
 
-    self.hasExternalCallback = true;
+    let _hasCallbackAddress = true;
+    let _reasonToFinishActivity = null;
 
     self.bindComponent = bindComponent;
     self.getItemData = getItemData;
@@ -49,8 +52,11 @@
     self.stop = stop;
     self.save = save;
     self.getCurrentSurvey = getCurrentSurvey;
-    self.setgasExternalCallback = getHasExternalCallback;
-    self.setHasExternalCallback = setHasExternalCallback;
+    self.hasCallbackAddress = getHasCallbackAddress;
+    self.setHasCallbackAddress = setHasCallbackAddress;
+    self.getConstants = getConstants;
+    self.setReasonToFinishActivity = setReasonToFinishActivity;
+    self.getReasonToFinishActivityFromSharedURL = getReasonToFinishActivityFromSharedURL;
 
     /**/
     self.registerHardBlocker = registerHardBlocker;
@@ -138,12 +144,24 @@
       return ActivityFacadeService.getCurrentSurvey().getSurvey();
     }
 
-    function getHasExternalCallback(){
-      return self.hasExternalCallback;
+    function getHasCallbackAddress(){
+      return _hasCallbackAddress;
     }
 
-    function setHasExternalCallback(boolValue){
-      self.hasExternalCallback = boolValue;
+    function setHasCallbackAddress(boolValue){
+      _hasCallbackAddress = boolValue;
+    }
+
+    function getConstants(){
+      return PLAYER_SERVICE_CONSTANTS;
+    }
+
+    function setReasonToFinishActivity(reason){
+      _reasonToFinishActivity = reason;
+    }
+
+    function getReasonToFinishActivityFromSharedURL(){
+      return _reasonToFinishActivity;
     }
   }
 })();
