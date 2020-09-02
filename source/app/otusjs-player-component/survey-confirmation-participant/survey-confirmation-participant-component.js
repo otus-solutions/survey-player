@@ -23,8 +23,7 @@
     self.stop = stop;
 
     function onInit() {
-      PlayerService.setHasExternalCallback(false);
-
+      PlayerService.setHasCallbackAddress(false);
       self.participantName = PlayerService.getCurrentSurvey().participantData.name;
 
       _unblock();
@@ -68,6 +67,7 @@
 
     function stop(){
       PlayerService.stop();
+      PlayerService.setReasonToFinishActivity(PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.IS_NOT_ME);
       $state.go(STATE.PARTICIPANT_FINISH);
     }
 
