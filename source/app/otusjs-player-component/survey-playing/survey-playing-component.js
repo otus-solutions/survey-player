@@ -89,6 +89,7 @@
     function finalize() {
       PlayerService.save();
       PlayerService.eject();
+      _goToParticipantFinishIfHasNoCallbackAddress(PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.FINALIZE);
     }
 
     function goAhead() {
@@ -103,10 +104,12 @@
 
     function pause() {
       PlayerService.save();
+      _goToParticipantFinishIfHasNoCallbackAddress(PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.SAVE);
     }
 
     function stop() {
       PlayerService.stop();
+      _goToParticipantFinishIfHasNoCallbackAddress(PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.CANCEL);
     }
 
     function goToFinish() {
@@ -117,6 +120,13 @@
       let itemData = PlayerService.getItemData();
       if (itemData) {
         self.playerDisplay.loadItem(itemData);
+      }
+    }
+
+    function _goToParticipantFinishIfHasNoCallbackAddress(reason){
+      if(!PlayerService.hasCallbackAddress()){
+        PlayerService.setReasonToFinishActivity(reason);
+        $state.go(STATE.PARTICIPANT_FINISH);
       }
     }
 
