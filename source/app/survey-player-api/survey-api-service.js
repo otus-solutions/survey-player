@@ -33,7 +33,7 @@
     const TOKEN = true;
     const MODE = 'MODE';
 
-    self.callbackIsExternal = false;
+    let _hasCallbackAddress = false;
 
     self.getFileUploadUrl = getFileUploadUrl;
     self.getActivityUrl = getActivityUrl;
@@ -57,7 +57,7 @@
     self.setSelectedCollection = setSelectedCollection;
     self.getSelectedCollection = getSelectedCollection;
     self.initDB = initDB;
-    self.hasExternalCallback = hasExternalCallback;
+    self.hasCallbackAddress = hasCallbackAddress;
 
     init();
 
@@ -210,7 +210,7 @@
 
     function setCallbackAddress(url) {
       sessionStorage.setItem(CALLBACK_ADDRESS, angular.copy(url.replace(HASHTAG, "#")));
-      self.callbackIsExternal = true;
+      _hasCallbackAddress = true;
     }
 
     function getCallbackAddress() {
@@ -235,8 +235,8 @@
       sessionStorage.removeItem(MODE);
     }
 
-    function hasExternalCallback(){
-      return self.callbackIsExternal;
+    function hasCallbackAddress(){
+      return _hasCallbackAddress;
     }
   }
 })();

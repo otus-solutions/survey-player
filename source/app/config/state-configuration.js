@@ -172,7 +172,7 @@
       $(SURVEY_PREVIEW_ID).empty();
       switch ($state.current.name) {
         case STATE.MAIN:
-          if(SurveyApiService.hasExternalCallback()){
+          if(SurveyApiService.hasCallbackAddress()){
             $(SURVEY_PREVIEW_ID).append($compile('<otus-survey-cover layout="column" layout-fill=""></otus-survey-cover>')($scope));
           }
           else{
