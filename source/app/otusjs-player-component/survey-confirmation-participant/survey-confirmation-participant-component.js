@@ -23,9 +23,14 @@
     self.stop = stop;
 
     function onInit() {
-      PlayerService.setHasCallbackAddress(false);
-      self.participantName = PlayerService.getCurrentSurvey().participantData.name;
+      const activity = PlayerService.getCurrentSurvey();
+      if(activity.statusHistory.getFinalizedRegistries().length > 0){
+        _stop(PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.ALREADY_FINALIZED);
+        return;
+      }
 
+      PlayerService.setHasCallbackAddress(false);
+      self.participantName = activity.participantData.name;
       _unblock();
     }
 
@@ -66,8 +71,12 @@
     }
 
     function stop(){
+      _stop(PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.IS_NOT_ME);
+    }
+
+    function _stop(reason){
       PlayerService.stop();
-      PlayerService.setReasonToFinishActivity(PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.IS_NOT_ME);
+      PlayerService.setReasonToFinishActivity(reason);
       $state.go(STATE.PARTICIPANT_FINISH);
     }
 
