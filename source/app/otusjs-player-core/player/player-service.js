@@ -31,9 +31,7 @@
     PLAYER_SERVICE_CONSTANTS) {
 
     const self = this;
-
-    // const HAS_CALLBACK_ADDRESS = 'has-Callback-Address'; /* sessionStorage key defined in SurveyPlayerApi */
-
+    
     let _component = null;
     let _goBackTo = null;
     let _goingBack = null;
