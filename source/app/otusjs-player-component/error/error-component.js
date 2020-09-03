@@ -19,7 +19,7 @@
     self.$onInit = onInit;
 
     function onInit() {
-      self.participantSharedURLError = PlayerService.hasCallbackAddress();
+      self.participantSharedURLError = !PlayerService.hasCallbackAddress();
 
       if(self.participantSharedURLError){
         if($(window).width() <= 600){

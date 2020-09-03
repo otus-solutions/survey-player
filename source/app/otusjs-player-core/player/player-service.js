@@ -14,6 +14,7 @@
     'otusjs.player.core.phase.EjectActionService',
     'otusjs.player.core.phase.StopActionService',
     'otusjs.player.core.phase.SaveActionService',
+    'SurveyApiService',
     'PLAYER_SERVICE_CORE_CONSTANTS'
   ];
 
@@ -26,16 +27,18 @@
     EjectActionService,
     StopActionService,
     SaveActionService,
+    SurveyApiService,
     PLAYER_SERVICE_CONSTANTS) {
 
-    var self = this;
-    var _component = null;
-    var _goBackTo = null;
-    var _goingBack = null;
-    var _hardBlocker = null;
-    var _softBlocker = null;
+    const self = this;
 
-    let _hasCallbackAddress = true;
+    // const HAS_CALLBACK_ADDRESS = 'has-Callback-Address'; /* sessionStorage key defined in SurveyPlayerApi */
+
+    let _component = null;
+    let _goBackTo = null;
+    let _goingBack = null;
+    let _hardBlocker = null;
+    let _softBlocker = null;
     let _reasonToFinishActivity = null;
 
     self.bindComponent = bindComponent;
@@ -53,7 +56,6 @@
     self.save = save;
     self.getCurrentSurvey = getCurrentSurvey;
     self.hasCallbackAddress = getHasCallbackAddress;
-    self.setHasCallbackAddress = setHasCallbackAddress;
     self.getConstants = getConstants;
     self.setReasonToFinishActivity = setReasonToFinishActivity;
     self.getReasonToFinishActivity = getReasonToFinishActivity;
@@ -145,11 +147,7 @@
     }
 
     function getHasCallbackAddress(){
-      return _hasCallbackAddress;
-    }
-
-    function setHasCallbackAddress(boolValue){
-      _hasCallbackAddress = boolValue;
+      return SurveyApiService.hasCallbackAddress();
     }
 
     function getConstants(){

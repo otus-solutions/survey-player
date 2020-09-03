@@ -30,9 +30,7 @@
         return;
       }
 
-      PlayerService.setHasCallbackAddress(false);
       self.participantName = $sce.trustAsHtml(PlayerService.getCurrentSurvey().participantData.name);
-
       _unblock();
     }
 
