@@ -33,7 +33,7 @@
           if (location.origin == SurveyApiService.getCallbackAddress()) {
             $state.go(STATE.HOME);
           }
-          else {
+          else if(SurveyApiService.hasCallbackAddress()){
             location.href = SurveyApiService.getCallbackAddress();
           }
         })
