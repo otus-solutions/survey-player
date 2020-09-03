@@ -55,7 +55,7 @@
     self.stop = stop;
     self.save = save;
     self.getCurrentSurvey = getCurrentSurvey;
-    self.hasCallbackAddress = getHasCallbackAddress;
+    self.hasCallbackAddress = hasCallbackAddress;
     self.getConstants = getConstants;
     self.setReasonToFinishActivity = setReasonToFinishActivity;
     self.getReasonToFinishActivity = getReasonToFinishActivity;
@@ -146,7 +146,7 @@
       return ActivityFacadeService.getCurrentSurvey().getSurvey();
     }
 
-    function getHasCallbackAddress(){
+    function hasCallbackAddress(){
       return SurveyApiService.hasCallbackAddress();
     }
 
