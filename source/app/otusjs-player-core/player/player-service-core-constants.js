@@ -8,8 +8,9 @@
         IS_NOT_ME: 'Nao sou eu.',
         GET_OUT: "Você saiu.",
         CANCEL: "Você saiu sem salvar a atividade.",
-        SAVE: "Você salvou a atividade.",
-        FINALIZE: "Você finalizou a atividade."
+        SAVE: "Você salvou a atividade, porém não finalizou.",
+        FINALIZE: "Você finalizou a atividade.",
+        ALREADY_FINALIZED: 'Você ja finalizou esta atividade.<br>Para preenchê-la novamente, entre em contato com seu centro.<br>Obrigado.'
       }
 
     });
