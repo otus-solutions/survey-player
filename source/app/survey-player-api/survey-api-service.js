@@ -32,8 +32,7 @@
     const COLLECTION = 'COLLECTION';
     const TOKEN = true;
     const MODE = 'MODE';
-
-    let _hasCallbackAddress = false;
+    const HAS_CALLBACK_ADDRESS = 'has-Callback-Address'; /* used too in otusjs.player.core.player.PlayerService */
 
     self.getFileUploadUrl = getFileUploadUrl;
     self.getActivityUrl = getActivityUrl;
@@ -48,6 +47,7 @@
     self.getLoggedUser = getLoggedUser;
     self.setCallbackAddress = setCallbackAddress;
     self.getCallbackAddress = getCallbackAddress;
+    self.hasCallbackAddress = hasCallbackAddress;
     self.setCurrentActivity = setCurrentActivity;
     self.getCurrentActivity = getCurrentActivity;
     self.clearSession = clearSession;
@@ -57,7 +57,6 @@
     self.setSelectedCollection = setSelectedCollection;
     self.getSelectedCollection = getSelectedCollection;
     self.initDB = initDB;
-    self.hasCallbackAddress = hasCallbackAddress;
 
     init();
 
@@ -210,11 +209,15 @@
 
     function setCallbackAddress(url) {
       sessionStorage.setItem(CALLBACK_ADDRESS, angular.copy(url.replace(HASHTAG, "#")));
-      _hasCallbackAddress = true;
+      sessionStorage.setItem(HAS_CALLBACK_ADDRESS, "true");
     }
 
     function getCallbackAddress() {
       return sessionStorage.getItem(CALLBACK_ADDRESS) ? sessionStorage.getItem(CALLBACK_ADDRESS) : location.href;
+    }
+
+    function hasCallbackAddress(){
+      return !!sessionStorage.getItem(HAS_CALLBACK_ADDRESS);
     }
 
     function setCurrentActivity(id) {
@@ -233,10 +236,8 @@
       sessionStorage.removeItem(CALLBACK_ADDRESS);
       sessionStorage.removeItem(LOGGED_USER);
       sessionStorage.removeItem(MODE);
+      sessionStorage.removeItem(HAS_CALLBACK_ADDRESS);
     }
 
-    function hasCallbackAddress(){
-      return _hasCallbackAddress;
-    }
   }
 })();
