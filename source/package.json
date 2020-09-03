@@ -20,7 +20,7 @@
     "start": "gulp browser-sync",
     "karma": "karma",
     "build": "gulp compress",
-    "production": "rm -rf node_modules && npm install && npm run build"
+    "production": "rm -rf node_modules && npm install && npm test && npm run build"
   },
   "dependencies": {
     "alasql": "0.4.3",
