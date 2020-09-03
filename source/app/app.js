@@ -25,7 +25,8 @@
       'survey.player.file.upload',
       'ngCookies',
       'ngResource',
-      'otusjs'
+      'otusjs',
+      'ngSanitize'
     ]).value('OtusLocalStorage', [
     'ActivityLocalStorageService'
   ])
