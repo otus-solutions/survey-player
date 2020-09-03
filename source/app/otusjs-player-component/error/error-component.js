@@ -3,10 +3,10 @@
 
   angular
     .module('otusjs.player.component')
-    .component('otusError', {
-      controller: 'otusErrorCtrl as $ctrl',
+    .component('otusSurveyError', {
+      controller: 'otusSurveyErrorCtrl as $ctrl',
       templateUrl: 'app/otusjs-player-component/error/error-template.html'
-    }).controller('otusErrorCtrl', Controller);
+    }).controller('otusSurveyErrorCtrl', Controller);
 
   Controller.$inject = [
     'otusjs.player.core.player.PlayerService'

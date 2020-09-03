@@ -21,7 +21,7 @@
 
     $stateProvider.state(STATE.ERROR, {
       url: '/error',
-      template: '<otus-error layout="column" layout-fill=""></otus-error>'
+      template: '<otus-survey-error layout="column" layout-fill=""></otus-survey-error>'
     });
 
     $stateProvider.state(STATE.HOME, {
