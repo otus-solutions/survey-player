@@ -9,19 +9,18 @@
     }).controller('otusSurveyFinishParticipantCtrl', Controller);
 
   Controller.$inject = [
-    '$sce',
     'otusjs.player.core.player.PlayerService'
   ];
 
 
-  function Controller($sce, PlayerService) {
+  function Controller(PlayerService) {
     const self = this;
 
     /* Public methods */
     self.$onInit = onInit;
 
     function onInit() {
-      self.message = $sce.trustAsHtml(PlayerService.getReasonToFinishActivity());
+      self.message = PlayerService.getReasonToFinishActivity();
       if(self.message === PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.IS_NOT_ME){
         self.message = 'Obrigado!';
       }
