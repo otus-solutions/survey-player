@@ -225,3 +225,23 @@ md-sidenav {
 .autocomplete-fancy {
   border-radius: 8px
 }
+
+.shared-url-final-message {
+  text-align: center;
+}
+.shared-url-final-message p {
+  margin-top: 1em;
+  margin-bottom: 0;
+}
+
+.shared-url-final-message-xs {
+  text-align: center;
+}
+.shared-url-final-message-xs p {
+  font-size: 16px;
+  margin-top: 1em;
+  margin-bottom: 0;
+}
+.shared-url-final-message-xs img {
+  max-width: 80%;
+}

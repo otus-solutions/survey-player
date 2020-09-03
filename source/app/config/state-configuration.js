@@ -21,7 +21,7 @@
 
     $stateProvider.state(STATE.ERROR, {
       url: '/error',
-      template: '<h1 style="flex-direction: row; text-align: center; flex: 100; margin: auto">404 - Data Not Found</h1>'
+      template: '<otus-error layout="column" layout-fill=""></otus-error>'
     });
 
     $stateProvider.state(STATE.HOME, {

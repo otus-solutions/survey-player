@@ -1,0 +1,19 @@
+<div ng-if="!$ctrl.participantSharedURLError">
+  <h1 style="flex-direction: row; text-align: center; flex: 100; margin: auto">
+    404 - Data Not Found
+  </h1>
+</div>
+
+<md-content ng-if="$ctrl.participantSharedURLError" class="cover-content" layout-align="center center" layout="row" flex>
+  <div layout="column" layout-align="center center" flex layout-padding>
+
+    <div layout="column" layout-align="center center" ng-class="$ctrl.class">
+      <img src="app/static-resource/image/otus-crash.png">
+
+      <p >A validade deste link expirou ou é um endereço inválido.</p>
+      <p >Entre em contato com seu centro para obter novo link de acesso.</p>
+      <p >Obrigado.</p>
+    </div>
+
+  </div>
+</md-content>
