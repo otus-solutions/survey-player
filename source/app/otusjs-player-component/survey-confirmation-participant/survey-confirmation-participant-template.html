@@ -1,7 +1,7 @@
 <md-content class="cover-content" layout-align="center center" layout="row" flex>
   <div layout-align="center center" layout="column" flex layout-padding>
     <section>
-      <h2 class="md-display-1">{{$ctrl.participantName}}></h2>
+      <h2 class="md-display-1" ng-bind-html="$ctrl.participantName"></h2>
     </section>
     <div layout="row">
       <md-button class="md-raised md-primary" aria-label="Iniciar" ng-click="$ctrl.play()"

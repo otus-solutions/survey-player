@@ -14,6 +14,7 @@ var CACHED_FILES = [
   "/node_modules/angular-animate/angular-animate.min.js",
   "/node_modules/angular-messages/angular-messages.min.js",
   "/node_modules/angular-resource/angular-resource.min.js",
+  "/node_modules/angular-sanitize/angular-sanitize.min.js",
   "/node_modules/lokijs/build/lokijs.min.js",
   "/node_modules/lokijs/build/loki-indexed-adapter.min.js",
   "/node_modules/lokijs/src/loki-angular.js",

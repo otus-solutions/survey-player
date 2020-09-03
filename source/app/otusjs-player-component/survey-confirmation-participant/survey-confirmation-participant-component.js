@@ -9,12 +9,13 @@
     }).controller('otusSurveyConfirmationParticipantCtrl', Controller);
 
   Controller.$inject = [
+    '$sce',
     '$state',
     'STATE',
     'otusjs.player.core.player.PlayerService'
   ];
 
-  function Controller($state, STATE, PlayerService) {
+  function Controller($sce, $state, STATE, PlayerService) {
     let self = this;
 
     /* Public methods */
@@ -30,7 +31,7 @@
       }
 
       PlayerService.setHasCallbackAddress(false);
-      self.participantName = PlayerService.getCurrentSurvey().participantData.name;
+      self.participantName = $sce.trustAsHtml(PlayerService.getCurrentSurvey().participantData.name);
 
       _unblock();
     }
