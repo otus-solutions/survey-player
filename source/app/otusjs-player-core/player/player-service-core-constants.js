@@ -28,11 +28,11 @@
         SAVE: {
           icon:{
             name: 'save',
-            color: "green",
+            color: "#00786c",
           },
           highlightedText: {
             text: 'Você salvou a atividade, porém NÃO finalizou.',
-            color: "#66b266"
+            color: "#009688"
           },
         },
         FINALIZE: {
