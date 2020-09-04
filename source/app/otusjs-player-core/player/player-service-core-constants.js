@@ -17,7 +17,7 @@
         },
         GET_OUT_WITHOUT_SAVE: {
           icon:{
-            name: 'meeting_room',
+            name: 'highlight_off',
             color: "orange",
           },
           highlightedText: {
