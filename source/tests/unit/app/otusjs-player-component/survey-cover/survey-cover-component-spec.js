@@ -13,6 +13,7 @@ describe('otusSurveyCover component', function () {
       Injections.$scope = Mock.$scope;
       Injections.$element = Mock.$element;
       Injections.$state = $injector.get('$state');
+      Injections.STATE = $injector.get('STATE');
       Injections.PlayerService = $injector.get('otusjs.player.core.player.PlayerService');
 
       controller = $controller('otusSurveyCoverCtrl', Injections);
@@ -40,6 +41,17 @@ describe('otusSurveyCover component', function () {
     spyOn(Injections.PlayerService, 'stop');
     controller.stop();
     expect(Injections.PlayerService.stop).toHaveBeenCalledTimes(1);
+  });
+
+  it('stop method should call PlayService setReasonToFinishActivity method in case has no callback address', function () {
+    spyOn(Injections.PlayerService, 'hasCallbackAddress').and.returnValue(false);
+    spyOn(Injections.PlayerService, 'setReasonToFinishActivity');
+    spyOn(Injections.$state, 'go');
+    controller.stop();
+    const expectedReason = Injections.PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.GET_OUT_WITHOUT_SAVE;
+    expect(Injections.PlayerService.setReasonToFinishActivity).toHaveBeenCalledTimes(1);
+    expect(Injections.PlayerService.setReasonToFinishActivity).toHaveBeenCalledWith(expectedReason);
+    expect(Injections.$state.go).toHaveBeenCalledWith(Injections.STATE.PARTICIPANT_FINISH);
   });
 
   describe('$onInit method Suite Test', function () {
