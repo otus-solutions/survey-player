@@ -4,16 +4,7 @@
   </h1>
 </div>
 
-<md-content ng-if="$ctrl.participantSharedURLError" class="cover-content" layout-align="center center" layout="row" flex>
-  <div layout="column" layout-align="center center" flex layout-padding>
-
-    <div layout="column" layout-align="center center" ng-class="$ctrl.class">
-      <img src="app/static-resource/image/otus-crash.png">
-
-      <p >Este link expirou ou é inválido.</p>
-      <p >Entre em contato com seu projeto para obter novo link de acesso.</p>
-      <p >Obrigado.</p>
-    </div>
-
-  </div>
-</md-content>
+<div ng-if="$ctrl.participantSharedURLError"
+     class="md-display-1 shared-url-message" layout="column" layout-align="center center" flex layout-margin="">
+  <div bind-html-compile="$ctrl.message"></div>
+</div>

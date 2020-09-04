@@ -30,40 +30,12 @@
         return;
       }
 
-      self.participantName = $sce.trustAsHtml(PlayerService.getCurrentSurvey().participantData.name);
-      _unblock();
-    }
-
-    function _unblock() {
-      self.hardError = false;
-      self.softError = false;
-      self.softProgress = false;
-      self.hardProgress = false;
-
-      if (self.hardBlocker) {
-        self.hardProgress = true;
-        self.hardBlocker
-          .then(function () {
-            self.hardProgress = false;
-          })
-          .catch(function () {
-            self.hardProgress = false;
-            self.hardError = true;
-            self.message = 'Ocorreu um erro ao baixar informações necessárias ao preenchimento da atividade. Clique para sair.';
-          });
-      }
-
-      if (self.softBlocker) {
-        self.softProgress = true;
-        self.softBlocker
-          .then(function () {
-            self.softProgress = false;
-          })
-          .catch(function () {
-            self.softProgress = false;
-            self.softError = true;
-          });
-      }
+      const title = activity.surveyForm.acronym + ' - ' + activity.getName();
+      const participantName = _capitalizeName(activity.participantData.name);
+      self.message = $sce.trustAsHtml(
+        `<p>${title}</p>` +
+        `<p>${participantName}</p>`
+      );
     }
 
     function play() {
@@ -78,6 +50,10 @@
       PlayerService.stop();
       PlayerService.setReasonToFinishActivity(reason);
       $state.go(STATE.PARTICIPANT_FINISH);
+    }
+
+    function _capitalizeName(name) {
+      return name.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
     }
 
   }

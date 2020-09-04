@@ -72,7 +72,7 @@
     function stop(){
       PlayerService.stop();
       if(!PlayerService.hasCallbackAddress()){
-        PlayerService.setReasonToFinishActivity(PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.GET_OUT);
+        PlayerService.setReasonToFinishActivity(PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.GET_OUT_WITHOUT_SAVE);
         $state.go(STATE.PARTICIPANT_FINISH);
       }
     }

@@ -50,7 +50,7 @@
       _confirmDialog(CANCEL_TITLE, CANCEL_CONTENT).then(
         function () {
           PlayerService.stop();
-          _goToParticipantFinishIfHasNoCallbackAddress(PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.CANCEL);
+          _goToParticipantFinishIfHasNoCallbackAddress(PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.GET_OUT_WITHOUT_SAVE);
         });
     }
 

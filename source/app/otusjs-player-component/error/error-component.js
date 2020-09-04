@@ -9,10 +9,11 @@
     }).controller('otusSurveyErrorCtrl', Controller);
 
   Controller.$inject = [
+    '$sce',
     'otusjs.player.core.player.PlayerService'
   ];
 
-  function Controller(PlayerService) {
+  function Controller($sce, PlayerService) {
     const self = this;
 
     /* Public methods */
@@ -22,14 +23,17 @@
       self.participantSharedURLError = !PlayerService.hasCallbackAddress();
 
       if(self.participantSharedURLError){
-        if($(window).width() <= 600){
-          self.class = "md-display-1 shared-url-final-message-xs";
-          self.imageWidth = "80%";
+        const reasonToFinish = PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.ERROR;
+
+        let template = `<md-icon md-font-set="material-icons" style="color: ${reasonToFinish.icon.color}">${reasonToFinish.icon.name}</md-icon>` +
+          `<p class="md-display-1 shared-url-message-highlighted" style="color: ${reasonToFinish.highlightedText.color}">${reasonToFinish.highlightedText.text}</p>`;
+        if(reasonToFinish.text){
+          reasonToFinish.text.forEach(sentence => {
+            template += `<p class="md-display-1 shared-url-message">${sentence}</p>`;
+          });
         }
-        else{
-          self.class = "md-display-1 shared-url-final-message";
-          self.imageWidth = "";
-        }
+
+        self.message = $sce.trustAsHtml(template);
       }
     }
 

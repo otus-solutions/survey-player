@@ -1,12 +1,3 @@
-<div layout-fill="" layout="column">
-  <div flex="10"  layout-align="end center" layout="row">
-
-  </div>
-  <md-content class="cover-content" layout-align="center center" layout="row" flex="80">
-    <div layout-align="center center" layout="column" flex>
-      <section>
-        <h2 class="md-display-1" ng-bind-html="$ctrl.message"></h2>
-      </section>
-    </div>
-  </md-content>
+<div class="md-display-1 shared-url-message" layout="column" layout-align="center center" flex layout-margin="">
+  <div bind-html-compile="$ctrl.message"></div>
 </div>
