@@ -17,11 +17,11 @@
         },
         GET_OUT_WITHOUT_SAVE: {
           icon:{
-            name: 'highlight_off',
+            name: 'meeting_room',
             color: "orange",
           },
           highlightedText: {
-            text: 'Você saiu sem salvar a atividade.',
+            text: 'Você saiu sem salvar ou finalizar a atividade.',
             color: "orange"
           }
         },
@@ -31,9 +31,10 @@
             color: "#00786c",
           },
           highlightedText: {
-            text: 'Você salvou a atividade, porém NÃO finalizou.',
+            text: 'Sua atividade foi salva, porém ainda não foi finalizada.',
             color: "#009688"
           },
+          text: ["Para finalizar, preencha o questionário até o final."]
         },
         FINALIZE: {
           icon:{
