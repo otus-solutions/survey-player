@@ -4,6 +4,7 @@
   angular
     .module('otusjs.player.component')
     .component('otusSurveyBackCover', {
+      controller: 'otusSurveyBackCoverCtrl as $ctrl',
       templateUrl: 'app/otusjs-player-component/survey-back-cover/survey-back-cover-template.html',
       bindings: {
         onFinalize: '&',
