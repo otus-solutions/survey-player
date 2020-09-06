@@ -1,28 +1,35 @@
 describe('PlayerService', function () {
 
-  var UNIT_NAME = 'otusjs.player.core.player.PlayerService';
-  var Mock = {};
-  var Injections = {};
-  var service = {};
+  const UNIT_NAME = 'otusjs.player.core.player.PlayerService';
+  let Mock = {};
+  let Injections = {};
+  let service = {};
 
   beforeEach(function () {
     module('otusjs.player.core');
     angular.mock.module('otusjs.player.standalone');
     spyOn(window, 'alasql');
 
-    inject(function (_$injector_) {
+    inject(function ($injector) {
       /* Injectable mocks */
-      mockActivityFacadeService(_$injector_);
-      mockPlayerStartActionService(_$injector_);
-      mockPlayActionService(_$injector_);
-      mockAheadActionService(_$injector_);
-      mockBackActionService(_$injector_);
+      Injections.ActivityFacadeService = $injector.get('otusjs.player.data.activity.ActivityFacadeService');
+      Injections.PlayerStartActionService = $injector.get('otusjs.player.core.phase.PlayerStartActionService');
+      Injections.PlayActionService = $injector.get('otusjs.player.core.phase.PlayActionService');
+      Injections.AheadActionService = $injector.get('otusjs.player.core.phase.AheadActionService');
+      Injections.BackActionService = $injector.get('otusjs.player.core.phase.BackActionService');
+      Injections.EjectActionService = $injector.get('otusjs.player.core.phase.EjectActionService');
+      Injections.StopActionService = $injector.get('otusjs.player.core.phase.StopActionService');
+      Injections.SaveActionService = $injector.get('otusjs.player.core.phase.SaveActionService');
+      Injections.SurveyApiService = $injector.get('SurveyApiService');
+      Injections.PLAYER_SERVICE_CORE_CONSTANTS = $injector.get('PLAYER_SERVICE_CORE_CONSTANTS');
 
-      service = _$injector_.get(UNIT_NAME, Injections);
+      service = $injector.get(UNIT_NAME, Injections);
     });
 
-    Mock.test = Promise.resolve('passou');
+    _mockInitialize();
+    spyOn(Injections.ActivityFacadeService, 'getCurrentItem').and.returnValue(Mock.itemService);
   });
+
 
   it('service method defined', function () {
     expect(service).toBeDefined();
@@ -42,6 +49,12 @@ describe('PlayerService', function () {
     expect(service.eject).toBeDefined();
     expect(service.stop).toBeDefined();
     expect(service.save).toBeDefined();
+    expect(service.getCurrentSurvey).toBeDefined();
+    expect(service.hasCallbackAddress).toBeDefined();
+    expect(service.getConstants).toBeDefined();
+    expect(service.setReasonToFinishActivity).toBeDefined();
+    expect(service.getReasonToFinishActivity).toBeDefined();
+
     expect(service.registerHardBlocker).toBeDefined();
     expect(service.registerSoftBlocker).toBeDefined();
     expect(service.getHardBlocker).toBeDefined();
@@ -49,112 +62,122 @@ describe('PlayerService', function () {
     expect(service.clearHardBlocker).toBeDefined();
   });
 
-  it('registerHardBlocker method should call getHardBlocker', function () {
-    spyOn(service, 'registerHardBlocker').and.callThrough();
-    service.registerHardBlocker(Mock.test);
-    expect(service.registerHardBlocker).toHaveBeenCalledTimes(1);
-  });
+  describe('Blockers Suite Test', function () {
 
-  it('getHardBlocker method should return promise', function () {
-    service.registerHardBlocker(Mock.test);
-    expect(service.getHardBlocker()).toEqual(Mock.test);
-  });
-
-  it('registerSoftBlocker method should call getSoftBlocker', function () {
-    spyOn(service, 'registerSoftBlocker').and.callThrough();
-    service.registerSoftBlocker(Mock.test);
-    expect(service.registerSoftBlocker).toHaveBeenCalledTimes(1);
-  });
-
-  it('getSoftBlocker method should return promise', function () {
-    service.registerSoftBlocker(Mock.test);
-    expect(service.getSoftBlocker()).toEqual(Mock.test);
-  });
-
-  describe('getItemData method', function () {
-
-    it('should retrieve the current item from activity', function () {
-      var itemData = service.getItemData();
-
-      expect(itemData).toEqual(Mock.itemData);
+    it('getHardBlocker method should return promise', function () {
+      service.registerHardBlocker(Mock.resolve);
+      expect(service.getHardBlocker()).toEqual(Mock.resolve);
     });
 
-  });
-
-  describe('goAhead method', function () {
-
-    it('should execute the AheadActionService', function () {
-      spyOn(Mock.AheadActionService, 'execute');
-
-      service.goAhead();
-
-      expect(Mock.AheadActionService.execute).toHaveBeenCalled();
+    it('getSoftBlocker method should return promise', function () {
+      service.registerSoftBlocker(Mock.resolve);
+      expect(service.getSoftBlocker()).toEqual(Mock.resolve);
     });
 
-  });
-
-  describe('goBack method', function () {
-
-    it('should execute the AheadActionService', function () {
-      spyOn(Mock.BackActionService, 'execute');
-
-      service.goBack();
-
-      expect(Mock.BackActionService.execute).toHaveBeenCalled();
+    it('clearHardBlocker method should set hasBlocker as null', function () {
+      service.clearHardBlocker(null);
+      expect(service.getHardBlocker()).toBeNull();
     });
-
   });
 
-  describe('play method', function () {
 
-    it('should execute the PlayActionService', function () {
-      spyOn(Mock.PlayActionService, 'execute');
-
-      service.play();
-
-      expect(Mock.PlayActionService.execute).toHaveBeenCalledWith();
-    });
-
+  it('bindComponent method should set private component', function () {
+    spyOn(service, 'bindComponent').and.callThrough();
+    service.bindComponent(Mock.component);
+    expect(service.bindComponent).toHaveBeenCalledTimes(1);
   });
 
-  describe('setup method', function () {
-
-    it('should execute the PlayerStartActionService', function () {
-      spyOn(Mock.PlayerStartActionService, 'execute');
-
-      service.setup();
-
-      expect(Mock.PlayerStartActionService.execute).toHaveBeenCalledWith();
-    });
-
+  it('getItemData method should retrieve the current item from activity', function () {
+    const itemData = service.getItemData();
+    expect(itemData).toEqual(Mock.itemData);
   });
 
-  function mockActivityFacadeService($injector) {
-    Mock.ActivityFacadeService = $injector.get('otusjs.player.data.activity.ActivityFacadeService');
-    Injections.ActivityFacadeService = Mock.ActivityFacadeService;
-  }
+  it('goAhead method should execute the AheadActionService', function () {
+    spyOn(Injections.AheadActionService, 'execute');
+    service.goAhead();
+    expect(Injections.AheadActionService.execute).toHaveBeenCalledTimes(1);
+  });
 
-  function mockPlayerStartActionService($injector) {
-    Mock.PlayerStartActionService = $injector.get('otusjs.player.core.phase.PlayerStartActionService');
+  it('goBack method should execute the BackActionService', function () {
+    spyOn(Injections.BackActionService, 'execute');
+    service.goBack();
+    expect(Injections.BackActionService.execute).toHaveBeenCalledTimes(1);
+  });
+
+  it('setGoBackTo method should private variables', function () {
+    spyOn(service, 'setGoBackTo');
+    service.setGoBackTo();
+    expect(service.setGoBackTo).toHaveBeenCalledTimes(1);
+  });
+
+  it('getGoBackTo method should return private goBackTo variable', function () {
+    service.setGoBackTo(Mock.goBackTo);
+    expect(service.getGoBackTo()).toBe(Mock.goBackTo);
+  });
+
+  it('play method should execute the PlayActionService', function () {
+    spyOn(Injections.PlayActionService, 'execute');
+    service.play();
+    expect(Injections.PlayActionService.execute).toHaveBeenCalledWith();
+  });
+
+  it('setup method should execute the PlayerStartActionService', function () {
+    spyOn(Injections.PlayerStartActionService, 'execute');
+    service.setup();
+    expect(Injections.PlayerStartActionService.execute).toHaveBeenCalledWith();
+  });
+
+  it('end method should call private component goToFinish method', function () {
+    spyOn(service, 'end');
+    service.end();
+    expect(service.end).toHaveBeenCalledTimes(1);
+  });
+
+  it('eject method should execute the EjectActionService', function () {
+    spyOn(Injections.EjectActionService, 'execute');
+    service.eject();
+    expect(Injections.EjectActionService.execute).toHaveBeenCalledTimes(1);
+  });
+
+  it('stop method should execute the StopActionService', function () {
+    spyOn(Injections.StopActionService, 'execute');
+    service.stop();
+    expect(Injections.StopActionService.execute).toHaveBeenCalledTimes(1);
+  });
+
+  it('save method should execute the SaveActionService', function () {
+    spyOn(Injections.SaveActionService, 'execute');
+    service.save();
+    expect(Injections.SaveActionService.execute).toHaveBeenCalledTimes(1);
+  });
+
+  it('getCurrentSurvey method should call ActivityFacadeService getCurrentSurvey method', function () {
+    const survey = {};
+    Mock.currentSurvey = {
+      getSurvey: function () { return survey; }
+    };
+    spyOn(Injections.ActivityFacadeService, 'getCurrentSurvey').and.returnValue(Mock.currentSurvey);
+
+    const result = service.getCurrentSurvey();
+
+    expect(Injections.ActivityFacadeService.getCurrentSurvey).toHaveBeenCalledTimes(1);
+    expect(result).toBe(survey);
+  });
+
+  it('getReasonToFinishActivity should return private _reasonToFinishActivity variable', function () {
+    const REASON_TO_FINISH = {};
+    service.setReasonToFinishActivity(REASON_TO_FINISH);
+    expect(service.getReasonToFinishActivity()).toBe(REASON_TO_FINISH);
+  });
+
+  function _mockInitialize() {
     Mock.itemData = {customID: 'VAL1'};
     Mock.itemService = {};
     Mock.itemService.getItems = jasmine.createSpy('getItems').and.returnValue(Mock.itemData);
-    spyOn(Mock.ActivityFacadeService, 'getCurrentItem').and.returnValue(Mock.itemService);
-    Injections.PlayerStartActionService = Mock.PlayerStartActionService;
+
+    Mock.resolve = Promise.resolve('passou');
+    Mock.component = {};
+    Mock.goBackTo = 'goBack';
   }
 
-  function mockPlayActionService($injector) {
-    Mock.PlayActionService = $injector.get('otusjs.player.core.phase.PlayActionService');
-    Injections.PlayActionService = Mock.PlayActionService;
-  }
-
-  function mockAheadActionService($injector) {
-    Mock.AheadActionService = $injector.get('otusjs.player.core.phase.AheadActionService');
-    Injections.AheadActionService = Mock.AheadActionService;
-  }
-
-  function mockBackActionService($injector) {
-    Mock.BackActionService = $injector.get('otusjs.player.core.phase.BackActionService');
-    Injections.BackActionService = Mock.BackActionService;
-  }
 });
