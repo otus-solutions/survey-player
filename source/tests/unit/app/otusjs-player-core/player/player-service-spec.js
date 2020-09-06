@@ -1,17 +1,12 @@
-describe('PlayerService', function () {
-
-  const UNIT_NAME = 'otusjs.player.core.player.PlayerService';
+describe('PlayerService core Suite Test', function () {
   let Mock = {};
   let Injections = {};
   let service = {};
 
   beforeEach(function () {
-    module('otusjs.player.core');
     angular.mock.module('otusjs.player.standalone');
-    spyOn(window, 'alasql');
 
-    inject(function ($injector) {
-      /* Injectable mocks */
+    angular.mock.inject(function ($injector) {
       Injections.ActivityFacadeService = $injector.get('otusjs.player.data.activity.ActivityFacadeService');
       Injections.PlayerStartActionService = $injector.get('otusjs.player.core.phase.PlayerStartActionService');
       Injections.PlayActionService = $injector.get('otusjs.player.core.phase.PlayActionService');
@@ -23,11 +18,12 @@ describe('PlayerService', function () {
       Injections.SurveyApiService = $injector.get('SurveyApiService');
       Injections.PLAYER_SERVICE_CORE_CONSTANTS = $injector.get('PLAYER_SERVICE_CORE_CONSTANTS');
 
-      service = $injector.get(UNIT_NAME, Injections);
+      service = $injector.get('otusjs.player.core.player.PlayerService', Injections);
     });
 
     _mockInitialize();
     spyOn(Injections.ActivityFacadeService, 'getCurrentItem').and.returnValue(Mock.itemService);
+    spyOn(window, 'alasql');
   });
 
 
