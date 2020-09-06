@@ -32,7 +32,7 @@
     const COLLECTION = 'COLLECTION';
     const TOKEN = true;
     const MODE = 'MODE';
-    const HAS_CALLBACK_ADDRESS = 'has-Callback-Address'; /* used too in otusjs.player.core.player.PlayerService */
+    const HAS_CALLBACK_ADDRESS = 'has-Callback-Address';
 
     self.getFileUploadUrl = getFileUploadUrl;
     self.getActivityUrl = getActivityUrl;
@@ -64,16 +64,16 @@
       initDB();
     }, 5000);
 
-    var _loginUrl;
-    var _datasourceUrl;
-    var _surveyUrl;
-    var _activityUrl;
-    var _staticVariableUrl;
-    var _fileUploadUrl;
-    var _collectUrl;
+    let _loginUrl;
+    let _datasourceUrl;
+    let _surveyUrl;
+    let _activityUrl;
+    let _staticVariableUrl;
+    let _fileUploadUrl;
+    let _collectUrl;
 
-    var _token = null;
-    var _user = null;
+    let _token = null;
+    let _user = null;
 
     function init() {
       _loginUrl = $cookies.get(LOGIN_ADDRESS);
@@ -144,7 +144,7 @@
     }
 
     function getModeOffline() {
-      var _mode = angular.copy(JSON.parse(sessionStorage.getItem(MODE)));
+      const _mode = angular.copy(JSON.parse(sessionStorage.getItem(MODE)));
       return !!_mode;
     }
 
@@ -175,11 +175,11 @@
     }
 
     function setLoggedUser(user) {
-      var deferred = $q.defer();
+      let deferred = $q.defer();
       if (user) {
         alasql(INIT_QUERY, [], function () {
           alasql(TABLE_USER, [], function (res) {
-            var query = "SELECT * INTO User ".concat(' FROM ?');
+            const query = "SELECT * INTO User ".concat(' FROM ?');
             _user = angular.copy(user);
             sessionStorage.setItem(LOGGED_USER, JSON.stringify(user));
             delete _user.token;
@@ -198,9 +198,9 @@
     }
 
     function getLoggedUser(propName) {
-      var loggedUser = _user ? _user : JSON.parse(sessionStorage.getItem(LOGGED_USER));
+      const loggedUser = _user ? _user : JSON.parse(sessionStorage.getItem(LOGGED_USER));
       if (loggedUser && loggedUser.hasOwnProperty('token') && !propName) {
-        var _loggedUser = angular.copy(loggedUser);
+        let _loggedUser = angular.copy(loggedUser);
         delete _loggedUser.token;
         return _loggedUser;
       }
