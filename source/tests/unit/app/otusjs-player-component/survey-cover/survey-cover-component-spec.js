@@ -60,8 +60,7 @@ describe('otusSurveyCover component', function () {
       spyOn(Injections.PlayerService, 'getHardBlocker').and.returnValue(hardBlocker);
       spyOn(Injections.PlayerService, 'getSoftBlocker').and.returnValue(softBlocker);
 
-      spyOn(Injections.PlayerService, 'getCurrentSurvey').and.returnValue(
-        Mock.getCurrentSurvey);
+      spyOn(Injections.PlayerService, 'getCurrentSurvey').and.returnValue(Mock.getCurrentSurvey);
 
       controller.$onInit();
       Mock.$scope.$digest();
@@ -111,7 +110,6 @@ describe('otusSurveyCover component', function () {
 
   function _mockInitialize($rootScope, $q) {
     Mock.$scope = $rootScope.$new();
-    Mock.$scope.$parent.$ctrl = {};
 
     const deferredResolve = $q.defer();
     deferredResolve.resolve();
@@ -121,8 +119,6 @@ describe('otusSurveyCover component', function () {
     deferredReject.reject();
     Mock.reject = deferredReject.promise;
 
-    Mock.getCurrentSurvey = {
-      getName: function () { return ''; }
-    }
+    Mock.getCurrentSurvey = Test.utils.data.getCurrentSurvey;
   }
 });
