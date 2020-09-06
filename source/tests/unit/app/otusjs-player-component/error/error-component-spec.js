@@ -1,5 +1,4 @@
 describe('otusSurveyError component', function () {
-  let Mock = {};
   let Injections = [];
   let controller = {};
 
