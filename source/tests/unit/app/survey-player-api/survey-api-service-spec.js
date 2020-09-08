@@ -13,14 +13,12 @@ describe('SurveyApiService Suite Test', function () {
       Injections.$q = $injector.get('$q');
       Injections.$rootScope = $injector.get('$rootScope');
 
-      spyOn(sessionStorage, 'setItem');
-      spyOn(sessionStorage, 'removeItem');
-      spyOn(window, 'alasql');
-      // spyOn(Injections.$cookies, 'get').and.returnValue(Mock.cookiesReturnValue);
-
       service = $injector.get('SurveyApiService', Injections);
     });
 
+    spyOn(sessionStorage, 'setItem').and.callThrough();
+    spyOn(sessionStorage, 'removeItem').and.callThrough();
+    spyOn(window, 'alasql');
   });
 
   it('check service', function () {
@@ -53,102 +51,107 @@ describe('SurveyApiService Suite Test', function () {
     expect(service.initDB).toBeDefined();
   });
 
-  it('setSelectedCollection method should call sessionStorage setItem method', function () {
+  xit('setSelectedCollection method should call sessionStorage setItem method', function () {
     const collection = { code: 'x' };
     service.setSelectedCollection(collection);
-    expect(sessionStorage.setItem).toHaveBeenCalledTimes(1);
+    expect(Mock.sessionStorage.setItem).toHaveBeenCalledTimes(1);
   });
 
   xit('setSelectedCollection method should call sessionStorage removeItem method', function () {
     const collection = null;
     service.setSelectedCollection(collection);
-    expect(sessionStorage.removeItem).toHaveBeenCalledTimes(1);
+    expect(Mock.sessionStorage.removeItem).toHaveBeenCalledTimes(1);
   });
 
-  it('getSelectedCollection method should call sessionStorage getItem method', function () {
-    spyOn(sessionStorage, 'getItem');
+  xit('getSelectedCollection method should call sessionStorage getItem method', function () {
+    spyOn(Mock.sessionStorage, 'getItem').and.callThrough();
     service.getSelectedCollection();
-    expect(sessionStorage.getItem).toHaveBeenCalledTimes(1);
+    expect(Mock.sessionStorage.getItem).toHaveBeenCalledTimes(1);
   });
 
 
-  it('setModeOffline method should call sessionStorage setItem method', function () {
+  xit('setModeOffline method should call sessionStorage setItem method', function () {
     service.setModeOffline();
-    expect(sessionStorage.setItem).toHaveBeenCalledTimes(1);
+    expect(Mock.sessionStorage.setItem).toHaveBeenCalledTimes(1);
   });
 
-  it('exitModeOffline method should call sessionStorage setItem method', function () {
+  xit('exitModeOffline method should call sessionStorage setItem method', function () {
     service.exitModeOffline();
-    expect(sessionStorage.setItem).toHaveBeenCalledTimes(1);
+    expect(Mock.sessionStorage.setItem).toHaveBeenCalledTimes(1);
   });
 
-  it('getModeOffline method should call sessionStorage getItem method', function () {
-    spyOn(sessionStorage, 'getItem').and.returnValue('{}');
+  xit('getModeOffline method should call sessionStorage getItem method', function () {
+    spyOn(Mock.sessionStorage, 'getItem').and.returnValue('{}');
     service.getModeOffline();
-    expect(sessionStorage.getItem).toHaveBeenCalledTimes(1);
+    expect(Mock.sessionStorage.getItem).toHaveBeenCalledTimes(1);
   });
 
 
-  it('setAuthToken method should call sessionStorage setItem method', function () {
+  xit('setAuthToken method should call sessionStorage setItem method', function () {
     service.setAuthToken();
-    expect(sessionStorage.setItem).toHaveBeenCalledTimes(1);
+    expect(Mock.sessionStorage.setItem).toHaveBeenCalledTimes(1);
   });
 
 
-  it('setLoggedUser method should call sessionStorage setItem method', function () {
+  xit('setLoggedUser method should call sessionStorage setItem method', function () {
     service.setLoggedUser(Mock.user);
-    //expect(sessionStorage.setItem).toHaveBeenCalledTimes(1); // todo
+    //expect(Mock.sessionStorage.setItem).toHaveBeenCalledTimes(1); // todo
   });
 
-  it('setLoggedUser method should not call sessionStorage setItem method', function () {
+  xit('setLoggedUser method should not call sessionStorage setItem method', function () {
     service.setLoggedUser();
-    expect(sessionStorage.setItem).not.toHaveBeenCalled();
+    expect(Mock.sessionStorage.setItem).not.toHaveBeenCalled();
   });
 
 
   xit('setCallbackAddress method should call sessionStorage setItem method twice', function () {
     service.setCallbackAddress('http');
-    expect(sessionStorage.setItem).toHaveBeenCalledTimes(2);
+    expect(Mock.sessionStorage.setItem).toHaveBeenCalledTimes(2);
   });
 
   xit('getCallbackAddress method should call sessionStorage setItem method twice', function () {
-    spyOn(sessionStorage, 'getItem').and.returnValue('{}');
+    spyOn(Mock.sessionStorage, 'getItem').and.returnValue('{}');
     service.getCallbackAddress();
-    expect(sessionStorage.getItem).toHaveBeenCalledTimes(2);
+    expect(Mock.sessionStorage.getItem).toHaveBeenCalledTimes(2);
   });
 
   xit('getCallbackAddress method should call sessionStorage setItem method one time', function () {
-    spyOn(sessionStorage, 'getItem').and.returnValue(null);
+    spyOn(Mock.sessionStorage, 'getItem').and.returnValue(null);
     service.getCallbackAddress();
-    expect(sessionStorage.getItem).toHaveBeenCalledTimes(1);
+    expect(Mock.sessionStorage.getItem).toHaveBeenCalledTimes(1);
   });
 
   xit('hasCallbackAddress method should call sessionStorage setItem method', function () {
-    spyOn(sessionStorage, 'getItem').and.returnValue('{}');
+    spyOn(Mock.sessionStorage, 'getItem').and.returnValue('{}');
     service.hasCallbackAddress();
-    expect(sessionStorage.getItem).toHaveBeenCalledTimes(1);
+    expect(Mock.sessionStorage.getItem).toHaveBeenCalledTimes(1);
   });
 
   xit('setCurrentActivity method should call sessionStorage setItem method', function () {
     service.setCurrentActivity('x');
-    expect(sessionStorage.setItem).toHaveBeenCalledTimes(1);
+    expect(Mock.sessionStorage.setItem).toHaveBeenCalledTimes(1);
   });
 
   xit('getCurrentActivity method should call sessionStorage setItem method', function () {
     const expectedValue = '{}';
-    spyOn(sessionStorage, 'getItem').and.returnValue(expectedValue);
+    spyOn(Mock.sessionStorage, 'getItem').and.returnValue(expectedValue);
     const result = service.getCurrentActivity();
-    expect(sessionStorage.getItem).toHaveBeenCalledTimes(1);
+    expect(Mock.sessionStorage.getItem).toHaveBeenCalledTimes(1);
     expect(result).toEqual(expectedValue);
   });
 
   xit('clearSession method should call sessionStorage removeItem method 6 times', function () {
     service.clearSession();
-    expect(sessionStorage.removeItem).toHaveBeenCalledTimes(6);
+    expect(Mock.sessionStorage.removeItem).toHaveBeenCalledTimes(6);
   });
 
 
   function _mockInitialize() {
+    Mock.sessionStorage = {
+      getItem: (key) => {},
+      setItem: (key, value) =>{},
+      removeItem: (key) => {}
+    };
     Mock.cookiesReturnValue = {};
     Mock.user = { token: 'abc' };
   }
