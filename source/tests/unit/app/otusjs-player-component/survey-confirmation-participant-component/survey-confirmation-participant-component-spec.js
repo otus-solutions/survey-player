@@ -7,8 +7,6 @@ describe('otusSurveyConfirmationParticipant component', function () {
     angular.mock.module('otusjs.player.standalone');
 
     angular.mock.inject(function ($controller, $injector) {
-      _mockInitialize();
-
       Injections.$sce = $injector.get('$sce');
       Injections.$state = $injector.get('$state');
       Injections.STATE = $injector.get('STATE');
@@ -17,6 +15,7 @@ describe('otusSurveyConfirmationParticipant component', function () {
       controller = $controller('otusSurveyConfirmationParticipantCtrl', Injections);
     });
 
+    _mockInitialize();
   });
 
   it('check controller', function () {
@@ -43,7 +42,7 @@ describe('otusSurveyConfirmationParticipant component', function () {
     expect(controller.message).not.toBeDefined();
   });
 
-  it('play method should call $state.go', function () {
+  it('play method should call $state go method', function () {
     spyOn(Injections.$state, 'go');
     controller.play();
     expect(Injections.$state.go).toHaveBeenCalledWith(Injections.STATE.BEGIN);

@@ -3873,3 +3873,18 @@ Test.utils.data.surveyItem = {
     }
   }
 };
+
+Test.utils.data.PLAYER_SERVICE_CONSTANTS = {
+  REASONS_TO_LIVE_PLAYER: {
+    IS_NOT_ME: {},
+    GET_OUT_WITHOUT_SAVE: {},
+    SAVE: {},
+    FINALIZE: {},
+    ALREADY_FINALIZED: {},
+    ERROR: {}
+  }
+};
+
+Test.utils.data.getCurrentSurvey = {
+  getName: function () { return 'x'; }
+};

@@ -4,9 +4,10 @@
   angular
     .module('otusjs.player.component')
     .component('otusSurveyPlaying', {
-      templateUrl: 'app/otusjs-player-component/survey-playing/survey-playing-template.html',
-      controller: Controller
-    });
+      controller: 'otusSurveyPlayingCtrl as $ctrl',
+      templateUrl: 'app/otusjs-player-component/survey-playing/survey-playing-template.html'
+    })
+    .controller('otusSurveyPlayingCtrl', Controller);
 
   Controller.$inject = [
     '$state',
@@ -22,11 +23,11 @@
     self.$onInit = onInit;
     self.eject = eject;
     self.finalize = finalize;
-    self.goAhead = goAhead;
-    self.goBack = goBack;
     self.pause = pause;
     self.stop = stop;
     self.goToFinish = goToFinish;
+    self.goAhead = goAhead;
+    self.goBack = goBack;
     self.onProcessingPlayer = onProcessingPlayer;
     self.goIsLockOpenClose = goIsLockOpenClose;
 
@@ -92,16 +93,6 @@
       _goToParticipantFinishIfHasNoCallbackAddress(PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.FINALIZE);
     }
 
-    function goAhead() {
-      PlayerService.goAhead();
-      _loadItem();
-    }
-
-    function goBack() {
-      PlayerService.goBack();
-      _loadItem();
-    }
-
     function pause() {
       PlayerService.save();
       _goToParticipantFinishIfHasNoCallbackAddress(PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.SAVE);
@@ -114,6 +105,16 @@
 
     function goToFinish() {
       $state.go(STATE.FINISH);
+    }
+
+    function goAhead() {
+      PlayerService.goAhead();
+      _loadItem();
+    }
+
+    function goBack() {
+      PlayerService.goBack();
+      _loadItem();
     }
 
     function _loadItem() {

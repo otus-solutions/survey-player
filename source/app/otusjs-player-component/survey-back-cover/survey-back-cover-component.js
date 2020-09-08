@@ -4,25 +4,24 @@
   angular
     .module('otusjs.player.component')
     .component('otusSurveyBackCover', {
+      controller: 'otusSurveyBackCoverCtrl as $ctrl',
       templateUrl: 'app/otusjs-player-component/survey-back-cover/survey-back-cover-template.html',
-      controller: Controller,
       bindings: {
         onFinalize: '&',
         onStop: '&'
       }
-    });
+    }).controller('otusSurveyBackCoverCtrl', Controller);
 
   Controller.$inject = [
     '$q',
     '$mdDialog',
-    '$scope',
     '$state',
     'STATE',
     'otusjs.player.core.player.PlayerService'
   ];
 
 
-  function Controller($q, $mdDialog, $scope, $state, STATE, PlayerService) {
+  function Controller($q, $mdDialog, $state, STATE, PlayerService) {
     const self = this;
     const CANCEL_TITLE = 'Sair da Atividade';
     const CANCEL_CONTENT = 'Todos os dados, não salvos, serão perdidos. Você tem certeza que deseja sair?';
