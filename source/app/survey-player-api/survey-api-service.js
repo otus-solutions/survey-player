@@ -64,16 +64,16 @@
       initDB();
     }, 5000);
 
-    let _loginUrl;
-    let _datasourceUrl;
-    let _surveyUrl;
-    let _activityUrl;
-    let _staticVariableUrl;
-    let _fileUploadUrl;
-    let _collectUrl;
+    var _loginUrl;
+    var _datasourceUrl;
+    var _surveyUrl;
+    var _activityUrl;
+    var _staticVariableUrl;
+    var _fileUploadUrl;
+    var _collectUrl;
 
-    let _token = null;
-    let _user = null;
+    var _token = null;
+    var _user = null;
 
     function init() {
       _loginUrl = $cookies.get(LOGIN_ADDRESS);
@@ -144,7 +144,7 @@
     }
 
     function getModeOffline() {
-      const _mode = angular.copy(JSON.parse(sessionStorage.getItem(MODE)));
+      var _mode = angular.copy(JSON.parse(sessionStorage.getItem(MODE)));
       return !!_mode;
     }
 
@@ -175,11 +175,11 @@
     }
 
     function setLoggedUser(user) {
-      let deferred = $q.defer();
+      var deferred = $q.defer();
       if (user) {
         alasql(INIT_QUERY, [], function () {
           alasql(TABLE_USER, [], function (res) {
-            const query = "SELECT * INTO User ".concat(' FROM ?');
+            var query = "SELECT * INTO User ".concat(' FROM ?');
             _user = angular.copy(user);
             sessionStorage.setItem(LOGGED_USER, JSON.stringify(user));
             delete _user.token;
@@ -198,9 +198,9 @@
     }
 
     function getLoggedUser(propName) {
-      const loggedUser = _user ? _user : JSON.parse(sessionStorage.getItem(LOGGED_USER));
+      var loggedUser = _user ? _user : JSON.parse(sessionStorage.getItem(LOGGED_USER));
       if (loggedUser && loggedUser.hasOwnProperty('token') && !propName) {
-        let _loggedUser = angular.copy(loggedUser);
+        var _loggedUser = angular.copy(loggedUser);
         delete _loggedUser.token;
         return _loggedUser;
       }
