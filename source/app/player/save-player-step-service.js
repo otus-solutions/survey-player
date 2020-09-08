@@ -10,13 +10,14 @@
     'SurveyClientService',
     'IndexedDbStorageService',
     'SurveyApiService',
+    '$mdToast',
     '$state',
     'STATE'
   ];
 
-  function Service(ActivityFacadeService, SurveyClientService, IndexedDbStorageService, SurveyApiService, $state, STATE) {
-    var self = this;
-    var _currentItem;
+  function Service(ActivityFacadeService, SurveyClientService, IndexedDbStorageService, SurveyApiService,
+                   $mdToast, $state, STATE) {
+    const self = this;
 
     /* Public methods */
     self.beforeEffect = beforeEffect;
