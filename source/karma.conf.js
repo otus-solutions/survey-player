@@ -22,6 +22,7 @@ module.exports = function (config) {
       NODE_MODULES_ROOT_PATH + 'angular-cookies/angular-cookies.min.js',
       NODE_MODULES_ROOT_PATH + 'angular-animate/angular-animate.min.js',
       NODE_MODULES_ROOT_PATH + 'angular-resource/angular-resource.min.js',
+      NODE_MODULES_ROOT_PATH + 'angular-sanitize/angular-sanitize.min.js',
       NODE_MODULES_ROOT_PATH + 'angular-aria/angular-aria.min.js',
       NODE_MODULES_ROOT_PATH + 'angular-bind-html-compile-ci-dev/angular-bind-html-compile.js',
       NODE_MODULES_ROOT_PATH + 'angular-mousewheel/mousewheel.js',
@@ -39,6 +40,9 @@ module.exports = function (config) {
       NODE_MODULES_ROOT_PATH + 'otus-validation-js/dist/otus-validation-min.js',
       NODE_MODULES_ROOT_PATH + 'trail-js/dist/trail-min.js',
       NODE_MODULES_ROOT_PATH + 'alasql/dist/alasql.min.js',
+      NODE_MODULES_ROOT_PATH + 'jasmine-promise-matchers/dist/jasmine-promise-matchers.js',
+      NODE_MODULES_ROOT_PATH + 'angular-ui-router/release/angular-ui-router.js',
+
 
       APP_ROOT_PATH + 'app.js',
 
