@@ -30,12 +30,11 @@
         return;
       }
 
-      const title = activity.surveyForm.acronym + ' - ' + activity.getName();
+      self.acronym = activity.surveyForm.acronym;
+      self.title = activity.getName();
+
       const participantName = _capitalizeName(activity.participantData.name);
-      self.message = $sce.trustAsHtml(
-        `<p>${title}</p>` +
-        `<p>${participantName}</p>`
-      );
+      self.participantName = $sce.trustAsHtml(`<p>${participantName}</p>`);
     }
 
     function play() {

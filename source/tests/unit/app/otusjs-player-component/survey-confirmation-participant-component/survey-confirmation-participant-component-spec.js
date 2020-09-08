@@ -28,18 +28,18 @@ describe('otusSurveyConfirmationParticipant component', function () {
     expect(controller.stop).toBeDefined();
   });
 
-  it('onInit method should set messaged in case callback address exists', function () {
+  it('onInit method should set page text in case callback address exists', function () {
     _mockActivity(0);
     spyOn(Injections.PlayerService, 'getCurrentSurvey').and.returnValue(Mock.activity);
     controller.$onInit();
-    expect(controller.message).toBeDefined();
+    expect(controller.participantName).toBeDefined();
   });
 
   it('onInit method should call PlayService stop method in case callback address does not exists', function () {
     _mockActivity(1);
     spyOn(Injections.PlayerService, 'getCurrentSurvey').and.returnValue(Mock.activity);
     _check_stop_method_call(controller.$onInit, 'ALREADY_FINALIZED');
-    expect(controller.message).not.toBeDefined();
+    expect(controller.participantName).not.toBeDefined();
   });
 
   it('play method should call $state go method', function () {
