@@ -8,11 +8,10 @@
   Service.$inject = [
     '$q',
     '$http',
-    'SurveyApiService',
-    '$log'
+    'SurveyApiService'
   ];
 
-  function Service($q, $http, SurveyApiService, $log) {
+  function Service($q, $http, SurveyApiService) {
     var self = this;
     var _rest = null;
 
@@ -35,7 +34,7 @@
       $http.get(_getActivityAddress() + '/' + activityInfo).success(function (response) {
         defer.resolve(response.data);
       }).error(function (error) {
-        $log.error('Cannot GET a survey template.');
+        console.error('Cannot GET a survey template.');
         defer.reject(error);
       });
       return defer.promise;
@@ -46,7 +45,7 @@
       $http.put(_getActivityAddress(), activity[0]).success(function (response) {
         defer.resolve(response.data);
       }).error(function (error) {
-        $log.error('Cannot GET a survey template.');
+        console.error('Cannot GET a survey template.');
       });
       return defer.promise;
     }
