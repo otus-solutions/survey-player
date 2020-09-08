@@ -38,7 +38,6 @@ describe('StopPlayerStepService Suite Test', function () {
   describe('effect method Suite Test', function () {
 
     function _callEffectMethod(hasCallbackAddressReturnValue){
-      console.log('location.href', location.href)
       spyOn(Injections.ActivityFacadeService, 'save');
       spyOn(Injections.SurveyApiService, 'getCallbackAddress').and.returnValue(Mock.callbackAddress);
       spyOn(Injections.SurveyApiService, 'hasCallbackAddress').and.returnValue(hasCallbackAddressReturnValue);
