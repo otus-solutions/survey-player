@@ -13,6 +13,7 @@ describe('otusSurveyCover component', function () {
       Injections.$scope = Mock.$scope;
       Injections.$element = Mock.$element;
       Injections.$state = $injector.get('$state');
+      Injections.STATE = $injector.get('STATE');
       Injections.PlayerService = $injector.get('otusjs.player.core.player.PlayerService');
 
       controller = $controller('otusSurveyCoverCtrl', Injections);
@@ -42,14 +43,24 @@ describe('otusSurveyCover component', function () {
     expect(Injections.PlayerService.stop).toHaveBeenCalledTimes(1);
   });
 
+  it('stop method should call PlayService setReasonToFinishActivity method in case has no callback address', function () {
+    spyOn(Injections.PlayerService, 'hasCallbackAddress').and.returnValue(false);
+    spyOn(Injections.PlayerService, 'setReasonToFinishActivity');
+    spyOn(Injections.$state, 'go');
+    controller.stop();
+    const expectedReason = Injections.PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.GET_OUT_WITHOUT_SAVE;
+    expect(Injections.PlayerService.setReasonToFinishActivity).toHaveBeenCalledTimes(1);
+    expect(Injections.PlayerService.setReasonToFinishActivity).toHaveBeenCalledWith(expectedReason);
+    expect(Injections.$state.go).toHaveBeenCalledWith(Injections.STATE.PARTICIPANT_FINISH);
+  });
+
   describe('$onInit method Suite Test', function () {
 
     function _callOnInit(hardBlocker, softBlocker){
       spyOn(Injections.PlayerService, 'getHardBlocker').and.returnValue(hardBlocker);
       spyOn(Injections.PlayerService, 'getSoftBlocker').and.returnValue(softBlocker);
 
-      spyOn(Injections.PlayerService, 'getCurrentSurvey').and.returnValue(
-        Mock.getCurrentSurvey);
+      spyOn(Injections.PlayerService, 'getCurrentSurvey').and.returnValue(Mock.getCurrentSurvey);
 
       controller.$onInit();
       Mock.$scope.$digest();
@@ -99,7 +110,6 @@ describe('otusSurveyCover component', function () {
 
   function _mockInitialize($rootScope, $q) {
     Mock.$scope = $rootScope.$new();
-    Mock.$scope.$parent.$ctrl = {};
 
     const deferredResolve = $q.defer();
     deferredResolve.resolve();
@@ -109,8 +119,6 @@ describe('otusSurveyCover component', function () {
     deferredReject.reject();
     Mock.reject = deferredReject.promise;
 
-    Mock.getCurrentSurvey = {
-      getName: function () { return ''; }
-    }
+    Mock.getCurrentSurvey = Test.utils.data.getCurrentSurvey;
   }
 });

@@ -10,12 +10,14 @@
     'SurveyClientService',
     'IndexedDbStorageService',
     'SurveyApiService',
-    '$state'
+    '$mdToast',
+    '$state',
+    'STATE'
   ];
 
-  function Service(ActivityFacadeService, SurveyClientService, IndexedDbStorageService, SurveyApiService, $state) {
-    var self = this;
-    var _currentItem;
+  function Service(ActivityFacadeService, SurveyClientService, IndexedDbStorageService, SurveyApiService,
+                   $mdToast, $state, STATE) {
+    const self = this;
 
     /* Public methods */
     self.beforeEffect = beforeEffect;
@@ -27,14 +29,20 @@
     }
 
     function effect(pipe, flowData) {
-      SurveyClientService.saveActivity(ActivityFacadeService.surveyActivity).then(function () {
-        if (location.origin == SurveyApiService.getCallbackAddress()) $state.go('/home')
-        else location.href = SurveyApiService.getCallbackAddress();
-      }).catch(function () {
-        $mdToast.show($mdToast.simple()
-          .textContent('Erro ao salvar a atividade!')
-          .hideDelay(3000));
-      });
+      SurveyClientService.saveActivity(ActivityFacadeService.surveyActivity)
+        .then(function () {
+          if (location.origin == SurveyApiService.getCallbackAddress()) {
+            $state.go(STATE.HOME);
+          }
+          else if(SurveyApiService.hasCallbackAddress()){
+            location.href = SurveyApiService.getCallbackAddress();
+          }
+        })
+        .catch(function () {
+          $mdToast.show($mdToast.simple()
+            .textContent('Erro ao salvar a atividade!')
+            .hideDelay(3000));
+        });
     }
 
     function afterEffect(pipe, flowData) {

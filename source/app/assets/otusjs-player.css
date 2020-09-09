@@ -6,7 +6,6 @@ md-icon[md-svg-icon="check"] {
   color: green
 }
 
-/* SURVEY HEADER */
 otus-survey-header md-chips-wrap {
   box-shadow: 0 0px !important;
 }
@@ -21,14 +20,6 @@ otus-survey-header {
   left: 0;
 }
 
-@media screen and (max-width: 600px) {
-  otus-survey-header {
-    height: 120px;
-    padding-bottom:8px;
-  }
-}
-
-/* SURVEY ITEM */
 otus-survey-item {
   transition: opacity 2s linear;
 }
@@ -90,9 +81,40 @@ otus-static-variable div md-content {
   margin-left: 24px;
 }
 
+.shared-url-confirmation-text {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+.shared-url-message {
+  text-align: center;
+  margin-top: 0.5em;
+  margin-bottom: 0;
+}
+
+.shared-url-message md-icon {
+  --icon-size: 64px;
+  font-size: var(--icon-size) !important;
+  width: var(--icon-size) !important;
+  height: var(--icon-size) !important;
+}
+
+.shared-url-message-highlighted {
+  text-align: center;
+  margin-top: 1em;
+  margin-bottom: 0;
+  font-weight: bold;
+}
+
 @media screen and (max-width: 600px) {
   .fab-speed-dial {
     left: 2px;
+  }
+
+  otus-survey-header {
+    height: 120px;
+    padding-bottom:8px;
   }
 
   otus-static-variable {
@@ -122,6 +144,18 @@ otus-static-variable div md-content {
     font-size: small;
     margin-left: 1px;
   }
+
+  .shared-url-confirmation-text {
+    font-size: 16px;
+  }
+
+  .shared-url-message {
+    font-size: 16px;
+  }
+
+  .shared-url-message-highlighted {
+    font-size: 20px;
+  }
 }
 
 @media screen and (min-width: 601px) {
@@ -142,6 +176,10 @@ otus-static-variable div md-content {
 
   .comment-box {
     font-size: medium;
+  }
+
+  .shared-url-message {
+    font-size: 24px;
   }
 }
 
@@ -224,4 +262,9 @@ md-sidenav {
 
 .autocomplete-fancy {
   border-radius: 8px
+}
+
+.shared-url-confirm-button {
+  width: 160px !important;
+  max-width: unset !important;
 }
