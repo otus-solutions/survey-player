@@ -15,7 +15,7 @@ describe('SavePlayerStepService Suite Test', function () {
       Injections.$state = $injector.get('$state');
       Injections.STATE = $injector.get('STATE');
 
-      service = $injector.get('SavePlayerStepService', Injections); // for set location.href
+      service = $injector.get('SavePlayerStepService', Injections);
 
       _mockInitialize($rootScope, $q);
     });

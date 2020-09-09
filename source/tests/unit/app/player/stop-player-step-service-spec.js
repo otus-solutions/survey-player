@@ -14,7 +14,7 @@ describe('StopPlayerStepService Suite Test', function () {
       _mockInitialize($rootScope);
     });
 
-    window.onbeforeunload = jasmine.createSpy();  // for set location.href
+    window.onbeforeunload = jasmine.createSpy();
   });
 
   it('check service', function () {
