@@ -25,7 +25,7 @@
 
     function onInit() {
       const activity = PlayerService.getCurrentSurvey();
-      if(activity.statusHistory.getFinalizedRegistries().length > 0){
+      if(activity.statusHistory.getLastStatus().name === 'FINALIZED'){
         _stop(PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.ALREADY_FINALIZED);
         return;
       }
