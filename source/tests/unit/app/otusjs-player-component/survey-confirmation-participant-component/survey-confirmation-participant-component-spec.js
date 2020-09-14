@@ -28,15 +28,15 @@ describe('otusSurveyConfirmationParticipant component', function () {
     expect(controller.stop).toBeDefined();
   });
 
-  it('onInit method should set page text in case callback address exists', function () {
-    _mockActivity(0);
+  it('onInit method should set page text in case not FINALIZED activity', function () {
+    _mockActivity('SAVED');
     spyOn(Injections.PlayerService, 'getCurrentSurvey').and.returnValue(Mock.activity);
     controller.$onInit();
     expect(controller.participantName).toBeDefined();
   });
 
-  it('onInit method should call PlayService stop method in case callback address does not exists', function () {
-    _mockActivity(1);
+  it('onInit method should call PlayService stop method in case FINALIZED activity', function () {
+    _mockActivity('FINALIZED');
     spyOn(Injections.PlayerService, 'getCurrentSurvey').and.returnValue(Mock.activity);
     _check_stop_method_call(controller.$onInit, 'ALREADY_FINALIZED');
     expect(controller.participantName).not.toBeDefined();
@@ -72,16 +72,12 @@ describe('otusSurveyConfirmationParticipant component', function () {
     };
   }
 
-  function _mockActivity(numFinalizedStatus){
-    let arr = [];
-    for(let i=0; i < numFinalizedStatus; i++){
-      arr.push({});
-    }
+  function _mockActivity(lastStatus){
     Mock.activity = {
-      surveyForm: {acronym: ''},
-      participantData: {name: ''},
+      surveyForm: {acronym: 'ABC'},
+      participantData: {name: 'Joao'},
       statusHistory: {
-        getFinalizedRegistries: function() { return arr; }
+        getLastStatus: function() { return { name: lastStatus}; }
       },
       getName: function () { return ''; }
     }
