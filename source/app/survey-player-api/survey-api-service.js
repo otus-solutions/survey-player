@@ -11,11 +11,28 @@
   ];
 
   function Service($cookies, $q, $rootScope) {
-    var self = this;
+    const self = this;
 
     const INIT_QUERY = "CREATE INDEXEDDB DATABASE IF NOT EXISTS userDB; ATTACH INDEXEDDB DATABASE userDB; USE userDB;";
     const DB_TABLE_USER = 'User';
     const TABLE_USER = "CREATE TABLE IF NOT EXISTS ".concat(DB_TABLE_USER).concat("; ");
+
+    const CURRENT_ACTIVITY = 'Current_Activity';
+    const AUTH_TOKEN = 'Auth_Token';
+    const CALLBACK_ADDRESS = 'Callback-Address';
+    const LOGIN_ADDRESS = 'Login-Address';
+    const DATASOURCE_ADDRESS = 'Datasource-Address';
+    const ACTIVITY_ADDRESS = 'Activity-Address';
+    const SURVEY_ADDRESS = 'Survey-Address';
+    const STATIC_VARIABLE_ADDRESS = 'StaticVariable-Address';
+    const FILE_UPLOAD_ADDRESS = 'FileUpload-Address';
+    const COLLECT_ADDRESS = 'Collect-Address';
+    const LOGGED_USER = '_userDB';
+    const HASHTAG = "HASHTAG";
+    const COLLECTION = 'COLLECTION';
+    const TOKEN = true;
+    const MODE = 'MODE';
+    const HAS_CALLBACK_ADDRESS = 'has-Callback-Address';
 
     self.getFileUploadUrl = getFileUploadUrl;
     self.getActivityUrl = getActivityUrl;
@@ -30,6 +47,7 @@
     self.getLoggedUser = getLoggedUser;
     self.setCallbackAddress = setCallbackAddress;
     self.getCallbackAddress = getCallbackAddress;
+    self.hasCallbackAddress = hasCallbackAddress;
     self.setCurrentActivity = setCurrentActivity;
     self.getCurrentActivity = getCurrentActivity;
     self.clearSession = clearSession;
@@ -40,26 +58,11 @@
     self.getSelectedCollection = getSelectedCollection;
     self.initDB = initDB;
 
-    const CURRENT_ACTIVITY = 'Current_Activity';
-    const AUTH_TOKEN = 'Auth_Token';
-    const CALLBACK_ADDRESS = 'Callback-Address';
-    const LOGIN_ADDRESS = 'Login-Address';
-    const DATASOURCE_ADDRESS = 'Datasource-Address';
-    const ACTIVITY_ADDRESS = 'Activity-Address';
-    const SURVEY_ADDRESS = 'Survey-Address';
-    const STATIC_VARIABLE_ADDRESS = 'StaticVariable-Address';
-    const FILE_UPLOAD_ADDRESS = 'FileUpload-Address';
-    const COLLECT_ADDRESS = 'Collect-Address';
-    const LOGGED_USER = '_userDB';
-    const HASHTAH = "HASHTAG";
-    const COLLECTION = 'COLLECTION';
-    const TOKEN = true;
-    const MODE = 'MODE';
     init();
 
     setTimeout(function () {
       initDB();
-    }, 5000)
+    }, 5000);
 
     var _loginUrl;
     var _datasourceUrl;
@@ -97,8 +100,6 @@
               }
 
               $rootScope.$broadcast("listSurveys", {any: {}});
-
-
             });
           });
         });
@@ -207,11 +208,16 @@
     }
 
     function setCallbackAddress(url) {
-      sessionStorage.setItem(CALLBACK_ADDRESS, angular.copy(url.replace(HASHTAH, "#")));
+      sessionStorage.setItem(CALLBACK_ADDRESS, angular.copy(url.replace(HASHTAG, "#")));
+      sessionStorage.setItem(HAS_CALLBACK_ADDRESS, "true");
     }
 
     function getCallbackAddress() {
       return sessionStorage.getItem(CALLBACK_ADDRESS) ? sessionStorage.getItem(CALLBACK_ADDRESS) : location.href;
+    }
+
+    function hasCallbackAddress(){
+      return !!sessionStorage.getItem(HAS_CALLBACK_ADDRESS);
     }
 
     function setCurrentActivity(id) {
@@ -230,6 +236,8 @@
       sessionStorage.removeItem(CALLBACK_ADDRESS);
       sessionStorage.removeItem(LOGGED_USER);
       sessionStorage.removeItem(MODE);
+      sessionStorage.removeItem(HAS_CALLBACK_ADDRESS);
     }
+
   }
 })();

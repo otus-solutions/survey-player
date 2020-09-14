@@ -1,0 +1,10 @@
+<div ng-if="!$ctrl.participantSharedURLError">
+  <h1 style="flex-direction: row; text-align: center; flex: 100; margin: auto">
+    404 - Data Not Found
+  </h1>
+</div>
+
+<div ng-if="$ctrl.participantSharedURLError"
+     class="md-display-1 shared-url-message" layout="column" layout-align="center center" flex layout-margin="">
+  <div bind-html-compile="$ctrl.message"></div>
+</div>

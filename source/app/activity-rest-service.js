@@ -8,11 +8,10 @@
   Service.$inject = [
     '$q',
     '$http',
-    'SurveyApiService',
-    '$rootScope'
+    'SurveyApiService'
   ];
 
-  function Service($q, $http, SurveyApiService, $rootScope) {
+  function Service($q, $http, SurveyApiService) {
     var self = this;
     var _rest = null;
 
@@ -36,6 +35,7 @@
         defer.resolve(response.data);
       }).error(function (error) {
         console.error('Cannot GET a survey template.');
+        defer.reject(error);
       });
       return defer.promise;
     }

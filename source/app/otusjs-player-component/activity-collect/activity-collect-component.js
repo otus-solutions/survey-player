@@ -23,6 +23,7 @@
     'CollectIndexedDbService',
     'SurveyApiService',
     '$state',
+    'STATE',
     'ActivityCollectionRestService',
     'ACTIVITY_STATUS',
     '$mdToast',
@@ -38,6 +39,7 @@
     CollectIndexedDbService,
     SurveyApiService,
     $state,
+    STATE,
     ActivityCollectionRestService,
     ACTIVITY_STATUS,
     $mdToast,
@@ -196,7 +198,7 @@
     function play(activity) {
       SurveyApiService.setCallbackAddress(location.origin);
       SurveyApiService.setCurrentActivity(activity.surveyForm.acronym);
-      $state.go('/');
+      $state.go(STATE.MAIN);
     }
 
     function onDestroy() {

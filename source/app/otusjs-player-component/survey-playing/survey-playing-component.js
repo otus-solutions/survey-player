@@ -4,16 +4,18 @@
   angular
     .module('otusjs.player.component')
     .component('otusSurveyPlaying', {
-      templateUrl: 'app/otusjs-player-component/survey-playing/survey-playing-template.html',
-      controller: Controller
-    });
+      controller: 'otusSurveyPlayingCtrl as $ctrl',
+      templateUrl: 'app/otusjs-player-component/survey-playing/survey-playing-template.html'
+    })
+    .controller('otusSurveyPlayingCtrl', Controller);
 
   Controller.$inject = [
-    'otusjs.player.core.player.PlayerService',
-    '$state'
+    '$state',
+    'STATE',
+    'otusjs.player.core.player.PlayerService'
   ];
 
-  function Controller(PlayerService, $state) {
+  function Controller($state, STATE, PlayerService) {
     let self = this;
 
     /* Public methods */
@@ -21,11 +23,11 @@
     self.$onInit = onInit;
     self.eject = eject;
     self.finalize = finalize;
-    self.goAhead = goAhead;
-    self.goBack = goBack;
     self.pause = pause;
     self.stop = stop;
     self.goToFinish = goToFinish;
+    self.goAhead = goAhead;
+    self.goBack = goBack;
     self.onProcessingPlayer = onProcessingPlayer;
     self.goIsLockOpenClose = goIsLockOpenClose;
 
@@ -88,6 +90,21 @@
     function finalize() {
       PlayerService.save();
       PlayerService.eject();
+      _goToParticipantFinishIfHasNoCallbackAddress(PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.FINALIZE);
+    }
+
+    function pause() {
+      PlayerService.save();
+      _goToParticipantFinishIfHasNoCallbackAddress(PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.SAVE);
+    }
+
+    function stop() {
+      PlayerService.stop();
+      _goToParticipantFinishIfHasNoCallbackAddress(PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.GET_OUT_WITHOUT_SAVE);
+    }
+
+    function goToFinish() {
+      $state.go(STATE.FINISH);
     }
 
     function goAhead() {
@@ -100,22 +117,17 @@
       _loadItem();
     }
 
-    function pause() {
-      PlayerService.save();
-    }
-
-    function stop() {
-      PlayerService.stop();
-    }
-
-    function goToFinish() {
-      $state.go('/finish');
-    }
-
     function _loadItem() {
       let itemData = PlayerService.getItemData();
       if (itemData) {
         self.playerDisplay.loadItem(itemData);
+      }
+    }
+
+    function _goToParticipantFinishIfHasNoCallbackAddress(reason){
+      if(!PlayerService.hasCallbackAddress()){
+        PlayerService.setReasonToFinishActivity(reason);
+        $state.go(STATE.PARTICIPANT_FINISH);
       }
     }
 

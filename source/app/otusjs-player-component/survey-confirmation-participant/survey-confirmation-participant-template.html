@@ -1,0 +1,27 @@
+<style>
+  md-chips.md-default-theme .md-chips, md-chips .md-chips {
+    box-shadow: none !important;
+  }
+</style>
+
+<div layout="column" layout-align="center center" flex>
+
+  <div layout="row" layout-align="center center" style="margin-bottom: 1em">
+    <md-chips>
+      <md-chip class="header-font">{{ $ctrl.acronym }}</md-chip>
+    </md-chips>
+    <div class="md-display-1 shared-url-confirmation-text" style="margin-bottom: 0">{{$ctrl.title}}</div>
+  </div>
+
+  <div class="md-display-1 shared-url-confirmation-text" ng-bind-html="$ctrl.participantName"></div>
+
+  <div layout="column" layout-align="start center">
+    <md-button class="md-raised md-primary shared-url-confirm-button" aria-label="Sim" ng-click="$ctrl.play()">
+      <md-icon md-font-set="material-icons">check</md-icon>
+      Sim, sou eu!
+    </md-button>
+    <md-button style="margin-top: 24px; text-transform: capitalize;" aria-label="Nao" ng-click="$ctrl.stop()" >
+      Não sou eu.
+    </md-button>
+  </div>
+</div>

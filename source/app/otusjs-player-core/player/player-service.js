@@ -13,7 +13,9 @@
     'otusjs.player.core.phase.BackActionService',
     'otusjs.player.core.phase.EjectActionService',
     'otusjs.player.core.phase.StopActionService',
-    'otusjs.player.core.phase.SaveActionService'
+    'otusjs.player.core.phase.SaveActionService',
+    'SurveyApiService',
+    'PLAYER_SERVICE_CORE_CONSTANTS'
   ];
 
   function PlayerService(
@@ -24,14 +26,18 @@
     BackActionService,
     EjectActionService,
     StopActionService,
-    SaveActionService) {
+    SaveActionService,
+    SurveyApiService,
+    PLAYER_SERVICE_CONSTANTS) {
 
-    var self = this;
-    var _component = null;
-    var _goBackTo = null;
-    var _goingBack = null;
-    var _hardBlocker = null;
-    var _softBlocker = null;
+    const self = this;
+    
+    let _component = null;
+    let _goBackTo = null;
+    let _goingBack = null;
+    let _hardBlocker = null;
+    let _softBlocker = null;
+    let _reasonToFinishActivity = null;
 
     self.bindComponent = bindComponent;
     self.getItemData = getItemData;
@@ -47,6 +53,10 @@
     self.stop = stop;
     self.save = save;
     self.getCurrentSurvey = getCurrentSurvey;
+    self.hasCallbackAddress = hasCallbackAddress;
+    self.getConstants = getConstants;
+    self.setReasonToFinishActivity = setReasonToFinishActivity;
+    self.getReasonToFinishActivity = getReasonToFinishActivity;
 
     /**/
     self.registerHardBlocker = registerHardBlocker;
@@ -132,6 +142,22 @@
 
     function getCurrentSurvey(){
       return ActivityFacadeService.getCurrentSurvey().getSurvey();
+    }
+
+    function hasCallbackAddress(){
+      return SurveyApiService.hasCallbackAddress();
+    }
+
+    function getConstants(){
+      return PLAYER_SERVICE_CONSTANTS;
+    }
+
+    function setReasonToFinishActivity(reason){
+      _reasonToFinishActivity = reason;
+    }
+
+    function getReasonToFinishActivity(){
+      return _reasonToFinishActivity;
     }
   }
 })();
