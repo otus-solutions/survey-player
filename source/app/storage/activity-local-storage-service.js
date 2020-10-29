@@ -95,6 +95,7 @@
     /* Datasources  Methods */
     function registerDatasource(datasource) {
       _db.loadDatabase();
+      _collection = _db.getCollection(self.collectionName);
       if (_collection) {
         _collection.insert({
           name: 'datasource',
