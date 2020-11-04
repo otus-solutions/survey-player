@@ -152,9 +152,7 @@
 
     function _setPlayerConfiguration() {
       _generateOtusPreview();
-      if($state.current.name === STATE.PLAY){
         PlayerService.setup();
-      }
       _appendTemplateAccordingState();
     }
 
