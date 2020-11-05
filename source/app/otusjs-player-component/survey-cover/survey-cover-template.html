@@ -11,7 +11,7 @@
     </div>
     <div layout="row">
       <md-button class="md-raised md-primary" aria-label="Iniciar" ng-click="$ctrl.play()"
-                 ng-disabled="$ctrl.hardError">
+                 ng-disabled="$ctrl.hardError || $ctrl.softProgress || $ctrl.hardProgress">
         <md-icon md-font-set="material-icons">assignment</md-icon>
         Iniciar
       </md-button>
