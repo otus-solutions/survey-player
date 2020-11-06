@@ -30,7 +30,6 @@
 
     function setupDatasources(dsDefsArray) {
       SurveyItemRestService.initialize();
-      ActivityLocalStorageService.clear();
       return $q(function (resolve, reject) {
         try {
           _getDatasources(dsDefsArray)
@@ -38,6 +37,7 @@
               dsDefsArray.forEach(function (dsDef) {
                 dsMap[dsDef.getID()].bindedItems = dsDef.getBindedItems();
               });
+              ActivityLocalStorageService.clear();
               var getAddress = ActivityLocalStorageService.registerDatasource(dsMap);
               DatasourceService.provideDatasourcesAddress(getAddress);
               resolve(true);
