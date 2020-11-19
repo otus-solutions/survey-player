@@ -31,7 +31,7 @@
     PLAYER_SERVICE_CONSTANTS) {
 
     const self = this;
-    
+
     let _component = null;
     let _goBackTo = null;
     let _goingBack = null;
@@ -64,6 +64,7 @@
     self.getHardBlocker = getHardBlocker;
     self.getSoftBlocker = getSoftBlocker;
     self.clearHardBlocker = clearHardBlocker;
+    self.inspectorNavigationOnline = inspectorNavigationOnline;
 
     function registerHardBlocker(blocker) {
       _hardBlocker = blocker;
@@ -140,24 +141,28 @@
       SaveActionService.execute();
     }
 
-    function getCurrentSurvey(){
+    function getCurrentSurvey() {
       return ActivityFacadeService.getCurrentSurvey().getSurvey();
     }
 
-    function hasCallbackAddress(){
+    function hasCallbackAddress() {
       return SurveyApiService.hasCallbackAddress();
     }
 
-    function getConstants(){
+    function getConstants() {
       return PLAYER_SERVICE_CONSTANTS;
     }
 
-    function setReasonToFinishActivity(reason){
+    function setReasonToFinishActivity(reason) {
       _reasonToFinishActivity = reason;
     }
 
-    function getReasonToFinishActivity(){
+    function getReasonToFinishActivity() {
       return _reasonToFinishActivity;
+    }
+
+    function inspectorNavigationOnline() {
+      return navigator.onLine;
     }
   }
 })();

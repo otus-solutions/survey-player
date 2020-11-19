@@ -20,10 +20,15 @@
     self.$onInit = onInit;
 
     function onInit() {
+      let reasonToFinish;
       self.participantSharedURLError = !PlayerService.hasCallbackAddress();
 
-      if(self.participantSharedURLError){
-        const reasonToFinish = PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.ERROR;
+      if (self.participantSharedURLError) {
+        if (!PlayerService.inspectorNavigationOnline()) {
+          reasonToFinish = PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.ERROR_OFFLINE
+        } else {
+          reasonToFinish = PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.ERROR;
+        }
 
         let template = `<md-icon md-font-set="material-icons" style="color: ${reasonToFinish.icon.color}">${reasonToFinish.icon.name}</md-icon>` +
           `<p class="md-display-1 shared-url-message-highlighted" style="color: ${reasonToFinish.highlightedText.color}">${reasonToFinish.highlightedText.text}</p>`;

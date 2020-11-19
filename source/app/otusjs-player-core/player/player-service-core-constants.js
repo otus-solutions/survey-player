@@ -74,6 +74,20 @@
             'Entre em contato com seu projeto para obter novo link de acesso.',
             'Obrigado.'
           ]
+        },
+        ERROR_OFFLINE: {
+          icon: {
+            name: 'sentiment_very_dissatisfied',
+            color: "red"
+          },
+          highlightedText: {
+            text: 'Erro ao conectar o servidor',
+            color: "lightcoral"
+          },
+          text: [
+            'Tente novamente ou tente mais tarde.',
+            'Obrigado.'
+          ]
         }
       }
 

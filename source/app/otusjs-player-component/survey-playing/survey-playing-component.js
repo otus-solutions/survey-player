@@ -124,10 +124,14 @@
       }
     }
 
-    function _goToParticipantFinishIfHasNoCallbackAddress(reason){
-      if(!PlayerService.hasCallbackAddress()){
-        PlayerService.setReasonToFinishActivity(reason);
-        $state.go(STATE.PARTICIPANT_FINISH);
+    function _goToParticipantFinishIfHasNoCallbackAddress(reason) {
+      if (!PlayerService.hasCallbackAddress()) {
+        if (PlayerService.inspectorNavigationOnline()) {
+          PlayerService.setReasonToFinishActivity(reason);
+          $state.go(STATE.PARTICIPANT_FINISH);
+        } else {
+          $state.go(STATE.ERROR);
+        }
       }
     }
 
