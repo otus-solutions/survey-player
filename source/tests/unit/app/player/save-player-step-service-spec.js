@@ -99,7 +99,7 @@ describe('SavePlayerStepService Suite Test', function () {
 
   function _mockInitialize($rootScope, $q) {
     let error = {};
-    error.STATUS = "";
+    error.STATUS = "teste";
     Mock.$scope = $rootScope.$new();
 
     const deferredResolve = $q.defer();
