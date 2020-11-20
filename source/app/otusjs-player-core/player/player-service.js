@@ -64,7 +64,6 @@
     self.getHardBlocker = getHardBlocker;
     self.getSoftBlocker = getSoftBlocker;
     self.clearHardBlocker = clearHardBlocker;
-    self.inspectorNavigationOnline = inspectorNavigationOnline;
 
     function registerHardBlocker(blocker) {
       _hardBlocker = blocker;
@@ -159,10 +158,6 @@
 
     function getReasonToFinishActivity() {
       return _reasonToFinishActivity;
-    }
-
-    function inspectorNavigationOnline() {
-      return navigator.onLine;
     }
   }
 })();

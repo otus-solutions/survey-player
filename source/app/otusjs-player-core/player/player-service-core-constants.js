@@ -81,7 +81,7 @@
             color: "red"
           },
           highlightedText: {
-            text: 'Erro ao conectar o servidor',
+            text: 'Erro ao conectar com o servidor',
             color: "lightcoral"
           },
           text: [

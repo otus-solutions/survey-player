@@ -20,13 +20,11 @@
     self.$onInit = onInit;
 
     function onInit() {
-      let reasonToFinish;
+      let reasonToFinish = PlayerService.getReasonToFinishActivity();
       self.participantSharedURLError = !PlayerService.hasCallbackAddress();
 
       if (self.participantSharedURLError) {
-        if (!PlayerService.inspectorNavigationOnline()) {
-          reasonToFinish = PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.ERROR_OFFLINE
-        } else {
+        if (reasonToFinish != PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.ERROR_OFFLINE) {
           reasonToFinish = PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.ERROR;
         }
 

@@ -98,6 +98,8 @@ describe('SavePlayerStepService Suite Test', function () {
 
 
   function _mockInitialize($rootScope, $q) {
+    let error = {};
+    error.STATUS = "";
     Mock.$scope = $rootScope.$new();
 
     const deferredResolve = $q.defer();
@@ -105,7 +107,7 @@ describe('SavePlayerStepService Suite Test', function () {
     Mock.resolve = deferredResolve.promise;
 
     const deferredReject = $q.defer();
-    deferredReject.reject();
+    deferredReject.reject(error);
     Mock.reject = deferredReject.promise;
 
     Mock.surveyActivity = {};

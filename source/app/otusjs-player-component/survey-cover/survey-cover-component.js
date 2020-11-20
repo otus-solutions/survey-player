@@ -72,12 +72,8 @@
     function stop() {
       PlayerService.stop();
       if (!PlayerService.hasCallbackAddress()) {
-        if (PlayerService.inspectorNavigationOnline()) {
-          PlayerService.setReasonToFinishActivity(PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.GET_OUT_WITHOUT_SAVE);
-          $state.go(STATE.PARTICIPANT_FINISH);
-        } else {
-          $state.go(STATE.ERROR);
-        }
+        PlayerService.setReasonToFinishActivity(PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.GET_OUT_WITHOUT_SAVE);
+        $state.go(STATE.PARTICIPANT_FINISH);
       }
     }
 
