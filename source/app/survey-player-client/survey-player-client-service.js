@@ -43,13 +43,17 @@
 
     function saveActivity(data) {
       var defer = $q.defer();
-      ActivityRepositoryService.save(data).then(function () {
-        if (data) {
-          defer.resolve(true);
-        } else {
-          defer.reject();
-        }
-      });
+      ActivityRepositoryService.save(data)
+        .then(function () {
+          if (data) {
+            defer.resolve(true);
+          } else {
+            defer.reject();
+          }
+        })
+        .catch(function (error) {
+          defer.reject(error);
+        });
       return defer.promise;
     }
 
@@ -60,7 +64,7 @@
         }
         return [];
       }).catch(function (err) {
-          return Promise.reject(err);
+        return Promise.reject(err);
       });
     }
 
@@ -71,7 +75,7 @@
         }
         return [];
       }).catch(function (err) {
-          return Promise.reject(err);
+        return Promise.reject(err);
       });
     }
 
