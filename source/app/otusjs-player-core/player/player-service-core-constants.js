@@ -2,11 +2,11 @@
 
   'use strict';
   angular.module('otusjs.player.core.player')
-    .constant('PLAYER_SERVICE_CORE_CONSTANTS',{
+    .constant('PLAYER_SERVICE_CORE_CONSTANTS', {
 
       REASONS_TO_LIVE_PLAYER: {
         IS_NOT_ME: {
-          icon:{
+          icon: {
             name: 'thumb_up',
             color: "green",
           },
@@ -16,7 +16,7 @@
           },
         },
         GET_OUT_WITHOUT_SAVE: {
-          icon:{
+          icon: {
             name: 'meeting_room',
             color: "orange",
           },
@@ -26,7 +26,7 @@
           }
         },
         SAVE: {
-          icon:{
+          icon: {
             name: 'save',
             color: "#00786c",
           },
@@ -37,7 +37,7 @@
           text: ["Para finalizar, preencha o questionário até o final."]
         },
         FINALIZE: {
-          icon:{
+          icon: {
             name: 'check_circle',
             color: "blue"
           },
@@ -48,7 +48,7 @@
           text: ['Obrigado.']
         },
         ALREADY_FINALIZED: {
-          icon:{
+          icon: {
             name: 'check_circle',
             color: "blue"
           },
@@ -62,7 +62,7 @@
           ]
         },
         ERROR: {
-          icon:{
+          icon: {
             name: 'sentiment_very_dissatisfied',
             color: "red"
           },
@@ -85,7 +85,7 @@
             color: "lightcoral"
           },
           text: [
-            'Tente novamente ou tente mais tarde.',
+            'Verifique a conexão e tente de novo!',
             'Obrigado.'
           ]
         }
