@@ -49,8 +49,8 @@
         .getById(activityInfo)
         .then(function (response) {
           deferred.resolve(response);
-        }).catch(function () {
-          deferred.reject();
+        }).catch(function (error) {
+          deferred.reject(error);
         });
 
       return deferred.promise;

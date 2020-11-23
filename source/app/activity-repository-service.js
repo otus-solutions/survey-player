@@ -30,7 +30,9 @@
 
 
     function getById(activityInfo) {
-      return ActivityCollectionService.getById(activityInfo).then(_toEntity);
+      return ActivityCollectionService.getById(activityInfo)
+        .then(_toEntity)
+        .catch(error => {  return Promise.reject(error); })
     }
 
     function getByAcronymOffline(id, acronym) {

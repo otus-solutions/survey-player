@@ -33,12 +33,16 @@
           });
       }
 
-      return ActivityRepositoryService.getById(SurveyApiService.getCurrentActivity()).then(function (response) {
-        if (Array.isArray(response) && response.length > 0) {
-          activityToPlay = angular.copy(response[0]);
-          return activityToPlay;
-        }
-      });
+      return ActivityRepositoryService.getById(SurveyApiService.getCurrentActivity())
+        .then(function (response) {
+          if (Array.isArray(response) && response.length > 0) {
+            activityToPlay = angular.copy(response[0]);
+            return activityToPlay;
+          }
+        })
+        .catch(function (error) {
+          return Promise.reject(error);
+        });
     }
 
     function saveActivity(data) {

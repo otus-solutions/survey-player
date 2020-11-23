@@ -44,8 +44,8 @@
       _remoteStorage.getById(activityInfo)
         .then(function (response) {
           request.resolve(response);
-        }).catch(function () {
-          request.reject();
+        }).catch(function (error) {
+          request.reject(error);
         });
 
       return request.promise;
