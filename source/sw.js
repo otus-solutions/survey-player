@@ -4,7 +4,6 @@ var CACHE_NAME = CACHE_PREFIX + version;
 
 var CACHED_FILES = [
   "manifest.json",
-  "favicon.ico",
   "/node_modules/jquery/dist/jquery.min.js",
   "/node_modules/angular/angular.min.js",
   "/node_modules/angular-ui-router/release/angular-ui-router.min.js",
@@ -32,6 +31,7 @@ var CACHED_FILES = [
   "/app/app.js",
   "/app/static-resource/stylesheet/please-wait-style.css",
   "/app/static-resource/image/coruja_pesquisadora.png",
+  "/app/assets/icons/favicon.ico",
   "/app/assets/MaterialIcons-Regular.woff2",
   "/app/assets/otusjs-player-standalone.css",
   "/app/assets/fonts-googleapis-css.css",
