@@ -66,7 +66,8 @@
     '$location',
     '$state',
     'LoadingScreenService',
-    'STATE'
+    'STATE',
+    'otusjs.player.core.player.PlayerService'
   ];
 
   function Controller(
@@ -82,7 +83,8 @@
     $location,
     $state,
     LoadingScreenService,
-    STATE) {
+    STATE,
+    PlayerServiceCore) {
 
     const self = this;
     /* Lifecycle hooks */
@@ -131,7 +133,10 @@
             _isValid = true;
             _setPlayerConfiguration();
             LoadingScreenService.finish();
-          }).catch(function () {
+          }).catch(function (error) {
+            if (error.STATUS != "UNAUTHORIZED") {
+              PlayerServiceCore.setReasonToFinishActivity(PlayerServiceCore.getConstants().REASONS_TO_LIVE_PLAYER.ERROR_OFFLINE);
+            }
             $state.go(STATE.ERROR);
             LoadingScreenService.finish();
           });
@@ -152,7 +157,7 @@
 
     function _setPlayerConfiguration() {
       _generateOtusPreview();
-        PlayerService.setup();
+      PlayerService.setup();
       _appendTemplateAccordingState();
     }
 
@@ -167,15 +172,15 @@
       return ActivityFacadeService.surveyActivity = _activity;
     }
 
-    function _appendTemplateAccordingState(){
-      const SURVEY_PREVIEW_ID ='#survey-preview';
+    function _appendTemplateAccordingState() {
+      const SURVEY_PREVIEW_ID = '#survey-preview';
       $(SURVEY_PREVIEW_ID).empty();
       switch ($state.current.name) {
         case STATE.MAIN:
-          if(SurveyApiService.hasCallbackAddress()){
+          if (SurveyApiService.hasCallbackAddress()) {
             $(SURVEY_PREVIEW_ID).append($compile('<otus-survey-cover layout="column" layout-fill=""></otus-survey-cover>')($scope));
           }
-          else{
+          else {
             $(SURVEY_PREVIEW_ID).append($compile('<otus-survey-confirmation-participant layout="column" layout-fill=""></otus-survey-confirmation-participant>')($scope));
           }
           break;

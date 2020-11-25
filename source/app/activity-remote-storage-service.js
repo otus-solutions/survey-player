@@ -49,9 +49,9 @@
         .getById(activityInfo)
         .then(function (response) {
           deferred.resolve(response);
-        }).catch(function () {
-        deferred.reject();
-      });
+        }).catch(function (error) {
+          deferred.reject(error);
+        });
 
       return deferred.promise;
     }
@@ -63,9 +63,9 @@
         .update(activity)
         .then(function (response) {
           deferred.resolve(response);
-        }).catch(function () {
-        deferred.reject();
-      });
+        }).catch(function (error) {
+          deferred.reject(error);
+        });
 
       return deferred.promise;
     }
@@ -78,8 +78,8 @@
         .then(function (response) {
           deferred.resolve(response);
         }).catch(function (err) {
-        deferred.reject(err);
-      });
+          deferred.reject(err);
+        });
 
       return deferred.promise;
     }

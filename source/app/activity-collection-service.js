@@ -44,9 +44,9 @@
       _remoteStorage.getById(activityInfo)
         .then(function (response) {
           request.resolve(response);
-        }).catch(function () {
-        request.reject();
-      });
+        }).catch(function (error) {
+          request.reject(error);
+        });
 
       return request.promise;
     }
@@ -60,8 +60,8 @@
           });
           request.resolve(_activity);
         }).catch(function () {
-        request.reject();
-      });
+          request.reject();
+        });
 
       return request.promise;
     }
@@ -73,9 +73,10 @@
         _remoteStorage.update(activity)
           .then(function (response) {
             request.resolve(response);
-          }).catch(function () {
-          request.reject();
-        });
+          })
+          .catch(function (error) {
+            request.reject(error);
+          });
       } else {
         return _updateInCollection(_code, JSON.parse(JSON.stringify(activity[0])));
       }
@@ -100,8 +101,8 @@
           });
 
         }).catch(function () {
-        request.reject();
-      });
+          request.reject();
+        });
       return request.promise;
     }
 
@@ -118,12 +119,12 @@
             };
           }));
         }).catch(function (err) {
-        ActivityIndexedDbService.getSurveyList().then(function (response) {
-          request.resolve(response);
-        }).catch(function () {
-          request.reject(err);
+          ActivityIndexedDbService.getSurveyList().then(function (response) {
+            request.resolve(response);
+          }).catch(function () {
+            request.reject(err);
+          });
         });
-      });
 
       return request.promise;
     }
@@ -136,12 +137,12 @@
           ActivityIndexedDbService.update(response);
           request.resolve(response);
         }).catch(function (err) {
-        ActivityIndexedDbService.getAllActivities().then(function (response) {
-          request.resolve(response);
-        }).catch(function () {
-          request.reject(err);
+          ActivityIndexedDbService.getAllActivities().then(function (response) {
+            request.resolve(response);
+          }).catch(function () {
+            request.reject(err);
+          });
         });
-      });
 
       return request.promise;
     }

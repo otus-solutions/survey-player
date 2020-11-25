@@ -9,10 +9,13 @@
     '$q',
     'otusjs.model.activity.ActivityFactory',
     'SurveyFormFactory',
-    'ActivityCollectionService'
+    'ActivityCollectionService',
+    '$state',
+    'STATE',
+    'otusjs.player.core.player.PlayerService'
   ];
 
-  function Service($q, ActivityFactory, SurveyFormFactory, ActivityCollectionService) {
+  function Service($q, ActivityFactory, SurveyFormFactory, ActivityCollectionService, $state, STATE, PlayerService) {
     var self = this;
     var _existsWorkingInProgress = null;
 
@@ -27,7 +30,9 @@
 
 
     function getById(activityInfo) {
-      return ActivityCollectionService.getById(activityInfo).then(_toEntity);
+      return ActivityCollectionService.getById(activityInfo)
+        .then(_toEntity)
+        .catch(error => {  return Promise.reject(error); })
     }
 
     function getByAcronymOffline(id, acronym) {
@@ -72,7 +77,9 @@
       }
 
       var work = _setupWorkProgress();
-      return ActivityCollectionService.update(toUpdate).then(work.finish);
+      return ActivityCollectionService.update(toUpdate)
+        .then(work.finish)
+        .catch(error => { return Promise.reject(error); });
     }
 
     function _setupWorkProgress() {

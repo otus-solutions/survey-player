@@ -69,8 +69,8 @@
       return deferred.promise;
     }
 
-    function _goToParticipantFinishIfHasNoCallbackAddress(reason){
-      if(!PlayerService.hasCallbackAddress()){
+    function _goToParticipantFinishIfHasNoCallbackAddress(reason) {
+      if (!PlayerService.hasCallbackAddress()) {
         PlayerService.setReasonToFinishActivity(reason);
         $state.go(STATE.PARTICIPANT_FINISH);
       }

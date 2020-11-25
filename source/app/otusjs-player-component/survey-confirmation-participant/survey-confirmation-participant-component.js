@@ -25,13 +25,13 @@
 
     function onInit() {
       const activity = PlayerService.getCurrentSurvey();
-      if(activity.statusHistory.getLastStatus().name === 'FINALIZED'){
+      if (activity.statusHistory.getLastStatus().name === 'FINALIZED') {
         _stop(PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.ALREADY_FINALIZED);
         return;
       }
 
-      self.acronym = activity.surveyForm.acronym;
-      self.title = activity.getName();
+      self.acronym = $sce.trustAsHtml(activity.surveyForm.acronym);
+      self.title = $sce.trustAsHtml(activity.getName());
 
       const participantName = _capitalizeName(activity.participantData.name);
       self.participantName = $sce.trustAsHtml(`<p>${participantName}</p>`);
@@ -41,18 +41,18 @@
       $state.go(STATE.BEGIN);
     }
 
-    function stop(){
+    function stop() {
       _stop(PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.IS_NOT_ME);
     }
 
-    function _stop(reason){
+    function _stop(reason) {
       PlayerService.stop();
       PlayerService.setReasonToFinishActivity(reason);
       $state.go(STATE.PARTICIPANT_FINISH);
     }
 
     function _capitalizeName(name) {
-      return name.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+      return name.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
     }
 
   }
