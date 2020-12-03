@@ -55,8 +55,9 @@
     self.getCurrentSurvey = getCurrentSurvey;
     self.hasCallbackAddress = hasCallbackAddress;
     self.getConstants = getConstants;
-    self.setReasonToFinishActivity = setReasonToFinishActivity;
     self.getReasonToFinishActivity = getReasonToFinishActivity;
+    self.setReasonToFinishActivity = setReasonToFinishActivity;
+    self.setReasonToFinishActivityFromErrorStatus = setReasonToFinishActivityFromErrorStatus;
     self.goToCallback = goToCallback;
     self.reloadSharedUrl = reloadSharedUrl;
 
@@ -154,12 +155,18 @@
       return PLAYER_SERVICE_CONSTANTS;
     }
 
+    function getReasonToFinishActivity() {
+      return _reasonToFinishActivity;
+    }
+
     function setReasonToFinishActivity(reason) {
       _reasonToFinishActivity = reason;
     }
 
-    function getReasonToFinishActivity() {
-      return _reasonToFinishActivity;
+    function setReasonToFinishActivityFromErrorStatus(errorStatus) {
+      _reasonToFinishActivity = (errorStatus === "UNAUTHORIZED" ?
+        getConstants().REASONS_TO_LIVE_PLAYER.UNAUTHORIZED :
+        getConstants().REASONS_TO_LIVE_PLAYER.OFFLINE_ERROR);
     }
 
     function goToCallback(){
