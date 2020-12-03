@@ -3,9 +3,15 @@
     <div bind-html-compile="$ctrl.message"></div>
   </div>
   <div ng-if="!$ctrl.participantSharedURLError">
-    <md-button class="md-primary" aria-label="Voltar" ng-click="$ctrl.goToCallback()" style="margin-top: 16px">
+    <md-button class="md-primary exit-error-message-button" aria-label="Voltar" ng-click="$ctrl.goToCallback()">
       <md-icon md-font-set="material-icons">exit_to_app</md-icon>
       Voltar
+    </md-button>
+  </div>
+  <div ng-if="$ctrl.showTryAgainButton">
+    <md-button class="md-primary exit-error-message-button" aria-label="Tentar novamente" ng-click="$ctrl.reloadSharedURL()">
+      <md-icon md-font-set="material-icons">cached</md-icon>
+      Tentar novamente
     </md-button>
   </div>
 </div>

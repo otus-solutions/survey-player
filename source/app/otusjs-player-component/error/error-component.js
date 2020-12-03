@@ -19,17 +19,24 @@
     /* Public methods */
     self.$onInit = onInit;
     self.goToCallback = goToCallback;
+    self.reloadSharedURL = reloadSharedURL;
+    self.showTryAgainButton = false;
 
     function onInit() {
-      let reasonToFinish = PlayerService.getReasonToFinishActivity() || PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.ERROR_OFFLINE;
       self.participantSharedURLError = !PlayerService.hasCallbackAddress();
 
-      if (reasonToFinish !== PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.ERROR_OFFLINE) {
+      const OFF_LINE_ERROR = PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.ERROR_OFFLINE;
+
+      let reasonToFinish = PlayerService.getReasonToFinishActivity() || OFF_LINE_ERROR;
+      if (reasonToFinish !== OFF_LINE_ERROR) {
         reasonToFinish = PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.ERROR;
       }
 
+      self.showTryAgainButton = (self.participantSharedURLError && reasonToFinish === OFF_LINE_ERROR);
+
       let template = `<md-icon md-font-set="material-icons" style="color: ${reasonToFinish.icon.color}">${reasonToFinish.icon.name}</md-icon>` +
         `<p class="md-display-1 shared-url-message-highlighted" style="color: ${reasonToFinish.highlightedText.color}">${reasonToFinish.highlightedText.text}</p>`;
+
       if(reasonToFinish.text){
         reasonToFinish.text.forEach(sentence => {
           template += `<p class="md-display-1 shared-url-message">${sentence}</p>`;
@@ -41,6 +48,10 @@
 
     function goToCallback(){
       PlayerService.goToCallback();
+    }
+
+    function reloadSharedURL(){
+      PlayerService.reloadSharedUrl();
     }
 
   }
