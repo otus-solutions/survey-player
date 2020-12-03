@@ -19,7 +19,7 @@
     /* Public methods */
     self.$onInit = onInit;
     self.goToCallback = goToCallback;
-    self.reloadSharedURL = reloadSharedURL;
+    self.reloadSharedUrl = reloadSharedUrl;
     self.showTryAgainButton = false;
 
     function onInit() {
@@ -50,7 +50,7 @@
       PlayerService.goToCallback();
     }
 
-    function reloadSharedURL(){
+    function reloadSharedUrl(){
       PlayerService.reloadSharedUrl();
     }
 
