@@ -58,6 +58,7 @@
     self.setReasonToFinishActivity = setReasonToFinishActivity;
     self.getReasonToFinishActivity = getReasonToFinishActivity;
     self.goToCallback = goToCallback;
+    self.reloadSharedUrl = reloadSharedUrl;
 
     /**/
     self.registerHardBlocker = registerHardBlocker;
@@ -164,6 +165,12 @@
     function goToCallback(){
       if(SurveyApiService.getCallbackAddress()){
         location.href = SurveyApiService.getCallbackAddress();
+      }
+    }
+
+    function reloadSharedUrl(){
+      if(SurveyApiService.getSharedUrl()){
+        location.href = SurveyApiService.getSharedUrl();
       }
     }
   }
