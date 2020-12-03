@@ -109,6 +109,9 @@
           SurveyApiService.setCallbackAddress(angular.copy(_callback));
           $location.search('callback', null);
         }
+        else{
+          SurveyApiService.setSharedUrl(angular.copy(location.href));
+        }
 
         if (_token) {
           SurveyApiService.setAuthToken(angular.copy(_token));
