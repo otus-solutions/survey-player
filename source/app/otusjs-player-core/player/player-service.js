@@ -57,6 +57,7 @@
     self.getConstants = getConstants;
     self.setReasonToFinishActivity = setReasonToFinishActivity;
     self.getReasonToFinishActivity = getReasonToFinishActivity;
+    self.goToCallback = goToCallback;
 
     /**/
     self.registerHardBlocker = registerHardBlocker;
@@ -158,6 +159,12 @@
 
     function getReasonToFinishActivity() {
       return _reasonToFinishActivity;
+    }
+
+    function goToCallback(){
+      if(SurveyApiService.getCallbackAddress()){
+        location.href = SurveyApiService.getCallbackAddress();
+      }
     }
   }
 })();
