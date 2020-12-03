@@ -124,9 +124,8 @@
                 self.template = angular.copy(response);
                 _setPlayerConfiguration();
               })
-              .catch(() => {
-                $state.go(STATE.ERROR);
-                LoadingScreenService.finish();
+              .catch(error => {
+                _closeLoadingAndGoToErrorPage(error);
               });
           }
         }
@@ -137,14 +136,9 @@
             _setPlayerConfiguration();
             LoadingScreenService.finish();
           }).catch(function (error) {
-            if (error.STATUS != "UNAUTHORIZED") {
-              PlayerServiceCore.setReasonToFinishActivity(PlayerServiceCore.getConstants().REASONS_TO_LIVE_PLAYER.ERROR_OFFLINE);
-            }
-            $state.go(STATE.ERROR);
-            LoadingScreenService.finish();
+            _closeLoadingAndGoToErrorPage(error);
           });
         }
-
       });
     }
 
@@ -204,6 +198,12 @@
           $(SURVEY_PREVIEW_ID).append($compile('<otus-survey-finish-participant layout="column" layout-fill=""></otus-survey-finish-participant>')($scope));
           break;
       }
+    }
+
+    function _closeLoadingAndGoToErrorPage(error){
+      PlayerServiceCore.setReasonToFinishActivityFromErrorStatus(error.STATUS);
+      $state.go(STATE.ERROR);
+      LoadingScreenService.finish();
     }
 
   }
