@@ -15,12 +15,13 @@
 
   function Controller($sce, PlayerService) {
     const self = this;
+    self.showTryAgainButton = false;
 
     /* Public methods */
     self.$onInit = onInit;
     self.goToCallback = goToCallback;
     self.reloadSharedUrl = reloadSharedUrl;
-    self.showTryAgainButton = false;
+
 
     function onInit() {
       self.participantSharedURLError = !PlayerService.hasCallbackAddress();
