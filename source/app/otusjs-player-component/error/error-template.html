@@ -1,10 +1,11 @@
-<div ng-if="!$ctrl.participantSharedURLError">
-  <h1 style="flex-direction: row; text-align: center; flex: 100; margin: auto">
-    404 - Data Not Found
-  </h1>
-</div>
-
-<div ng-if="$ctrl.participantSharedURLError"
-     class="md-display-1 shared-url-message" layout="column" layout-align="center center" flex layout-margin="">
-  <div bind-html-compile="$ctrl.message"></div>
+<div layout="column" layout-align="center center" flex layout-margin="">
+  <div class="md-display-1 shared-url-message">
+    <div bind-html-compile="$ctrl.message"></div>
+  </div>
+  <div ng-if="!$ctrl.participantSharedURLError">
+    <md-button class="md-primary" aria-label="Voltar" ng-click="$ctrl.goToCallback()" style="margin-top: 16px">
+      <md-icon md-font-set="material-icons">exit_to_app</md-icon>
+      Voltar
+    </md-button>
+  </div>
 </div>
