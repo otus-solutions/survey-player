@@ -25,11 +25,11 @@
     function onInit() {
       self.participantSharedURLError = !PlayerService.hasCallbackAddress();
 
-      const OFF_LINE_ERROR = PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.ERROR_OFFLINE;
+      const OFF_LINE_ERROR = PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.OFFLINE_ERROR;
 
       let reasonToFinish = PlayerService.getReasonToFinishActivity() || OFF_LINE_ERROR;
       if (reasonToFinish !== OFF_LINE_ERROR) {
-        reasonToFinish = PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.ERROR;
+        reasonToFinish = PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.UNAUTHORIZED;
       }
 
       self.showTryAgainButton = (self.participantSharedURLError && reasonToFinish === OFF_LINE_ERROR);

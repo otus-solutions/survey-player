@@ -61,7 +61,7 @@
             'Obrigado.'
           ]
         },
-        ERROR: {
+        UNAUTHORIZED: {
           icon: {
             name: 'sentiment_very_dissatisfied',
             color: "red"
@@ -75,7 +75,7 @@
             'Obrigado.'
           ]
         },
-        ERROR_OFFLINE: {
+        OFFLINE_ERROR: {
           icon: {
             name: 'sentiment_very_dissatisfied',
             color: "red"
