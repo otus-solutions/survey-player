@@ -135,6 +135,9 @@
     }
 
     function getActivityUrl() {
+      if(!_activityUrl){
+        _activityUrl = $cookies.get(ACTIVITY_ADDRESS);
+      }
       return _activityUrl;
     }
 
