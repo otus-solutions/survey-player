@@ -1,4 +1,4 @@
-describe('otusSurveyFinishParticipant component', function () {
+describe('otusSurveyFinishParticipant_component_UnitTest_Suite', function () {
   let Mock = {};
   let Injections = [];
   let controller = {};
@@ -16,15 +16,15 @@ describe('otusSurveyFinishParticipant component', function () {
     Mock.REASONS_TO_LIVE_PLAYER = Injections.PlayerService.getConstants().REASONS_TO_LIVE_PLAYER;
   });
 
-  it('check controller', function () {
+  it('check_controller', function () {
     expect(controller).toBeDefined();
   });
 
-  it('methods should defined', function () {
+  it('methods_should_defined', function () {
     expect(controller.$onInit).toBeDefined();
   });
 
-  describe('onInit method Suite Test', function () {
+  describe('onInit_method', function () {
     function _callOnInit(reason){
       spyOn(Injections.PlayerService, 'getReasonToFinishActivity').and.returnValue(reason);
       controller.$onInit();
@@ -32,14 +32,20 @@ describe('otusSurveyFinishParticipant component', function () {
       expect(controller.message).toBeDefined();
     }
 
-    it('onInit method should set message in case reasonToFinish has secondary text', function () {
+    it('should_set_message_in_case_reasonToFinish_has_secondary_text', function () {
       _callOnInit(Mock.REASONS_TO_LIVE_PLAYER.ALREADY_FINALIZED);
     });
 
-    it('onInit method should set longer message in case reasonToFinish has no secondary text', function () {
+    it('should_set_longer_message_in_case_reasonToFinish_has_no_secondary_text', function () {
       _callOnInit(Mock.REASONS_TO_LIVE_PLAYER.IS_NOT_ME);
     });
 
+  });
+
+  it('reloadSharedUrl_method_should_call_PlayerService_reloadSharedUrl_method', function () {
+    spyOn(Injections.PlayerService, 'reloadSharedUrl');
+    controller.reloadSharedUrl();
+    expect(Injections.PlayerService.reloadSharedUrl).toHaveBeenCalledTimes(1);
   });
 
 });
