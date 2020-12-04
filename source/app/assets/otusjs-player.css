@@ -107,6 +107,10 @@ otus-static-variable div md-content {
   font-weight: bold;
 }
 
+.exit-error-message-button {
+  margin-top: 16px
+}
+
 @media screen and (max-width: 600px) {
   .fab-speed-dial {
     left: 2px;

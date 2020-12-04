@@ -40,10 +40,7 @@
           }
         })
         .catch(function (error) {
-          if (error.STATUS != "UNAUTHORIZED") {
-            PlayerService.setReasonToFinishActivity(PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.ERROR_OFFLINE);
-          }
-
+          PlayerService.setReasonToFinishActivityFromErrorStatus(error.STATUS);
           $state.go(STATE.ERROR);
 
           $mdToast.show($mdToast.simple()
