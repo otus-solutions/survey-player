@@ -31,6 +31,7 @@
     PLAYER_SERVICE_CONSTANTS) {
 
     const self = this;
+    const UNAUTHORIZED_ERROR_STATUS = "UNAUTHORIZED";
 
     let _component = null;
     let _goBackTo = null;
@@ -167,7 +168,7 @@
     }
 
     function setReasonToFinishActivityFromErrorStatus(errorStatus) {
-      _reasonToFinishActivity = (errorStatus === "UNAUTHORIZED" ?
+      _reasonToFinishActivity = (errorStatus === UNAUTHORIZED_ERROR_STATUS ?
         getConstants().REASONS_TO_LIVE_PLAYER.UNAUTHORIZED :
         getConstants().REASONS_TO_LIVE_PLAYER.OFFLINE_ERROR);
     }
