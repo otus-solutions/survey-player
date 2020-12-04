@@ -31,7 +31,8 @@
     PLAYER_SERVICE_CONSTANTS) {
 
     const self = this;
-    
+    const UNAUTHORIZED_ERROR_STATUS = "UNAUTHORIZED";
+
     let _component = null;
     let _goBackTo = null;
     let _goingBack = null;
@@ -55,8 +56,11 @@
     self.getCurrentSurvey = getCurrentSurvey;
     self.hasCallbackAddress = hasCallbackAddress;
     self.getConstants = getConstants;
-    self.setReasonToFinishActivity = setReasonToFinishActivity;
     self.getReasonToFinishActivity = getReasonToFinishActivity;
+    self.setReasonToFinishActivity = setReasonToFinishActivity;
+    self.setReasonToFinishActivityFromErrorStatus = setReasonToFinishActivityFromErrorStatus;
+    self.goToCallback = goToCallback;
+    self.reloadSharedUrl = reloadSharedUrl;
 
     /**/
     self.registerHardBlocker = registerHardBlocker;
@@ -118,6 +122,9 @@
 
     function play() {
       PlayActionService.execute();
+      if(!hasCallbackAddress()){
+        SurveyApiService.setSharedUrl(angular.copy(location.href));
+      }
     }
 
     function setup() {
@@ -140,24 +147,42 @@
       SaveActionService.execute();
     }
 
-    function getCurrentSurvey(){
+    function getCurrentSurvey() {
       return ActivityFacadeService.getCurrentSurvey().getSurvey();
     }
 
-    function hasCallbackAddress(){
+    function hasCallbackAddress() {
       return SurveyApiService.hasCallbackAddress();
     }
 
-    function getConstants(){
+    function getConstants() {
       return PLAYER_SERVICE_CONSTANTS;
     }
 
-    function setReasonToFinishActivity(reason){
+    function getReasonToFinishActivity() {
+      return _reasonToFinishActivity;
+    }
+
+    function setReasonToFinishActivity(reason) {
       _reasonToFinishActivity = reason;
     }
 
-    function getReasonToFinishActivity(){
-      return _reasonToFinishActivity;
+    function setReasonToFinishActivityFromErrorStatus(errorStatus) {
+      _reasonToFinishActivity = (errorStatus === UNAUTHORIZED_ERROR_STATUS ?
+        getConstants().REASONS_TO_LIVE_PLAYER.UNAUTHORIZED :
+        getConstants().REASONS_TO_LIVE_PLAYER.OFFLINE_ERROR);
+    }
+
+    function goToCallback(){
+      if(SurveyApiService.getCallbackAddress()){
+        location.href = SurveyApiService.getCallbackAddress();
+      }
+    }
+
+    function reloadSharedUrl(){
+      if(SurveyApiService.getSharedUrl()){
+        location.href = SurveyApiService.getSharedUrl();
+      }
     }
   }
 })();

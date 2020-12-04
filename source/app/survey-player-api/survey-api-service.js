@@ -34,6 +34,7 @@
     const MODE = 'MODE';
     const HAS_CALLBACK_ADDRESS = 'has-Callback-Address';
 
+    self.initDB = initDB;
     self.getFileUploadUrl = getFileUploadUrl;
     self.getActivityUrl = getActivityUrl;
     self.getSurveyUrl = getSurveyUrl;
@@ -56,7 +57,8 @@
     self.exitModeOffline = exitModeOffline;
     self.setSelectedCollection = setSelectedCollection;
     self.getSelectedCollection = getSelectedCollection;
-    self.initDB = initDB;
+    self.getSharedUrl = getSharedUrl;
+    self.setSharedUrl = setSharedUrl;
 
     init();
 
@@ -71,6 +73,7 @@
     var _staticVariableUrl;
     var _fileUploadUrl;
     var _collectUrl;
+    var _sharedUrl = null;
 
     var _token = null;
     var _user = null;
@@ -132,6 +135,9 @@
     }
 
     function getActivityUrl() {
+      if(!_activityUrl){
+        _activityUrl = $cookies.get(ACTIVITY_ADDRESS);
+      }
       return _activityUrl;
     }
 
@@ -237,6 +243,16 @@
       sessionStorage.removeItem(LOGGED_USER);
       sessionStorage.removeItem(MODE);
       sessionStorage.removeItem(HAS_CALLBACK_ADDRESS);
+    }
+
+    function getSharedUrl() {
+      return _sharedUrl;
+    }
+
+    function setSharedUrl(sharedUrl) {
+      if(!_sharedUrl){
+        _sharedUrl = sharedUrl;
+      }
     }
 
   }

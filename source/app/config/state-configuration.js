@@ -66,7 +66,8 @@
     '$location',
     '$state',
     'LoadingScreenService',
-    'STATE'
+    'STATE',
+    'otusjs.player.core.player.PlayerService'
   ];
 
   function Controller(
@@ -82,7 +83,8 @@
     $location,
     $state,
     LoadingScreenService,
-    STATE) {
+    STATE,
+    PlayerServiceCore) {
 
     const self = this;
     /* Lifecycle hooks */
@@ -107,6 +109,9 @@
           SurveyApiService.setCallbackAddress(angular.copy(_callback));
           $location.search('callback', null);
         }
+        else{
+          SurveyApiService.setSharedUrl(angular.copy(location.href));
+        }
 
         if (_token) {
           SurveyApiService.setAuthToken(angular.copy(_token));
@@ -119,9 +124,8 @@
                 self.template = angular.copy(response);
                 _setPlayerConfiguration();
               })
-              .catch(() => {
-                $state.go(STATE.ERROR);
-                LoadingScreenService.finish();
+              .catch(error => {
+                _closeLoadingAndGoToErrorPage(error);
               });
           }
         }
@@ -131,12 +135,10 @@
             _isValid = true;
             _setPlayerConfiguration();
             LoadingScreenService.finish();
-          }).catch(function () {
-            $state.go(STATE.ERROR);
-            LoadingScreenService.finish();
+          }).catch(function (error) {
+            _closeLoadingAndGoToErrorPage(error);
           });
         }
-
       });
     }
 
@@ -152,7 +154,7 @@
 
     function _setPlayerConfiguration() {
       _generateOtusPreview();
-        PlayerService.setup();
+      PlayerService.setup();
       _appendTemplateAccordingState();
     }
 
@@ -167,15 +169,15 @@
       return ActivityFacadeService.surveyActivity = _activity;
     }
 
-    function _appendTemplateAccordingState(){
-      const SURVEY_PREVIEW_ID ='#survey-preview';
+    function _appendTemplateAccordingState() {
+      const SURVEY_PREVIEW_ID = '#survey-preview';
       $(SURVEY_PREVIEW_ID).empty();
       switch ($state.current.name) {
         case STATE.MAIN:
-          if(SurveyApiService.hasCallbackAddress()){
+          if (SurveyApiService.hasCallbackAddress()) {
             $(SURVEY_PREVIEW_ID).append($compile('<otus-survey-cover layout="column" layout-fill=""></otus-survey-cover>')($scope));
           }
-          else{
+          else {
             $(SURVEY_PREVIEW_ID).append($compile('<otus-survey-confirmation-participant layout="column" layout-fill=""></otus-survey-confirmation-participant>')($scope));
           }
           break;
@@ -196,6 +198,12 @@
           $(SURVEY_PREVIEW_ID).append($compile('<otus-survey-finish-participant layout="column" layout-fill=""></otus-survey-finish-participant>')($scope));
           break;
       }
+    }
+
+    function _closeLoadingAndGoToErrorPage(error){
+      PlayerServiceCore.setReasonToFinishActivityFromErrorStatus(error.STATUS);
+      $state.go(STATE.ERROR);
+      LoadingScreenService.finish();
     }
 
   }

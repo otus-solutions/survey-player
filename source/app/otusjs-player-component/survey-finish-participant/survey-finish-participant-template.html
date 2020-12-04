@@ -1,3 +1,13 @@
-<div class="md-display-1 shared-url-message" layout="column" layout-align="center center" flex layout-margin="">
-  <div bind-html-compile="$ctrl.message"></div>
+<div layout="column" layout-align="center center" flex layout-margin="">
+  <div class="md-display-1 shared-url-message">
+    <div bind-html-compile="$ctrl.message"></div>
+  </div>
+
+  <div ng-if="$ctrl.showFillAgainButton">
+    <md-button id="fillAgainButton" class="md-primary md-raised exit-error-message-button" aria-label="Preencher novamente"
+               ng-click="$ctrl.reloadSharedUrl()">
+      <md-icon md-font-set="material-icons">cached</md-icon>
+      Preencher novamente
+    </md-button>
+  </div>
 </div>

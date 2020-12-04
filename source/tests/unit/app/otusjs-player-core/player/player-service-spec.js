@@ -1,7 +1,11 @@
-describe('PlayerService core Suite Test', function () {
+describe('PlayerService_core_UnitTest_Suite', function () {
   let Mock = {};
   let Injections = {};
   let service = {};
+
+  beforeAll(() => {
+    _mockLocationHrefDefinition();
+  });
 
   beforeEach(function () {
     angular.mock.module('otusjs.player.standalone');
@@ -166,6 +170,18 @@ describe('PlayerService core Suite Test', function () {
     expect(service.getReasonToFinishActivity()).toBe(REASON_TO_FINISH);
   });
 
+  it('goToCallback_should_call_SurveyApiService_getCallbackAddress_twice', function () {
+    spyOn(Injections.SurveyApiService, 'getCallbackAddress').and.returnValue(Mock.url);
+    service.goToCallback();
+    expect(Injections.SurveyApiService.getCallbackAddress).toHaveBeenCalledTimes(2);
+  });
+
+  it('reloadSharedUrl_should_call_SurveyApiService_getSharedUrl_twice', function () {
+    spyOn(Injections.SurveyApiService, 'getSharedUrl').and.returnValue(Mock.url);
+    service.reloadSharedUrl();
+    expect(Injections.SurveyApiService.getSharedUrl).toHaveBeenCalledTimes(2);
+  });
+
   function _mockInitialize() {
     Mock.itemData = {customID: 'VAL1'};
     Mock.itemService = {};
@@ -174,6 +190,11 @@ describe('PlayerService core Suite Test', function () {
     Mock.resolve = Promise.resolve('passou');
     Mock.component = {};
     Mock.goBackTo = 'goBack';
+    Mock.url = 'http://url';
+  }
+
+  function _mockLocationHrefDefinition(){
+    window.onbeforeunload = () => 'anything';
   }
 
 });

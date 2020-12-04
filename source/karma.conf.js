@@ -35,7 +35,7 @@ module.exports = function (config) {
       NODE_MODULES_ROOT_PATH + 'lokijs/src/loki-angular.js',
       NODE_MODULES_ROOT_PATH + 'lokijs/src/loki-indexed-adapter.js',
       NODE_MODULES_ROOT_PATH + 'jquery/dist/jquery.min.js',
-      NODE_MODULES_ROOT_PATH + 'otus-model-js/dist/otus-model.min.js',
+      NODE_MODULES_ROOT_PATH + 'otus-model-js/dist/otus-model.js',
       NODE_MODULES_ROOT_PATH + 'otus-model-js/dist/st-utils.min.js',
       NODE_MODULES_ROOT_PATH + 'otus-validation-js/dist/otus-validation-min.js',
       NODE_MODULES_ROOT_PATH + 'trail-js/dist/trail-min.js',
