@@ -12,11 +12,12 @@
     'SurveyApiService',
     '$mdToast',
     '$state',
-    'STATE'
+    'STATE',
+    'otusjs.player.core.player.PlayerService'
   ];
 
   function Service(ActivityFacadeService, SurveyClientService, IndexedDbStorageService, SurveyApiService,
-                   $mdToast, $state, STATE) {
+    $mdToast, $state, STATE, PlayerService) {
     const self = this;
 
     /* Public methods */
@@ -34,11 +35,14 @@
           if (location.origin == SurveyApiService.getCallbackAddress()) {
             $state.go(STATE.HOME);
           }
-          else if(SurveyApiService.hasCallbackAddress()){
+          else if (SurveyApiService.hasCallbackAddress()) {
             location.href = SurveyApiService.getCallbackAddress();
           }
         })
-        .catch(function () {
+        .catch(function (error) {
+          PlayerService.setReasonToFinishActivityFromErrorStatus(error.STATUS);
+          $state.go(STATE.ERROR);
+
           $mdToast.show($mdToast.simple()
             .textContent('Erro ao salvar a atividade!')
             .hideDelay(3000));
