@@ -22,24 +22,24 @@ describe('otusSurveyErrorComponent_UnitTest_suite', function () {
     expect(controller.$onInit).toBeDefined();
   });
 
-  describe('', () => {
-    it('onInit_method_should_set_message', function () {
+  describe('onInit_method', () => {
+    it('should_set_message', function () {
       spyOn(Injections.PlayerService, "hasCallbackAddress").and.returnValue(false);
       controller.$onInit();
       expect(Injections.PlayerService.hasCallbackAddress).toHaveBeenCalledTimes(1);
       expect(controller.message).toBeDefined();
     });
 
-    it('onInit_method_should_set_showTryAgainButton_as_true_in_case_reasonToFinish_is_OFF_LINE_ERROR_and_has_not_callback', function () {
-      const REASON_TO_LIVE = Injections.PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.ERROR_OFFLINE;
+    it('should_set_showTryAgainButton_as_true_in_case_reasonToFinish_is_OFFLINE_ERROR_and_has_not_callback', function () {
+      const OFFLINE_ERROR = Injections.PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.OFFLINE_ERROR;
       spyOn(Injections.PlayerService, "hasCallbackAddress").and.returnValue(false);
-      spyOn(Injections.PlayerService, "getReasonToFinishActivity").and.returnValue(REASON_TO_LIVE);
+      spyOn(Injections.PlayerService, "getReasonToFinishActivity").and.returnValue(OFFLINE_ERROR);
       controller.$onInit();
       expect(controller.showTryAgainButton).toBe(true);
     });
 
-    it('onInit_method_should_set_showTryAgainButton_as_false_in_case_reasonToFinish_is_not_OFF_LINE_ERROR', function () {
-      const REASON_TO_LIVE = Injections.PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.ERROR;
+    it('should_set_showTryAgainButton_as_false_in_case_reasonToFinish_is_not_OFFLINE_ERROR', function () {
+      const REASON_TO_LIVE = Injections.PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.UNAUTHORIZED;
       spyOn(Injections.PlayerService, "getReasonToFinishActivity").and.returnValue(REASON_TO_LIVE);
       controller.$onInit();
       expect(controller.showTryAgainButton).toBe(false);
