@@ -37,11 +37,12 @@
     "angular-sanitize": "1.5.8",
     "angular-ui-mask": "1.8.7",
     "angular-ui-router": "0.3.1",
+    "cross-cookie": "0.0.9",
     "fuse.js": "2.6.2",
     "gulp-json-editor": "2.5.4",
     "jquery": "3.0.0",
     "lokijs": "1.4.2",
-    "otus-model-js": "https://github.com/ccem-dev/survey-player.git#feature-OP-27",
+    "otus-model-js": "https://github.com/ccem-dev/otus-model-js.git#ccem-dev",
     "otus-validation-js": "1.1.0",
     "please-wait": "0.0.5",
     "trail-js": "git@github.com:ccem-dev/trail-js.git#dev"

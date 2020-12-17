@@ -19,7 +19,7 @@
     var CREATE_TABLES = TABLE_ACTIVITY;
     self.update = update;
     self.insert = insert;
-    self.getAllActivities = getAllActivities;
+    self.getAll = getAll;
     self.getActivity = getActivity;
     self.getSurveyList = getSurveyList;
     self.removeActivity = removeActivity;
@@ -28,8 +28,8 @@
       alasql(INIT_QUERY, [], function () {
         alasql(CREATE_TABLES, [], function (res) {
           if (res === 1) {
-            var query = "SELECT * INTO ".concat(DB_TABLE_ACTIVITIES).concat(' FROM ?');
-            alasql(query, [activities]);
+            var query = "INSERT OR REPLACE INTO ".concat(DB_TABLE_ACTIVITIES).concat(' VALUE ?');
+            alasql(query, [activities[0]]);
           }
         });
       });
@@ -44,15 +44,15 @@
 
     function insert(activities) {
       if (_isValid(activities)) {
-        // removeActivity(activities[0]._id).then();
-        getAllActivities().then(function (res) {
+        getAll().then(function (res) {
           let _activities = Array.prototype.concat.apply(res, activities)
+          console.info(res)
           _insertCookie(_activities)
           update(_activities);
         }).catch(function (err) {
           update(Array.prototype.concat.apply(activities));
-        });
-      }
+        })
+       }
     }
 
     function _insertCookie(activities) {
@@ -71,20 +71,20 @@
       var defer = $q.defer();
       alasql(INIT_QUERY, [], function () {
         alasql.promise('DELETE FROM '.concat(DB_TABLE_ACTIVITIES)
-          .concat(' WHERE ')
-          .concat('_id = "')
-          .concat(id)
-          .concat('";'))
-          .then( function (res) {
-          defer.resolve(res);
-        }).catch(function (err) {
-          console.info(err);
-        });
-      });
+            .concat(' WHERE ')
+            .concat('_id = "')
+            .concat(id)
+            .concat('";'))
+            .then( function (res) {
+              defer.resolve(res);
+            }).catch(function (err) {
+            defer.reject(err)
+          });
+      })
       return defer.promise;
     }
 
-    function getAllActivities() {
+    function getAll() {
       var defer = $q.defer();
       alasql(INIT_QUERY, [], function () {
         alasql.promise('SELECT * FROM '.concat(DB_TABLE_ACTIVITIES)).then(function (response) {
@@ -113,10 +113,6 @@
       });
 
       return defer.promise;
-    }
-
-    function getActivityByUser() {
-
     }
 
     function getActivity(id) {
