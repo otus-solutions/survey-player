@@ -28,8 +28,8 @@
       alasql(INIT_QUERY, [], function () {
         alasql(CREATE_TABLES, [], function (res) {
           if (res === 1) {
-            var query = "INSERT OR REPLACE INTO ".concat(DB_TABLE_ACTIVITIES).concat(' VALUE ?');
-            alasql(query, [activities[0]]);
+            var query = "SELECT * INTO ".concat(DB_TABLE_ACTIVITIES).concat(' FROM ?');
+            alasql(query, [activities]);
           }
         });
       });
@@ -45,8 +45,16 @@
     function insert(activities) {
       if (_isValid(activities)) {
         getAll().then(function (res) {
-          let _activities = Array.prototype.concat.apply(res, activities)
-          console.info(res)
+
+          let _filteredActivities = res.filter(function (oldActivity) {
+            return oldActivity._id === activities[0]._id;
+          })
+          let _activities = []
+          if(_filteredActivities.length > 0) {
+            _activities = Array.prototype.concat.apply(res)
+          }else{
+            _activities = Array.prototype.concat.apply(res, activities)
+          }
           _insertCookie(_activities)
           update(_activities);
         }).catch(function (err) {

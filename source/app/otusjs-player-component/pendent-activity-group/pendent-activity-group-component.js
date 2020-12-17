@@ -40,6 +40,7 @@
     self.toggleMenu = toggleMenu
 
     function onInit() {
+      _setUser();
       PendentActivitiesDbStorageService.getAll()
         .then(function(res){
           self.activities = res;
@@ -64,6 +65,9 @@
     }
 
     function save(activity) {
+      if(!self.user){
+        return _showToast('Você precisa estar logado para salvar as atividades');
+      }
       activity.loading = true;
       ActivityCollectionService.update([activity])
         .then(function (response) {
