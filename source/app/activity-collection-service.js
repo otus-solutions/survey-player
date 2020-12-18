@@ -15,8 +15,7 @@
     'ActivityIndexedDbService',
     'CollectIndexedDbService',
     'SurveyApiService',
-    'ActivityCollectionRestService',
-    '$rootScope'
+    'PendentActivitiesDbStorageService'
   ];
 
   /**
@@ -27,7 +26,7 @@
    * @namespace ActivityCollectionService
    * @memberof Services
    */
-  function Service($q, ActivityRemoteStorageService, ActivityIndexedDbService, CollectIndexedDbService, SurveyApiService) {
+  function Service($q, ActivityRemoteStorageService, ActivityIndexedDbService, CollectIndexedDbService, SurveyApiService, PendentActivitiesDbStorageService) {
     var self = this;
     var _remoteStorage = ActivityRemoteStorageService;
 
@@ -72,9 +71,11 @@
       if (!_code) {
         _remoteStorage.update(activity)
           .then(function (response) {
+            PendentActivitiesDbStorageService.removeActivity(response._id).then();
             request.resolve(response);
           })
           .catch(function (error) {
+            PendentActivitiesDbStorageService.insert(JSON.parse(JSON.stringify(activity)));
             request.reject(error);
           });
       } else {
