@@ -73,6 +73,18 @@
         })
       }
       $cookies.put('pendent-activities', JSON.stringify(parsedActivities), [{expires: new Date().getFullYear() + 1}])
+      console.info($cookies.get('pendent-activities'))
+    }
+
+    function _removeFromCookieById(id) {
+      let pendentActivities = $cookies.get('pendent-activities');
+      if(pendentActivities) {
+        let currActivities = JSON.parse(pendentActivities);
+        let newActivities = currActivities.filter(currActivity => {
+          return currActivity._id !== id;
+        })
+        $cookies.put('pendent-activities', JSON.stringify(newActivities), [{expires: new Date().getFullYear() + 1}])
+      }
     }
 
     function removeActivity(id){
@@ -89,6 +101,7 @@
             defer.reject(err)
           });
       })
+      _removeFromCookieById(id);
       return defer.promise;
     }
 
