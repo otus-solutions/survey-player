@@ -73,7 +73,6 @@
         })
       }
       $cookies.put('pendent-activities', JSON.stringify(parsedActivities), [{expires: new Date().getFullYear() + 1}])
-      console.info($cookies.get('pendent-activities'))
     }
 
     function _removeFromCookieById(id) {
@@ -83,7 +82,11 @@
         let newActivities = currActivities.filter(currActivity => {
           return currActivity._id !== id;
         })
-        $cookies.put('pendent-activities', JSON.stringify(newActivities), [{expires: new Date().getFullYear() + 1}])
+        if(newActivities.length > 0){
+          $cookies.put('pendent-activities', JSON.stringify(newActivities), [{expires: new Date().getFullYear() + 1}])
+        }else {
+          $cookies.remove('pendent-activities')
+        }
       }
     }
 
