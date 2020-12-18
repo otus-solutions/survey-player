@@ -58,12 +58,11 @@
       self.otusQuestion.answer = self;
 
       _uploadInterface = FileUploadService.getUploadInterface();
-      _questionID = CurrentItemService.getItemsByTemplateID(self.itemData.templateID);
+      _questionID = self.itemData.templateID;
       _deleteDialog = _createDeleteDialog();
       _pendingArrayControl = 0;
       self.pendingCounter = 0;
     }
-
 
     function popFromPending(idx) {
       return self.pendingList.splice(idx, 1);
@@ -133,6 +132,8 @@
             self.sentFiles.splice(idx, 1);
             _updateAnswer();
           }, function (err) {
+            self.sentFiles.splice(idx, 1);
+            _updateAnswer();
             _toastError('excluir');
           });
       }, function () {
@@ -190,7 +191,7 @@
     function _updateAnswer() {
       self.onUpdate({
         valueType: 'answer',
-        value: (self.sentFiles.length ? self.sentFiles : {})
+        value: (self.sentFiles.length ? self.sentFiles : null)
       });
     }
 
