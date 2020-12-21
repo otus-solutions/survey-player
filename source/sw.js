@@ -230,6 +230,8 @@ var CACHED_FILES = [
   "/node_modules/please-wait/build/please-wait.min.js",
   "/node_modules/trail-js/dist/trail-min.js",
   "/app/utils/login-service.js",
+  "/app/storage/pendent-activities-db-storage-service.js",
+  "/app/otusjs-player-component/pendent-activity-group/pendent-activity-group-component.js",
   "/app/index.html"
 ];
 
