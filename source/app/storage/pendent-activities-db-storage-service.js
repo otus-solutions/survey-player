@@ -5,11 +5,10 @@
     .service('PendentActivitiesDbStorageService', Service);
 
   Service.$inject = [
-    '$q',
-    '$cookies'
+    '$q'
   ];
 
-  function Service($q, $cookies) {
+  function Service($q) {
     var self = this;
 
     var DB_TABLE_ACTIVITIES = 'PendentActivities';
@@ -72,22 +71,24 @@
           acronym: activity.surveyForm.acronym
         })
       }
-      $cookies.put('pendent-activities', JSON.stringify(parsedActivities), [{expires: new Date().getFullYear() + 1}])
+      cookie.set('pendent-activities', JSON.stringify(parsedActivities))
     }
 
     function _removeFromCookieById(id) {
-      let pendentActivities = $cookies.get('pendent-activities');
-      if(pendentActivities) {
-        let currActivities = JSON.parse(pendentActivities);
-        let newActivities = currActivities.filter(currActivity => {
-          return currActivity._id !== id;
-        })
-        if(newActivities.length > 0){
-          $cookies.put('pendent-activities', JSON.stringify(newActivities), [{expires: new Date().getFullYear() + 1}])
-        }else {
-          $cookies.remove('pendent-activities')
-        }
-      }
+      cookie.get('pendent-activities')
+        .then(pendentActivities => {
+          let currActivities = JSON.parse(pendentActivities);
+          let newActivities = currActivities.filter(currActivity => {
+            return currActivity._id !== id;
+          })
+          if(newActivities.length > 0){
+            cookie.set('pendent-activities', JSON.stringify(newActivities))
+              .then()
+          }else {
+            cookie.remove('pendent-activities')
+              .then()
+          }
+      });
     }
 
     function removeActivity(id){
