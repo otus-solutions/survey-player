@@ -8,6 +8,7 @@
       BEGIN: '/begin',
       ERROR: '/error',
       HOME: '/home',
+      PENDENT_ACTIVITIES: '/pendent',
       PLAY: '/play',
       FINISH: '/finish',
 
