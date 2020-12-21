@@ -3,33 +3,17 @@
     display: flex !important;
   }
 </style>
-<md-toolbar class="md-hue-2" md-scroll-shrink>
-  <div class="md-toolbar-tools">
-    <md-button class="md-icon-button" ng-click="$ctrl.toggleMenu()">
-      <md-icon>menu</md-icon>
-    </md-button>
-    <span>Survey Player - Atividades Pendentes</span>
-    <span flex></span>
-    <md-button class="md-icon-button cursor-auto" aria-label="Connection">
-      <connection-icon></connection-icon>
-    </md-button>
-    <span layout-margin="" hide-xs show-gt-xs>{{ $ctrl.user.name }}</span>
-    <md-button class="md-icon-button md-raised md-accent" aria-label="Login" id="shortLogin"
-               ng-click="$ctrl.authenticate()" hide-xs show-gt-xs ng-disabled="$ctrl.disableAuth">
-      <md-icon ng-if="!$ctrl.user">person</md-icon>
-      <md-icon ng-if="$ctrl.user">how_to_reg</md-icon>
-      <md-tooltip ng-if="!$ctrl.user">Entrar</md-tooltip>
-      <md-tooltip ng-if="$ctrl.user">Autenticado</md-tooltip>
-    </md-button>
-  </div>
-</md-toolbar>
-<span flex="5"></span>
 <md-content ng-if="$ctrl.activities.length > 0" layout="column" layout-wrap layout-fill="" flex layout-padding=""
             ng-init="search">
+  <span flex="5"></span>
   <div layout="column">
-    <span class="md-headline" layout="column" layout-align="center center">Atividades pendentes(não salvas)</span>
+    <span class="md-headline" layout="column" layout-align="center center">Atividades pendentes (não salvas)</span>
   </div>
-  <div>
+  <div ng-if="$ctrl.hasCallback">
+
+  </div>
+  <div layout="row" layout-align="space-between center">
+    <md-button ng-click="$ctrl.goToCallback()" class="md-raised">Voltar</md-button>
     <md-button class="md-accent md-primary" ng-click="$ctrl.saveAll()">Enviar todas</md-button>
   </div>
   <md-content layout="column" flex="">
@@ -44,8 +28,7 @@
           </md-chips>
           <div class="md-list-item-text" layout="column">
             <span class="md-body-1"> {{ activity.surveyForm.name }}</span>
-            <p class="md-caption">Versão: {{ activity.surveyForm.version }}</p>
-            <p class="md-caption">participante: {{ activity.participantData.name }} - {{activity.participantData.recruitmentNumber}}</p>
+            <p class="md-caption">{{ activity.participantData.name }} - {{activity.participantData.recruitmentNumber}}</p>
           </div>
           <span class="md-caption" flex="20" flex-gt-sm="10"> {{ $ctrl.STATUS[activity.statusHistory[activity.statusHistory.length - 1].name] }}</span>
           <md-button ng-if="!activity.saved && !activity.loading" class="md-icon-button md-accent" flex-offset="5" ng-click="$ctrl.save(activity)">

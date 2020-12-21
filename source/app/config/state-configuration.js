@@ -30,7 +30,7 @@
     });
 
     $stateProvider.state(STATE.PENDENT_ACTIVITIES, {
-      url: '/pendent',
+      url: '/pendent?callback&token',
       template: '<pendent-activity-group layout="column" flex></pendent-activity-group>'
     })
 
@@ -188,7 +188,7 @@
           break;
 
         case STATE.PENDENT_ACTIVITIES:
-          $(SURVEY_PREVIEW_ID).appent($compile('<pendent-activity-group layout="column" layout-fill=""></pendent-activity-group>'))
+          $(SURVEY_PREVIEW_ID).append($compile('<pendent-activity-group layout="column" layout-fill=""></pendent-activity-group>'))
 
         case STATE.BEGIN:
           $(SURVEY_PREVIEW_ID).append($compile('<otus-survey-cover layout="column" layout-fill=""></otus-survey-cover>')($scope));

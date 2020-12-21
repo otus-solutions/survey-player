@@ -13,10 +13,15 @@
     '$mdToast',
     '$timeout',
     '$mdSidenav',
+    '$state',
+    '$stateParams',
+    '$location',
+    'STATE',
     'PendentActivitiesDbStorageService',
     'ActivityCollectionService',
     'SurveyApiService',
-    'LoginService'
+    'LoginService',
+    'PlayerService'
   ];
 
   function Controller(
@@ -24,50 +29,37 @@
     $mdToast,
     $timeout,
     $mdSidenav,
+    $state,
+    $stateParams,
+    $location,
+    STATE,
     PendentActivitiesDbStorageService,
     ActivityCollectionService,
-    SurveyApiService,
-    LoginService
+    SurveyApiService
   ) {
 
     var self = this;
+
 
     self.$onInit = onInit;
 
     self.save = save;
     self.saveAll = saveAll;
-    self.authenticate = authenticate
-    self.toggleMenu = toggleMenu
+    self.goToCallback = goToCallback;
 
     function onInit() {
-      _setUser();
+      _setCallback();
+      _setToken();
       PendentActivitiesDbStorageService.getAll()
         .then(function(res){
+          if(res.length < 1) {
+            $state.go(STATE.HOME);
+          }
           self.activities = res;
         });
     }
 
-    function authenticate() {
-      $mdSidenav('userMenu').close()
-      LoginService.authenticate().then(function (response) {
-        _setUser();
-        if (response) {
-          _showToast(response);
-        }
-      }, function (err) {
-        _setUser();
-        err ? _showToast(err) : null;
-      });
-    }
-
-    function _setUser() {
-      self.user = SurveyApiService.getLoggedUser() ? SurveyApiService.getLoggedUser() : "";
-    }
-
     function save(activity) {
-      if(!self.user){
-        return _showToast('Você precisa estar logado para salvar as atividades');
-      }
       activity.loading = true;
       ActivityCollectionService.update([activity])
         .then(function (response) {
@@ -92,8 +84,25 @@
       }
     }
 
-    function toggleMenu() {
-      $mdSidenav('userMenu').toggle();
+    function goToCallback() {
+      location.href = SurveyApiService.getCallbackAddress()
+    }
+
+    function _setCallback() {
+      let callback = angular.copy($stateParams.callback)
+      if(callback) {
+        SurveyApiService.setCallbackAddress(callback);
+        $location.search('callback', null);
+      }
+      self.hasCallback = SurveyApiService.hasCallbackAddress();
+    }
+
+    function _setToken() {
+      let _token = angular.copy($stateParams.token);
+      if (_token) {
+        SurveyApiService.setAuthToken(angular.copy(_token));
+        $location.search('token', null);
+      }
     }
 
     function _showToast(text) {
@@ -102,14 +111,5 @@
         .hideDelay(3000));
     }
 
-    $scope.$on("logged", function () {
-      _setUser();
-      self.disableAuth = false;
-    });
-
-    $scope.$on("login", function () {
-      self.authenticate();
-      self.disableAuth = false;
-    });
   }
 })();

@@ -19,6 +19,7 @@ var CACHED_FILES = [
   "/node_modules/lokijs/build/loki-indexed-adapter.min.js",
   "/node_modules/lokijs/src/loki-angular.js",
   "/node_modules/alasql/dist/alasql.min.js",
+  "/node_modules/cross-cookie/dist/cross-cookie.js",
   "/node_modules/angular-bind-html-compile-ci-dev/angular-bind-html-compile.js",
   "/node_modules/angular-mousewheel/mousewheel.js",
   "/node_modules/otus-model-js/dist/otus-model.js",
