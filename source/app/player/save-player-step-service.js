@@ -44,7 +44,7 @@
           $state.go(STATE.ERROR);
 
           $mdToast.show($mdToast.simple()
-            .textContent('Erro ao salvar a atividade!')
+            .textContent('Erro ao salvar a atividade, atividade salva em atividades pendentes!')
             .hideDelay(3000));
         });
     }
