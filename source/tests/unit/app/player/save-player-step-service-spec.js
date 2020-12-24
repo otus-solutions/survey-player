@@ -74,14 +74,6 @@ describe('SavePlayerStepService Suite Test', function () {
       expect(Injections.SurveyApiService.getCallbackAddress).toHaveBeenCalledTimes(1);
     });
 
-    it('effect method should call $mdToast show method', function () {
-      _spyOnSurveyClientService(Mock.reject);
-      spyOn(Injections.$mdToast, 'show');
-      service.effect();
-      Mock.$scope.$digest();
-      expect(Injections.$mdToast.show).toHaveBeenCalledTimes(1);
-    });
-
   });
 
   it('afterEffect method should return flowData', function () {
