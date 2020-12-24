@@ -43,9 +43,6 @@
           PlayerService.setReasonToFinishActivityFromErrorStatus(error.STATUS);
           $state.go(STATE.ERROR);
 
-          $mdToast.show($mdToast.simple()
-            .textContent('Erro ao salvar a atividade, atividade salva em atividades pendentes!')
-            .hideDelay(3000));
         });
     }
 
