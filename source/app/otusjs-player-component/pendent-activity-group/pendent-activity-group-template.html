@@ -3,17 +3,15 @@
     display: flex !important;
   }
 </style>
-<md-content ng-if="$ctrl.activities.length > 0" layout="column" layout-wrap layout-fill="" flex layout-padding=""
-            ng-init="search">
+<md-content ng-if="$ctrl.activities.length > 0" layout="column" layout-wrap layout-fill="" flex layout-padding="">
   <span flex="5"></span>
+  <div layout="row" layout-align="start center">
+    <md-button ng-click="$ctrl.goToCallback()" class="md-raised"><md-icon>arrow_back</md-icon>voltar</md-button>
+  </div>
   <div layout="column">
     <span class="md-headline" layout="column" layout-align="center center">Atividades pendentes (não salvas)</span>
   </div>
-  <div ng-if="$ctrl.hasCallback">
-
-  </div>
-  <div layout="row" layout-align="space-between center">
-    <md-button ng-click="$ctrl.goToCallback()" class="md-raised">Voltar</md-button>
+  <div layout="row" layout-align="end center">
     <md-button class="md-accent md-primary" ng-click="$ctrl.saveAll()">Enviar todas</md-button>
   </div>
   <md-content layout="column" flex="">
@@ -47,42 +45,21 @@
       </md-list>
     </div>
   </md-content>
-
-    </md-grid-tile>
-  </md-grid-list>
   <span flex="20"></span>
 </md-content>
-<md-content ng-if="$ctrl.activities.length < 1" layout="column" layout-align="center center">
-  <span class="md-headline">
-    Não há atividades que não foram salvas
-  </span>
 
+<md-content ng-if="$ctrl.activities.length < 1" layout="column" layout-fill="" flex layout-padding="">
+  <span flex="5"></span>
+  <div layout="row" layout-align="start center">
+    <md-button ng-click="$ctrl.goToCallback()" class="md-raised"><md-icon>arrow_back</md-icon> Voltar</md-button>
+  </div>
+  <div layout="row" layout-align="center center">
+    <span class="md-headline">Não há atividades pendentes de envio</span>
+  </div>
+  <span flex="5"></span>
+  <div layout="column" layout-align="center center">
+    <div>
+      <img height="250px" width="250px" ng-src="{{$ctrl.imageURL}}" />
+    </div>
+  </div>
 </md-content>
-<md-sidenav class="md-sidenav-left" md-component-id="userMenu"
-            md-whiteframe="4">
-  <md-toolbar class="md-theme-indigo">
-    <div class="md-toolbar-tools">
-      <h1 flex md-truncate>Informações</h1>
-      <md-button class="md-icon-button" ng-click="$ctrl.toggleMenu()">
-        <md-icon>close</md-icon>
-      </md-button>
-    </div>
-  </md-toolbar>
-  <md-content layout-margin="" layout="column">
-    <span class="md-subheader" layout-align="start center" layout="row" flex="">
-      <div><md-icon>account_circle</md-icon> Dados da Conta</div>
-    </span>
-    <p class="md-body-1" flex="" ng-show="!$ctrl.user">
-      Usuário não identificado
-    </p>
-    <div ng-show="$ctrl.user" layout="column">
-      <span class="md-body-2">{{ $ctrl.user.name + ' ' + $ctrl.user.surname}}</span>
-      <span class="md-body-1">{{ $ctrl.user.email}}</span>
-    </div>
-    <span flex="20"></span>
-    <md-button ng-click="$ctrl.authenticate($event)" aria-label="Login" class="md-accent" style="top: 50%">
-      <span ng-if="!$ctrl.user">ENTRAR</span>
-      <span ng-if="$ctrl.user">SAIR</span>
-    </md-button>
-  </md-content>
-</md-sidenav>

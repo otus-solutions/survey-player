@@ -9,29 +9,21 @@
     });
 
   Controller.$inject = [
-    '$scope',
     '$mdToast',
-    '$timeout',
-    '$mdSidenav',
-    '$state',
     '$stateParams',
     '$location',
+    '$state',
     'STATE',
     'PendentActivitiesDbStorageService',
     'ActivityCollectionService',
     'SurveyApiService',
-    'LoginService',
-    'PlayerService'
   ];
 
   function Controller(
-    $scope,
     $mdToast,
-    $timeout,
-    $mdSidenav,
-    $state,
     $stateParams,
     $location,
+    $state,
     STATE,
     PendentActivitiesDbStorageService,
     ActivityCollectionService,
@@ -40,8 +32,9 @@
 
     var self = this;
 
-
+    self.activities = [];
     self.$onInit = onInit;
+    self.imageURL = 'assets/icons/pilhas.svg';
 
     self.save = save;
     self.saveAll = saveAll;
@@ -52,9 +45,6 @@
       _setToken();
       PendentActivitiesDbStorageService.getAll()
         .then(function(res){
-          if(res.length < 1) {
-            $state.go(STATE.HOME);
-          }
           self.activities = res;
         });
     }
@@ -63,17 +53,15 @@
       activity.loading = true;
       ActivityCollectionService.update([activity])
         .then(function (response) {
+          self.activities = self.activities.filter(function (savedActivity) {
+            return savedActivity._id != activity._id
+          })
           activity.saved = true;
           activity.loading = false;
         }).catch(function (e) {
           activity.loading = false;
           _showToast('algo deu errado ao salvar a atividade ' + activity.surveyForm.name)
       });
-      $timeout(function() {
-        activity.saved = true;
-        activity.loading = false;
-      }, 1000);
-
     }
 
     function saveAll() {
@@ -85,7 +73,11 @@
     }
 
     function goToCallback() {
-      location.href = SurveyApiService.getCallbackAddress()
+      if(self.hasCallback) {
+        location.href = SurveyApiService.getCallbackAddress()
+      }else {
+        $state.go(STATE.HOME);
+      }
     }
 
     function _setCallback() {

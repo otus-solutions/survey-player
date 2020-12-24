@@ -1,4 +1,4 @@
-var version = "1.8.0";
+var version = "1.8.1";
 var CACHE_PREFIX = 'survey-player';
 var CACHE_NAME = CACHE_PREFIX + version;
 
