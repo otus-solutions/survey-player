@@ -1,7 +1,7 @@
 var version = "1.8.1";
 var CACHE_PREFIX = 'survey-player';
 var CACHE_NAME = CACHE_PREFIX + version;
-
+''
 var CACHED_FILES = [
   "manifest.json",
   "/node_modules/jquery/dist/jquery.min.js",
