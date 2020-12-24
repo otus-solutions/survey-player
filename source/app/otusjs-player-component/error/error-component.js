@@ -29,6 +29,7 @@
       const OFF_LINE_ERROR = PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.OFFLINE_ERROR;
 
       let reasonToFinish = PlayerService.getReasonToFinishActivity() || OFF_LINE_ERROR;
+
       if (reasonToFinish !== OFF_LINE_ERROR) {
         reasonToFinish = PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.UNAUTHORIZED;
       }

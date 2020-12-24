@@ -77,7 +77,7 @@
         },
         OFFLINE_ERROR: {
           icon: {
-            name: 'sentiment_very_dissatisfied',
+            name: 'cloud_off',
             color: "red"
           },
           highlightedText: {
@@ -85,8 +85,7 @@
             color: "lightcoral"
           },
           text: [
-            'Verifique a conexão e tente de novo!',
-            'Obrigado.'
+            'A atividade <b>foi armazenada</b> em seu dispositivo.</br> É possível sincronizá-la quando houver acesso à internet</br> através do botão <b>Atividades Pendentes</b>',
           ]
         }
       }
