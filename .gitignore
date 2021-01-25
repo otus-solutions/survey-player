@@ -6,3 +6,4 @@ terraform.*
 **/*swp
 **/.npmrc
 **/dist
+.terraform.lock.hcl
