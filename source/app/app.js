@@ -9,6 +9,7 @@
       'ngAnimate',
       'ui.router',
       'ui.mask',
+      'ui.utils.masks',
       'angular-bind-html-compile',
       /* Exportable dependencies */
       'otusjs.player.core',

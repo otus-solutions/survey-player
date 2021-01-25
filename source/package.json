@@ -1,6 +1,6 @@
 {
   "name": "survey-player",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "description": "Survey Player Module Otus",
   "keywords": [
     "preview",
@@ -29,6 +29,7 @@
     "angular-aria": "1.5.8",
     "angular-bind-html-compile-ci-dev": "1.1.1",
     "angular-cookies": "1.5.8",
+    "angular-input-masks": "4.4.1",
     "angular-material": "1.1.20",
     "angular-material-icons": "0.6.0",
     "angular-messages": "1.5.8",
@@ -42,7 +43,7 @@
     "gulp-json-editor": "2.5.4",
     "jquery": "3.0.0",
     "lokijs": "1.4.2",
-    "otus-model-js": "1.39.0",
+    "otus-model-js": "1.41.0",
     "otus-validation-js": "1.1.0",
     "please-wait": "0.0.5",
     "trail-js": "git@github.com:ccem-dev/trail-js.git#dev"
