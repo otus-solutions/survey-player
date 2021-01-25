@@ -31,6 +31,7 @@ module.exports = function (config) {
       NODE_MODULES_ROOT_PATH + 'angular-mocks/angular-mocks.js',
       NODE_MODULES_ROOT_PATH + 'angular-ui-router/release/angular-ui-router.min.js',
       NODE_MODULES_ROOT_PATH + 'angular-ui-mask/dist/mask.js',
+      NODE_MODULES_ROOT_PATH + 'angular-input-masks/releases/angular-input-masks-standalone.min.js',
       NODE_MODULES_ROOT_PATH + 'lokijs/build/lokijs.min.js',
       NODE_MODULES_ROOT_PATH + 'lokijs/src/loki-angular.js',
       NODE_MODULES_ROOT_PATH + 'lokijs/src/loki-indexed-adapter.js',
