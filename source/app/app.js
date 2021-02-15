@@ -11,6 +11,7 @@
       'ui.mask',
       'ui.utils.masks',
       'angular-bind-html-compile',
+      'ngSanitize',
       /* Exportable dependencies */
       'otusjs.player.core',
       'otusjs.player.component',
