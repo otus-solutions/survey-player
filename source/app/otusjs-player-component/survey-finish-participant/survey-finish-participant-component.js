@@ -25,6 +25,7 @@
 
     function onInit() {
       const reasonToFinish = PlayerService.getReasonToFinishActivity();
+      PlayerService.clearReasonToFinishActivity();
 
       self.showFillAgainButton = (reasonToFinish !== PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.FINALIZE);
 
