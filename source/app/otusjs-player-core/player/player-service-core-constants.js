@@ -87,6 +87,19 @@
           text: [
             'A atividade <b>foi armazenada</b> em seu dispositivo.</br> É possível sincronizá-la quando houver acesso à internet</br> através do botão <b>Atividades Pendentes</b>',
           ]
+        },
+        BAD_REQUEST_ERROR: {
+          icon: {
+            name: 'cloud_off',
+            color: "red"
+          },
+          highlightedText: {
+            text: 'Erro ao conectar com o servidor ou link inválido',
+            color: "lightcoral"
+          },
+          text: [
+            'Tente novamente mais tarde ou entre em contato com o seu projeto'
+          ]
         }
       }
 
