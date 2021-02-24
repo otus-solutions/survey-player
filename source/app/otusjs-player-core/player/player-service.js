@@ -31,7 +31,10 @@
     PLAYER_SERVICE_CONSTANTS) {
 
     const self = this;
-    const UNAUTHORIZED_ERROR_STATUS = "UNAUTHORIZED";
+    const ERROR_STATUS = {
+      UNAUTHORIZED: "UNAUTHORIZED",
+      BAD_REQUEST: "BAD_REQUEST"
+    };
 
     let _component = null;
     let _goBackTo = null;
@@ -168,9 +171,14 @@
     }
 
     function setReasonToFinishActivityFromErrorStatus(errorStatus) {
-      _reasonToFinishActivity = (errorStatus === UNAUTHORIZED_ERROR_STATUS ?
-        getConstants().REASONS_TO_LIVE_PLAYER.UNAUTHORIZED :
-        getConstants().REASONS_TO_LIVE_PLAYER.OFFLINE_ERROR);
+      switch (errorStatus) {
+        case ERROR_STATUS.UNAUTHORIZED:
+          _reasonToFinishActivity = getConstants().REASONS_TO_LIVE_PLAYER.UNAUTHORIZED; break;
+        case ERROR_STATUS.BAD_REQUEST:
+          _reasonToFinishActivity = getConstants().REASONS_TO_LIVE_PLAYER.BAD_REQUEST_ERROR; break;
+        default:
+          _reasonToFinishActivity = getConstants().REASONS_TO_LIVE_PLAYER.OFFLINE_ERROR;
+      }
     }
 
     function goToCallback(){
