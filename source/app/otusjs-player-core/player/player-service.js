@@ -60,6 +60,7 @@
     self.hasCallbackAddress = hasCallbackAddress;
     self.getConstants = getConstants;
     self.getReasonToFinishActivity = getReasonToFinishActivity;
+    self.clearReasonToFinishActivity = clearReasonToFinishActivity;
     self.setReasonToFinishActivity = setReasonToFinishActivity;
     self.setReasonToFinishActivityFromErrorStatus = setReasonToFinishActivityFromErrorStatus;
     self.goToCallback = goToCallback;
@@ -164,6 +165,10 @@
 
     function getReasonToFinishActivity() {
       return _reasonToFinishActivity;
+    }
+
+    function clearReasonToFinishActivity() {
+      _reasonToFinishActivity = null;
     }
 
     function setReasonToFinishActivity(reason) {
