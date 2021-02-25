@@ -108,6 +108,20 @@
           text: [
             'Tente novamente mais tarde ou entre em contato com o seu projeto'
           ]
+        },
+        UNEXPECTED_ERROR: {
+          id: 'UNEXPECTED_ERROR',
+          icon: {
+            name: 'sentiment_very_dissatisfied',
+            color: "red"
+          },
+          highlightedText: {
+            text: 'Ocorreu um erro inesperado',
+            color: "lightcoral"
+          },
+          text: [
+            'Tente novamente mais tarde ou entre em contato com o seu projeto'
+          ]
         }
       }
 
