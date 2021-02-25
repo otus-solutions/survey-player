@@ -1,4 +1,4 @@
-describe('otusSurveyErrorComponent_UnitTest_suite', function () {
+describe('otusSurveyErrorComponent_UnitTest_Suite', function () {
   let Injections = [];
   let controller = {};
 
@@ -30,17 +30,18 @@ describe('otusSurveyErrorComponent_UnitTest_suite', function () {
       expect(controller.message).toBeDefined();
     });
 
-    it('should_set_showTryAgainButton_as_true_in_case_reasonToFinish_is_OFFLINE_ERROR_and_has_not_callback', function () {
-      const OFFLINE_ERROR = Injections.PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.OFFLINE_ERROR;
+    it('should_set_showTryAgainButton_as_true_in_case_reasonToFinish_is_UNEXPECTED_ERROR_and_has_not_callback', function () {
+      const UNEXPECTED_ERROR = Injections.PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.UNEXPECTED_ERROR;
       spyOn(Injections.PlayerService, "hasCallbackAddress").and.returnValue(false);
-      spyOn(Injections.PlayerService, "getReasonToFinishActivity").and.returnValue(OFFLINE_ERROR);
+      spyOn(Injections.PlayerService, "getReasonToFinishActivity").and.returnValue(UNEXPECTED_ERROR);
       controller.$onInit();
       expect(controller.showTryAgainButton).toBe(true);
     });
 
-    it('should_set_showTryAgainButton_as_false_in_case_reasonToFinish_is_not_OFFLINE_ERROR', function () {
+    it('should_set_showTryAgainButton_as_false_in_case_reasonToFinish_is_not_UNEXPECTED_ERROR', function () {
       const REASON_TO_LIVE = Injections.PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.UNAUTHORIZED;
-      spyOn(Injections.PlayerService, "getReasonToFinishActivity").and.returnValue(REASON_TO_LIVE);
+      spyOn(Injections.PlayerService, "hasCallbackAddress").and.returnValue(false);
+      spyOn(Injections.PlayerService, "getReasonToFinishActivityAndClear").and.returnValue(REASON_TO_LIVE);
       controller.$onInit();
       expect(controller.showTryAgainButton).toBe(false);
     });
