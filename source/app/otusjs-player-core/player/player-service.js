@@ -42,7 +42,6 @@
     let _hardBlocker = null;
     let _softBlocker = null;
     let _reasonToFinishActivity = null;
-    let _lastReasonToFinishActivity = null;
 
     self.bindComponent = bindComponent;
     self.getItemData = getItemData;
