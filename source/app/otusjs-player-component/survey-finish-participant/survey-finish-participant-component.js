@@ -27,7 +27,7 @@
       const reasonToFinish = PlayerService.getReasonToFinishActivity();
       PlayerService.clearReasonToFinishActivity();
 
-      self.showFillAgainButton = (reasonToFinish !== PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.FINALIZE);
+      self.showFillAgainButton = !_isFinalReason(reasonToFinish);
 
       let template = `<md-icon md-font-set="material-icons" style="color: ${reasonToFinish.icon.color}">${reasonToFinish.icon.name}</md-icon>` +
         `<p class="md-display-1 shared-url-message-highlighted" style="color: ${reasonToFinish.highlightedText.color}">${reasonToFinish.highlightedText.text}</p>`;
@@ -43,6 +43,16 @@
 
     function reloadSharedUrl(){
       PlayerService.reloadSharedUrl();
+    }
+
+
+    function _isFinalReason(reason){
+      const REASONS_TO_LIVE_PLAYER = PlayerService.getConstants().REASONS_TO_LIVE_PLAYER;
+      const finalReasons = [
+        REASONS_TO_LIVE_PLAYER.IS_NOT_ME.id,
+        REASONS_TO_LIVE_PLAYER.FINALIZE.id
+      ];
+      return finalReasons.includes(reason.id);
     }
 
   }
