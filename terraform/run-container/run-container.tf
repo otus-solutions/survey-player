@@ -27,8 +27,7 @@ resource "docker_container" "survey-player" {
     "FILE_UPLOAD_URL=${var.survey-player-fileUpload-url}",
     "LOGIN_URL=${var.survey-player-login-url}",
     "SURVEY_URL=${var.survey-player-survey-url}",
-    "COLLECT_URL=${var.survey-player-collect-url}",
-    "SHARED_URL_REGEX=${var.survey-player-url-regex}"
+    "COLLECT_URL=${var.survey-player-collect-url}"
   ]
   ports {
     internal = 80

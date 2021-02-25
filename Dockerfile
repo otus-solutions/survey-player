@@ -10,7 +10,5 @@ COPY server/player.conf /etc/nginx/conf.d/default.conf
 COPY server/entrypoint.sh /usr/local/bin/commands.sh
 RUN chmod +x /usr/local/bin/commands.sh
 
-ENV SHARED_URL_REGEX '\\?activity=[a-f0-9]+&token=.+'
-
 CMD ["/bin/sh", "-c", "/usr/local/bin/commands.sh && nginx -g 'daemon off;'"]
 
