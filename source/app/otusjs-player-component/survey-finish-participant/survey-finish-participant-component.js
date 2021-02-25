@@ -22,10 +22,8 @@
     self.$onInit = onInit;
     self.reloadSharedUrl = reloadSharedUrl;
 
-
     function onInit() {
-      const reasonToFinish = PlayerService.getReasonToFinishActivity();
-      PlayerService.clearReasonToFinishActivity();
+      const reasonToFinish = PlayerService.getReasonToFinishActivityAndClear();
 
       self.showFillAgainButton = !_isFinalReason(reasonToFinish);
 
@@ -44,7 +42,6 @@
     function reloadSharedUrl(){
       PlayerService.reloadSharedUrl();
     }
-
 
     function _isFinalReason(reason){
       const REASONS_TO_LIVE_PLAYER = PlayerService.getConstants().REASONS_TO_LIVE_PLAYER;

@@ -42,6 +42,7 @@
     let _hardBlocker = null;
     let _softBlocker = null;
     let _reasonToFinishActivity = null;
+    let _lastReasonToFinishActivity = null;
 
     self.bindComponent = bindComponent;
     self.getItemData = getItemData;
@@ -60,11 +61,11 @@
     self.hasCallbackAddress = hasCallbackAddress;
     self.getConstants = getConstants;
     self.getReasonToFinishActivity = getReasonToFinishActivity;
-    self.clearReasonToFinishActivity = clearReasonToFinishActivity;
     self.setReasonToFinishActivity = setReasonToFinishActivity;
     self.setReasonToFinishActivityFromErrorStatus = setReasonToFinishActivityFromErrorStatus;
     self.goToCallback = goToCallback;
     self.reloadSharedUrl = reloadSharedUrl;
+    self.getReasonToFinishActivityAndClear = getReasonToFinishActivityAndClear;
 
     /**/
     self.registerHardBlocker = registerHardBlocker;
@@ -164,10 +165,6 @@
       return _reasonToFinishActivity;
     }
 
-    function clearReasonToFinishActivity() {
-      _reasonToFinishActivity = null;
-    }
-
     function setReasonToFinishActivity(reason) {
       _reasonToFinishActivity = reason;
     }
@@ -193,6 +190,25 @@
       if(SurveyApiService.getSharedUrl()){
         location.href = SurveyApiService.getSharedUrl();
       }
+    }
+
+    function getReasonToFinishActivityAndClear() {
+      const reasonToFinish = getReasonToFinishActivity() || _getLastReasonToFinishActivity();
+      _clearReasonToFinishActivity();
+      return reasonToFinish;
+    }
+
+    function _clearReasonToFinishActivity() {
+      if(!_reasonToFinishActivity){
+        return;
+      }
+      SurveyApiService.setLastReasonToFinish(_reasonToFinishActivity.id);
+      _reasonToFinishActivity = null;
+    }
+
+    function _getLastReasonToFinishActivity(){
+      const reasonId = SurveyApiService.getLastReasonToFinish();
+      return Object.values(getConstants().REASONS_TO_LIVE_PLAYER).find(obj => obj.id === reasonId);
     }
   }
 })();

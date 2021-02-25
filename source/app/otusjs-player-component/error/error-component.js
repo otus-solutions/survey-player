@@ -24,12 +24,11 @@
 
 
     function onInit() {
-      self.participantSharedURLError = !PlayerService.hasCallbackAddress();
-
       const OFF_LINE_ERROR = PlayerService.getConstants().REASONS_TO_LIVE_PLAYER.OFFLINE_ERROR;
 
-      const reasonToFinish = PlayerService.getReasonToFinishActivity() || OFF_LINE_ERROR;
-      PlayerService.clearReasonToFinishActivity();
+      const reasonToFinish = PlayerService.getReasonToFinishActivityAndClear() || OFF_LINE_ERROR;
+
+      self.participantSharedURLError = !PlayerService.hasCallbackAddress();
 
       self.showTryAgainButton = (self.participantSharedURLError && reasonToFinish.id === OFF_LINE_ERROR.id);
 
