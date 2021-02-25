@@ -126,9 +126,6 @@
 
     function play() {
       PlayActionService.execute();
-      if(!hasCallbackAddress()){
-        SurveyApiService.setSharedUrl(angular.copy(location.href));
-      }
     }
 
     function setup() {
