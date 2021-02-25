@@ -31,7 +31,7 @@
       const reasonToFinish = PlayerService.getReasonToFinishActivity() || OFF_LINE_ERROR;
       PlayerService.clearReasonToFinishActivity();
 
-      self.showTryAgainButton = (self.participantSharedURLError && reasonToFinish === OFF_LINE_ERROR);
+      self.showTryAgainButton = (self.participantSharedURLError && reasonToFinish.id === OFF_LINE_ERROR.id);
 
       let template = `<md-icon md-font-set="material-icons" style="color: ${reasonToFinish.icon.color}">${reasonToFinish.icon.name}</md-icon>` +
         `<p class="md-display-1 shared-url-message-highlighted" style="color: ${reasonToFinish.highlightedText.color}">${reasonToFinish.highlightedText.text}</p>`;
