@@ -44,3 +44,7 @@ variable "survey-player-version" {
 variable "survey-player-name" {
   default = "survey-player"
 }
+
+variable "survey-player-network" {
+  default = "otus-api-network"
+}
