@@ -170,13 +170,17 @@
     }
 
     function setReasonToFinishActivityFromErrorStatus(errorStatus) {
+      if(!window.navigator.onLine){
+        _reasonToFinishActivity = getConstants().REASONS_TO_LIVE_PLAYER.OFFLINE_ERROR;
+        return;
+      }
       switch (errorStatus) {
         case ERROR_STATUS.UNAUTHORIZED:
           _reasonToFinishActivity = getConstants().REASONS_TO_LIVE_PLAYER.UNAUTHORIZED; break;
         case ERROR_STATUS.BAD_REQUEST:
           _reasonToFinishActivity = getConstants().REASONS_TO_LIVE_PLAYER.BAD_REQUEST_ERROR; break;
         default:
-          _reasonToFinishActivity = getConstants().REASONS_TO_LIVE_PLAYER.OFFLINE_ERROR;
+          _reasonToFinishActivity = getConstants().REASONS_TO_LIVE_PLAYER.UNEXPECTED_ERROR;
       }
     }
 
