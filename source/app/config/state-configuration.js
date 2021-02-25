@@ -114,7 +114,7 @@
           SurveyApiService.setCallbackAddress(angular.copy(_callback));
           $location.search('callback', null);
         }
-        else if($state.current.name === STATE.MAIN){
+        else if($state.current.name === STATE.MAIN && _token && _activity){
           SurveyApiService.setSharedUrl(angular.copy(location.href));
         }
 
