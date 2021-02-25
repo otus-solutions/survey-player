@@ -6,6 +6,7 @@
 
       REASONS_TO_LIVE_PLAYER: {
         IS_NOT_ME: {
+          id: 'IS_NOT_ME',
           icon: {
             name: 'thumb_up',
             color: "green",
@@ -16,6 +17,7 @@
           },
         },
         GET_OUT_WITHOUT_SAVE: {
+          id: 'GET_OUT_WITHOUT_SAVE',
           icon: {
             name: 'meeting_room',
             color: "orange",
@@ -26,6 +28,7 @@
           }
         },
         SAVE: {
+          id: 'SAVE',
           icon: {
             name: 'save',
             color: "#00786c",
@@ -37,6 +40,7 @@
           text: ["Para finalizar, preencha o questionário até o final."]
         },
         FINALIZE: {
+          id: 'FINALIZE',
           icon: {
             name: 'check_circle',
             color: "blue"
@@ -48,6 +52,7 @@
           text: ['Obrigado.']
         },
         ALREADY_FINALIZED: {
+          id: 'ALREADY_FINALIZED',
           icon: {
             name: 'check_circle',
             color: "blue"
@@ -62,6 +67,7 @@
           ]
         },
         UNAUTHORIZED: {
+          id: 'UNAUTHORIZED',
           icon: {
             name: 'sentiment_very_dissatisfied',
             color: "red"
@@ -76,6 +82,7 @@
           ]
         },
         OFFLINE_ERROR: {
+          id: 'OFFLINE_ERROR',
           icon: {
             name: 'cloud_off',
             color: "red"
@@ -89,6 +96,7 @@
           ]
         },
         BAD_REQUEST_ERROR: {
+          id: 'BAD_REQUEST_ERROR',
           icon: {
             name: 'cloud_off',
             color: "red"
