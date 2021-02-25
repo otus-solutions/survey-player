@@ -33,6 +33,7 @@
     const TOKEN = true;
     const MODE = 'MODE';
     const HAS_CALLBACK_ADDRESS = 'has-Callback-Address';
+    const SHARED_URL_REGEX = /\?activity=[a-f0-9]+&token=.+/;//TODO could be ENV var?
 
     self.initDB = initDB;
     self.getFileUploadUrl = getFileUploadUrl;
@@ -250,7 +251,7 @@
     }
 
     function setSharedUrl(sharedUrl) {
-      if(!_sharedUrl){
+      if(SHARED_URL_REGEX.test(sharedUrl)){
         _sharedUrl = sharedUrl;
       }
     }
