@@ -35,7 +35,6 @@ resource "null_resource" "survey-player-build" {
   }
 }
 
-
 resource "null_resource" "survey-player" {
   depends_on = [
     null_resource.survey-player-build]

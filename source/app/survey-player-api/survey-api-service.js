@@ -33,6 +33,9 @@
     const TOKEN = true;
     const MODE = 'MODE';
     const HAS_CALLBACK_ADDRESS = 'has-Callback-Address';
+    const SHARED_URL = "Shared-Url";
+    const LAST_REASON_TO_FINISH = "last-Reason-To-Finish";
+
 
     self.initDB = initDB;
     self.getFileUploadUrl = getFileUploadUrl;
@@ -59,6 +62,8 @@
     self.getSelectedCollection = getSelectedCollection;
     self.getSharedUrl = getSharedUrl;
     self.setSharedUrl = setSharedUrl;
+    self.getLastReasonToFinish = getLastReasonToFinish;
+    self.setLastReasonToFinish = setLastReasonToFinish;
 
     init();
 
@@ -73,7 +78,6 @@
     var _staticVariableUrl;
     var _fileUploadUrl;
     var _collectUrl;
-    var _sharedUrl = null;
 
     var _token = null;
     var _user = null;
@@ -243,16 +247,24 @@
       sessionStorage.removeItem(LOGGED_USER);
       sessionStorage.removeItem(MODE);
       sessionStorage.removeItem(HAS_CALLBACK_ADDRESS);
+      sessionStorage.removeItem(SHARED_URL);
+      sessionStorage.removeItem(LAST_REASON_TO_FINISH);
     }
 
     function getSharedUrl() {
-      return _sharedUrl;
+      return sessionStorage.getItem(SHARED_URL);
     }
 
     function setSharedUrl(sharedUrl) {
-      if(!_sharedUrl){
-        _sharedUrl = sharedUrl;
-      }
+      sessionStorage.setItem(SHARED_URL, sharedUrl);
+    }
+
+    function getLastReasonToFinish() {
+      return sessionStorage.getItem(LAST_REASON_TO_FINISH);
+    }
+
+    function setLastReasonToFinish(reason) {
+      sessionStorage.setItem(LAST_REASON_TO_FINISH, reason);
     }
 
   }
