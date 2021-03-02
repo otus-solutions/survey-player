@@ -31,7 +31,10 @@
     PLAYER_SERVICE_CONSTANTS) {
 
     const self = this;
-    const UNAUTHORIZED_ERROR_STATUS = "UNAUTHORIZED";
+    const ERROR_STATUS = {
+      UNAUTHORIZED: "UNAUTHORIZED",
+      BAD_REQUEST: "BAD_REQUEST"
+    };
 
     let _component = null;
     let _goBackTo = null;
@@ -61,6 +64,7 @@
     self.setReasonToFinishActivityFromErrorStatus = setReasonToFinishActivityFromErrorStatus;
     self.goToCallback = goToCallback;
     self.reloadSharedUrl = reloadSharedUrl;
+    self.getReasonToFinishActivityAndClear = getReasonToFinishActivityAndClear;
 
     /**/
     self.registerHardBlocker = registerHardBlocker;
@@ -122,9 +126,6 @@
 
     function play() {
       PlayActionService.execute();
-      if(!hasCallbackAddress()){
-        SurveyApiService.setSharedUrl(angular.copy(location.href));
-      }
     }
 
     function setup() {
@@ -168,9 +169,18 @@
     }
 
     function setReasonToFinishActivityFromErrorStatus(errorStatus) {
-      _reasonToFinishActivity = (errorStatus === UNAUTHORIZED_ERROR_STATUS ?
-        getConstants().REASONS_TO_LIVE_PLAYER.UNAUTHORIZED :
-        getConstants().REASONS_TO_LIVE_PLAYER.OFFLINE_ERROR);
+      if(!window.navigator.onLine){
+        _reasonToFinishActivity = getConstants().REASONS_TO_LIVE_PLAYER.OFFLINE_ERROR;
+        return;
+      }
+      switch (errorStatus) {
+        case ERROR_STATUS.UNAUTHORIZED:
+          _reasonToFinishActivity = getConstants().REASONS_TO_LIVE_PLAYER.UNAUTHORIZED; break;
+        case ERROR_STATUS.BAD_REQUEST:
+          _reasonToFinishActivity = getConstants().REASONS_TO_LIVE_PLAYER.BAD_REQUEST_ERROR; break;
+        default:
+          _reasonToFinishActivity = getConstants().REASONS_TO_LIVE_PLAYER.UNEXPECTED_ERROR;
+      }
     }
 
     function goToCallback(){
@@ -183,6 +193,25 @@
       if(SurveyApiService.getSharedUrl()){
         location.href = SurveyApiService.getSharedUrl();
       }
+    }
+
+    function getReasonToFinishActivityAndClear() {
+      const reasonToFinish = getReasonToFinishActivity() || _getLastReasonToFinishActivity();
+      _clearReasonToFinishActivity();
+      return reasonToFinish;
+    }
+
+    function _clearReasonToFinishActivity() {
+      if(!_reasonToFinishActivity){
+        return;
+      }
+      SurveyApiService.setLastReasonToFinish(_reasonToFinishActivity.id);
+      _reasonToFinishActivity = null;
+    }
+
+    function _getLastReasonToFinishActivity(){
+      const reasonId = SurveyApiService.getLastReasonToFinish();
+      return Object.values(getConstants().REASONS_TO_LIVE_PLAYER).find(obj => obj.id === reasonId);
     }
   }
 })();
