@@ -26,9 +26,9 @@ describe('otusSurveyFinishParticipant_component_UnitTest_Suite', function () {
 
   describe('onInit_method', function () {
     function _callOnInit(reason){
-      spyOn(Injections.PlayerService, 'getReasonToFinishActivity').and.returnValue(reason);
+      spyOn(Injections.PlayerService, 'getReasonToFinishActivityAndClear').and.returnValue(reason);
       controller.$onInit();
-      expect(Injections.PlayerService.getReasonToFinishActivity).toHaveBeenCalledTimes(1);
+      expect(Injections.PlayerService.getReasonToFinishActivityAndClear).toHaveBeenCalledTimes(1);
       expect(controller.message).toBeDefined();
     }
 
