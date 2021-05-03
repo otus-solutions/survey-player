@@ -25,6 +25,7 @@
     self.authenticate = authenticate;
     self.toggleMenu = toggleMenu;
     self.$onInit = onInit;
+    self.canSend = canSend;
     self.$onChanges = onChanges;
 
     self.list = list;
@@ -33,7 +34,8 @@
     self.preActivities = [];
     self.isLoading = false;
     self.disableAuth = true;
-    self.user = ""
+    self.user = "";
+
 
     function onInit() {
       self.commands = [];
@@ -59,6 +61,10 @@
         _setUser();
         self.isLoading = false;
       });
+    }
+
+    function canSend(command) {
+      return command.icon === 'cloud_upload' ? $scope.$root.online : true;
     }
 
     function authenticate() {

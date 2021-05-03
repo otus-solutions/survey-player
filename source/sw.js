@@ -1,4 +1,4 @@
-var version = "1.10.1";
+var version = "1.11.0";
 var CACHE_PREFIX = 'survey-player';
 var CACHE_NAME = CACHE_PREFIX + version;
 
@@ -116,6 +116,7 @@ var CACHED_FILES = [
   "/app/otusjs-player-component/survey-header/survey-header-component.js",
   "/app/otusjs-player-component/survey-item/survey-item-component.js",
   "/app/otusjs-player-component/survey-item/question/question-component.js",
+  "/app/otusjs-player-component/survey-item/question/question-component-styles.css",
   "/app/otusjs-player-component/survey-item/question/calendar/calendar-question-component.js",
   "/app/otusjs-player-component/survey-item/question/calendar/calendar-question-view-component.js",
   "/app/otusjs-player-component/survey-item/question/integer/integer-question-component.js",
