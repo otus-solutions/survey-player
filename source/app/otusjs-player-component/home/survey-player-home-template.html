@@ -48,7 +48,7 @@
       <div layout="row" layout-align="start center" flex layout-padding="">
         <small flex class="md-caption">Plataforma Otus</small>
         <md-button class="{{command.theme}}" style="margin-right: 30px" ng-repeat="command in $ctrl.commands"
-                   ng-click="command.action()">
+                   ng-click="command.action()" ng-disabled="!$ctrl.canSend(command)">
           <md-icon>{{''.concat(command.icon)}}</md-icon>
         </md-button>
       </div>

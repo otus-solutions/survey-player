@@ -28,7 +28,6 @@
       self.online = true;
     });
 
-
     $scope.$watch('$root.online', function (status) {
       self.online = status;
     });

@@ -12,12 +12,13 @@
     'SurveyApiService',
     '$mdToast',
     '$state',
+    '$window',
     'STATE',
     'otusjs.player.core.player.PlayerService'
   ];
 
   function Service(ActivityFacadeService, SurveyClientService, IndexedDbStorageService, SurveyApiService,
-    $mdToast, $state, STATE, PlayerService) {
+    $mdToast, $state, $window, STATE, PlayerService) {
     const self = this;
 
     /* Public methods */
